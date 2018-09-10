@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace="패키지.인터페이스" -->
+<mapper namespace="kr.co.moviemovit.screen.ScreenMapper">
+	<!-- MySQL ver. -->
+	<!-- 영화관 브랜드에 해당하는 지점 list -->  
+	<select id="cineNameList" parameterType="String" resultType="CinemaDTO">
+		<![CDATA[
+			SELECT cineCode, cineName
+			FROM cinemaTable
+			WHERE brandName = #{brandName}
+			ORDER BY cineName ASC
+		]]>
+	</select>
+</mapper>

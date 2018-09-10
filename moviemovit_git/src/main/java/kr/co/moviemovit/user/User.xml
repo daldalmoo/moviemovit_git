@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace="패키지.인터페이스" -->
+<mapper namespace="kr.co.moviemovit.user.UserMapper">
+	<!-- MySQL ver. -->
+	
+	<!-- 회원가입 insert -->
+	<insert id="joinMember" parameterType="UserDTO">		
+		<![CDATA[
+			INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,zipcode,addr1,addr2,wdate)
+			VALUES (#{uid}, #{upw}, #{uname}, #{gender}, #{birth}, #{email}, #{phone}, #{zipcode}, #{addr1}, #{addr2}, now())
+		]]>
+	</insert>
+	
+	<!-- 아이디 중복검사 -->
+	<select id="idCheck" parameterType="UserDTO" resultType="int">
+		<![CDATA[
+			SELECT count(uid) as cnt
+			FROM userTable
+			WHERE uid = #{uid}
+		]]>
+	</select>
+	
+	<!-- 이메일 중복검사 -->
+	<select id="emailCheck" parameterType="UserDTO" resultType="int">
+		<![CDATA[
+			SELECT count(email) as cnt
+			FROM userTable
+			WHERE email = #{email}
+		]]>
+	</select>
+	
+	<!-- ########################경계선################################# -->
+	<!-- 로그인 -->
+	<select id="loginProc" parameterType="UserDTO" resultType="UserDTO">		
+		<![CDATA[
+			SELECT uid, upw, grade
+			FROM userTable
+			WHERE uid = #{uid} AND upw = #{upw}
+			AND grade IN ('ADMIN','SELLER','VIP','GOLD','SILVER','F')
+		]]>
+	</select>
+	
+	<!-- 회원정보 read -->
+	<select id="getMemberInfo" parameterType="UserDTO" resultType="UserDTO">
+		<![CDATA[
+			SELECT uid,upw,uname,gender,birth,email,phone,zipcode,addr1,addr2,grade
+			FROM userTable
+			WHERE uid = #{uid} AND upw = #{upw}
+		]]>
+	</select>
+	
+	<!-- 회원탈퇴 -->
+	<update id="userDelete" parameterType="UserDTO">
+		<![CDATA[
+			UPDATE userTable
+			SET grade = 'F'
+			WHERE uid = #{uid} AND upw = #{upw}
+		]]>
+	</update>
+	
+	<!-- 회원수정 -->
+	<update id="updateMember" parameterType="UserDTO">
+		<![CDATA[
+			UPDATE userTable
+			SET upw = #{upw}, uname = #{uname}, gender = #{gender}, birth = #{birth}, 
+				phone = #{phone}, zipcode = #{zipcode}, addr1 = #{addr1}, addr2 = #{addr2}
+			WHERE uid = #{uid}
+		]]>
+	</update>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findUserID" parameterType="UserDTO" resultType="UserDTO">
+		<![CDATA[
+			SELECT uid, uname, email
+			FROM userTable
+			WHERE uname = #{uname} AND email = #{email}
+		]]>
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findUserPw" parameterType="UserDTO" resultType="UserDTO">
+		<![CDATA[
+			SELECT uid, upw, uname, email
+			FROM userTable
+			WHERE uid = #{uid} AND uname = #{uname} AND email = #{email}
+		]]>
+	</select>
+	
+	<!-- 임시비밀번호 업데이트 -->
+	<update id="setRandomPw" parameterType="UserDTO">
+		<![CDATA[
+			UPDATE userTable
+			SET upw = #{upw}
+			WHERE uid = #{uid} AND uname = #{uname} AND email = #{email}
+		]]>
+	</update>	
+</mapper>

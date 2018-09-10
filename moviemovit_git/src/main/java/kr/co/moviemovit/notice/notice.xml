@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace="패키지.인터페이스" -->
+<mapper namespace="kr.co.moviemovit.notice.NoticeMapper">
+
+	<!-- 오라클 ver. -->
+	<!-- <insert id="create" parameterType="NoticeDTO"> -->
+		<!-- 
+			- keyProperty="noticeno" : 가지고 온 key값을 원하는 클래스의 값에 저장 (여기서는 NoticeDTO클래스의 멤버변수 noticeno) 
+									   <insert>의 parameterType에 적용된 클래스를 기준으로 함
+			- resultType="int" : 가지고 온 key의 타입을 설정. <insert>의 parameterType에 적용된 클래스의 noticeno타입과 같아야 함 
+			- order="BEFORE" : <insert>구문을 실행하기 전에 <selectKey>구문 실행 - order="AFTER" : 
+			<insert>구문을 실행한 후에 <selectKey>구문 실행 -->
+	<!-- 
+		<selectKey keyProperty="noticeno" resultType="int"
+			order="BEFORE">
+			SELECT NVL(MAX(noticeno),0) + 1 AS noticeno
+			FROM notice5
+		</selectKey>
+
+		INSERT INTO notice5(noticeno, title, rname, rdate)
+		VALUES (#{noticeno},
+		#{title}, #{rname}, sysdate)
+	</insert>
+ 	-->
+ 	
+ 	<!-- MySQL ver. -->
+	<insert id="create" parameterType="NoticeDTO">
+		<selectKey keyProperty="noticeno" resultType="int" order="BEFORE">
+			<![CDATA[
+			SELECT ifnull(max(noticeno),0)+1 AS noticeno FROM noticeTable 
+			]]> 
+		</selectKey>
+ <![CDATA[
+		INSERT INTO noticeTable(noticeno,title,s_e ,uid,wdate,open)
+		VALUES (#{noticeno},#{title},#{s_e},#{uid},now(),#{open})
+	 ]]>
+	</insert>
+	
+	 <select id="list" parameterType="NoticePage" resultType="NoticeDTO">
+		<![CDATA[
+		SELECT *
+		FROM (
+					SELECT @NO := @NO + 1 AS ROWNUM, A.*
+					FROM (
+    							SELECT *
+    							FROM noticeTable
+  				 			 ) A,
+  				 			 ( SELECT @NO := 0 ) B 
+				 ) C
+		WHERE C.ROWNUM BETWEEN #{startIndex}+1 AND #{startIndex}+#{pageSize};
+
+		]]>
+	</select>
+	
+	 <select id="listCnt" resultType="int">
+		<![CDATA[
+			SELECT count(noticeno) as cnt
+			FROM noticeTable
+		]]>
+	</select>
+
+	<select id="read" parameterType="NoticeDTO" resultType="NoticeDTO">
+		<![CDATA[
+			SELECT noticeno, title, s_e, uid,wdate,open
+			FROM noticeTable
+			WHERE noticeno = #{noticeno}
+		]]>
+	</select>
+	
+	 <delete id="delete" parameterType="NoticeDTO">
+		<![CDATA[
+			DELETE FROM noticeTable
+			WHERE noticeno = #{noticeno}
+		]]>
+	</delete>
+	
+	
+	<update id="update" parameterType="NoticeDTO">
+		<![CDATA[
+			UPDATE noticeTable
+			SET title = #{title}
+			    ,uid = #{uid}
+				,s_e = #{s_e}
+				,wdate = now()
+				,open = #{open}
+			WHERE noticeno = #{noticeno}
+		]]>
+	</update>
+	
+	 
+	
+	 
+</mapper>

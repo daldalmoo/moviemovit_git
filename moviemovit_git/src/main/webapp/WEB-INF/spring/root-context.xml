@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- root-context.xml : web.xml 등록되어 있음 -->
+  
+  <!-- MySQL JDBC 연결 -->
+  <!-- 주의 사항 :  & → ＆amp; 엔티티로 변경할것 -->
+  
+  <!-- 1) Data Source (DB연결) : DB연결하기 위한 정보를 스프링빈으로 등록. pom.xml에서 spring-jdbc 라이브러리 필요 -->
+  <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">   
+    <property name="driverClass" value="com.mysql.cj.jdbc.Driver"></property>
+    <!-- com.mysql.jdbc.Driver -> com.mysql.cj.jdbc.Driver 수정. 20180828 신혜 -->
+    <property name="url"         value="jdbc:mysql://localhost:3306/myjava?useUnicode=yes&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC"></property>
+    <!-- <property name="url"         value="jdbc:mysql://localhost:3306/myjava?useUnicode=true＆amp;characterEncoding=euckr"></property> 에서 위와 같이 수정. 20180828 신혜 -->
+    <property name="username"    value="root"></property>
+    <property name="password"    value="1234"></property>   
+  </bean>
+  
+  <!-- 2) notice.xml 등을 스프링빈을 주입받아서 객체 생성 -->
+  <!-- SqlSession setup for MyBatis Database Layer -->
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource" />   <!-- ref : 참조하라 -->
+    
+    <!-- 매핑할 XML파일(mapper)이 있는 경로 설정.  ** : 모든 폴더  *.xml : 모든 xml 파일 -->
+    <property name="mapperLocations" value="classpath:kr/co/moviemovit/**/*.xml" />
+    
+    <!-- DTO클래스가 있는 경로 설정 -->
+    <property name="typeAliasesPackage" value="kr.co.moviemovit"></property>
+    <!-- alias : 가명 -->
+    <!-- 서로 다른 경로의 패키지가 여러개 오는 경우
+    <property name="typeAliasesPackage" value="dev.blog.notice5, dev.blog.bbs, dev.blog.member"></property>
+     -->
+    
+  </bean>
+
+  <!-- 3) 2)에서 생성된 스프링빈을 이용해서 SQL실행 객체 생성. PrepareStatement 역할. DAO에서 사용 -->
+  <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+    <!-- 생성자함수 -->
+    <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+  </bean>
+  
+</beans>

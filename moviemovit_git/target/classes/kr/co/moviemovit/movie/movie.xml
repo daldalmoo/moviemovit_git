@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace="팩키지.인터페이스" -->
+<mapper namespace="kr.co.moviemovit.movie.MovieMapper">
+
+    <insert id="create" parameterType="MovieDTO">
+        <selectKey keyProperty="mCode" resultType="int" order="BEFORE">
+			<![CDATA[
+				SELECT IFNULL(MAX(mCode),0) + 1 AS mCode
+				FROM movieTable
+			]]>	
+		</selectKey>
+		    <![CDATA[	
+				INSERT INTO movieTable(mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date)
+				VALUES(#{mCode}, #{poster}, #{mName}, #{genre}, #{screen}, #{age}, #{s_e}, #{country}, #{director}, #{actor}, #{DD}, #{runningTime}, #{s_date}, #{e_date})                        
+			]]>	
+	</insert>
+	
+	<select id="list" resultType="MovieDTO">
+		<![CDATA[
+			SELECT mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date
+			FROM movieTable
+			ORDER BY mCode DESC	
+		]]>
+	</select>
+	
+	<select id="read" parameterType="MovieDTO" resultType="MovieDTO">
+		<![CDATA[
+			SELECT mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date
+			FROM movieTable
+			WHERE mCode = #{mCode}
+		]]>	
+	</select>
+
+    <delete id="delete" parameterType="MovieDTO">
+		<![CDATA[
+			DELETE FROM movieTable
+			WHERE mCode = #{mCode}
+		]]>	
+	</delete>	
+	
+	<update id="update" parameterType="MovieDTO" >
+	    <![CDATA[
+			UPDATE movieTable
+			SET	poster=#{poster}, mName=#{mName}, genre=#{genre}, screen=#{screen}, age=#{age}, s_e=#{s_e}, country=#{country}, director=#{director}, actor=#{actor}, DD=#{DD}, runningTime=#{runningTime}, s_date=#{s_date}, e_date=#{e_date}
+			WHERE mCode = #{mCode}
+		]]>	
+	</update>
+	
+	
+	
+	
+	
+</mapper>
+
+
+
+
+

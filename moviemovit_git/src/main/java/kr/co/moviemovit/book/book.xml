@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.moviemovit.book.BookMapper">
+  
+  <!-- 예매 목록 -->
+  <select id="list" resultType="BookDTO">
+    <![CDATA[
+      SELECT bCode, wdate, uid, sCode, cCode, seat, auditType
+      FROM bookTable
+      ORDER BY bCode DESC
+    ]]>
+  </select>
+  
+  
+  <!-- 예매 등록 -->
+  <!-- <insert id="create" parameterType="CouponDTO">
+    <selectKey keyProperty="cCode" resultType="int" order="BEFORE">
+      <![CDATA[
+        SELECT IFNULL(MAX(cCode),0)+1 AS cCode
+        FROM couponTable
+      ]]> 
+    </selectKey>
+    <![CDATA[
+      INSERT INTO couponTable(cCode, uid, startDate, expDate)
+      VALUES(#{cCode}, #{uid}, #{startDate}, #{expDate})
+    ]]> 
+  </insert> -->
+  
+  <!-- 예매 데이터 입력 시 회원 아이디 목록 가져오기 -->
+  <!-- <select id="uidlist" resultType="String">
+    <![CDATA[
+      SELECT uid
+      FROM userTable
+      ORDER BY uid ASC
+    ]]>
+  </select> -->
+  
+  <!-- 예매 데이터 입력 시 검색어와 일치하는 회원 아이디 목록 가져오기 -->
+  <!-- <select id="uidsearch" parameterType="String" resultType="String">
+    <![CDATA[
+      SELECT uid
+      FROM userTable
+      WHERE uid LIKE concat('%',#{uid},'%')
+      ORDER BY uid ASC
+    ]]>
+  </select> -->
+  
+  
+  <!-- 상세 데이터 읽어오기 -->
+  <!-- <select id="read" parameterType="int" resultType="CouponDTO">
+    <![CDATA[
+      SELECT cCode, uid, startDate, expDate
+      FROM couponTable
+      WHERE cCode = #{cCode}
+    ]]>
+  </select> -->
+  
+  
+  <!-- 예매 수정 -->
+  <!-- <update id="update" parameterType="CouponDTO">
+    <![CDATA[
+      UPDATE couponTable
+      SET uid=#{uid}, startDate=#{startDate}, expDate=#{expDate}
+      WHERE cCode = #{cCode}
+    ]]>
+  </update> -->
+  
+  
+  <!-- 예매 삭제 -->
+  <!-- <delete id="delete" parameterType="int">
+    <![CDATA[
+      DELETE FROM couponTable
+      WHERE cCode = #{cCode}
+    ]]>
+  </delete> -->
+  
+</mapper>
+
+
+
+
+
