@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace="팩키지.인터페이스" -->
+<mapper namespace="kr.co.moviemovit.people.PeopleMapper">
+    
+    <insert id="create" parameterType="PeopleDTO">
+        <selectKey keyProperty="peoCode" resultType="int" order="BEFORE">
+			<![CDATA[
+				SELECT IFNULL(MAX(peoCode),0) + 1 AS peoCode
+				FROM peopleTable
+			]]>	
+		</selectKey>
+		    <![CDATA[	
+				INSERT INTO peopleTable(peoCode, peoName, country, peoBirth, gender, peoPic)
+				VALUES(#{peoCode}, #{peoName}, #{country}, #{peoBirth}, #{gender}, #{peoPic})                        
+			]]>	
+	</insert>
+	
+	<select id="list" resultType="PeopleDTO">
+	    <![CDATA[
+			SELECT peoCode, peoName, country, peoBirth, gender, peoPic
+			FROM peopleTable
+			ORDER BY peoCode DESC	
+		]]>
+	</select>
+	
+	<select id="read" parameterType="PeopleDTO" resultType="PeopleDTO">
+		<![CDATA[
+			SELECT peoCode, peoName, country, peoBirth, gender, peoPic
+			FROM peopleTable
+			WHERE peoCode = #{peoCode}
+		]]>	
+	</select>
+	
+	<delete id="delete" parameterType="PeopleDTO">
+	    <![CDATA[
+			DELETE FROM peopleTable
+			WHERE peoCode = #{peoCode}
+		]]>	
+	</delete>
+	
+	<update id="update" parameterType="PeopleDTO">
+	    <![CDATA[
+			UPDATE peopleTable
+			SET peoName=#{peoName}, country=#{country}, peoBirth=#{peoBirth}, gender=#{gender}, peoPic=#{peoPic} 
+			WHERE peoCode = #{peoCode}
+		]]>	
+	</update>
+    
+	
+	
+	
+	
+	
+</mapper>
+
+
+
+
+

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 원래는 table과 같은 이름을 더 많이 쓴다 -->
+<!-- resultmap : join으로 이루어진 테이블 -->
+<!-- values애 들어가는 값은 #으로 구분하고, DTO에 있는 String -->
+<!-- DTO에 만든 GET SET 함수들과 칼럼명과 똑같아야 한다 그래야 사용가능 -->
+<!-- namespace 패키지, 인터페이스명칭 -->
+<mapper namespace='kr.co.moviemovit.review.ReviewMapper'>
+
+
+<!-- ////////////////////////////////// CINEMA //////////////////////////////////////// -->
+
+    <!-- CREATE  -->
+	<!-- 1) cineCode 삽입을 위한 select문 -->
+	<select id="setCineCode" parameterType="String" resultType="String">  
+		<![CDATA[
+		SELECT concat(left(brandName, 1), cineCode) as cineCode
+		FROM (SELECT brandName,
+		CASE 
+		WHEN cineCode>=0 AND cineCode<10 THEN concat('00', cineCode)
+		WHEN cineCode>=10 AND cineCode<100 THEN concat('0', cineCode)
+		ELSE ''
+		END AS cineCode
+		FROM 
+		(SELECT brandName, IFNULL(MAX(cineCode),0) + 1 as cineCode
+		FROM (SELECT count(cineName) as cineCode, brandName
+		FROM cinemaTable
+		WHERE brandName=#{brandName}) as AA) as BB) as CC
+		        ]]>
+	 </select>
+
+	<!-- 2) 1)에서 선택한 cineCode dto에 set후 insert 실행 -->
+	<insert id="cinemaForm" parameterType="cinemaDTO">
+     <![CDATA[
+        INSERT INTO cinemaTable(cineCode, brandName, cineName, tel, addr1, addr2, addr3, logoImg, home, etc, wido, kyengdo, wdate)
+        VALUES(#{cineCode}, #{brandName}, #{cineName}, #{tel}, #{addr1}, #{addr2}, #{addr3}, #{logoImg}, #{home}, #{etc}, #{wido}, #{kyengdo}, now())
+      ]]>
+	</insert>
+	
+	<!--  READ -->
+    <!--  0907 지영 위도경도 추가 -->
+    <select id="cinemaRead" parameterType="cinemaDTO" resultType="cinemaDTO">
+        <![CDATA[
+            SELECT cineCode, brandName, cineName, tel, addr1, addr2, addr3, logoImg, home, etc, wido, kyengdo
+            FROM cinematable
+            WHERE cineCode = #{cineCode}
+        ]]>
+    </select>
+	
+	<!-- UPDATE -->
+    <update id="cinemaUpdate" parameterType="cinemaDTO">
+        <![CDATA[
+         UPDATE cinemaTable
+         SET brandName = #{brandName}, cineName = #{cineName}, tel = #{tel}, addr1 = #{addr1}, 
+             addr2 = #{addr2}, addr3 = #{addr3}, logoImg = #{logoImg}, home = #{home},
+             etc = #{etc}, wido = #{wido}, kyengdo = #{kyengdo}
+         WHERE cineCode = #{cineCode}
+        ]]>
+    </update>
+
+    <!-- DELETE -->
+    <delete id="cinemaDeletePro" parameterType="String">
+        <![CDATA[
+            DELETE FROM cinemaTable
+            WHERE cineCode = #{cineCode}
+        ]]> 
+    </delete>   
+    
+   
+   <!-- LIST --> 
+   <select id="cinemaList" resultType="cinemaDTO">
+    <![CDATA[
+        SELECT cineCode, brandName, cineName, tel, addr1, addr2, addr3, logoImg
+        from cinematable
+        ]]>
+    </select>
+    
+    <!-- 1) List : 검색 -->
+	<select id="search" parameterType="map" resultType="cinemaDTO"> 
+	<![CDATA[
+	SELECT * 
+	FROM cinematable
+	WHERE cineName like CONCAT('%', #{sch_value} , '%')
+	 ]]>
+	</select>
+	
+	<!-- 2) List : 카테고리 -->   
+    <select id="cate" parameterType="java.util.List" resultType="cinemaDTO">
+    SELECT *
+    FROM cinemaTable
+    WHERE brandName IN 
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+    #{item}
+    </foreach>
+    </select>
+	
+   
+   
+   <!-- ////////////////////////////////// REVIEW //////////////////////////////////////// --> 
+   
+    <!-- REVIEWSTAR -->
+    <select id="reviewstar" resultType="kr.co.moviemovit.review.ReviewStar">
+        <![CDATA[    
+        SELECT cineCode, pixel, sound, clean, service, seat, around, snack, trans, 
+                     sum(pixel+sound+clean+service+seat+around+snack+trans)/8 AS startotal
+        FROM reviewStarTable
+        GROUP BY cineCode
+          ]]>
+     </select> 
+     
+     
+    <!-- REVIEWSTAR 02 -->    
+    <!-- <select id="reviewstardto" parameterType="ReviewStarDTO" resultType="kr.co.moviemovit.reviewstar.ReviewStarDTO">
+    <![CDATA[
+         SELECT no, cineCode, uid, pixel, sound, clean, service, seat, around, snack, trans, wdate
+         FROM reviewStarTable
+         WHERE cineCode = #{cineCode}
+    ]]>
+    </select> -->
+    
+    <!-- CREATE  -->
+    <insert id="reviewForm" parameterType="ReviewStar">
+            <selectKey keyProperty="no" resultType="int" order="BEFORE">
+             <![CDATA[
+                SELECT ifnull(MAX(no), 0)+1 as no
+                FROM reviewStarTable
+                ]]>
+            </selectKey>
+            <![CDATA[
+            INSERT INTO reviewStarTable(cineCode, pixel, sound, clean, service, seat, around, snack, trans)
+            VALUES( #{cineCode}, #{pixel}, #{sound}, #{clean}, #{service}, #{seat}, #{around}, #{snack}, #{trans})
+            ]]>
+    </insert>
+   
+    
+</mapper>

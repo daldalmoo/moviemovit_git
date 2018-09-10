@@ -1,0 +1,150 @@
+.cbp-mc-form {
+  position: relative;
+}
+
+*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.cbp-mc-form:before, 
+.cbp-mc-form:after { 
+  content: " "; display: table; 
+}
+
+.cbp-mc-form:after { 
+  clear: both; 
+}
+
+.cbp-mc-column {
+  width: 50%;
+  margin: auto;
+  text-align: left;
+}
+
+/* 20180906 남효 추가 */
+.cbp-mc-column td{
+text-align:left;
+  padding:10px;
+  margin:auto;
+}
+
+.cbp-mc-form label {
+  padding: 30px 5px 5px 2px;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.cbp-mc-form input,
+.cbp-mc-form textarea,
+.cbp-mc-form select {
+  font-family: 'Lato', Calibri, Arial, sans-serif;
+  line-height: 1.5;
+  font-size: 1.4em;
+  padding: 5px 5px;
+  color: #17a9fa;
+  /*180827 경민 50에서 70으로 수정  */
+  width: 70%;
+  background: transparent;
+}
+
+.cbp-mc-form input,
+.cbp-mc-form textarea,
+.cbp-mc-form select {
+  border: 3px solid #041793;
+}
+
+.cbp-mc-form textarea {
+  min-height: 200px;
+}
+
+.cbp-mc-form input:focus,
+.cbp-mc-form textarea:focus,
+.cbp-mc-form label:active + input,
+.cbp-mc-form label:active + textarea {
+  outline: none;
+  border: 3px solid #10689a;
+}
+
+.cbp-mc-form select:focus {
+  outline: none;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #17a9fa;
+    font-style: italic;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #10689a;
+    font-style: italic;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #10689a;
+    font-style: italic;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #10689a;
+    font-style: italic;
+}
+
+.cbp-mc-submit-wrap {
+  text-align: center;
+  padding-top: 40px;
+  clear: both;
+}
+
+.cbp-mc-form input.cbp-mc-submit {
+  background: #40bf80;
+  border: none;
+  color: #fff;
+  width: auto;
+  cursor: pointer;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 1.1em;
+  border-radius: 2px;
+  letter-spacing: 1px;
+}
+
+.cbp-mc-form input.cbp-mc-submit:hover {
+  background: #2b8256;
+}
+
+.cbp-mc-form input.cbp-mc-button {
+  background: #40bf80;
+  border: none;
+  color: #fff;
+  width: auto;
+  cursor: pointer;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 5px 15px;
+  font-size: 1.1em;
+  border-radius: 2px;
+  letter-spacing: 1px;
+}
+
+.cbp-mc-form input.cbp-mc-button:hover {
+  background: #2b8256;
+}
+
+@media screen and (max-width: 70em) {
+  .cbp-mc-column {
+    width: 50%;
+  }
+  .cbp-mc-column:nth-child(3) {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 48em) {
+  .cbp-mc-column {
+    width: 100%;
+    padding: 10px;
+  }
+}
