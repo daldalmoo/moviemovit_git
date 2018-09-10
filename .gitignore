@@ -1,0 +1,47 @@
+# commit 시 제외할 파일 목록 지정#
+################################
+
+# 실행파일 제외 #
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# 로그 파일, 업로드 폴더 제외 #
+*.log
+upload/
+logs/
+
+# 맥, 윈도우용 시스템 파일 제외 #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 이클립스(or STS) 설정 파일 제외 #
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+.project
+.externalToolBuilders/
+*.launch
+.classpath
+.factorypath
+.buildpath
+.target
+.tern-project
+.springBeans
+.recommenders/
