@@ -45,3 +45,7 @@ local.properties
 .tern-project
 .springBeans
 .recommenders/
+
+# Spring Framework 전용 Git 생성? 설정파일 제외 #
+pom.properties
+MANIFEST.MF
