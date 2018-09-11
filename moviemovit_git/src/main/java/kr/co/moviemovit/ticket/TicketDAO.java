@@ -1,4 +1,4 @@
-package kr.co.moviemovit.book;
+package kr.co.moviemovit.ticket;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
   private String auditType;  // 관람객유형 (adu you sen kid -> 성인 청소년 경로우대 아이)
 */
 @Component
-public class BookDAO {
+public class TicketDAO {
   
   //@Autowired
   //DBOpen dbopen;
@@ -25,16 +25,16 @@ public class BookDAO {
   @Autowired
   SqlSession sqlSession;
   
-  public BookDAO() {
+  public TicketDAO() {
     System.out.println("---------- BookDAO() 객체 생성");
   }//default constructor
   
   
 /*********************************** 예매 목록 *********************************************/
   // 예매 목록 select
-  public ArrayList<BookDTO> list() {
-    BookMapper mapper = sqlSession.getMapper(BookMapper.class);
-    ArrayList<BookDTO> list = mapper.list();
+  public ArrayList<TicketDTO> list() {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<TicketDTO> list = mapper.list();
     return list;
   }//list() end
   

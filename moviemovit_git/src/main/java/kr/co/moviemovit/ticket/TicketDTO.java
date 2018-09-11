@@ -1,6 +1,6 @@
-package kr.co.moviemovit.book;
+package kr.co.moviemovit.ticket;
 
-public class BookDTO {
+public class TicketDTO {
   private String bCode;  // 예매코드(PK)
   private String wdate;  // 예매날짜
   private String uid;    // 유저 아이디 <- userTable
@@ -9,7 +9,7 @@ public class BookDTO {
   private String seat;   // 예매좌석위치(최대5명)
   private String auditType;  // 관람객유형 (adu you sen kid -> 성인 청소년 경로우대 아이)
   
-  public BookDTO() {
+  public TicketDTO() {
     System.out.println("---------- BookDTO() 객체 생성");
   }//default constructor
 

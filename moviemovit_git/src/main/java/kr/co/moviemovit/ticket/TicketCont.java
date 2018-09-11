@@ -1,4 +1,4 @@
-package kr.co.moviemovit.book;
+package kr.co.moviemovit.ticket;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class BookCont {
+public class TicketCont {
   
   @Autowired  // 의존 관계를 자동으로 연결 및 객체 자동 생성
-  BookDAO dao;
+  TicketDAO dao;
 
-  public BookCont() {
+  public TicketCont() {
     System.out.println("---------- BookCont() 객체 생성");
   }//default constructor
   
@@ -28,9 +28,9 @@ public class BookCont {
 /*********************************** 예매 목록 *********************************************/
   // 결과확인 http://localhost:9090/moviemovit/book/list.do
   @RequestMapping(value="/book/list.do")
-  public ModelAndView list(BookDTO dto) {
+  public ModelAndView list(TicketDTO dto) {
       ModelAndView mav = new ModelAndView();
-      ArrayList<BookDTO> list = dao.list();
+      ArrayList<TicketDTO> list = dao.list();
       mav.setViewName("book/bookList");
       mav.addObject("list", list);
       return mav; 

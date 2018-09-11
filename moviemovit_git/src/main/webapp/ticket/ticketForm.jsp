@@ -5,45 +5,73 @@
 <!-- 통째로 갈아없을꺼임!!!!!!! -->
 
 <head>
-<link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
-<style>
-.cbp-mc-column th {
-  text-align: right;
-}
-.cbp-mc-column td {
-  text-align: left;
-  padding: 10px;
-  margin: auto;
-}
-.container-fluid .in {
-  position: absolute;
-  top: 200;
-  z-index: 20000;
-}
-.modal-backdrop {
-  z-index: 9999;
-}
-
-/* placeholder 속성 */
-::-webkit-input-placeholder {  /* 크롬 */
-  font-size: 18px;
-  font-style: normal;
-}
-:-moz-placeholder {    /* 파이어폭스 */
-  font-size: 18px;
-  font-style: normal;
-}
-::-moz-placeholder {
-  font-size: 18;
-  font-style: normal;
-}
-:-ms-input-placeholder {   /* 익스 */
-  font-size: 18px;
-  font-style: normal;
-}
-</style>
+<link href="../css/ticketStyle.css" rel="stylesheet" type="text/css">
 </head>
 
+<!-- ------------------------------ 소스 복붙 ---------------------------------- -->
+<style>
+
+/* UI Object */
+#wrap{width:100%}
+#header{width:100%}
+#container{*display:inline-block;_width /**/:100%;padding-right:200px;padding-left:200px}
+#container:after{display:block;clear:both;content:''}
+.snb{float:left;position:relative;left:-200px;width:180px;margin-right:-180px}
+#content{float:left;width:100%}
+.aside{float:left;position:relative;left:200px;width:182px;margin-left:-182px}
+#footer{width:100%}
+
+/* Layout Color - 실제 서비스 적용 후 아래 코드는 삭제 하세요 */
+div{margin:0 0 10px;padding:10px 0;color:#2d2c2d;font-family:Tahoma;font-size:14px;font-weight:bold}
+#wrap{position:relative;width:auto;padding:10px;border:1px solid #bdbdbd;background:#f7f7f7}
+#header{width:auto;margin-top:10px;padding:10px;border:2px solid #bfbfbf;background:#e5e5e5}
+#container{position:relative;border:2px solid #bfbfbf;background:#e5e5e5}
+.snb{left:-190px;width:178px;margin-top:10px;border:1px solid #bdbdbd;background:#fff;text-align:center}
+#content{position:relative;height:200px;margin-top:10px;border:1px solid #bdbdbd;background:#fff;text-align:center}
+.aside{left:190px;width:178px;margin-top:10px;border:1px solid #bdbdbd;background:#fff;text-align:center}
+#footer{clear:both;width:auto;padding:10px;border:2px solid #bfbfbf;background:#e5e5e5}
+/* //UI Object */
+</style>
+
+<!--ui object -->
+<div id="wrap">
+<p>#wrap</p>
+<!--header -->
+<div id="header">
+<p>#header</p>
+</div>
+<!--//header -->
+<!--container -->
+<div id="container">
+<p>#container</p>
+<!--snb -->
+<div class="snb">
+<p>.snb</p>
+</div>
+<!--//snb -->
+<!--content -->
+<div id="content">
+<p>#content</p>
+</div>
+<!--//content -->
+<!--aside -->
+<div class="aside">
+<p>.aside</p>
+</div>
+<!--//aside -->
+<div class="clear">
+</div>
+</div>
+<!--//container -->
+<!--footer -->
+<div id="footer">
+<p>#footer</p>
+</div>
+<!--//footer -->
+</div>
+<!--//ui object -->
+
+<!-- ------------------------------ 소스 복붙 ---------------------------------- -->
 
 <form class="cbp-mc-form" name="regForm" method='POST' action='./create.do' onsubmit="return couponCheck(this)">
   <span style="color: red; font-weight: bold">* 필수입력</span><br>
