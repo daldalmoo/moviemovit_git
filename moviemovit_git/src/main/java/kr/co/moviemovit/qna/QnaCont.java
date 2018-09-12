@@ -150,7 +150,7 @@ public class QnaCont {
     
     // 현재글의 groupNum 설정하기 위해 저장될 위치 바로 위의 groupNum을 GNpoint 변수에 저장
     int GNpoint = dto.getGroupNum();   // 부모에 답글이 하나도 없을 땐 부모글 글순서로 설정
-    ArrayList<QnaDTO> groupnolist = dao.groupNoList(dto);  // 부모글과 같은 groupNo 중 부모글 글순서 이상인 것만 가져오기 
+    ArrayList<QnaDTO> groupnolist = dao.groupNoList(dto);  // 부모글과 같은 groupNo 중 부모글 글순서 초과인 것만 가져오기 
     //System.out.println("---------QnaCont 2 : groupnolist.size() : "+groupnolist.size());
     for(int i=0; i<groupnolist.size(); i++) {
       //System.out.println("---------QnaCont 2 : groupNolist.get("+i+").toString() : "+groupNolist.get(i).toString());
