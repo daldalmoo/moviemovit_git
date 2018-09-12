@@ -3,6 +3,7 @@ package kr.co.moviemovit.people;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -166,7 +167,50 @@ public class PeopleCont {
 	      mav.addObject("link2", "<input type='button' value='인물목록' onclick='location.href=\"./peoList.do\"'>");
 	    }//if end
 	    return mav;    
-	  }//deleteProc() end
+	  }//updateProc() end
 	
+	  @RequestMapping(value="/people/peoSearch.do", method=RequestMethod.GET)
+	  public ModelAndView peolist() {
+	    ModelAndView mav = new ModelAndView();
+	    ArrayList<PeopleDTO> list = dao.peolist();
+	    
+	    // 페이지 이동 및 값 올리기
+	    mav.addObject("list", list);
+	    mav.setViewName("people/peoSearch");  // .do 명령어로 이동시 "redirect:" 사용
+	    return mav;
+	  }//uidSearch() end
+	  
+	  // 쿠폰 등록 또는 수정시 필요한 회원 아이디 검색하기 (AJAX 구방식)
+	  @RequestMapping(value="/people/peoresult.do")
+	  public ModelAndView peoresult(HttpServletRequest req, HttpServletResponse resp, String searchfield) {
+	    // uid 목록을 resultList에 저장
+		ArrayList<PeopleDTO> resultList = new ArrayList<PeopleDTO>();
+	    try {
+	      // 입출력하는 데이터의 문자코드셋을 UTF-8 로 지정
+	      req.setCharacterEncoding("UTF-8");
+	      
+	      // 검색어 가져오기
+	      /*req.getParameter("searchfield").trim(); 매개변수로 가져옴 */
+	      //System.out.println("CouponCont : searchfield : " + searchfield);
+	      
+	      // DB값 가져오기
+	      if(searchfield.length() <= 0) { // 검색어가 없으면 전체 uid 목록
+	    	  resultList = dao.peolist();
+	          //System.out.println("PeopleCont 0 : resultList.get(0) : " + resultList.get(0).getPeoName());
+	      } else if(searchfield.length()>0) { // 검색어가 있으면 검색된 uid 목록
+	    	  resultList = dao.peosearch(searchfield);
+	          //System.out.println("PeopleCont 1 : resultList.get(0) : " + resultList.get(0).getPeoName());
+	      }//if end
+	    }catch (Exception e) {
+	      System.out.println("실패:" + e);
+	    }//try end
+	    //System.out.println("CouponCont : resultList.toString() : "+resultList.toString());
+	    
+	    // 페이지 이동 및 값 올리기
+	    ModelAndView mav = new ModelAndView();
+	    mav.addObject("resultList", resultList);
+	    mav.setViewName("people/peoSearchTable");  // .do 명령어로 이동시 "redirect:" 사용
+	    return mav;
+	  }//peoresult() end
 
 }//class end

@@ -7,6 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import kr.co.moviemovit.people.PeopleDTO;
+import kr.co.moviemovit.people.PeopleMapper;
+import kr.co.moviemovit.screen.ScreenMapper;
+
 @Component
 public class MovieDAO {
 	
@@ -26,6 +30,7 @@ public class MovieDAO {
 	public ArrayList<MovieDTO> list() {
 	    MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
 	    ArrayList<MovieDTO> list = mapper.list();
+	    
 	    return list;
 	}//list() end
 	
@@ -47,6 +52,24 @@ public class MovieDAO {
 		return count;
 	}//update() end
 
+	public ArrayList<PeopleDTO> peopleNameList(String peoName) {
+		MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
+        ArrayList<PeopleDTO> peoplelist = mapper.peopleNameList(peoName);
+        return peoplelist;
+    }//peopleNameList() end
+	
+	public ArrayList<PeopleDTO> peopleNameList2(String peoName) {
+		MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
+        ArrayList<PeopleDTO> peoplelist2 = mapper.peopleNameList2(peoName);
+        return peoplelist2;
+    }//peopleNameList() end
+	
+	public int star(int star) {
+		MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
+		int count = mapper.star(star);
+		return count;
+	}//update() end
+	
 	
 	
 

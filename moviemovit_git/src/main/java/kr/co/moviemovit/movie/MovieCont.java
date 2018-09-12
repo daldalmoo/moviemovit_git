@@ -1,6 +1,8 @@
 package kr.co.moviemovit.movie;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import kr.co.moviemovit.people.PeopleDTO;
+import kr.co.moviemovit.review.CinemaDTO;
 import net.utility.UploadSaveManager;
 import net.utility.Utility;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -51,13 +56,7 @@ public class MovieCont {
 	    dto.setPoster(poster);
 	    dto.setFilesize(posterMF.getSize());
 	//------------------------------------------------------------   
-	    if(dto.getDirector()==null) {
-	    	dto.setDirector("default");
-	    }
-	    if(dto.getActor()==null) {
-	    	dto.setActor("default");
-	    }
-	    	    
+	       	    
 	    if(dto.getGenre().equals("romance")) {
 			 dto.setGenre("로맨스");
 		 } else if (dto.getGenre().equals("crime")) {
@@ -88,9 +87,6 @@ public class MovieCont {
 	    	dto.setScreen("상영종료");
 	    }//if end
 
-	    dto.setAge(Integer.parseInt("age"));
-	    System.out.println(dto.getAge());
-	    
 	    
 	    int cnt=dao.create(dto);
 	    if(cnt==0) {
@@ -112,6 +108,7 @@ public class MovieCont {
 	     ModelAndView mav = new ModelAndView();
 	     mav.setViewName("movie/movieList");
 	     ArrayList<MovieDTO> list = dao.list();
+	     
 	     mav.addObject("list", list);
 	     return mav;
 	 }//list() end
@@ -177,16 +174,7 @@ public class MovieCont {
 		    dto.setPoster(poster);
 		    dto.setFilesize(posterMF.getSize());
 		//------------------------------------------------------------   
-		if(dto.getDirector()==null) {
-			dto.setDirector("default");
-		}
-		if(dto.getActor()==null) {
-			dto.setActor("default");
-		}
-		if(dto.getCountry()==null) {
-			dto.setCountry("default");
-		}
-		
+				
 		if(dto.getGenre().equals("romance")) {
 			 dto.setGenre("로맨스");
 		 } else if (dto.getGenre().equals("crime")) {
@@ -217,8 +205,6 @@ public class MovieCont {
 	    	dto.setScreen("상영종료");
 	    }//if end
 	    
-	    
-	    
 		int cnt = dao.update(dto);
 	    
 	    if(cnt==0) {
@@ -232,11 +218,76 @@ public class MovieCont {
 	      mav.addObject("link2", "<input type='button' value='영화목록' onclick='location.href=\"./movieList.do\"'>");
 	    }//if end
 	    return mav;    
-	  }//deleteProc() end
+	  }//updateProc() end
 	
-	 
-	  
+	  @RequestMapping(value="/movie/peopleNameList.do", method = RequestMethod.POST)
+		public void peopleNameList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+			resp.setCharacterEncoding("UTF-8");
+			
+			String peoName = req.getParameter("keyWord").trim();
+			System.out.println(peoName);
+			
+			String message = ""; //응답 메세지
+			if(peoName.length()>0) { //검색어가 존재하는지?
+				ArrayList<PeopleDTO> peopleList = dao.peopleNameList(peoName);
+				//,를 기준으로 문자를 나눠서 갯수만큼 출력
+				int size = peopleList.size();
+				if(size>0) {
+					message += size + "|";
+					for(int idx=0; idx<size; idx++) {
+						PeopleDTO dto = new PeopleDTO();
+						dto = peopleList.get(idx);
+						String key = dto.getPeoName();
+						message += key;
+						if(idx<size-1) {
+							message += ",";
+						}
+					}//for end
+				}//if end
+			} else {
+				System.out.println("인물목록 불러오기 실패");
+			}//if end
+			
+			resp.setContentType("text/plain; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+			out.println(message);
+			out.flush();
+			out.close();
+		}//peopleNameList() end
 	
-	
+	  @RequestMapping(value="/movie/peopleNameList2.do", method = RequestMethod.POST)
+		public void peopleNameList2(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+			resp.setCharacterEncoding("UTF-8");
+			
+			String peoName = req.getParameter("keyWord2").trim();
+			System.out.println(peoName);
+			
+			String message = ""; //응답 메세지
+			if(peoName.length()>0) { //검색어가 존재하는지?
+				ArrayList<PeopleDTO> peopleList2 = dao.peopleNameList(peoName);
+				//,를 기준으로 문자를 나눠서 갯수만큼 출력
+				int size = peopleList2.size();
+				if(size>0) {
+					message += size + "|";
+					for(int idx=0; idx<size; idx++) {
+						PeopleDTO dto = new PeopleDTO();
+						dto = peopleList2.get(idx);
+						String key = dto.getPeoName();
+						message += key;
+						if(idx<size-1) {
+							message += ",";
+						}
+					}//for end
+				}//if end
+			} else {
+				System.out.println("인물목록 불러오기 실패");
+			}//if end
+			
+			resp.setContentType("text/plain; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+			out.println(message);
+			out.flush();
+			out.close();
+		}//peopleNameList() end
 
 }//class end

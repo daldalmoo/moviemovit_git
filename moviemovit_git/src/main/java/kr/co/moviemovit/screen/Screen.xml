@@ -15,4 +15,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			ORDER BY cineName ASC
 		]]>
 	</select>
+	
+	<!-- 영화목록 list -->  
+	<select id="movieNameList" parameterType="String" resultType="MovieDTO">
+		<![CDATA[
+			SELECT mCode,mName
+			FROM movieTable 
+			WHERE mName LIKE concat('%',#{mName},'%')
+			ORDER BY mName ASC
+		]]>
+	</select>
 </mapper>
