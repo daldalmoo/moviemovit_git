@@ -89,21 +89,7 @@ CREATE TABLE reviewStarTable(
  ,snack     INT          DEFAULT 0  NOT NULL
  ,trans     INT          DEFAULT 0  NOT NULL
  ,wdate     DATETIME     NOT NULL
- ,FOREIGN KEY(cineCode) 
-  REFERENCES cinemaTable(cineCode) 
-  ON DELETE CASCADE
- ,FOREIGN KEY(uid) 
-  REFERENCES userTable(uid) 
-  ON DELETE CASCADE
-)ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- reviewTable »ý¼º
-CREATE TABLE reviewTable(
-  no        INT           NOT NULL  PRIMARY KEY
- ,cineCode  CHAR(4)       NOT NULL
- ,uid       VARCHAR(20)   NOT NULL
  ,s_e       VARCHAR(255)  NOT NULL
- ,wdate     DATETIME      NOT NULL
  ,ip        VARCHAR(20)   NOT NULL
  ,heart     INT           NOT NULL
  ,FOREIGN KEY(cineCode) 

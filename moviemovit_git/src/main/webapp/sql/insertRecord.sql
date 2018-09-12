@@ -38,6 +38,7 @@ values('C003','CGV','원주','1544-1122','GWD','강원도 원주시','서원대 171','37.34
 insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,kyengdo,logoImg,wdate,etc,home)
 values('M002','MEGABOX','제주','1544-0070','JJD','제주도 제주시 중앙로14길','18','33.5116003','126.5226707','img/default.png',now(),'운영시간 : 8:00~2:00','http://www.megabox.co.kr');
 
+
 -- roomTable 레코드 삽입
 insert into roomTable(roomCode,cineCode,roomName,seatCnt,DD,seatImg)
 values('C001_1','C001',1,50,'2D, 3D','moving/images/seat1.jpg');
@@ -48,19 +49,13 @@ values('C001_3','C001',3,150,'imax','moving/images/seat3.jpg');
 insert into roomTable(roomCode,cineCode,roomName,seatCnt,DD,seatImg,etc)
 values('L001_4','L001',4,100,'4D','moving/images/seat4.jpg','레드벨벳 신곡기념관');
 
--- reviewStarTable 레코드 삽입
-insert into reviewStarTable(no,cineCode,uid,pixel,sound,clean,service,seat,around,snack,trans,wdate)
-values((SELECT IFNULL(MAX(no),0)+1 FROM reviewStarTable as rst),'C001','member1',5,3,1,2,3,3,3,5,now());
-insert into reviewStarTable(no,cineCode,uid,pixel,sound,service,seat,around,snack,trans,wdate)
-values((SELECT IFNULL(MAX(no),0)+1 FROM reviewStarTable as rst),'L001','member2',4,2,2,3,2,2,5,now());
 
--- reviewTable 레코드 삽입
-insert into reviewTable(no,cineCode,uid,s_e,wdate,ip,heart)
-values((SELECT IFNULL(MAX(no),0)+1 FROM reviewTable as rt),'C001','member1','좌석이 폭신폭신하고 넓어서 편안합니다',now(),'172.168.0.20',10);
-insert into reviewTable(no,cineCode,uid,s_e,wdate,ip,heart)
-values((SELECT IFNULL(MAX(no),0)+1 FROM reviewTable as rt),'L001','member2','자리앞에 팝콘 떨어진게 아직도 있더라구요',now(),'152.168.0.18',2);
-insert into reviewTable(no,cineCode,uid,s_e,wdate,ip,heart)
-values((SELECT IFNULL(MAX(no),0)+1 FROM reviewTable as rt),'M001','member3','제 키가 작은 편인데도 다리 뻗고 있기 힘들어요',now(),'128.168.0.20',0);
+-- reviewTable과 reviewStarTable 합쳐짐 _ 0911 승지
+-- reviewStarTable 레코드 삽입
+insert into reviewStarTable(no,cineCode,uid,pixel,sound,clean,service,seat,around,snack,trans,wdate,s_e,ip,heart)
+values((SELECT IFNULL(MAX(no),0)+1 FROM reviewStarTable as rst),'C001','member1',5,3,1,2,3,3,3,5,now(),'좌석이 폭신폭신하고 넓어서 편안합니다','172.168.0.20',10);
+insert into reviewStarTable(no,cineCode,uid,pixel,sound,service,seat,around,snack,trans,wdate,s_e,ip,heart)
+values((SELECT IFNULL(MAX(no),0)+1 FROM reviewStarTable as rst),'L001','member2',4,2,2,3,2,2,5,now(),'자리앞에 팝콘 떨어진게 아직도 있더라구요','152.168.0.18',2);
 
 -- noticeTable 레코드 삽입
 insert into  noticeTable(noticeno,title,s_e,uid,wdate,open)

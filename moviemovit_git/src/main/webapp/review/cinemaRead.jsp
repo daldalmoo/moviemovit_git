@@ -5,6 +5,65 @@
 <%-- 본문시작 template.jsp --%>
 
 <style rel="stylesheet">
+/* 0912 test 목록에 넣을 css */
+.header {   /* 영화관목록  */
+  background-color: #3366cc;
+  color: white; 
+  font-size: 1.5em;
+  padding: 1rem;
+  text-align: center;
+  text-transform: uppercase;        
+}
+.table-users {
+  border: 1px solid #327a81;
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+  max-width: calc(100% - 2em);
+  margin: 1em auto;
+  overflow: hidden;
+  width: 100%;
+}
+table {
+  width: 100%;
+}
+table td, table th {
+  color: #2b686e;
+  padding: 10px;
+}
+table td {
+  text-align: center;
+  vertical-align: middle;
+}
+ table td:last-child {
+  font-size: 0.95em;
+  line-height: 1.4;
+  text-align: center;
+} 
+table th {
+  background-color: #bfe1ff;
+  font-weight: 300;
+  text-align: center;
+  font-weight: bold;
+}
+/* 0905 th 첫번째 요소 스타일넣기
+ table th:first-child{
+    width: 20%;
+ }
+ 
+ 0905 th 마지막 요소 스타일넣기
+ table th:last-child {
+  width: 150px;
+} 
+table tr:nth-child(2n) {
+  background-color: white;
+}
+table tr:nth-child(2n+1) {
+  background-color: #bfe1ff;
+}*/
+
+
+
+
 /* 0906버튼 */
 .cbp-mc-button {
   background: #40bf80;
@@ -231,15 +290,6 @@ table td:last-child {
   
   <tr>
      <td colspan="3">
-          <%-- 지영언니
-          <c:forEach var="reviewstar" items="${reviewstar }">
-          <c:choose>
-              <c:when test="${cineCode == reviewstar.cineCode}">
-               ${reviewstar.startotal}
-               </c:when>
-            </c:choose>
-          </c:forEach>
-           --%>
   
         <!-- 별점별 이미지출력 -->
           <c:forEach var="reviewstar" items="${reviewstar }">
@@ -669,8 +719,11 @@ table td:last-child {
  -->
  
     
-         <a href="./reviewForm.do?cineCode=${dto.cineCode }" > ${dto.brandName }  ${dto.cineName }영화관 평가 등록하기 </a>
+         <a href="./create.do?cineCode=${dto.cineCode }" > ${dto.brandName }  ${dto.cineName }영화관 평가 등록하기 </a>
         <!-- <input class="cbp-mc-button" type="button" value=" 나도 평가 등록하기!! " onclick="location.href='reviewForm.jsp'" > -->
+<!-- test 0912 -->
+
+
 
  
 
@@ -725,6 +778,39 @@ table td:last-child {
 </script>   
 </div>          
 
+0912 test
+
+<div class="table-users">
+   <div class="header">리뷰 목록</div>
+<table>
+      <tr>
+         <th>아이디공간</th>
+         <th> 평가 </th>
+         <th> 관리자</th>
+      </tr> 
+      
+       <c:forEach var="sdto" items="${list }"> 
+       <tr class="brandtest">
+         <td> ${sdto.uid }</td>
+         <td> 화질 ${sdto.pixel } 청결도 ${sdto.clean }
+            <br>
+            	음향 ${sdto.sound } 서비스 ${sdto.service }
+            <br>
+            	좌석 ${sdto.seat }	주변 편의시설${sdto.around }  
+         		<br>
+         			매점 ${sdto.snack } 교통 ${sdto.trans }
+         		<br> 
+         		${sdto.s_e }</td>
+         <td>
+            <input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./update.do?cCode=${sdto.cineCode }'"/>
+            <input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./delete.do?cCode=${sdto.cineCode }'"/>
+         </td> 
+         </tr> 
+   </c:forEach>
+   </table>
+</div>
+
+     <a href="./list.do?cineCode=${dto.cineCode }" > ${dto.brandName }  ${dto.cineName } 평가목록 </a>
 
 
 

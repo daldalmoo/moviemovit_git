@@ -7,16 +7,16 @@
 /* ==== Google font ==== */
 @import url(https://fonts.googleapis.com/css?family=Varela+Round|Open+Sans:400,300,600,400italic,700);
 
-
+0911 ฑ๊ว้ test
 
 body {
     width: 100%;
     height: 100%;
-   font-family: 'Open Sans', sans-serif;
-   font-weight: 400;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
     color: #888;
-   font-size: 16px;
-   /* line-height: 1.6em; */
+    font-size: 16px;
+    /* line-height: 1.6em; */
     background-color: #fff;
 }
 
