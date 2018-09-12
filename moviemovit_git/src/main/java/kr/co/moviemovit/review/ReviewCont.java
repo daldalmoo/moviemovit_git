@@ -130,12 +130,13 @@ public class ReviewCont {
     mav.setViewName("review/cinemaRead");
     dto = dao.cinemaRead(dto);
     ArrayList<ReviewStar> reviewstar = dao.reviewstar();
- /*   ReviewStarDTO reviewstardto = dao.reviewstardto();*/
-//    mav.addObject("reviewstardto", reviewstardto);
+    //0912 test
+    ArrayList<ReviewStar> list = dao.list();
+    mav.addObject("list", list);
+    
     mav.addObject("reviewstar", reviewstar);
     mav.addObject("dto", dto);
     return mav;
-    
   }
   
 
@@ -314,17 +315,29 @@ public class ReviewCont {
 
   
   ////////////////////////////// REVIEW  ////////////////////////////////////////////////////////////////////////////
-  
 
   /*0906 리뷰점수 매기는 폼*/
-  @RequestMapping(value="/review/reviewForm.do", method=RequestMethod.GET)
+  @RequestMapping(value="/review/create.do", method=RequestMethod.GET)
   public ModelAndView reviewForm() {
     ModelAndView mav= new ModelAndView();
     mav.setViewName("review/reviewForm");
     return mav;
   } // 
   
-  /*0905*/
+  @RequestMapping(value="/review/create.do", method=RequestMethod.POST)
+  public ModelAndView createProc(ReviewStar sdto, HttpServletRequest req) {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("review/msgView");
+    int count = dao.create(sdto);
+    mav.addObject("count", count);
+    return mav;
+  }
+  
+  
+  
+  
+  /*
+  
   @RequestMapping(value="/review/reviewForm.do", method=RequestMethod.POST)
   public ModelAndView reviewform(ReviewStar sdto) {
     ModelAndView mav= new ModelAndView();
@@ -332,6 +345,19 @@ public class ReviewCont {
     int count = dao.reviewForm(sdto);
     mav.addObject("count", count);
     return mav;
-  } // POST
+  } // POST*/
+  
+  
+  /* review 목록                              결과확인하는 값
+  @RequestMapping(value="/review/cinemaRead.do")
+  public ModelAndView list(ReviewStar sdto) {
+      ModelAndView mav = new ModelAndView();
+      ArrayList<ReviewStar> list = dao.list();
+      // 페이지 이동 및 값 올리기
+      mav.setViewName("review/cinemaRead"); //reviewList
+      mav.addObject("list", list);
+      return mav; 
+  }*/ //list() end
 
+  
 } // class end

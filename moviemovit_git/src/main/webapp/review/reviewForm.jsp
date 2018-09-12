@@ -34,7 +34,7 @@ td:first-child {
 }
 </style>
 </head>
-<FORM class="cbp-mc-form" name='frm' method='POST' action='./reviewform.do'>
+<FORM class="cbp-mc-form" name='frm' method='POST' action='./create.do'>
 	<span style="color: red; font-weight: bold">* 필수입력</span><br>
 
  <div class="table-review">

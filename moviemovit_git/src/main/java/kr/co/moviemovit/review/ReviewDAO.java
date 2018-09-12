@@ -93,23 +93,24 @@ public class ReviewDAO {
   
 
 
-  /* public ReviewStarDTO reviewread(ReviewStarDTO reviewstardto){
-  ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
-  reviewstardto = mapper.reviewstardto(reviewstardto);
-  return reviewstardto;
-}//read
-*/
-
   
   ////////////////////////////////////////// REVIEW  //////////////////////////////////////////////////////////
   
-  /*0905sj*/
-  public int reviewForm(ReviewStar sdto) {
+  /* insert 등록 */
+  public int create(ReviewStar sdto) {
     ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
-    int count = mapper.reviewForm(sdto);
-    System.out.println(sdto.getPixel());
-    System.out.println(sdto.getCineCode());
+    int count = mapper.create(sdto);
     return count;
   }// create() end
+  
+   //review 목록
+   public ArrayList<ReviewStar> list() {
+     ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
+     ArrayList<ReviewStar> list = mapper.list();
+     return list;
+   }//list() end
+
+   
+   
 
 } //class end
