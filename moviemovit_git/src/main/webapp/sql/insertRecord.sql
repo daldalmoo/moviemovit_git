@@ -67,8 +67,10 @@ insert into  noticeTable(noticeno,title,s_e,uid,wdate,open)
 values((SELECT ifnull(MAX(noticeno),0)+1 FROM noticeTable as notice),'사이트를 처음 이용하시는 분들',' ','admin1',now(),'Y');
 
 -- QnATable 레코드 삽입
-insert into  QnATable(qCode,qType,uid,title,content,wdate,ip,groupNo,indent)
-values((SELECT ifnull(MAX(qCode),0)+1 FROM QnATable as q),'q1','member1','예매어떻게 해요','예매하는 방법을 모르겠습니다. ㅠㅠ',now(),'172.168.0.20',0,0);
+--insert into  QnATable(qCode,qType,uid,title,content,wdate,ip,groupNo,indent,groupNum)
+--values((SELECT ifnull(MAX(qCode),0)+1 FROM QnATable as q),'q1','member1','예매어떻게 해요','예매하는 방법을 모르겠습니다. ㅠㅠ',now(),'172.168.0.20',0,0,0);
+insert into  QnATable(qCode,qType,uid,title,content,wdate,groupNo,indent,groupNum)
+values((SELECT ifnull(MAX(qCode),0)+1 FROM QnATable as q),'q1','member1','예매어떻게 해요','예매하는 방법을 모르겠습니다. ㅠㅠ',now(),0,0,0);
 
 -- starTable
 insert into starTable(sCode, mCode, uid, star, comment, wdate)

@@ -135,13 +135,14 @@ CREATE TABLE QnATable(
   title      VARCHAR(100) NOT NULL,
   content    VARCHAR(255) ,
   wdate      DATETIME NOT NULL,
-  ip         VARCHAR(20) NOT NULL,
   groupNo    INT,               
   indent     INT,
+  groupNum   INT,
   FOREIGN KEY(uid) 
   REFERENCES userTable(uid) 
   ON DELETE CASCADE
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- --------------------------------- 나중에 추가해야할 컬럼 : ip         VARCHAR(20) NOT NULL,
 
 --  starTable 생성
 CREATE TABLE starTable(

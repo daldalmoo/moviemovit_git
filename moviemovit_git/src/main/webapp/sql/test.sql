@@ -28,3 +28,13 @@ INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
 VALUES('m5', 's1234!', '우신혜', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'SILVER');
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
 VALUES('m6', 's1234!', '우신혜', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'F');
+
+-- QnATable 목록 답변알고리즘부분만 보기
+select title, uid, groupNo, indent, groupNum
+from QnATable
+where groupNo=5;
+
+
+
+
+
