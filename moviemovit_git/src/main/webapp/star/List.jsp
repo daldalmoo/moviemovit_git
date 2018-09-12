@@ -73,8 +73,6 @@ table tr:nth-child(2n+1) {
   
 }
 
-
-
 /*공개,수정,삭제 스타일*/
 .cbp-mc-button {
   background: #40bf80;
@@ -188,25 +186,8 @@ table tr:nth-child(2n+1) {
  <div class="table-users">
    <div class="header">MOVIE LIST</div>
  </div>
-   <%-- <table>
-     <c:forEach var="dto" items="${list }">
-     <tr>
-       <td><a href="./movieRead.do?mCode=${dto.mCode }"><img class="mimg" src="./storage/${dto.poster }" width="400" height="800"></a></td>
-       <td>${dto.mName}</td>
-       <td>
-       <a href="#"></a>
-       <input class="cbp-mc-button" type="button" value="예매하기" id="예매하기">
-       </td>
-     </tr>
-     </c:forEach>
-   </table>
-    
-   <div class="cbp-mc-submit-wrap">
-		<input class="cbp-mc-button" type="button" value="영화등록" onclick="location.href='./create.do'"/>
-		<input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />
-   </div> --%>
+
    <c:forEach var="dto" items="${list }">
-   
    <div>
    <div class="box-image" >
      <span class="thumb-image">
@@ -228,6 +209,31 @@ table tr:nth-child(2n+1) {
     </div>
    </div>
      </c:forEach>  
+     
+     <c:forEach var="dto" items="${list }">
+     
+     </c:forEach>
+     
+     <table class="table table-stripped" id="reviews">
+    <thead>
+        <tr>
+            <th>Rating</th> <!-- 평점 -->
+            <th>User</th>
+            <th>Text</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach var="review" items="${ reviews }" varStatus="status">
+            <!-- 평점 기준 별표시 출력 -->
+            <tr>
+                <td><c:forEach var="rating" items="${ ratingOptions }" varStatus="status" begin="1" end="${ review.rating }">★</c:forEach></td>
+                <td>익명</td>
+                <td>${ review.text }</td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
+     
      
      <!-- 하단 버튼 -->
       <div class="cbp-mc-submit-wrap">

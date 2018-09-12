@@ -49,6 +49,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE peoCode = #{peoCode}
 		]]>	
 	</update>
+	
+	<select id="peolist" resultType="PeopleDTO">
+      <![CDATA[
+        SELECT peoCode, peoName, country, peoBirth, gender, peoPic
+		FROM peopleTable
+		ORDER BY peoName DESC	
+      ]]>
+    </select>
+    
+    
+    <select id="peosearch" parameterType="String" resultType="PeopleDTO">
+      <![CDATA[
+        SELECT peoCode, peoName, country, peoBirth, gender, peoPic
+        FROM peopleTable
+        WHERE peoName LIKE concat('%', #{peoName}, '%')
+        ORDER BY peoName DESC
+      ]]>
+    </select>
     
 	
 	

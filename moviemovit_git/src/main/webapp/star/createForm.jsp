@@ -21,7 +21,7 @@
 
 </style>
 </head>
-<div class="header2">영화 등록</div>
+<div class="header2">별점 등록</div>
 <form class="cbp-mc-form" name="regForm" method="POST" action="./create.do"
       enctype="multipart/form-data">
     <input type='hidden' name='mCode' value='${mCode }'>

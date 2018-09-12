@@ -20,7 +20,6 @@
     font-size:20px;
 }
 
-
 </style>
 </head>
 <div class="header2">인물 등록</div>
@@ -34,6 +33,7 @@
 		<th>*이름</th>
 		<td class="list">
 			<input type="text" id="peoName" name="peoName" placeholder="이름" required>
+			<input class="cbp-mc-button" type="button" value="인물검색" onclick="openPopup(this.form);">
 		</td>
 	</tr>
 	<tr>
@@ -234,33 +234,27 @@
 	<div class="cbp-mc-submit-wrap">
 		<input class="cbp-mc-button" type="submit" value="등록" />
 		<input class="cbp-mc-button" type="reset" value="다시입력" />
-		<input class="cbp-mc-button" type="button" value="인물목록" onclick="location.href='./peopleList.do'"/>
+		<input class="cbp-mc-button" type="button" value="인물목록" onclick="location.href='./peoList.do'"/>
 	</div>
 	
 	<!-- 인물 중복 검사 -->
 	<!-- 아이디, 이메일 중복검사 -->
-	<script src="js/jquery.js"></script>
 	<script>
-		$("#peopleCheck").click(function() {
-			//1단계 : 컨트롤요소의 값 가져와서 서버로 전달하기
-			var peoName = "peoName=" + $("peoName").val();
-			$.get("/people/peoplecheck.do", peoName, CheckPeople, "text");
-		}//click end
-		
-		function CheckPeople(result) {
-			//2단계 : 서버에서 응답받은 값 받기
-			var people_result = eval(result.people_result); //숫자형 변환
-			if(id_result==0) {
-				$("panel_id").css("color","blue");
-				$("panel_id").html("사용 가능한 아이디입니다");
-			}else {
-				$("#panel_id").css("color","red");
-				$("#panel_id").html("중복 아이디입니다");
-				$("#uid").focus();
-			}//if end
-			
-		}//CheckID() end
-	</script>
+    function openPopup(frm){
+      //사용자 모니터 해상도 값
+      var sx=parseInt(screen.width);
+      var sy=parseInt(screen.height);
+      var x=sx/3;
+      var y=sy/2;
+      
+      // 팝업창 오픈 및 위치 이동
+      var url = "peoSearch.do";
+      var win=window.open(url,"peoSearch","width="+x+",height="+y);
+      var movex = x;
+      var movey = y/3;
+      win.moveTo(movex, movey);
+    }
+    </script>
 	
 	
 </form>

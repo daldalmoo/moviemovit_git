@@ -183,7 +183,6 @@ table tr:nth-child(2n+1) {
 
 <div class="table-users">
    <div class="header">Movie List</div>
-   <input type='hidden' name='mCode' value='${mCode }'>
    <table style="text-align:center; margin:center;">
       <tr>
         <th>영화명</th>
@@ -246,7 +245,6 @@ table tr:nth-child(2n+1) {
 	<div class="cbp-mc-submit-wrap">
 		<input class="cbp-mc-button" type="button" value="영화등록" onclick="location.href='./create.do'"/>
 		<input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='./movieList.do'"/>
-		<input class="cbp-mc-button" type="button" value="평점등록" onclick="location.href='../star/create.do?mCode=${dto.mCode }'"/>
 		<input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />
 		<input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./delete.do?mCode=${dto.mCode }'"/>
 		<input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./update.do?mCode=${dto.mCode }'"/>

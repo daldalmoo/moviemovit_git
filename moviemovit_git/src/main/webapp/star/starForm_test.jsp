@@ -2,7 +2,7 @@
 <%@ include file="../header.jsp"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%-- 본문시작 movieList.jsp --%>
+<%-- 본문시작 starList.jsp --%>
 
 <style rel="stylesheet">
 .header {   /* 영화관목록  */
@@ -13,6 +13,19 @@
   text-align: center;
   text-transform: uppercase;        
 }
+
+
+/* 별점  0904*/
+.starR{
+  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+  background-size: auto 100%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  text-indent: -9999px;
+  cursor: pointer;
+}
+.starR.on{background-position:0 0;}
 
 .table-users {
   border: 1px solid #327a81;
@@ -62,17 +75,13 @@ table tr:nth-child(2n+1) {
   margin: 1em auto;
 }
 
-
-
 .mimg {        /* 영화관 목록안의 영화관이미지 */
   font-size: 0;
   text-align: center;
   width: 100px;
   max-width: calc(100% - 50em);
   height: 180px;
-  
 }
-
 
 
 /*공개,수정,삭제 스타일*/
@@ -184,59 +193,71 @@ table tr:nth-child(2n+1) {
 
 </style>
 
-
- <div class="table-users">
-   <div class="header">MOVIE LIST</div>
- </div>
-   <%-- <table>
-     <c:forEach var="dto" items="${list }">
-     <tr>
-       <td><a href="./movieRead.do?mCode=${dto.mCode }"><img class="mimg" src="./storage/${dto.poster }" width="400" height="800"></a></td>
-       <td>${dto.mName}</td>
-       <td>
-       <a href="#"></a>
-       <input class="cbp-mc-button" type="button" value="예매하기" id="예매하기">
-       </td>
-     </tr>
-     </c:forEach>
-   </table>
-    
-   <div class="cbp-mc-submit-wrap">
-		<input class="cbp-mc-button" type="button" value="영화등록" onclick="location.href='./create.do'"/>
-		<input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />
-   </div> --%>
-   <c:forEach var="dto" items="${list }">
+   <div class="table-users">
+     <div class="header">MOVIE LIST</div>
+   </div>
+   <form class="cbp-mc-form" name="regForm" method="POST" action="./create.do" >
+   <input type='hidden' name='mCode' value='${mCode }'>
+   <div >
    
-   <div>
-   <div class="box-image" >
-     <span class="thumb-image">
-     <a href="./movieRead.do?mCode=${dto.mCode }">
-       <img class="mimg" src="./storage/${dto.poster }" width="400" height="800"/>
-       </a>
-     </span>
+     <div class="box-image" >
+       <span class="thumb-image">
+         <a href="./movieRead.do?mCode=${dto.mCode }">
+           <img class="mimg" src="../movie/storage/${dto.poster }" width="400" height="800"/>
+         </a>
+       </span>
      </div>
    
    <div class="box">
-       <strong class="title">${dto.mName }</strong><br>
-     <span>
-       <strong>
-       ${dto.s_date } 개봉<br> 
-       <span>${dto.screen }</span><br>
-       </strong>
-     </span>
+      <strong class="title">${dto.mName }</strong><br>
+      <!-- 별점test -->
+      <div class="starRev">
+      <span class="starR on">1</span>
+        <input type="hidden" id="star" name="star" value="1">
+      <span class="starR">2</span>
+        <input type="hidden" id="star" name="star" value="2">
+      <span class="starR">3</span>
+        <input type="hidden" id="star" name="star" value="3">
+      <span class="starR">4</span>                 
+        <input type="hidden" id="star" name="star" value="4">
+      <span class="starR">5</span>                 
+        <input type="hidden" id="star" name="star" value="5">
+   </div>
+     
+      
+      <!-- 별점test -->
+      <script>
+      $('.starRev span').click(function(){
+    	  
+         $(this).parent().children('span').removeClass('on');
+         $(this).addClass('on').prevAll('span').addClass('on');
          
+         return false;
+	  });	
+      
+      /* $('.starRev span').barrating({
+       	 theme: 'fontawesome-stars'
+       	 , onSelect: function(value, text, event){
+      	     // 별점 클릭 후 처리는 여기서 코드
+      	     // 선택한 별점 값을 value로 받음
+       	 }
+      }); */
+
+	  </script>	
+       
     </div>
    </div>
-     </c:forEach>  
+     <br>
+     
      
      <!-- 하단 버튼 -->
       <div class="cbp-mc-submit-wrap">
-		<input class="cbp-mc-button" type="button" value="영화등록" onclick="location.href='./create.do'"/>
-		<input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />
-      </div>
+		<input class="cbp-mc-button" type="submit" value="평점등록" />
+		<input class="cbp-mc-button" type="button" value="예매하기" onclick="" />
+	  </div>
    
+   </form>
    
- </div>    
 
 
 
