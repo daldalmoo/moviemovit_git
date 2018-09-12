@@ -90,7 +90,7 @@ public class ScreenCont {
 			//,를 기준으로 문자를 나눠서 갯수만큼 출력
 			int size = movieList.size();
 			if(size>0) {
-				//message += size + "|";
+				message += size + "|";
 				for(int idx=0; idx<size; idx++) {
 					MovieDTO dto = new MovieDTO();
 					dto = movieList.get(idx);
