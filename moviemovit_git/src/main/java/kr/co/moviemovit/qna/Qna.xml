@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace="패키지.인터페이스" -->
+<mapper namespace="kr.co.moviemovit.qna.QnaMapper">
+
+ 	<!-- **************** create 관련 부분 **************** -->
+  <select id="groupNoMax" resultType="int">
+    <![CDATA[
+      SELECT ifnull(max(groupNo),0)+1 AS groupNo
+      FROM QnATable 
+    ]]>
+  </select>
+  
+	<insert id="create" parameterType="QnaDTO">
+		<selectKey keyProperty="qCode" resultType="int" order="BEFORE">
+			<![CDATA[
+			  SELECT ifnull(max(qCode),0)+1 AS qCode FROM QnATable 
+			]]> 
+		</selectKey>
+    <![CDATA[
+		  INSERT INTO QnATable(qCode,qType,title,content,uid,wdate,groupNo,groupNum,indent)
+		  VALUES (#{qCode},#{qType},#{title},#{content},#{uid},now(),#{groupNo},#{groupNum},#{indent})
+	  ]]>
+	</insert>
+	
+  
+  <!-- **************** list 관련 부분 **************** -->
+  <select id="list" parameterType="QnaPage" resultType="QnaDTO">
+		<![CDATA[
+		SELECT *
+		FROM (
+					SELECT @NO := @NO + 1 AS ROWNUM, A.*
+					FROM (
+    							SELECT * FROM QnATable
+                  ORDER BY groupNo DESC, groupNum ASC
+  				 			 ) A,
+  				 			 ( SELECT @NO := 0 ) B 
+				 ) C
+		WHERE C.ROWNUM BETWEEN #{startIndex}+1 AND #{startIndex}+#{pageSize};
+		]]>
+	</select>
+	
+	<select id="listCnt" resultType="int">
+		<![CDATA[
+			SELECT count(qCode) as cnt
+			FROM QnATable
+		]]>
+	</select>
+  
+  
+  <!-- **************** read 관련 부분 **************** -->
+	<select id="read" parameterType="QnaDTO" resultType="QnaDTO">
+		<![CDATA[
+			SELECT *
+			FROM QnATable
+			WHERE qCode = #{qCode}
+		]]>
+	</select>
+	
+  
+  <!-- **************** delete 관련 부분 **************** -->
+	<delete id="delete" parameterType="QnaDTO">
+		<![CDATA[
+			DELETE FROM QnATable
+			WHERE qCode = #{qCode}
+		]]>
+	</delete>
+	
+  
+  <!-- **************** update 관련 부분 **************** -->
+  <update id="update" parameterType="QnaDTO">
+    <![CDATA[
+      UPDATE QnATable
+      SET title = #{title}
+         ,qType = #{qType}
+         ,uid = #{uid}
+         ,content = #{content}
+         ,wdate = now()
+      WHERE qCode = #{qCode}
+    ]]>
+  </update> 
+	
+  
+  <!-- **************** 답변쓰기 관련 부분 **************** -->
+  <!-- 부모글과 같은 groupNo 중 부모글 글순서 이상인 것만 가져오기 -->
+  <select id="groupNoList" parameterType="QnaDTO" resultType="QnaDTO">
+    <![CDATA[
+      SELECT *
+      FROM QnATable
+      WHERE groupNo = #{groupNo} AND groupNum > #{groupNum}
+      ORDER BY groupNum ASC
+    ]]>
+  </select>
+  
+  <update id="groupNumUpdate" parameterType="int">
+    <![CDATA[
+      UPDATE QnATable
+      SET groupNum = groupNum+1
+      WHERE groupNum >= #{GNpoint}
+    ]]>
+  </update>
+  
+  
+</mapper>
