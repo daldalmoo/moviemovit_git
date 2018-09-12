@@ -24,11 +24,11 @@
     color:#ccc;
     text-decoration:none;
 }
+
 .star_rating a:first-child {margin-left:0;}
+
 .star_rating a.on {color:#777;}
 
-
-출처: http://uidevelop.tistory.com/36 [UI Develop]
 
 /* 별점  0904*/
 .starR{
@@ -213,7 +213,7 @@ table tr:nth-child(2n+1) {
      <div class="header">MOVIE LIST</div>
    </div>
    <form class="cbp-mc-form" name="regForm" method="POST" action="./create.do" >
-   <input type='hidden' name='mCode' value='${mCode }'>
+   <input type='hidden' name='mCode' value='${dto.mCode }'>
    <div >
    
      <div class="box-image" >
@@ -227,13 +227,13 @@ table tr:nth-child(2n+1) {
    <div class="box">
       <strong class="title">${dto.mName }</strong><br>
       <!-- 별점test -->
-      <p class="star_rating">
-    <a href="#" class="on">★</a>
-    <a href="#" class="on">★</a>
-    <a href="#" class="on">★</a>
-    <a href="#">★</a>
-    <a href="#">★</a>
-</p>
+    <div class="container">
+        <input type="radio" name="star" class="rating" value="1" />
+        <input type="radio" name="star" class="rating" value="2" />
+        <input type="radio" name="star" class="rating" value="3" />
+        <input type="radio" name="star" class="rating" value="4" />
+        <input type="radio" name="star" class="rating" value="5" />
+    </div>
 
    </div>
      
@@ -258,11 +258,11 @@ table tr:nth-child(2n+1) {
       
 
 
-      $( ".star_rating a" ).click(function() {
+      $(".star_rating a").click(function() {
     	     $(this).parent().children("a").removeClass("on");
     	     $(this).addClass("on").prevAll("a").addClass("on");
     	     return false;
-    	});
+      });
 
 
 	  </script>	
