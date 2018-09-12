@@ -12,8 +12,6 @@ select * from roomTable;
 
 select * from reviewStarTable;
 
-select * from reviewTable;
-
 select * from noticeTable;
 
 select * from QnATable;
@@ -25,4 +23,3 @@ select * from couponTable;
 select * from screenTable;
 
 select * from bookTable;
-
