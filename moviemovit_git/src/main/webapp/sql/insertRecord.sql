@@ -85,10 +85,10 @@ insert into screenTable(sCode,roomCode,sdate,stime,mCode)
 values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C001_2', '2018-08-20', '1030', '1');
 
 -- bookTable 레코드 삽입
-insert into bookTable(bCode,wdate,uid,sCode,seat,auditType,cCode)
+insert into ticketTable(tCode,wdate,uid,sCode,seat,auditType,cCode)
 values('2018080711330601',now(),'member1',1,'A1,A2,A3,A4','adu,you,sen,kid',1);
 
-insert into bookTable(bCode,wdate,uid,sCode,seat,auditType,cCode)
+insert into ticketTable(tCode,wdate,uid,sCode,seat,auditType,cCode)
 values('2018080711330602',now(),'member2',2,'D10,D11','you,sen',8);
 
 
