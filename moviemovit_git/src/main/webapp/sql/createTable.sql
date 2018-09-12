@@ -185,9 +185,9 @@ CREATE TABLE screenTable (
   ON DELETE CASCADE
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- bookTable 持失
-CREATE TABLE bookTable (
-  bCode		  VARCHAR(20)	NOT NULL PRIMARY KEY
+-- ticketTable 持失
+CREATE TABLE ticketTable (
+  tCode		  VARCHAR(20)	NOT NULL PRIMARY KEY
  ,wdate 		DATETIME	  NOT NULL
  ,uid		    VARCHAR(20)	NOT NULL
  ,sCode		  INT        	NOT NULL

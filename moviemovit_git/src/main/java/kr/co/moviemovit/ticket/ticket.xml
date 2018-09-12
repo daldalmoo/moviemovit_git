@@ -3,29 +3,29 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.moviemovit.book.BookMapper">
+<mapper namespace="kr.co.moviemovit.ticket.TicketMapper">
   
   <!-- 예매 목록 -->
-  <select id="list" resultType="BookDTO">
+  <select id="list" resultType="TicketDTO">
     <![CDATA[
-      SELECT bCode, wdate, uid, sCode, cCode, seat, auditType
-      FROM bookTable
-      ORDER BY bCode DESC
+      SELECT tCode, wdate, uid, sCode, cCode, seat, auditType
+      FROM ticketTable
+      ORDER BY tCode DESC
     ]]>
   </select>
   
   
   <!-- 예매 등록 -->
-  <!-- <insert id="create" parameterType="CouponDTO">
-    <selectKey keyProperty="cCode" resultType="int" order="BEFORE">
+  <!-- <insert id="create" parameterType="TicketDTO">
+    <selectKey keyProperty="tCode" resultType="int" order="BEFORE">
       <![CDATA[
-        SELECT IFNULL(MAX(cCode),0)+1 AS cCode
-        FROM couponTable
+        SELECT IFNULL(MAX(tCode),0)+1 AS cCode
+        FROM ticketTable
       ]]> 
     </selectKey>
     <![CDATA[
-      INSERT INTO couponTable(cCode, uid, startDate, expDate)
-      VALUES(#{cCode}, #{uid}, #{startDate}, #{expDate})
+      INSERT INTO ticketTable(tCode, uid, startDate, expDate)
+      VALUES(#{tCode}, #{uid}, #{startDate}, #{expDate})
     ]]> 
   </insert> -->
   
@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- <select id="uidlist" resultType="String">
     <![CDATA[
       SELECT uid
-      FROM userTable
+      FROM ticketTable
       ORDER BY uid ASC
     ]]>
   </select> -->
@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- <select id="uidsearch" parameterType="String" resultType="String">
     <![CDATA[
       SELECT uid
-      FROM userTable
+      FROM ticketTable
       WHERE uid LIKE concat('%',#{uid},'%')
       ORDER BY uid ASC
     ]]>
@@ -50,21 +50,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   
   <!-- 상세 데이터 읽어오기 -->
-  <!-- <select id="read" parameterType="int" resultType="CouponDTO">
+  <!-- <select id="read" parameterType="int" resultType="TicketDTO">
     <![CDATA[
-      SELECT cCode, uid, startDate, expDate
-      FROM couponTable
-      WHERE cCode = #{cCode}
+      SELECT tCode, uid, startDate, expDate
+      FROM ticketTable
+      WHERE tCode = #{tCode}
     ]]>
   </select> -->
   
   
   <!-- 예매 수정 -->
-  <!-- <update id="update" parameterType="CouponDTO">
+  <!-- <update id="update" parameterType="TicketDTO">
     <![CDATA[
-      UPDATE couponTable
+      UPDATE ticketTable
       SET uid=#{uid}, startDate=#{startDate}, expDate=#{expDate}
-      WHERE cCode = #{cCode}
+      WHERE tCode = #{tCode}
     ]]>
   </update> -->
   
@@ -72,8 +72,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- 예매 삭제 -->
   <!-- <delete id="delete" parameterType="int">
     <![CDATA[
-      DELETE FROM couponTable
-      WHERE cCode = #{cCode}
+      DELETE FROM ticketTable
+      WHERE tCode = #{tCode}
     ]]>
   </delete> -->
   

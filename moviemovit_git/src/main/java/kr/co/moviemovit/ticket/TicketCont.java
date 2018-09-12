@@ -21,17 +21,17 @@ public class TicketCont {
   TicketDAO dao;
 
   public TicketCont() {
-    System.out.println("---------- BookCont() 객체 생성");
+    System.out.println("---------- TicketCont() 객체 생성");
   }//default constructor
   
   
 /*********************************** 예매 목록 *********************************************/
-  // 결과확인 http://localhost:9090/moviemovit/book/list.do
-  @RequestMapping(value="/book/list.do")
+  // 결과확인 http://localhost:9090/moviemovit/ticket/list.do
+  @RequestMapping(value="/ticket/list.do")
   public ModelAndView list(TicketDTO dto) {
       ModelAndView mav = new ModelAndView();
       ArrayList<TicketDTO> list = dao.list();
-      mav.setViewName("book/bookList");
+      mav.setViewName("ticket/ticketList");
       mav.addObject("list", list);
       return mav; 
   }//list() end
@@ -83,7 +83,7 @@ public class TicketCont {
   }//afterYear() end
   *//*
   // 쿠폰 등록하는 폼
-  @RequestMapping(value="/coupon/create.do", method=RequestMethod.GET)  // link 클릭해서 넘어오는건 다 GET 방식
+  @RequestMapping(value="/ticket/create.do", method=RequestMethod.GET)  // link 클릭해서 넘어오는건 다 GET 방식
   public ModelAndView createForm(HttpServletRequest req) {
     ModelAndView mav = new ModelAndView();
     
@@ -94,13 +94,13 @@ public class TicketCont {
     // 페이지 이동 및 값 올리기
     mav.addObject("startDate", startDate);
     mav.addObject("expDate", expDate);
-    mav.setViewName("coupon/couponForm");
-    return mav;  // /coupon/couponForm.jsp
+    mav.setViewName("ticket/ticketForm");
+    return mav;  // /ticket/ticketForm.jsp
   }//createForm() end
   *//*
   // 쿠폰 등록 DB INSERT
-  @RequestMapping(value="/coupon/create.do", method=RequestMethod.POST)
-  public ModelAndView createProc(CouponDTO dto) {
+  @RequestMapping(value="/ticket/create.do", method=RequestMethod.POST)
+  public ModelAndView createProc(TicketDTO dto) {
     ModelAndView mav = new ModelAndView();
     
     // 입력된 데이터가 없으면 오늘 날짜, 오늘날짜+1년후로 세팅
@@ -140,19 +140,19 @@ public class TicketCont {
   }//createProc() end
   *//*
   // 쿠폰 등록 또는 수정시 필요한 회원 아이디 목록 가져오기
-  @RequestMapping(value="/coupon/uidSearch.do", method=RequestMethod.GET)
+  @RequestMapping(value="/ticket/uidSearch.do", method=RequestMethod.GET)
   public ModelAndView uidlist() {
     ModelAndView mav = new ModelAndView();
     ArrayList<String> list = dao.uidlist();
     
     // 페이지 이동 및 값 올리기
     mav.addObject("list", list);
-    mav.setViewName("coupon/uidSearch");  // .do 명령어로 이동시 "redirect:" 사용
+    mav.setViewName("ticket/uidSearch");  // .do 명령어로 이동시 "redirect:" 사용
     return mav;
   }//uidSearch() end
   *//*
   // 쿠폰 등록 또는 수정시 필요한 회원 아이디 검색하기 (AJAX 구방식)
-  @RequestMapping(value="/coupon/uidresult.do")
+  @RequestMapping(value="/ticket/uidresult.do")
   public ModelAndView uidresult(HttpServletRequest req, HttpServletResponse resp) {
     // uid 목록을 resultList에 저장
     ArrayList<String> resultList = new ArrayList<String>();
@@ -180,25 +180,25 @@ public class TicketCont {
     // 페이지 이동 및 값 올리기
     ModelAndView mav = new ModelAndView();
     mav.addObject("resultList", resultList);
-    mav.setViewName("coupon/uidSearchTable");  // .do 명령어로 이동시 "redirect:" 사용
+    mav.setViewName("ticket/uidSearchTable");  // .do 명령어로 이동시 "redirect:" 사용
     return mav;
   }//uidresult() end
 */
   
 /************************************ 수정 *************************************************/
   // 쿠폰 수정하는 폼
-  /*@RequestMapping(value="/coupon/update.do", method=RequestMethod.GET)  // link 클릭해서 넘어오는건 다 GET 방식
+  /*@RequestMapping(value="/ticket/update.do", method=RequestMethod.GET)  // link 클릭해서 넘어오는건 다 GET 방식
   public ModelAndView updateForm(int cCode) {
     ModelAndView mav = new ModelAndView();
-    CouponDTO dto = dao.read(cCode);
+    TicketDTO dto = dao.read(cCode);
     mav.addObject("dto", dto);
-    mav.setViewName("coupon/couponUpdate");
-    return mav;  // /coupon/couponUpdate.jsp
+    mav.setViewName("ticket/ticketUpdate");
+    return mav;  // /ticket/ticketUpdate.jsp
   }//updateForm() end
   *//*
   // 쿠폰 수정 DB UPDATE
-  @RequestMapping(value="/coupon/update.do", method=RequestMethod.POST)
-  public ModelAndView updateProc(CouponDTO dto) {
+  @RequestMapping(value="/ticket/update.do", method=RequestMethod.POST)
+  public ModelAndView updateProc(TicketDTO dto) {
     ModelAndView mav = new ModelAndView();
     System.out.println("dto.getStartDate() : "+dto.getStartDate());
     
@@ -241,7 +241,7 @@ public class TicketCont {
   
 /************************************ 삭제 *************************************************/
   // 쿠폰 삭제 확인창 폼
-  /*@RequestMapping(value="/coupon/delete.do", method=RequestMethod.GET)  // link 클릭해서 넘어오는건 다 GET 방식
+  /*@RequestMapping(value="/ticket/delete.do", method=RequestMethod.GET)  // link 클릭해서 넘어오는건 다 GET 방식
   public ModelAndView deleteForm(int cCode) {
     ModelAndView mav = new ModelAndView();
     String msg = "";
@@ -262,7 +262,7 @@ public class TicketCont {
   }//updateForm() end
   *//*
   // 쿠폰 삭제 DB DELETE
-  @RequestMapping(value="/coupon/deleteProc.do", method=RequestMethod.GET)
+  @RequestMapping(value="/ticket/deleteProc.do", method=RequestMethod.GET)
   public ModelAndView deleteProc(int cCode) {
     ModelAndView mav = new ModelAndView();
     int count = dao.delete(cCode);

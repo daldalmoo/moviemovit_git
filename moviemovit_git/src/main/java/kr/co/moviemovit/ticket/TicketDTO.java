@@ -1,7 +1,7 @@
 package kr.co.moviemovit.ticket;
 
 public class TicketDTO {
-  private String bCode;  // 예매코드(PK)
+  private String tCode;  // 예매코드(PK)
   private String wdate;  // 예매날짜
   private String uid;    // 유저 아이디 <- userTable
   private int sCode;     // 상영코드 <- screenTable
@@ -10,15 +10,15 @@ public class TicketDTO {
   private String auditType;  // 관람객유형 (adu you sen kid -> 성인 청소년 경로우대 아이)
   
   public TicketDTO() {
-    System.out.println("---------- BookDTO() 객체 생성");
+    System.out.println("---------- TicketDTO() 객체 생성");
   }//default constructor
 
-  public String getbCode() {
-    return bCode;
+  public String gettCode() {
+    return tCode;
   }
 
-  public void setbCode(String bCode) {
-    this.bCode = bCode;
+  public void setbCode(String tCode) {
+    this.tCode = tCode;
   }
 
   public String getWdate() {

@@ -10,11 +10,11 @@ public interface TicketMapper {
   
   // .xml 에서 정의한 <insert id="create"> 활용. id가 메소드명으로 와야함. body 작성 따로 안함.
   public ArrayList<TicketDTO> list();
-  //public int create(CouponDTO dto);
+  //public int create(TicketDTO dto);
   //public ArrayList<String> uidlist();
   //public ArrayList<String> uidsearch(String uid);
-  //public CouponDTO read(int cCode);
-  //public int update(CouponDTO dto);
+  //public TicketDTO read(int cCode);
+  //public int update(TicketDTO dto);
   //public int delete(int cCode);
   
   

@@ -1,5 +1,5 @@
 -- ------------------------- drop table
-drop table bookTable;
+drop table ticketTable;
 drop table screenTable;
 drop table couponTable;
 drop table starTable;

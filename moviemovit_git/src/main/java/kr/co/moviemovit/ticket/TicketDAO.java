@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /*
-  private String bCode;  // 예매코드(PK)
+  private String tCode;  // 예매코드(PK)
   private String wdate;  // 예매날짜
   private String uid;    // 유저 아이디 <- userTable
   private int sCode;     // 상영코드 <- screenTable
@@ -26,7 +26,7 @@ public class TicketDAO {
   SqlSession sqlSession;
   
   public TicketDAO() {
-    System.out.println("---------- BookDAO() 객체 생성");
+    System.out.println("---------- TicketDAO() 객체 생성");
   }//default constructor
   
   
@@ -41,22 +41,22 @@ public class TicketDAO {
 
 /************************************ 등록 *************************************************/
   // 쿠폰 등록 insert
-  /*public int create(CouponDTO dto) {
-    CouponMapper mapper = sqlSession.getMapper(CouponMapper.class);
+  /*public int create(TicketDTO dto) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     int count = mapper.create(dto);
     return count;
   }//create() end
   
   // 쿠폰 등록&수정시 필요한 회원 아이디 목록 가져오기 select
   public ArrayList<String> uidlist() {
-    CouponMapper mapper = sqlSession.getMapper(CouponMapper.class);
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     ArrayList<String> list = mapper.uidlist();
     return list;
   }//uidlist() end
   
   // 쿠폰 등록&수정시 검색어와 일치하는 회원 아이디 목록 가져오기 select where
   public ArrayList<String> uidsearch(String uid) {
-    CouponMapper mapper = sqlSession.getMapper(CouponMapper.class);
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     ArrayList<String> list = mapper.uidsearch(uid);
     return list;
   }//uidsearch() end
@@ -64,15 +64,15 @@ public class TicketDAO {
   
 /************************************ 수정 *************************************************/
   // 쿠폰 한개 상세데이터 가져오기 select
-  /*public CouponDTO read(int cCode) {
-    CouponMapper mapper = sqlSession.getMapper(CouponMapper.class);
-    CouponDTO dto = mapper.read(cCode);
+  /*public TicketDTO read(int cCode) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    TicketDTO dto = mapper.read(cCode);
     return dto;
   }//read() end
   
   // 쿠폰 수정 update
-  public int update(CouponDTO dto) {
-    CouponMapper mapper = sqlSession.getMapper(CouponMapper.class);
+  public int update(TicketDTO dto) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     int count = mapper.create(dto);
     return count;
   }//update() end
@@ -81,7 +81,7 @@ public class TicketDAO {
 /************************************ 삭제 *************************************************/
   // 쿠폰 삭제 delete
   /*public int delete(int cCode) {
-    CouponMapper mapper = sqlSession.getMapper(CouponMapper.class);
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     int count = mapper.delete(cCode);
     return count;
   }//delete() end
