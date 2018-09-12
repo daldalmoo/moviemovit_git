@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
 
 @Controller
@@ -33,7 +34,6 @@ public class ScreenCont {
 	@RequestMapping(value="/screen/screenform.do", method = RequestMethod.GET)
 	public ModelAndView screenForm() {
 		ModelAndView mav = new ModelAndView();
-		
 		/*
 			screenTable에서 상영관 등록 과정
 			- 영화관 브랜드명은 screenForm.jsp에서 입력한 값
@@ -51,9 +51,6 @@ public class ScreenCont {
 	public void cineNameList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{		
 		//screenForm.jsp에서 넘긴 brandName받음
 		String brandName = req.getParameter("brandName");
-
-		
-		//CinemaDTO에 brandName set하기
 		CinemaDTO dto = new CinemaDTO();
 		
 		//DB에서 영화관 브랜드에 해당하는 지점 가져오기
@@ -72,13 +69,47 @@ public class ScreenCont {
 		}else {
 			cineMsg += "해당 브랜드의 지점을 가져오는데 실패했습니다";
 		}//if end
-        
+		
 		resp.setContentType("text/plain; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
 		out.println(cineMsg);
 		out.flush();
 		out.close();
-		
 	}//cineNameList() end
+	
+	//2) 영화이름 목록 가져오기
+	@RequestMapping(value="/screen/movieNameList.do", method = RequestMethod.POST)
+	public void movieNameList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		resp.setCharacterEncoding("UTF-8");
+		//screenForm.jsp에서 넘긴 keyWord받음
+		String mName = req.getParameter("keyWord").trim();
+		String message = ""; //응답 메세지
+		
+		if(mName.length()>0) { //검색어가 존재하는지?
+			ArrayList<MovieDTO> movieList = dao.movieNameList(mName);
+			//,를 기준으로 문자를 나눠서 갯수만큼 출력
+			int size = movieList.size();
+			if(size>0) {
+				message += size + "|";
+				for(int idx=0; idx<size; idx++) {
+					MovieDTO dto = new MovieDTO();
+					dto = movieList.get(idx);
+					String key = dto.getmName();
+					message += key;
+					if(idx<size-1) {
+						message += ",";
+					}
+				}//for end
+			}//if end
+		} else {
+			System.out.println("영화목록 불러오기 실패");
+		}//if end
+		
+		resp.setContentType("text/plain; charset=UTF-8");
+		PrintWriter out = resp.getWriter();
+		out.println(message);
+		out.flush();
+		out.close();
+	}//movieNameList() end
 	
 }//class end

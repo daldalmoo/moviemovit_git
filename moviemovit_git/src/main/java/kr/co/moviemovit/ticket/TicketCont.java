@@ -38,6 +38,11 @@ public class TicketCont {
   
   
 /************************************ 등록 *************************************************/
+	@RequestMapping(value="/ticket/ticketform.do", method = RequestMethod.GET)
+	public String ticketForm() {
+		return "ticket/ticketForm";
+	}//ticketForm() end
+	
   // 오늘 날짜를 2018-08-31 형식의 String으로 반환하는 함수
   /*private String today() {
     Calendar cal = new GregorianCalendar(Locale.KOREA);

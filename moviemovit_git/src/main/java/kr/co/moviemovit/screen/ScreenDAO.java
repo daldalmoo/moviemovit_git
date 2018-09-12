@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
 
 @Component
@@ -25,4 +26,11 @@ public class ScreenDAO {
 		ArrayList<CinemaDTO> cineList = mapper.cineNameList(brandName);
 		return cineList;
 	}//ChoosecineName() end
+	
+	//영화 목록 가져오기
+	public ArrayList<MovieDTO> movieNameList(String mName) {
+		ScreenMapper mapper = sqlSession.getMapper(ScreenMapper.class);
+		ArrayList<MovieDTO> movieList = mapper.movieNameList(mName);
+		return movieList;
+	}//movieNameList() end
 }//class end
