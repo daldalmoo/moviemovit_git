@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../header.jsp"%>
-<%-- 본문시작 bookUpdate.jsp : 예매 수정 폼 --%>
+<%-- 본문시작 ticketUpdate.jsp : 예매 수정 폼 --%>
 
 <!-- 예매는 수정이 안되지 않나 ??? 회의하기!! -->
 

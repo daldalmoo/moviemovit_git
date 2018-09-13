@@ -22,4 +22,5 @@ select * from couponTable;
 
 select * from screenTable;
 
-select * from bookTable;
+select * from ticketTable;
+
