@@ -5,7 +5,7 @@
 <!-- 통째로 갈아없을꺼임!!!!!!! -->
 
 <head>
-<link href="../css/ticketForm_content.css" rel="stylesheet" type="text/css">
+<!-- <link href="../css/ticketForm_content.css" rel="stylesheet" type="text/css"> -->
 </head>
 
 <!-- ------------------------------ 소스 복붙 ---------------------------------- -->
@@ -43,10 +43,14 @@
   font-weight:bold;
   color:white;
 }
-#content .theater_area .refreshbtn,
-#content .theater_area .searchbtn {  /* 새로고침, 검색 버튼 */
+#content .theater_area .refreshbtn {  /* 새로고침 버튼 */
   position:relative;
   top:12px;
+  transform:translateY(-50%);
+}
+#content .theater_area .searchbtn {  /* 검색 버튼 */
+  position:relative;
+  top:13.5px;
   transform:translateY(-50%);
 }
 
