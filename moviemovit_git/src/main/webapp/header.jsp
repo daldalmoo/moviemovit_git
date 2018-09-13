@@ -83,15 +83,15 @@ footer {
     if(s_id.equals("guest") || s_passwd.equals("guest") || s_grade.equals("guest")) { %>
     <div id="loginmenu">
     <ul>
-      <li><a href="./loginform.do" title="Link">Login</a></li>
-      <li><a href="./agree.do" title="Link">Join</a></li>
+      <li><a href="../user/loginform.do" title="Link">Login</a></li>
+      <li><a href="../user/agree.do" title="Link">Join</a></li>
     </ul>
     </div>
   <%} else{ //로그인했다면 %>
     <div id="loginmenu">
     <ul>
-      <li><a href="./logout.do" title="Link">Logout</a></li>
-      <li><a href="./mypage.do" title="Link">Mypage</a></li>
+      <li><a href="../user/logout.do" title="Link">Logout</a></li>
+      <li><a href="../user/mypage.do" title="Link">Mypage</a></li>
     </ul>
     </div>  
   <% }%>  
