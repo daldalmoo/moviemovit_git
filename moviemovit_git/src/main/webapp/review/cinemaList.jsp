@@ -2,6 +2,7 @@
 <%@ include file="../header.jsp"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <%-- 본문시작 template.jsp --%>
 
 
@@ -181,42 +182,37 @@ table tr:nth-child(2n+1) {
 <table>
         <tr></tr>
     <tr>
-    <form id="form_category" method="get" action="/moviemovit/review/cate.do">
         <th style="background-color: lightgray; color: gray; text-align: center;">브랜드</th>
         <td style="background-color:white; text-align: left; color: gray;">
-            <input type="checkbox" name="categorybox" value="all" class="checkSelect"><label for="all">모두</label>
-            &nbsp;  &nbsp;  &nbsp;
-            <input type="checkbox" name="categorybox" value="CGV" class="checkSelect"><label for="CGV">CGV</label>
+
+            <input type="checkbox" name="categorybox" value="CGV" onclick="cate()"/><label for="CGV">CGV</label>
             &nbsp;  &nbsp;  &nbsp; 
-            <input type="checkbox" name="categorybox" value="LOTTE" class="checkSelect""><label for="LOTTE">롯데시네마</label> 
+            <input type="checkbox" name="categorybox" value="LOTTE" onclick="cate()" class="checkSelect""><label for="LOTTE">롯데시네마</label> 
             &nbsp;  &nbsp;  &nbsp;
-            <input type="checkbox" name="categorybox" value="MEGABOX" class="checkSelect""><label for="MEGABOX">메가박스</label>
+            <input type="checkbox" name="categorybox" value="MEGABOX" onclick="cate()" class="checkSelect""><label for="MEGABOX">메가박스</label>
             &nbsp;  &nbsp;  &nbsp;
-            <input type="checkbox" name="categorybox" value="INDEP" class="checkSelect"><label for="INDEP">독립영화관</label>
+            <input type="checkbox" name="categorybox" value="INDEP" onclick="cate()" class="checkSelect"><label for="INDEP">독립영화관</label>
         </td>
-    </tr>
-    <button type="submit" id="button_cate" onclick="cate();">검색</button>
-    </form>
-    <tr>
+    </tr>   
+    <tr> 
         <th style="background-color: lightgray; color: gray; text-align: center;"> 지역별</th>
         <td style="background-color:white; text-align: left; color: gray;">
-            <input  type="checkbox" value="1" id="brand_3" onclick=""><label for="brand_3">모두</label> 
+           
+            <input  type="checkbox" name="addrbox" value="SEO" id="SEO" onclick="cate()"><label for="brand_3">서울</label> 
             &nbsp;  &nbsp;  &nbsp;
-            <input  type="checkbox" value="2" id="brand_3" onclick=""><label for="brand_3">서울</label> 
+            <input  type="checkbox" name="addrbox" value="3" id="brand_3" onclick="cate()"><label for="brand_3">경기</label> 
             &nbsp;  &nbsp;  &nbsp;
-            <input  type="checkbox" value="3" id="brand_3" onclick=""><label for="brand_3">경기</label> 
+            <input  type="checkbox" name="addrbox" value="4" id="brand_3" onclick="cate()"><label for="brand_3">인천</label>
             &nbsp;  &nbsp;  &nbsp;
-            <input  type="checkbox" value="4" id="brand_3" onclick=""><label for="brand_3">인천</label>
+            <input  type="checkbox" name="addrbox" value="5" id="brand_3" onclick="cate()""><label for="brand_3">강원</label>
+            &nbsp;  &nbsp;  &nbsp; 
+            <input  type="checkbox" name="addrbox" value="6" id="brand_3" onclick="cate()""><label for="brand_3">충청</label> 
             &nbsp;  &nbsp;  &nbsp;
-            <input  type="checkbox" value="5" id="brand_3" onclick=""><label for="brand_3">강원</label>
+            <input  type="checkbox" name="addrbox" value="7" id="brand_3" onclick="cate()"><label for="brand_3">경상</label> 
             &nbsp;  &nbsp;  &nbsp;
-            <input  type="checkbox" value="6" id="brand_3" onclick=""><label for="brand_3">충청</label> 
-            &nbsp;  &nbsp;  &nbsp;
-            <input  type="checkbox" value="7" id="brand_3" onclick=""><label for="brand_3">경상</label> 
-            &nbsp;  &nbsp;  &nbsp;
-            <input  type="checkbox" value="8" id="brand_3" onclick=""><label for="brand_3">전라</label> 
+            <input  type="checkbox" name="addrbox" value="8" id="brand_3" onclick="cate()"><label for="brand_3">전라</label> 
            &nbsp;  &nbsp;  &nbsp;
-            <input  type="checkbox" value="9" id="brand_3" onclick=""><label for="brand_3">제주</label>
+            <input  type="checkbox" name="addrbox" value="9" id="brand_3" onclick="cate()"><label for="brand_3">제주</label>
            </td> 
         </tr>
 
@@ -224,8 +220,8 @@ table tr:nth-child(2n+1) {
 
 <div class="table-users">
    <div class="header">영화관 목록</div>
-
-   <table>
+<div id="resulttable">
+   <table id="testcategory">
       <tr>
          <th>영화관</th>
          <th>브랜드</th>
@@ -239,14 +235,14 @@ table tr:nth-child(2n+1) {
        <c:forEach var="dto" items="${list }"> 
            <tr class="brandtest">
            <td>
-           <c:choose>
+         <c:choose>
                <c:when test="${dto.logoImg == '' || dto.logoImg eq null}">
                <img src="img/default.png" alt="" /></td>
                </c:when>
                <c:otherwise>
                <img src="${dto.logoImg}" alt="" /></td>
                </c:otherwise> 
-           </c:choose>
+           </c:choose> 
            <td>
            <c:choose>
                <c:when test="${dto.brandName == 'CGV'}">
@@ -283,8 +279,38 @@ table tr:nth-child(2n+1) {
              </td>
          </tr>  
      </c:forEach>
+
    </table>
+</div> 
 </div>
+<!-- 게시판 하단의 페이징 버튼 -->
+<div class="pager">
+        <ul>
+               <c:if test="${ pageMaker.cri.page > 10 }">
+                       <li><a href="moviemovit/review/cinemaList.do?page=${ pageMaker.startPage - 1 }">◀</a></li>
+               </c:if>
+               <!-- startpage랑 endpage -->
+                       <c:forEach var="i" begin="${ pageMaker.startPage }" end="${ pageMaker.endPage }">
+                              <c:choose>
+                                      <c:when test="${ i > pageMaker.endPage }">
+                                             <li>${ i }</li>
+                                      </c:when>
+                                      <c:when test="${ i == pageMaker.cri.page }">
+                                             <li class="selected">[${ i }]</li>
+                                      </c:when>
+                                      <c:otherwise>
+                                             <li><a href="/moviemovit/review/cinemaList.do?page=${ i }">${ i }</a></li>
+                                      </c:otherwise>
+                              </c:choose>
+                       </c:forEach>
+                <!--  디스플레이 하고 싶은 페이지 개수 < 실제 페이지의 끝자리 -->
+               <c:if test="${ pageMaker.displayPageNum < pageMaker.endPage }">
+                       <li><a href="/moviemovit/review/cinemaList.do?page=${ pageMaker.endPage + 1 }">▶</a></li>
+               </c:if>
+        </ul>
+</div>  
+
+
 <form id="form_search" method="get" action="/moviemovit/review/search.do"> 
 <select id="sch_type" name="sch_type"> 
 <option value="cineName">영화관이름</option> 
@@ -303,20 +329,57 @@ else { jQuery('#form_search').submit(); } }
 //jQuery('#form_search #sch_type option').val('${mapSearch.sch_type}');
 jQuery('#form_search #sch_type value').val('${mapSearch.sch_type}'); 
 
+/*
+ 일단 체크 된 값들을 받아오기 > 받아온 다음  
+ select해서 list를 다시 만들어서 받아오는 것보다
+ 카테고리박스가 체크된 값들 중에서 brandName이랑 일치하는 것을 for문으로 돌려서 받기...?
+ 
+ */
 
+function cate() {
 
-
-/*  function cate() {
-    
-    alert("1");
     var checkArr = new Array();
     $("input[name='categorybox']:checked").each(function(i) {
         checkArr.push($(this).val());
-    };  */
-    
-    
-</script>
+    });
+        var checkArr2 = new Array();
+        $("input[name='addrbox']:checked").each(function(i) {
+            checkArr2.push($(this).val());
+    });
+    //값 확인 
+    alert(checkArr);
+    alert(checkArr2);
+   
+        $.ajax({
+        type: 'POST',
+        url: 'categorize.do',
+        data: { checkArr : checkArr, },
+        cache: false,
+        async : false,
+        datatype : 'html',
+        success: function(data){
+            $("#resulttable").html(data);
+            alert('완료');
+         }
+    });
+        
+ }   
+        
+// 전체 체크 박스
+$(function(){ 
+    //전체선택 체크박스 클릭 
+    $("#allCheck").click(function(){ 
+        //만약 전체 선택 체크박스가 체크된상태일경우 
+        if($("#allCheck").prop("checked")) { 
+            //해당화면에 전체 checkbox들을 체크해준다
+            $("input[type=checkbox]").prop("checked",true); 
+            // 전체선택 체크박스가 해제된 경우 
+            } else { 
+                //해당화면에 모든 checkbox들의 체크를해제시킨다. 
+                $("input[type=checkbox]").prop("checked",false); } }) })
 
+
+</script>
 
 <input class="cbp-mc-button" type="button" value="영화관 등록" onclick="location.href='cinemaForm.do'"/>
 

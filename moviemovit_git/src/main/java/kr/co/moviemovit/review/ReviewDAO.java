@@ -39,9 +39,9 @@ public class ReviewDAO {
   
   
   // LIST : 카테고리
-  public ArrayList<CinemaDTO> cate(@RequestParam("checkArr[]")List<String> cate) {    
+  public ArrayList<CinemaDTO> cate(@RequestParam("checkArr[]")List<String> cate, @RequestParam("checkArr2[]")List<String> cate2) {    
     ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
-    ArrayList<CinemaDTO> list = mapper.cate(cate);
+    ArrayList<CinemaDTO> list = mapper.cate(cate, cate2);
     return list;
     
   }
@@ -92,7 +92,13 @@ public class ReviewDAO {
   }// delete end
   
 
-
+  //LIST : select+ limit를 이용한 페이징 영역 구분
+  
+  public ArrayList<CinemaDTO> listCriteria(Criteria cri){
+    ReviewMapper mapper= sqlSession.getMapper(ReviewMapper.class);
+    ArrayList<CinemaDTO> list = mapper.listCriteria(cri);
+    return list;
+  }
   
   ////////////////////////////////////////// REVIEW  //////////////////////////////////////////////////////////
   

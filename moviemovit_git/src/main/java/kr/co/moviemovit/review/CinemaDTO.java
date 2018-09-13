@@ -21,6 +21,12 @@ public class CinemaDTO {
   private String home;
   private int startotal;
   private ReviewStar ReviewStar;
+  
+  //∆‰¿Ã¬°
+  private int pageNo;
+  private int countPerPage;
+
+  
   public String getCineCode() {
     return cineCode;
   }
@@ -118,5 +124,17 @@ public class CinemaDTO {
     ReviewStar = reviewStar;
   }
   
+  public int getPageNo() {
+    return pageNo;
+  }
+  public void setPageNo(int pageNo) {
+    this.pageNo = pageNo;
+  }
+  public int getCountPerPage() {
+    return countPerPage;
+  }
+  public void setCountPerPage(int countPerPage) {
+    this.countPerPage = countPerPage;
+  }
  
 } // class end

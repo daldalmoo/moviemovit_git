@@ -1,6 +1,7 @@
 package kr.co.moviemovit.review;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -251,20 +252,50 @@ public class ReviewCont {
    
   }
   
-  ////////////////////////////////////// LIST
+  ////////////////////////////////////// LIST + 페이징 0912
   @RequestMapping(value="/review/cinemaList.do")
-  public ModelAndView cinemaList() {
+  public ModelAndView cinemaList(HttpServletRequest request) {
     
     ModelAndView mav= new ModelAndView();
-    mav.setViewName("review/cinemaList");
-    ArrayList<CinemaDTO> list = dao.cinemaList();
+    Criteria cri = new Criteria();
+
+    //첫페이지일 경우 page를 1로 설정
+    //1페이지인지 판단 여부 = request page 값이 null 여부를 판단
+    String pagetemp = request.getParameter("page");
+    int page = 1;
+
+    //null이 아니라면 page를 int형으로 변화시키고 page에 set
+    if (pagetemp!=null) {
+    page = Integer.parseInt(pagetemp);
+    cri.setPage(page);
+    }
+    
+    //0이랑 10
+    System.out.println(cri.getPageStart());
+    System.out.println(cri.getPage());
+    
+    ArrayList<CinemaDTO> list = dao.listCriteria(cri);
+    
+    mav.addObject("list", list);  // 게시판의 글 리스트
+    PageMaker pageMaker = new PageMaker();
+    pageMaker.setCri(cri);
+    
+    //total은 xml 별도 추가 없이 컨트롤러에서 count
+    //list를 불러와서
+    ArrayList<CinemaDTO> alllist = dao.cinemaList();
+    // size 재기
+    int totalcount = alllist.size();
+    pageMaker.setTotalCount(totalcount);
+    mav.addObject("pageMaker", pageMaker);
+
     ArrayList<ReviewStar> reviewstar = dao.reviewstar();
+    
     mav.addObject("list", list);
     mav.addObject("reviewstar", reviewstar);
     return mav;
   } 
 
-  
+  // LIST : search
   @RequestMapping(value="/review/search.do", method=RequestMethod.GET) 
   public ModelAndView search(HttpServletRequest request) { 
   
@@ -278,40 +309,42 @@ public class ReviewCont {
     
     ArrayList<CinemaDTO> list = dao.search(sch_type, sch_value);
     ArrayList<ReviewStar> reviewstar = dao.reviewstar();
-    
-    
+
     mav.addObject("list", list); 
     mav.addObject("reviewstar", reviewstar); 
+   
    
     return mav; 
     
   }
+
   
-  //카테고리
-  /*
-  @RequestMapping(value="/review/cate.do", method=RequestMethod.GET) 
-  public ModelAndView cate(HttpServletRequest request, @RequestParam("checkArr[]")List<String> list) { 
+  //LIST : 카테고리
+  @RequestMapping(value="/review/categorize.do", method=RequestMethod.POST) 
+  public ModelAndView cate(@RequestParam("checkArr[]")List<String> list, @RequestParam("checkArr2[]")List<String> list2) throws Exception{ 
     
     System.out.println(list);
+    System.out.println(list2);
   
-    /*ModelAndView mav= new ModelAndView();
-    /*ModelAndView mav = new ModelAndView(new MappingJacksonJsonView());
-  
-    ArrayList<CinemaDTO> category = dao.cate(list);
+    ArrayList<CinemaDTO> category = dao.cate(list, list2);
+    System.out.println(category);
     System.out.println(category.size());
     
-  ArrayList<ReviewStar> reviewstar = dao.reviewstar();
-   
+    //값 잘 넘어오는 것 확인
+    //MOELANDVIEW로 값 받아서 REFRESH하기
+    ModelAndView mav= new ModelAndView();
+    
+    ArrayList<ReviewStar> reviewstar = dao.reviewstar();
+
     mav.addObject("list", category); 
     mav.addObject("reviewstar", reviewstar); 
+
+    mav.setViewName("review/cinemaList_");
+    
+    return mav;
    
-    mav.setViewName("redirect:/review/reviewlist.do");
   
-    return m;
-      
-  }
-  */
-  
+  }  
 
   
   ////////////////////////////// REVIEW  ////////////////////////////////////////////////////////////////////////////

@@ -87,7 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 ]]>
 	</select>
 	
-	<!-- 2) List : 카테고리 -->   
+<!-- 2) List : 카테고리   
     <select id="cate" parameterType="java.util.List" resultType="cinemaDTO">
     SELECT *
     FROM cinemaTable
@@ -96,8 +96,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     #{item}
     </foreach>
     </select>
-	
-   
+    -->
+    
+    <!-- 2) List : 카테고리 -->
+    <select id="cate" parameterType="java.util.List" resultType="cinemaDTO">
+        SELECT cineCode, brandName, cineName, tel, addr1, addr2, addr3, logoImg
+        FROM cinemaTable
+        WHERE cineCode!=''
+        <if test = "list != null">
+        AND brandName IN <foreach collection="list" item="item" index="index" open="("
+            separator="," close=")">
+            #{item}
+        </foreach>
+        </if>
+        <if test = "list2 != null">
+        AND addr1 IN<foreach collection="list2" item="item" index="index" open="("
+            separator="," close=")">
+            #{item}
+        </foreach>
+        </if>
+    </select>
    
    <!-- ////////////////////////////////// REVIEW //////////////////////////////////////// -->   
     <!-- REVIEWSTAR -->
