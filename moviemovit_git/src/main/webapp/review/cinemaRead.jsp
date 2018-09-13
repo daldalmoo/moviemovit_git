@@ -5,12 +5,13 @@
 <%-- 본문시작 template.jsp --%>
 
 <style rel="stylesheet">
+
 /* 0912 test 목록에 넣을 css */
 .header {   /* 영화관목록  */
   background-color: #3366cc;
   color: white; 
   font-size: 1.5em;
-  padding: 1rem;
+  /* padding: 1rem; */
   text-align: center;
   text-transform: uppercase;        
 }
@@ -23,9 +24,16 @@
   overflow: hidden;
   width: 100%;
 }
+
+/* users테이블 img test */
+.table-users img {
+  width: 130px;
+  /* max-width: calc(100% - 50em); */
+}
+
 table {
   width: 100%;
-}
+} /*
 table td, table th {
   color: #2b686e;
   padding: 10px;
@@ -39,18 +47,12 @@ table td {
   line-height: 1.4;
   text-align: center;
 } 
-table th {
-  background-color: #bfe1ff;
-  font-weight: 300;
-  text-align: center;
-  font-weight: bold;
-}
-/* 0905 th 첫번째 요소 스타일넣기
+
+
  table th:first-child{
     width: 20%;
  }
  
- 0905 th 마지막 요소 스타일넣기
  table th:last-child {
   width: 150px;
 } 
@@ -59,8 +61,8 @@ table tr:nth-child(2n) {
 }
 table tr:nth-child(2n+1) {
   background-color: #bfe1ff;
-}*/
-
+}
+*/
 
 
 
@@ -81,6 +83,8 @@ table tr:nth-child(2n+1) {
 .cbp-mc-button:hover {
   background: #2b8256;
 }
+
+
 /* 별점 */
 .starR{
   background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
@@ -133,14 +137,7 @@ table tr:nth-child(2n+1) {
     background:url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
 }
   */
- .header {   /* 영화관목록  */
-  background-color: #3366cc;
-  color: white;
-  font-size: 1.5em;
-  /* padding: 1rem; */
-  text-align: center;
-  text-transform: uppercase;        
-} 
+ 
  /* sj0831 */ 
 .table-review {
   border: 2px solid #327a81;
@@ -150,11 +147,11 @@ table tr:nth-child(2n+1) {
   margin: 1em auto;
   overflow: hidden;
   width: 80%;
-}
+}/*
 table {
   margin-left: 5%;
-  margin-right: 5%; /* 0903 승지 추가 */
-}/* 
+  margin-right: 5%;   0903 승지 추가 
+}
 table td, table th {
   color: #2b686e;
   padding: 10px;
@@ -167,8 +164,8 @@ table td:last-child {
   font-size: 0.95em;
   line-height: 1.4;
   text-align: center;
-}
- */
+}*/
+
  
  /* 0903 sj */
  /* 각 요소별 별점에 적용 */
@@ -181,19 +178,17 @@ table td:last-child {
  .review img {
     width: 165px;
     height: 30px;
- }
- 
- img {
     margin-right: 3rem;
  }
  
  
+
 @media screen and (max-width: 700px) {
   table, tr, td {
     display: block;
   }
-  td:first-child {/* 
-    position: absolute; */
+  td:first-child {
+    position: absolute; 
     top: 50%;
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
@@ -268,29 +263,29 @@ table td:last-child {
     box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
     margin: 0.5rem 0;
     padding: 0;
-  }
+  }/*
   .table-users {
     border: none;
     box-shadow: none;
     overflow: visible;
-  }
+  }*/
 }
 </style>
 
 <div class="table-review">
 <c:set var="cineCode" value="${dto.cineCode}"/> 
 
+
 <table>
     <tr>
        <td rowspan="10"><img src="${dto.logoImg }" width="400" height="270" style="float: left; "></td>
   </tr> 
        <tr style="font-size: 2em;">
-     <th colspan="2"> ${dto.brandName } &nbsp; ${dto.cineName }</th>
+       <th colspan="2"> ${dto.brandName } &nbsp; ${dto.cineName }</th>
   </tr>
   
   <tr>
      <td colspan="3">
-  
         <!-- 별점별 이미지출력 -->
           <c:forEach var="reviewstar" items="${reviewstar }">
           <c:if test="${cineCode eq reviewstar.cineCode }">
@@ -318,8 +313,7 @@ table td:last-child {
                     
           <%--  </c:if>
           </c:forEach>   --%>
-          
-          
+         
         </td>
   </tr>
   <tr>
@@ -341,7 +335,7 @@ table td:last-child {
 </table>
 </div>
 
-
+<!-- 영화관에 대한 각 별점(8개) -->
 <div class="table-review">
 <table class="review" width="100%">
         <!-- 각 영화관별로 평가점수 가져오기 -->
@@ -536,197 +530,16 @@ table td:last-child {
   </c:forEach>
 </table>
 </div>  <!-- 영화관별 평가보기 끝 -->
+            
+            
                 
-<!-- 
-<form id="rs">
-<div class="table-review">
-    <table class="review" width="100%">
-        <tr>
-            <td>
-                     
-                        별점test
-                      <div class="starRev">
-              화질 <span class="starR on">별1</span>
-                      <span class="starR">별2</span>
-                      <span class="starR">별3</span>
-                      <span class="starR">별4</span> 
-                      <span class="starR">별5</span>
-                        </div>
-                        별점test
-                      <script>
-                        $('.starRev span').click(function(){
-                      $(this).parent().children('span').removeClass('on');
-                      $(this).addClass('on').prevAll('span').addClass('on');
-                      return false;
-                        }); 
-                        </script>
                 
-            </td>
-            <td>
-            
-                        별점test
-                      <div class="starRev">
-                청결도 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="starR on">별1</span>
-                      <span class="starR">별2</span>
-                      <span class="starR">별3</span>
-                      <span class="starR">별4</span>
-                      <span class="starR">별5</span>
-                        </div>
-                        별점test
-                      <script>
-                        $('.starRev span').click(function(){
-                      $(this).parent().children('span').removeClass('on');
-                      $(this).addClass('on').prevAll('span').addClass('on');
-                      return false;
-                      });   
-                        </script>           
-                        
-            </td>
-        </tr>
-        <tr>
-            <td>
-            
-                        별점test
-                      <div class="starRev">
-                 음향 <span class="starR on">별1</span>
-                      <span class="starR">별2</span>
-                      <span class="starR">별3</span>
-                      <span class="starR">별4</span>
-                      <span class="starR">별5</span>
-                        </div>
-                        별점test
-                      <script>
-                        $('.starRev span').click(function(){
-                      $(this).parent().children('span').removeClass('on');
-                      $(this).addClass('on').prevAll('span').addClass('on');
-                      return false;
-                    }); 
-                        </script>                       
-            </td>
-            <td>
-            
-                        별점test
-                      <div class="starRev">
-                서비스  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="starR on">별1</span>
-                      <span class="starR">별2</span>
-                      <span class="starR">별3</span>
-                      <span class="starR">별4</span>
-                      <span class="starR">별5</span>
-                        </div>
-                        별점test
-                      <script>
-                        $('.starRev span').click(function(){
-                      $(this).parent().children('span').removeClass('on');
-                      $(this).addClass('on').prevAll('span').addClass('on');
-                      return false;
-                    }); 
-                        </script>           
-                                    
-            </td>
-        </tr>
-        <tr>
-            <td>
-            
-                        별점test
-                      <div class="starRev">
-                좌석 <span class="starR on">별1</span>
-                      <span class="starR">별2</span>
-                      <span class="starR">별3</span>
-                      <span class="starR">별4</span>
-                      <span class="starR">별5</span>
-                        </div>
-                        별점test
-                      <script>
-                        $('.starRev span').click(function(){
-                      $(this).parent().children('span').removeClass('on');
-                      $(this).addClass('on').prevAll('span').addClass('on');
-                      return false;
-                    }); 
-                        </script>                       
-            </td>
-            <td>
-            
-                        별점test
-                      <div class="starRev">
-         교통 접근성  &nbsp;&nbsp;&nbsp;
-                    <span class="starR on">별1</span>
-                      <span class="starR">별2</span>
-                      <span class="starR">별3</span>
-                      <span class="starR">별4</span>
-                      <span class="starR">별5</span>
-                        </div>
-                        별점test
-                      <script>
-                        $('.starRev span').click(function(){
-                      $(this).parent().children('span').removeClass('on');
-                      $(this).addClass('on').prevAll('span').addClass('on');
-                      return false;
-                    }); 
-                        </script>                       
-            </td>
-        </tr>
-        <tr>
-            <td>
-            
-                        별점test
-                      <div class="starRev">
-                매점 <span class="starR on">별1</span>
-                      <span class="starR">별2</span>
-                      <span class="starR">별3</span>
-                      <span class="starR">별4</span>
-                      <span class="starR">별5</span>
-                        </div>
-                        별점test
-                      <script>
-                        $('.starRev span').click(function(){
-                      $(this).parent().children('span').removeClass('on');
-                      $(this).addClass('on').prevAll('span').addClass('on');
-                      return false;
-                    }); 
-                        </script>                       
-            </td>
-            <td>
-            
-                        별점test
-                      <div class="starRev">
-     주변 편의시설 <span class="starR on">별1</span>
-                      <span class="starR">별2</span>
-                      <span class="starR">별3</span>
-                      <span class="starR">별4</span>
-                      <span class="starR">별5</span>
-                        </div>
-                        별점test
-                      <script>
-                        $('.starRev span').click(function(){
-                      $(this).parent().children('span').removeClass('on');
-                      $(this).addClass('on').prevAll('span').addClass('on');
-                      return false;
-                    }); 
-                        </script>                       
-            </td>
-        </tr>
-        <tr>
-            <td> </td>
-        </tr>
-        <tr>
-            <td colspan="2"><textarea name="s_e" id="s_e" style="width: 80%"></textarea></td>
-        </tr>
-    </table>
-</div>
-</form>
- -->
- 
-    
-         <a href="./create.do?cineCode=${dto.cineCode }" > ${dto.brandName }  ${dto.cineName }영화관 평가 등록하기 </a>
-        <!-- <input class="cbp-mc-button" type="button" value=" 나도 평가 등록하기!! " onclick="location.href='reviewForm.jsp'" > -->
-<!-- test 0912 -->
-
-
+                
+   <a href="./create.do?cineCode=${dto.cineCode }" > ${dto.brandName }  ${dto.cineName }영화관 평가 등록하기 </a>
+   <!-- <input class="cbp-mc-button" type="button" value=" 나도 평가 등록하기!! " onclick="location.href='reviewForm.jsp'" > -->
 
  
-
+<!-- 지도 표시 -->
 <div class="table-review">
         <!-- 지도생성 -->
         <div id="map" style="width:400px;height:270px;"></div>
@@ -778,8 +591,8 @@ table td:last-child {
 </script>   
 </div>          
 
-0912 test
 
+<!-- 각 영화관에 달린 리뷰 -->
 <div class="table-users">
    <div class="header">리뷰 목록</div>
 <table>
@@ -790,22 +603,65 @@ table td:last-child {
       </tr> 
       
        <c:forEach var="sdto" items="${list }"> 
-       <tr class="brandtest">
+       <tr>
          <td> ${sdto.uid }</td>
-         <td> 화질 ${sdto.pixel } 청결도 ${sdto.clean }
-            <br>
-            	음향 ${sdto.sound } 서비스 ${sdto.service }
-            <br>
-            	좌석 ${sdto.seat }	주변 편의시설${sdto.around }  
-         		<br>
-         			매점 ${sdto.snack } 교통 ${sdto.trans }
-         		<br> 
+         <td> 
+			         화질<c:if test="${sdto.pixel==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.pixel==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.pixel==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.pixel==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.pixel==5 }"><img src="./img/star5.png"></c:if>    
+	               청결도<c:if test="${sdto.clean==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.clean==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.clean==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.clean==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.clean==5 }"><img src="./img/star5.png"></c:if>
+             <br>
+             
+        	음향<c:if test="${sdto.sound==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.sound==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.sound==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.sound==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.sound==5 }"><img src="./img/star5.png"></c:if>        	 
+       	 서비스<c:if test="${sdto.service==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.service==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.service==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.service==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.service==5 }"><img src="./img/star5.png"></c:if> 
+             <br>
+             
+             
+                      좌석 <c:if test="${sdto.seat==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.seat==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.seat==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.seat==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.seat==5 }"><img src="./img/star5.png"></c:if>    
+	     주변 편의시설<c:if test="${sdto.around==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.around==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.around==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.around==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.around==5 }"><img src="./img/star5.png"></c:if>	
+             <br>
+             
+             
+      		매점<c:if test="${sdto.snack==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.snack==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.snack==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.snack==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.snack==5 }"><img src="./img/star5.png"></c:if>	
+         	 교통<c:if test="${sdto.trans==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.trans==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.trans==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.trans==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.trans==5 }"><img src="./img/star5.png"></c:if>	
+         	 	 <br>
+         	 	  
          		${sdto.s_e }</td>
          <td>
             <input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./update.do?cCode=${sdto.cineCode }'"/>
             <input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./delete.do?cCode=${sdto.cineCode }'"/>
          </td> 
-         </tr> 
+         </tr>    
    </c:forEach>
    </table>
 </div>

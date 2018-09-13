@@ -1,261 +1,88 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header.jsp"%>
-<%-- 본문시작 theaterForm.jsp --%>
-<head>
 
-<link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>jQuery Bar Rating - Minimal, light-weight jQuery ratings</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=1024, initial-scale=1">
 
-<style>
+    <link rel="stylesheet" href="ratingjs/examples/css/normalize.min.css">
+    <link rel="stylesheet" href="ratingjs/examples/css/main.css">
+    <link rel="stylesheet" href="ratingjs/examples/css/examples.css">
 
-/* 별점  0904*/
-.starR{
-  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
-  background-size: auto 100%;
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  text-indent: -9999px;
-  cursor: pointer;
-}
-.starR.on{background-position:0 0;}
+    <!-- Icons -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <style>
+      @font-face {
+        font-family: 'Glyphicons Halflings';
+        src:url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.eot');
+        src:url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+          url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.woff') format('woff'),
+          url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+          url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+      }
+    </style>
 
-/* test */
-td:first-child {
-    height: 50px;
-  }
+    <!-- Themes -->
+    <link rel="stylesheet" href="ratingjs/dist/themes/bars-1to10.css">
+    <link rel="stylesheet" href="ratingjs/dist/themes/bars-movie.css">
+    <link rel="stylesheet" href="ratingjs/dist/themes/bars-square.css">
+    <link rel="stylesheet" href="ratingjs/dist/themes/bars-pill.css">
+    <link rel="stylesheet" href="ratingjs/dist/themes/bars-reversed.css">
+    <link rel="stylesheet" href="ratingjs/dist/themes/bars-horizontal.css">
+
+    <link rel="stylesheet" href="ratingjs/dist/themes/fontawesome-stars.css">
+    <link rel="stylesheet" href="ratingjs/dist/themes/css-stars.css">
+    <link rel="stylesheet" href="ratingjs/dist/themes/bootstrap-stars.css">
+    <link rel="stylesheet" href="ratingjs/dist/themes/fontawesome-stars-o.css">
+
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
 
 
-
-/*180827 경민 list 클래스 추가*/
-.list {
-	text-align: left;
-	padding: 10px;
-	margin: auto;
-}
-</style>
-</head>
-<FORM class="cbp-mc-form" name='frm' method='POST' action='./create.do'>
-	<span style="color: red; font-weight: bold">* 필수입력</span><br>
-
- <div class="table-review">
-	<table class="review" width="100%">
-		<tr>
-			<td>
-					 
-						<!-- 별점test -->
-					  <div class="starRev">
-		   	  화질 <span class="starR on">별1</span>
-					  <span class="starR">별2</span>
-					  <span class="starR">별3</span>
-					  <span class="starR">별4</span> 
-					  <span class="starR">별5</span>
-						</div>
-						<!-- 별점test -->
-				 	  <script>
-						$('.starRev span').click(function(){
-					  $(this).parent().children('span').removeClass('on');
-					  $(this).addClass('on').prevAll('span').addClass('on');
-					  return false;
-					});	
-						
-						</script>
-				
-			</td>
-			<td>
-			
-						<!-- 별점test -->
-					  <div class="starRev">
-			    청결도 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			    	<span class="starR on">별1</span>
-			    	<input type="hidden" id="clean" name="clean">
-					  <span class="starR">별2</span>
-					  <input type="hidden" id="clean" name="clean">
-					  <span class="starR">별3</span>
-					  <input type="hidden" id="clean" name="clean">
-					  <span class="starR">별4</span>
-					  <input type="hidden" id="clean" name="clean">
-					  <span class="starR">별5</span>
-					  <input type="hidden" id="clean" name="clean">
-						</div>
-						<!-- 별점test -->
-				 	  <script>
-						$('.starRev span').click(function(){
-					  $(this).parent().children('span').removeClass('on');
-					  $(this).addClass('on').prevAll('span').addClass('on');
-					  return false;
-					});	
-						</script>			
-						
-			</td>
-		</tr>
-		<tr>
-			<td>
-						<!-- 별점test -->
-					  <div class="starRev">
-			     음향 <span class="starR on">별1</span>
-			      <input type="hidden" id="sound" name="sound">
-					  <span class="starR">별2</span>
-					  <input type="hidden" id="sound" name="sound">
-					  <span class="starR">별3</span>
-					  <input type="hidden" id="sound" name="sound">
-					  <span class="starR">별4</span>
-					  <input type="hidden" id="sound" name="sound">
-					  <span class="starR">별5</span>
-					  <input type="hidden" id="sound" name="sound">
-						</div>
-						<!-- 별점test -->
-				 	  <script>
-						$('.starRev span').click(function(){
-					  $(this).parent().children('span').removeClass('on');
-					  $(this).addClass('on').prevAll('span').addClass('on');
-					  return false;
-					});	
-						</script>						
-			</td>
-			<td>
-			
-						<!-- 별점test -->
-					  <div class="starRev">
-			    서비스  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			    	<span class="starR on">별1</span>
-			    	<input type="hidden" id="service" name="service">
-					  <span class="starR">별2</span>
-					  <input type="hidden" id="service" name="service">
-					  <span class="starR">별3</span>
-					  <input type="hidden" id="service" name="service">
-					  <span class="starR">별4</span>
-					  <input type="hidden" id="service" name="service">
-					  <span class="starR">별5</span>
-					  <input type="hidden" id="service" name="service">
-						</div>
-						<!-- 별점test -->
-				 	  <script>
-						$('.starRev span').click(function(){
-					  $(this).parent().children('span').removeClass('on');
-					  $(this).addClass('on').prevAll('span').addClass('on');
-					  return false;
-					});	
-						</script>			
-									
-			</td>
-		</tr>
-		<tr>
-			<td>
-			
-						<!-- 별점test -->
-					  <div class="starRev">
-			    좌석 <span class="starR on">별1</span>
-			      <input type="hidden" id="seat" name="seat">
-					  <span class="starR">별2</span>
-					  <input type="hidden" id="seat" name="seat">
-					  <span class="starR">별3</span>
-					  <input type="hidden" id="seat" name="seat">
-					  <span class="starR">별4</span>
-					  <input type="hidden" id="seat" name="seat">
-					  <span class="starR">별5</span>
-					  <input type="hidden" id="seat" name="seat">
-						</div>
-						<!-- 별점test -->
-				 	  <script>
-						$('.starRev span').click(function(){
-					  $(this).parent().children('span').removeClass('on');
-					  $(this).addClass('on').prevAll('span').addClass('on');
-					  return false;
-					});	
-						</script>						
-			</td>
-			<td>
-			
-						<!-- 별점test -->
-					  <div class="starRev">
-	     교통 접근성  &nbsp;&nbsp;&nbsp;
-	     			<span class="starR on">별1</span>
-	     			<input type="hidden" id="trans" name="trans">
-					  <span class="starR">별2</span>
-					  <input type="hidden" id="trans" name="trans">
-					  <span class="starR">별3</span>
-					  <input type="hidden" id="trans" name="trans">
-					  <span class="starR">별4</span>
-					  <input type="hidden" id="trans" name="trans">
-					  <span class="starR">별5</span>
-					  <input type="hidden" id="trans" name="trans">
-						</div>
-						<!-- 별점test -->
-				 	  <script>
-						$('.starRev span').click(function(){
-					  $(this).parent().children('span').removeClass('on');
-					  $(this).addClass('on').prevAll('span').addClass('on');
-					  return false;
-					});	
-						</script>						
-			</td>
-		</tr>
-		<tr>
-			<td>
-			
-						<!-- 별점test -->
-					  <div class="starRev">
-			    매점  <span class="starR on">별1</span>
-			      <input type="hidden" id="snack" name="snack">
-					  <span class="starR">별2</span>
-					  <input type="hidden" id="snack" name="snack">
-					  <span class="starR">별3</span>
-					  <input type="hidden" id="snack" name="snack">
-					  <span class="starR">별4</span>
-					  <input type="hidden" id="snack" name="snack">
-					  <span class="starR">별5</span>
-					  <input type="hidden" id="snack" name="snack">
-						</div>
-						<!-- 별점test -->
-				 	  <script>
-						$('.starRev span').click(function(){
-					  $(this).parent().children('span').removeClass('on');
-					  $(this).addClass('on').prevAll('span').addClass('on');
-					  return false;
-					});	
-						</script>						
-			</td>
-			<td>
-			
-						<!-- 별점test -->
-					  <div class="starRev">
-	 주변 편의시설 <span class="starR on">별1</span>
-	 					<input type="hidden" id="around" name="around">
-					  <span class="starR">별2</span>
-					  <input type="hidden" id="around" name="around">
-					  <span class="starR">별3</span>
-					  <input type="hidden" id="around" name="around">
-					  <span class="starR">별4</span>
-					  <input type="hidden" id="around" name="around">
-					  <span class="starR">별5</span>
-					  <input type="hidden" id="around" name="around">
-						</div>
-						<!-- 별점test -->
-				 	  <script>
-						$('.starRev span').click(function(){
-					  $(this).parent().children('span').removeClass('on');
-					  $(this).addClass('on').prevAll('span').addClass('on');
-					  return false;
-					});	
-						</script>						
-			</td>
-		</tr>
-		<tr>
-			<td>리뷰내용</td>
-		</tr>
-		<tr>
-			<td colspan="2"><textarea name="s_e" id="s_e" style="width: 80%"></textarea></td>
-		</tr>
-	</table>
-</div>
-
-		<div class="cbp-mc-submit-wrap">
-		<input class="cbp-mc-submit" type="submit" value="등록" /> 
-		<input class="cbp-mc-submit" type="button" value="취소"
-					 onclick="javascript:history.back()" />
-		</div>	
+  </head>
+  
+  <body>
  
-</form>
+  
+<form name='frm' method='POST' action='./reviewform.do'>
+    <section class="section section-examples">
+    <%-- <input type="hidden" name="uid" value="<%=uid %>"> --%>
 
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+       <!--  <div class="col col-fullwidth"> -->
+       <div class="star-ratings">
+ 			 <div class="stars stars-example-fontawesome-o">
+                 화질 <select id="example-fontawesome-o" name="rating" data-current-rating="0" autocomplete="off">
+                  <option value=""></option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+           </select>
+                <span class="title current-rating">
+                  Current rating: <span class="value"></span>
+                </span>
+                <span class="title your-rating hidden">
+                  Your rating: <span class="value"></span>&nbsp;
+                  <a href="#" class="clear-rating"><i class="fa fa-times-circle"></i></a>
+                </span>
+              </div>
+            </div>
+    </section>
+    </form>
+  
+  
+  
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="ratingjs/examples/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+    <script src="ratingjs/jquery.barrating.js"></script>
+    <script src="ratingjs/examples/js/examples.js"></script>
+  </body>
+  
+  
+  
+  
