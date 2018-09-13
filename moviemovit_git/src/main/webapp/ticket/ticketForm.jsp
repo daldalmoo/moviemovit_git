@@ -117,7 +117,6 @@
 	text-align: center
 }
 
-<<<<<<< HEAD
 /*예매 view 페이지 css*/
 /*1) 영화선택*/
 .lst_movie {
@@ -145,26 +144,19 @@ ul li {
 	margin-top: 5px;
 }
 
-.blind {
-	height: 30px;
-	padding: 0 0 0 0px;
-	font-weight: bold;
-	color: white;
-	vertical-align: top;
-	white-space: nowrap;
-	background-color: black;
-	text-align: center;
-	margin: 0 0 15px;
+.movie_area .movie_areaTitle {
+	background:linear-gradient(to top, #3b3d58 0%, #5d607d 100%);
+	font-size:12pt;
+  	font-weight:bold;
+  	color:white;
+  	text-align: center;
 }
-
-/* 3) 날짜선택*/
-=======
-
 
 /* 신혜 */
 #content .theater_area {  /* 극장선택 타이틀 & 검색 부분 div */
   background:linear-gradient(to top, #3b3d58 0%, #5d607d 100%);
 }
+
 #content .theater_area .contentTitle {  /* 극장선택 글씨 */
   font-size:12pt;
   font-weight:bold;
@@ -177,84 +169,19 @@ ul li {
   transform:translateY(-50%);
 }
 
->>>>>>> refs/remotes/origin/Hap
 </style>
 
 <form class="cbp-mc-form" name="regForm" method='POST'
 	action='./create.do' onsubmit="return couponCheck(this)">
-
-<<<<<<< HEAD
-	<!--container -->
-	<div id="container">
-		<p>#container</p>
-=======
+ 
   <!--container -->
   <div id="container">
     <p>#container</p>
-    
-    <!--snb -->
-    <div class="snb">
-      <p>영화선택</p>
-    </div>
-    <!-- snb end -->
-    
-    
-    <!-- ------------------------------ content : 극장선택 ------------------------------ -->
-    <div id="content">
-      <div class="theater_area">
-        <span class="contentTitle">극장선택</span>
-        <input type="image" class="refreshbtn" src="./img/refresh_btn.gif" alt="새로고침" onclick="javascript:ResetSelTheaterList('0');nclk(this, 'the.ref', '', 1)">
-        <input type="text" id="txtTheater" title="극장검색" class="search">
-        <input type="image" class="searchbtn" src="./img/btn_search.gif" alt="검색" onclick="javascript:TheaterSearchBtnClick();nclk(this, 'the.enter', '', 1);">
-      </div>
-        
-        
-        <!-- [D] 활성화시 a class 'on' -->
-        <!-- <ul id="t_tab_menu" class="tab_menu">
-          <li class="t_tab">
-            <a href="javascript:TabTheaterMode('1', 0);" onclick="nclk(this, 'the.all', '', 1)" title="전체극장" class="on">
-              <span class="blind">전체극장</span>
-            </a>
-          </li>
-          <li class="t_tab2">
-            <a href="javascript:TabTheaterMode('1',1);" onclick="nclk(this, 'the.play', '', 1)" title="상영극장" class="">
-              <span class="blind">상영극장</span>
-            </a>
-          </li>
-          <li class="t_tab3">
-            <a href="javascript:TabTheaterMode('1',2);" onclick="nclk(this, 'the.chain', '', 1)" title="체인별" class="">
-              <span class="blind">체인별</span>
-            </a>
-          </li>
-        </ul> -->
-        
-    </div>
-    <!-- ------------------------------ content : 극장선택 end ------------------------------ -->
-    
-    
-    <!--aside -->
-    <div class="aside">
-      <p>날짜선택</p>
-    </div>
-    <!-- aside end -->
-    
-    <!-- bottom -->
-    <div class="bottom">
-    	<p>상영시간표</p>
-    </div>
-    <!-- bottom end -->
-    
-    <!-- rbottom -->
-	<div class="rbottom">
-    	<p>인원선택</p>
-   	</div>
-    <!-- rbottom end -->
->>>>>>> refs/remotes/origin/Hap
 
-		<!--영화선택 -->
+    	<!-- --------------------------snb(=movie_area) : 영화선택  ----------------------------- -->
 		<div class="movie_area">
 			<h2>
-				<p class="blind">영화선택</p>
+				<p class="movie_areaTitle">영화선택</p>
 			</h2>
 			<ul id="1st_movie">
 				<c:forEach var="movie" items="${movieList }">
@@ -273,20 +200,20 @@ ul li {
 				</select>
 			 -->	
 		</div>
-		<!-- snb end -->
-
-		<!--content -->
-		<div id="content">
-			<h2>
-				<p class="blind">극장선택</p>
-			</h2>
-			<ul class="2nd_theater">
-				<li id="theater"></li>
-			</ul>
-
-		</div>
-		<!-- content end -->
-
+	<!-- --------------------------snb(=movie_area) : 영화선택 end -------------------------- -->
+    
+    <!-- ------------------------------ content : 극장선택 ------------------------------ -->
+    <div id="content">
+      <div class="theater_area">
+        <span class="contentTitle">극장선택</span>
+        <input type="image" class="refreshbtn" src="./img/refresh_btn.gif" 
+        		alt="새로고침" onclick="javascript:ResetSelTheaterList('0');nclk(this, 'the.ref', '', 1)">
+        <input type="text" id="txtTheater" title="극장검색" class="search">
+        <input type="image" class="searchbtn" src="./img/btn_search.gif"
+        		alt="검색" onclick="javascript:TheaterSearchBtnClick();nclk(this, 'the.enter', '', 1);">
+      </div>      
+    </div>
+    <!-- ------------------------------ content : 극장선택 end ------------------------------ -->
 		<!--aside -->
 		<div class="aside">
 			<h2>
