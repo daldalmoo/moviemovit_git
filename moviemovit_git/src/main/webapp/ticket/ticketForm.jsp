@@ -5,7 +5,7 @@
 <!-- 통째로 갈아없을꺼임!!!!!!! -->
 
 <head>
-<!-- <link href="../css/ticketStyle.css" rel="stylesheet" type="text/css"> -->
+<link href="../css/ticketForm_content.css" rel="stylesheet" type="text/css">
 </head>
 
 <!-- ------------------------------ 소스 복붙 ---------------------------------- -->
@@ -32,6 +32,24 @@
 
 .movieinfo{position:relative;left:-190px;width:132%;height:200px;margin-top:15px;border:1px solid #bdbdbd;background:#fff;text-align:center}
 
+
+
+/* 신혜 */
+#content .theater_area {  /* 극장선택 타이틀 & 검색 부분 div */
+  background:linear-gradient(to top, #3b3d58 0%, #5d607d 100%);
+}
+#content .theater_area .contentTitle {  /* 극장선택 글씨 */
+  font-size:12pt;
+  font-weight:bold;
+  color:white;
+}
+#content .theater_area .refreshbtn,
+#content .theater_area .searchbtn {  /* 새로고침, 검색 버튼 */
+  position:relative;
+  top:12px;
+  transform:translateY(-50%);
+}
+
 </style>
 
 <form class="cbp-mc-form" name="regForm" method='POST' action='./create.do' onsubmit="return couponCheck(this)">
@@ -46,11 +64,39 @@
     </div>
     <!-- snb end -->
     
-    <!--content -->
+    
+    <!-- ------------------------------ content : 극장선택 ------------------------------ -->
     <div id="content">
-      <p>극장선택</p>
+      <div class="theater_area">
+        <span class="contentTitle">극장선택</span>
+        <input type="image" class="refreshbtn" src="./img/refresh_btn.gif" alt="새로고침" onclick="javascript:ResetSelTheaterList('0');nclk(this, 'the.ref', '', 1)">
+        <input type="text" id="txtTheater" title="극장검색" class="search">
+        <input type="image" class="searchbtn" src="./img/btn_search.gif" alt="검색" onclick="javascript:TheaterSearchBtnClick();nclk(this, 'the.enter', '', 1);">
+      </div>
+        
+        
+        <!-- [D] 활성화시 a class 'on' -->
+        <!-- <ul id="t_tab_menu" class="tab_menu">
+          <li class="t_tab">
+            <a href="javascript:TabTheaterMode('1', 0);" onclick="nclk(this, 'the.all', '', 1)" title="전체극장" class="on">
+              <span class="blind">전체극장</span>
+            </a>
+          </li>
+          <li class="t_tab2">
+            <a href="javascript:TabTheaterMode('1',1);" onclick="nclk(this, 'the.play', '', 1)" title="상영극장" class="">
+              <span class="blind">상영극장</span>
+            </a>
+          </li>
+          <li class="t_tab3">
+            <a href="javascript:TabTheaterMode('1',2);" onclick="nclk(this, 'the.chain', '', 1)" title="체인별" class="">
+              <span class="blind">체인별</span>
+            </a>
+          </li>
+        </ul> -->
+        
     </div>
-    <!-- content end -->
+    <!-- ------------------------------ content : 극장선택 end ------------------------------ -->
+    
     
     <!--aside -->
     <div class="aside">
