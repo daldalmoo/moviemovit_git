@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public interface QnaMapper {
 	/*
-		MyBatis3ì˜ ë§¤í¼(notice.xml)ì— ë“±ë¡ë˜ì–´ ìˆëŠ” idë¥¼ ì¸í„°í˜ì´ìŠ¤ì˜ ë©”ì†Œë“œì—
-		ë‹¤ì‹œ í•œë²ˆ ë“±ë¡í•¨ìœ¼ë¡œì¨ MyBatis3ì—ì„œ í˜¸ì¶œí•˜ê¸° í¸ë¦¬í•˜ë„ë¡ ì§€ì›í•¨.
+		MyBatis3ÀÇ ¸ÅÆÛ(notice.xml)¿¡ µî·ÏµÇ¾î ÀÖ´Â id¸¦ ÀÎÅÍÆäÀÌ½ºÀÇ ¸Ş¼Òµå¿¡
+		´Ù½Ã ÇÑ¹ø µî·ÏÇÔÀ¸·Î½á MyBatis3¿¡¼­ È£ÃâÇÏ±â Æí¸®ÇÏµµ·Ï Áö¿øÇÔ.
 		
-		â˜…idê°€ methodëª…ìœ¼ë¡œ ì™€ì•¼í•¨.
+		¡Úid°¡ method¸íÀ¸·Î ¿Í¾ßÇÔ.
 	*/
   //<select id="groupNoMax" resultType="int">
   public int groupNoMax();
