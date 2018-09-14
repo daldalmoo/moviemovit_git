@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.google.code.geocoder.Geocoder;
 import com.google.code.geocoder.GeocoderRequestBuilder;
 import com.google.code.geocoder.model.GeocodeResponse;
@@ -71,7 +68,7 @@ public class ReviewCont {
     MultipartFile logoImgMF = dto.getLogoImgMF();
     
     
-    // ì´ë¯¸ì§€ê°€ ì²¨ë¶€ë˜ì§€ ì•Šì•˜ìœ¼ë©´ ë””í´íŠ¸ ì´ë¯¸ì§€ë¡œ SET
+    // ÀÌ¹ÌÁö°¡ Ã·ºÎµÇÁö ¾Ê¾ÒÀ¸¸é µğÆúÆ® ÀÌ¹ÌÁö·Î SET
     if(logoImgMF.isEmpty()) {  
       dto.setLogoImg("default.png");
     } else { 
@@ -79,8 +76,8 @@ public class ReviewCont {
       dto.setLogoImg(logoImg);
     }
     
-    // CINECODEê°€ NVLë¡œ ë§Œë“¤ì–´ì§€ì§€ ì•Šê¸° ë•Œë¬¸ì— ë³„ë„ë¡œ ìƒì„±
-    // BRANDì˜ ì•ìë¦¬ + í•´ë‹¹ ë¸Œëœë“œ ë‚´ ëª‡ë²ˆì§¸ ì˜í™”ê´€ì¸ì§€ cincodeset
+    // CINECODE°¡ NVL·Î ¸¸µé¾îÁöÁö ¾Ê±â ¶§¹®¿¡ º°µµ·Î »ı¼º
+    // BRANDÀÇ ¾ÕÀÚ¸® + ÇØ´ç ºê·£µå ³» ¸î¹øÂ° ¿µÈ­°üÀÎÁö cincodeset
     String cineCode = dao.setCineCode(dto.getBrandName());
     dto.setCineCode(cineCode);
     int count = dao.cinemaForm(dto);
@@ -91,7 +88,7 @@ public class ReviewCont {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('ë“±ë¡ ì‹¤íŒ¨');";
+      msg += "  alert('µî·Ï ½ÇÆĞ');";
       msg += "  history.go(-1);";
       msg += "</script>";
       msg += "</html></body>";
@@ -101,7 +98,7 @@ public class ReviewCont {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('ë“±ë¡ ì„±ê³µ');";
+      msg += "  alert('µî·Ï ¼º°ø');";
       msg += "  window.location='./cinemaList.do';";
       msg += "</script>";
       msg += "</html></body>";
@@ -112,14 +109,14 @@ public class ReviewCont {
     return mav;
   } // 
   
-  // CREATE : ìœ„ë„, ê²½ë„ë¥¼ ì–»ê¸° ìœ„í•œ ì •ë³´
+  // CREATE : À§µµ, °æµµ¸¦ ¾ò±â À§ÇÑ Á¤º¸
   @RequestMapping(value="/review/geoCoding.do")
   public void geoCoding(HttpServletRequest req, HttpServletResponse response) throws Exception{
     String location = req.getParameter("addr");
 
     Geocoder geocoder = new Geocoder();
-    // setAddress : ë³€í™˜í•˜ë ¤ëŠ” ì£¼ì†Œ (ê²½ê¸°ë„ ì„±ë‚¨ì‹œ ë¶„ë‹¹êµ¬ ë“±)
-    // setLanguate : ì¸ì½”ë”© ì„¤ì •
+    // setAddress : º¯È¯ÇÏ·Á´Â ÁÖ¼Ò (°æ±âµµ ¼º³²½Ã ºĞ´ç±¸ µî)
+    // setLanguate : ÀÎÄÚµù ¼³Á¤
     GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(location).setLanguage("ko").getGeocoderRequest();
     GeocodeResponse geocoderResponse;
     geocoderResponse = geocoder.geocode(geocoderRequest);
@@ -134,7 +131,7 @@ public class ReviewCont {
                 
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/xml");
-            response.getWriter().write(coordStr); // ì‘ë‹µê²°ê³¼ë°˜í™˜
+            response.getWriter().write(coordStr); // ÀÀ´ä°á°ú¹İÈ¯
           }
   } // 
   
@@ -163,7 +160,7 @@ public class ReviewCont {
   @RequestMapping(value="/review/cinemaUpdate.do", method = RequestMethod.GET)
   public ModelAndView cinemaUpdate(CinemaDTO dto) {
     ModelAndView mav = new ModelAndView();
-    // dtoë¥¼ í˜„ì¬ dtoë¡œ ì—…ë°ì´íŠ¸
+    // dto¸¦ ÇöÀç dto·Î ¾÷µ¥ÀÌÆ®
     dto = dao.cinemaRead(dto);
     mav.addObject("dto", dto);
     mav.setViewName("review/cinemaUpdate");
@@ -183,7 +180,7 @@ public class ReviewCont {
       
       dto.setCineCode(cineCode);
 
-      // ì „ì†¡ë˜ëŠ” íŒŒì¼ì´ ì €ì¥ë˜ëŠ” ì‹¤ì œ ê²½ë¡œ
+      // Àü¼ÛµÇ´Â ÆÄÀÏÀÌ ÀúÀåµÇ´Â ½ÇÁ¦ °æ·Î
       String basePath = req.getSession().getServletContext().getRealPath("/review/img");
 
       MultipartFile logoImgMF = dto.getLogoImgMF();
@@ -191,12 +188,12 @@ public class ReviewCont {
       
       if (logoImgMF.getSize() > 0) {
         UploadSaveManager.deleteFile(basePath, oldlogoImgMF);
-        // ìƒˆë¡œìš´ íŒŒì¼ ìˆì„ ê²½ìš° ì‚­ì œí•˜ê³  í•˜ê¸°
+        // »õ·Î¿î ÆÄÀÏ ÀÖÀ» °æ¿ì »èÁ¦ÇÏ°í ÇÏ±â
         // poster posterMF ???
         String logoImg = UploadSaveManager.saveFileSpring30(logoImgMF, basePath);
         dto.setLogoImg(logoImg);
       } else {
-        // ê¸°ì¡´íŒŒì¼ì„ ìƒˆë¡œ ì €ì¥
+        // ±âÁ¸ÆÄÀÏÀ» »õ·Î ÀúÀå
         dto.setLogoImg(oldDTO.getLogoImg());
       }
 
@@ -207,7 +204,7 @@ public class ReviewCont {
         msg += "<!DOCTYPE html>";
         msg += "<html><body>";
         msg += "<script>";
-        msg += "  alert('ìˆ˜ì • ì‹¤íŒ¨');";
+        msg += "  alert('¼öÁ¤ ½ÇÆĞ');";
         msg += "  history.go(-1);";
         msg += "</script>";
         msg += "</html></body>";
@@ -217,7 +214,7 @@ public class ReviewCont {
         msg += "<!DOCTYPE html>";
         msg += "<html><body>";
         msg += "<script>";
-        msg += "  alert('ìˆ˜ì • ì„±ê³µ');";
+        msg += "  alert('¼öÁ¤ ¼º°ø');";
         msg += "  window.location='./cinemaList.do';";
         msg += "</script>";
         msg += "</html></body>";
@@ -236,7 +233,7 @@ public class ReviewCont {
   @RequestMapping(value="/review/cinemaDelete.do", method = RequestMethod.GET)
   public ModelAndView cinemaDelete(HttpServletRequest req) {
     ModelAndView mav = new ModelAndView();
-    // dtoë¥¼ í˜„ì¬ dtoë¡œ ì—…ë°ì´íŠ¸
+    // dto¸¦ ÇöÀç dto·Î ¾÷µ¥ÀÌÆ®
     String cineCode = req.getParameter("cineCode");
     
     mav.addObject("cineCode", cineCode);
@@ -245,10 +242,10 @@ public class ReviewCont {
 
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
-      msg += "<p>ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?</p>";
-      msg += "<input type='button' value='í™•ì¸' onclick='location.href=\"./cinemaDeletePro.do?cineCode="
+      msg += "<p>»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?</p>";
+      msg += "<input type='button' value='È®ÀÎ' onclick='location.href=\"./cinemaDeletePro.do?cineCode="
           + cineCode + "\"'>";
-      msg += "<input type='button' value='ì·¨ì†Œ' onclick='javascript:history.back()'>";
+      msg += "<input type='button' value='Ãë¼Ò' onclick='javascript:history.back()'>";
       msg += "</html></body>";
       
       mav.addObject("msg", msg);
@@ -262,7 +259,7 @@ public class ReviewCont {
   @RequestMapping(value="/review/cinemaDeletePro.do", method = RequestMethod.GET)
   public ModelAndView cinemaDeletePro(HttpServletRequest req) {
     ModelAndView mav = new ModelAndView();
-    // dtoë¥¼ í˜„ì¬ dtoë¡œ ì—…ë°ì´íŠ¸
+    // dto¸¦ ÇöÀç dto·Î ¾÷µ¥ÀÌÆ®
     String cineCode = req.getParameter("cineCode");
     
     int count = dao.cinemaDeletePro(cineCode);
@@ -272,7 +269,7 @@ public class ReviewCont {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('ì‚­ì œ ì‹¤íŒ¨');";
+      msg += "  alert('»èÁ¦ ½ÇÆĞ');";
       msg += "  history.go(-1);";
       msg += "</script>";
       msg += "</body></html>";
@@ -282,7 +279,7 @@ public class ReviewCont {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('ì‚­ì œ ì„±ê³µ');";
+      msg += "  alert('»èÁ¦ ¼º°ø');";
       msg += "  window.location='./cinemaList.do';";
       msg += "</script>";
       msg += "</body></html>";
@@ -294,38 +291,38 @@ public class ReviewCont {
    
   }
   
-  ////////////////////////////////////// LIST + í˜ì´ì§• 0912
+  ////////////////////////////////////// LIST + ÆäÀÌÂ¡ 0912
   @RequestMapping(value="/review/cinemaList.do")
   public ModelAndView cinemaList(HttpServletRequest request) {
     
     ModelAndView mav= new ModelAndView();
     Criteria cri = new Criteria();
 
-    //ì²«í˜ì´ì§€ì¼ ê²½ìš° pageë¥¼ 1ë¡œ ì„¤ì •
-    //1í˜ì´ì§€ì¸ì§€ íŒë‹¨ ì—¬ë¶€ = request page ê°’ì´ null ì—¬ë¶€ë¥¼ íŒë‹¨
+    //Ã¹ÆäÀÌÁöÀÏ °æ¿ì page¸¦ 1·Î ¼³Á¤
+    //1ÆäÀÌÁöÀÎÁö ÆÇ´Ü ¿©ºÎ = request page °ªÀÌ null ¿©ºÎ¸¦ ÆÇ´Ü
     String pagetemp = request.getParameter("page");
     int page = 1;
 
-    //nullì´ ì•„ë‹ˆë¼ë©´ pageë¥¼ intí˜•ìœ¼ë¡œ ë³€í™”ì‹œí‚¤ê³  pageì— set
+    //nullÀÌ ¾Æ´Ï¶ó¸é page¸¦ intÇüÀ¸·Î º¯È­½ÃÅ°°í page¿¡ set
     if (pagetemp!=null) {
     page = Integer.parseInt(pagetemp);
     cri.setPage(page);
     }
     
-    //0ì´ë‘ 10
+    //0ÀÌ¶û 10
     System.out.println(cri.getPageStart());
     System.out.println(cri.getPage());
     
     ArrayList<CinemaDTO> list = dao.listCriteria(cri);
     
-    mav.addObject("list", list);  // ê²Œì‹œíŒì˜ ê¸€ ë¦¬ìŠ¤íŠ¸
+    mav.addObject("list", list);  // °Ô½ÃÆÇÀÇ ±Û ¸®½ºÆ®
     PageMaker pageMaker = new PageMaker();
     pageMaker.setCri(cri);
     
-    //totalì€ xml ë³„ë„ ì¶”ê°€ ì—†ì´ ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ count
-    //listë¥¼ ë¶ˆëŸ¬ì™€ì„œ
+    //totalÀº xml º°µµ Ãß°¡ ¾øÀÌ ÄÁÆ®·Ñ·¯¿¡¼­ count
+    //list¸¦ ºÒ·¯¿Í¼­
     ArrayList<CinemaDTO> alllist = dao.cinemaList();
-    // size ì¬ê¸°
+    // size Àç±â
     int totalcount = alllist.size();
     pageMaker.setTotalCount(totalcount);
     mav.addObject("pageMaker", pageMaker);
@@ -361,7 +358,7 @@ public class ReviewCont {
   }
 
   
-  //LIST : ì¹´í…Œê³ ë¦¬
+  //LIST : Ä«Å×°í¸®
   @RequestMapping(value="/review/categorize.do", method=RequestMethod.POST) 
   public ModelAndView cate(@RequestParam("checkArr[]")List<String> list, @RequestParam("checkArr2[]")List<String> list2) throws Exception{ 
     
@@ -372,8 +369,8 @@ public class ReviewCont {
     System.out.println(category);
     System.out.println(category.size());
     
-    //ê°’ ì˜ ë„˜ì–´ì˜¤ëŠ” ê²ƒ í™•ì¸
-    //MOELANDVIEWë¡œ ê°’ ë°›ì•„ì„œ REFRESHí•˜ê¸°
+    //°ª Àß ³Ñ¾î¿À´Â °Í È®ÀÎ
+    //MOELANDVIEW·Î °ª ¹Ş¾Æ¼­ REFRESHÇÏ±â
     ModelAndView mav= new ModelAndView();
     
     ArrayList<ReviewStar> reviewstar = dao.reviewstar();
@@ -390,7 +387,7 @@ public class ReviewCont {
 
   ////////////////////////////// REVIEW  ////////////////////////////////////////////////////////////////////////////
 
-  /*0906 ë¦¬ë·°ì ìˆ˜ ë§¤ê¸°ëŠ” í¼*/
+  /*0906 ¸®ºäÁ¡¼ö ¸Å±â´Â Æû*/
   @RequestMapping(value="/review/create.do", method=RequestMethod.GET)
   public ModelAndView create() {
     ModelAndView mav= new ModelAndView();
@@ -402,8 +399,8 @@ public class ReviewCont {
   public ModelAndView createProc(ReviewStar sdto) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("review/msgView");
-    int count = dao.create(sdto);
-    mav.addObject("count", count);
+    //int count = dao.create(sdto);
+    //mav.addObject("count", count);
     return mav;
   }
   
@@ -422,12 +419,12 @@ public class ReviewCont {
   } // POST*/
   
   
-  /* review ëª©ë¡                              ê²°ê³¼í™•ì¸í•˜ëŠ” ê°’
+  /* review ¸ñ·Ï                              °á°úÈ®ÀÎÇÏ´Â °ª
   @RequestMapping(value="/review/cinemaRead.do")
   public ModelAndView list(ReviewStar sdto) {
       ModelAndView mav = new ModelAndView();
       ArrayList<ReviewStar> list = dao.list();
-      // í˜ì´ì§€ ì´ë™ ë° ê°’ ì˜¬ë¦¬ê¸°
+      // ÆäÀÌÁö ÀÌµ¿ ¹× °ª ¿Ã¸®±â
       mav.setViewName("review/cinemaRead"); //reviewList
       mav.addObject("list", list);
       return mav; 
