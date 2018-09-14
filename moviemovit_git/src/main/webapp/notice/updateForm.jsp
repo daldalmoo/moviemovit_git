@@ -44,7 +44,7 @@ margin:auto;
 	<table class="cbp-mc-column">
 	<tr>
 	<th>공지사항번호</th>
-	<td><input type="text" id="qCode"name="qCode" size="50"   value="${dto.qCode }" ></td>
+	<td><input type="text" id="noticeno"name="noticeno" size="50"   value="${dto.noticeno }" ></td>
 	</tr>
 		<tr>
 			<th>제목</th>
@@ -56,16 +56,19 @@ margin:auto;
 			</tr>
 		<tr>
 			<th>내용</th>
-			<td><textarea name="content" id="content" readonly>${dto.content}</textarea></td>
+			<td><textarea name="s_e" id="s_e" readonly>${dto.s_e}</textarea></td>
+		</tr>
+		<tr>
+			<th>공개여부</th>
+			<td><input type="text" id="open"name="open" size="50" value="${dto.open}" ></td>
 		</tr>
 	</table>
 	
-  <input type="hidden" name="qType" value="${dto.qType}"/>
-  
 	<div class="bottom">
 		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='list.do'">
 		<input type="submit" id="noticebutton" class="cbp-mc-submit" value="수정">
-		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='delete.do?qCode=${dto.qCode}'">
+		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='delete.do?noticeno=${dto.noticeno}'">
+		
 	</div>
 
 </form>
