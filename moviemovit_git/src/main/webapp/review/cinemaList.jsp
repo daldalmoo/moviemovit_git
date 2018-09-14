@@ -244,7 +244,7 @@ table tr:nth-child(2n+1) {
                <img src="img/default.png" alt="" /></td>
                </c:when>
                <c:otherwise>
-               <img src="${dto.logoImg}" alt="" /></td>
+               <img src="img/${dto.logoImg}" alt="" /></td>
                </c:otherwise> 
            </c:choose>
            <td>

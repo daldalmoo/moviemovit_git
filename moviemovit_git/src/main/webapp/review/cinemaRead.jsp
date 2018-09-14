@@ -6,6 +6,7 @@
 
 <style rel="stylesheet">
 
+
 /* 0912 test 목록에 넣을 css */
 .header {   /* 영화관목록  */
   background-color: #3366cc;
@@ -15,21 +16,78 @@
   text-align: center;
   text-transform: uppercase;        
 }
-.table-users {
-  border: 1px solid #327a81;
+
+
+
+/* 지도 */
+/* .map{
+  border: 2px solid #327a81;
   border-radius: 10px;
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
   max-width: calc(100% - 2em);
   margin: 1em auto;
   overflow: hidden;
-  width: 100%;
+  width: 80%;
+}
+ */
+
+
+/* 영화관에 대한 8개항목 총 별점 */
+.cinemaStar {
+  border: 2px solid #327a81;
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+  max-width: calc(100% - 2em);
+  margin: 1em auto;
+  overflow: hidden;
+  width: 80%;
+}
+.cinemaStar img {
+	width: 150px;
+}
+.cinemaStar table td:first-child{
+    align: right;
+    text-align: right;
+    padding-right: 50px;
+ }
+.cinemaStar table td:nth-child(2n) {
+  align: left;
+  text-align: left;
+  
 }
 
-/* users테이블 img test */
+
+
+/* 리뷰목록 불러온곳 */
+.table-users {
+  border: 2px solid #327a81;
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+  max-width: calc(100% - 2em);
+  margin: 1em auto;
+  overflow: hidden;
+  width: 80%;
+}
 .table-users img {
   width: 130px;
   /* max-width: calc(100% - 50em); */
 }
+
+
+
+
+ /* 각 요소별 별점에 적용 */
+ .review {
+    text-align: center;
+    color:  black;
+ }
+ .review img {
+    width: 165px;
+    height: 30px;
+    margin-right: 1rem;
+ }
+ 
+
 
 table {
   width: 100%;
@@ -56,6 +114,9 @@ table td {
  table th:last-child {
   width: 150px;
 } 
+
+ 
+ 
 table tr:nth-child(2n) {
   background-color: white;
 }
@@ -83,63 +144,9 @@ table tr:nth-child(2n+1) {
 .cbp-mc-button:hover {
   background: #2b8256;
 }
-
-
-/* 별점 */
-.starR{
-  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
-  background-size: auto 100%;
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  text-indent: -9999px;
-  cursor: pointer;
-}
-.starR.on{background-position:0 0;}
-/* 
-.customoverlay {
-    position:relative;
-    bottom:85px;
-    border-radius:6px;
-    border: 1px solid #ccc;
-    border-bottom:2px solid #ddd;
-    float:left;
-}
-.customoverlay:nth-of-type(n) {
-    border:0; 
-    box-shadow:0px 1px 2px #888;
-}
-.customoverlay a {
-    display:block;
-    text-decoration:none;
-    color:#000;text-align:center;
-    border-radius:6px;font-size:14px;
-    font-weight:bold;overflow:hidden;
-    background: #d95050;
-    background: #d95050 url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;
-}
-.customoverlay .title {
-    display:block;
-    text-align:center;
-    background:#fff;
-    margin-right:35px;
-    padding:5px 10px;
-    font-size:12px;
-    font-weight:bold;
-}
-.customoverlay:after {
-    content:'';
-    position:absolute;
-    margin-left:-12px;
-    left:50%;bottom:-12px;
-    width:22px;
-    height:12px;
-    background:url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
-}
-  */
  
  /* sj0831 */ 
-.table-review {
+.main-table {
   border: 2px solid #327a81;
   border-radius: 10px;
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
@@ -147,7 +154,9 @@ table tr:nth-child(2n+1) {
   margin: 1em auto;
   overflow: hidden;
   width: 80%;
-}/*
+}
+
+/*
 table {
   margin-left: 5%;
   margin-right: 5%;   0903 승지 추가 
@@ -167,118 +176,15 @@ table td:last-child {
 }*/
 
  
- /* 0903 sj */
- /* 각 요소별 별점에 적용 */
- .review {
-    text-align: left;
-    color:  black;
-    
- }
  
- .review img {
-    width: 165px;
-    height: 30px;
-    margin-right: 3rem;
- }
- 
- 
-
-@media screen and (max-width: 700px) {
-  table, tr, td {
-    display: block;
-  }
-  td:first-child {
-    position: absolute; 
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
-    width: 100px;
-  }
-  td:not(:first-child) {
-    clear: both;
-    margin-left: 100px;
-    padding: 4px 20px 4px 90px;
-    position: relative;
-    text-align: left;
-  }
-  td:not(:first-child):before {
-    color: #91ced4;
-    content: '';
-    display: block;
-    left: 0;
-    /* position: absolute; */
-  }
- 
-  tr {
-    padding: 10px 0;
-    position: relative;
-  }
-  tr:first-child {
-    display: none;
-  }
-}
-@media screen and (max-width: 500px) {
-  .header {
-    background-color: transparent;
-    color: white;
-    font-size: 2em;
-    font-weight: 700;
-    padding: 0;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-  }
-  img {
-    border: 3px solid;
-    border-color: #daeff1;
-    height: 100px;
-    margin: 0.5rem 0;
-    width: 100px;
-  }
-  td:first-child {
-    background-color: #c8e7ea;
-    border-bottom: 1px solid #91ced4;
-    border-radius: 10px 10px 0 0;
-    position: relative;
-    top: 0;
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-    width: 100%;
-  }
-  td:not(:first-child) {
-    margin: 0;
-    padding: 5px 1em;
-    width: 100%;
-  }
-  td:not(:first-child):before {
-    font-size: .8em;
-    padding-top: 0.3em;
-    position: relative;
-  }
-  td:last-child {
-    padding-bottom: 1rem !important;
-  }
-  tr {
-    background-color: white !important;
-    border: 1px solid #6cbec6;
-    border-radius: 10px;
-    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-    margin: 0.5rem 0;
-    padding: 0;
-  }/*
-  .table-users {
-    border: none;
-    box-shadow: none;
-    overflow: visible;
-  }*/
 }
 </style>
 
-<div class="table-review">
+<div class="main-table">
 <c:set var="cineCode" value="${dto.cineCode}"/> 
-
-
 <table>
-    <tr>
-       <td rowspan="10"><img src="${dto.logoImg }" width="400" height="270" style="float: left; "></td>
+    <tr>																						  <!-- style="float: left; " -->		
+       <td rowspan="10"><img src="${dto.logoImg }" width="400" height="270"></td>
   </tr> 
        <tr style="font-size: 2em;">
        <th colspan="2"> ${dto.brandName } &nbsp; ${dto.cineName }</th>
@@ -336,11 +242,12 @@ table td:last-child {
 </div>
 
 <!-- 영화관에 대한 각 별점(8개) -->
-<div class="table-review">
-<table class="review" width="100%">
-        <!-- 각 영화관별로 평가점수 가져오기 -->
-     <%--  <c:forEach var="reviewstar" items="${reviewstar }">
-      <c:if test="${cineCode == reviewstar.cineCode }"> --%>
+<div class="cinemaStar">
+<table>
+																																			        <!-- 각 영화관별로 평가점수 가져오기 -->
+																																			     <%--  <c:forEach var="reviewstar" items="${reviewstar }">
+																																			      <c:if test="${cineCode == reviewstar.cineCode }"> --%>
+                <br>
                 <tr>
                    <td>화질 
                       <c:choose>
@@ -526,9 +433,11 @@ table td:last-child {
                             </c:choose>
                 </td>
               </tr>
+              
   </c:if>
   </c:forEach>
 </table>
+<br>
 </div>  <!-- 영화관별 평가보기 끝 -->
             
             
@@ -538,11 +447,97 @@ table td:last-child {
    <a href="./create.do?cineCode=${dto.cineCode }" > ${dto.brandName }  ${dto.cineName }영화관 평가 등록하기 </a>
    <!-- <input class="cbp-mc-button" type="button" value=" 나도 평가 등록하기!! " onclick="location.href='reviewForm.jsp'" > -->
 
+
+
+<!-- 각 영화관에 달린 리뷰 -->
+<div class="table-users">
+   <div class="header">리뷰 목록</div>
+<table>
+      <tr style="background-color: #bfe1ff;">
+         <th>아이디공간</th>
+         <th> 평가 </th>
+         <th> 관리자</th>
+      </tr> 
+      
+       <c:forEach var="sdto" items="${list }"> 
+       <tr>
+         <td> ${sdto.uid }</td>
+         <td> 
+			         화질 <c:if test="${sdto.pixel==0 }"><img src="./img/star0.png"></c:if>
+			       <c:if test="${sdto.pixel==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.pixel==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.pixel==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.pixel==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.pixel==5 }"><img src="./img/star5.png"></c:if>    
+	               청결도<c:if test="${sdto.clean==0 }"><img src="./img/star0.png"></c:if>
+	           <c:if test="${sdto.clean==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.clean==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.clean==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.clean==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.clean==5 }"><img src="./img/star5.png"></c:if>
+             <br>
+             
+        	음향 <c:if test="${sdto.sound==0 }"><img src="./img/star0.png"></c:if>
+        		 <c:if test="${sdto.sound==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.sound==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.sound==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.sound==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.sound==5 }"><img src="./img/star5.png"></c:if>        	 
+       	 서비스<c:if test="${sdto.service==0 }"><img src="./img/star0.png"></c:if>
+       	 		 <c:if test="${sdto.service==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.service==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.service==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.service==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.service==5 }"><img src="./img/star5.png"></c:if> 
+             <br>
+             
+             
+                      좌석 <c:if test="${sdto.seat==0 }"><img src="./img/star0.png"></c:if>
+             <c:if test="${sdto.seat==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.seat==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.seat==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.seat==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.seat==5 }"><img src="./img/star5.png"></c:if>    
+	     주변 편의시설<c:if test="${sdto.around==0 }"><img src="./img/star0.png"></c:if>
+	     			 <c:if test="${sdto.around==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.around==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.around==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.around==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.around==5 }"><img src="./img/star5.png"></c:if>	
+             <br>
+             
+             
+      		매점<c:if test="${sdto.snack==0 }"><img src="./img/star0.png"></c:if>
+      			 <c:if test="${sdto.snack==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.snack==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.snack==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.snack==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.snack==5 }"><img src="./img/star5.png"></c:if>	
+         	 교통<c:if test="${sdto.trans==0 }"><img src="./img/star0.png"></c:if>
+         	 	 <c:if test="${sdto.trans==1 }"><img src="./img/star1.png"></c:if>
+		         <c:if test="${sdto.trans==2 }"><img src="./img/star2.png"></c:if>
+		         <c:if test="${sdto.trans==3 }"><img src="./img/star3.png"></c:if>
+		         <c:if test="${sdto.trans==4 }"><img src="./img/star4.png"></c:if>
+		         <c:if test="${sdto.trans==5 }"><img src="./img/star5.png"></c:if>	
+         	 	 <br>
+         		<p style="line-height: 1.4;">${sdto.s_e }</p><hr> </td>
+         <td>
+            <input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./update.do?cCode=${sdto.cineCode }'"/>
+            <input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./delete.do?cCode=${sdto.cineCode }'"/>
+         
+         </td> 
+         </tr>
+            
+   </c:forEach>
+   </table>
+</div>
+
+
  
 <!-- 지도 표시 -->
-<div class="table-review">
-        <!-- 지도생성 -->
-        <div id="map" style="width:400px;height:270px;"></div>
+<div>
+        <!-- 지도생성  																					테두리 설정-->
+        <div id="map" style="width:400px;height:270px; border: 2px solid #327a81; border-radius: 10px; margin-left: 10%"></div>
          <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5c0accc753a3f17e942b62e44cbe2426"></script>
             <script>
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -586,88 +581,10 @@ table td:last-child {
                 position: position,
                 content: content,
                 yAnchor: 1 
-            });     
+            });     ssas
             
 </script>   
 </div>          
-
-
-<!-- 각 영화관에 달린 리뷰 -->
-<div class="table-users">
-   <div class="header">리뷰 목록</div>
-<table>
-      <tr>
-         <th>아이디공간</th>
-         <th> 평가 </th>
-         <th> 관리자</th>
-      </tr> 
-      
-       <c:forEach var="sdto" items="${list }"> 
-       <tr>
-         <td> ${sdto.uid }</td>
-         <td> 
-			         화질<c:if test="${sdto.pixel==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.pixel==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.pixel==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.pixel==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.pixel==5 }"><img src="./img/star5.png"></c:if>    
-	               청결도<c:if test="${sdto.clean==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.clean==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.clean==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.clean==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.clean==5 }"><img src="./img/star5.png"></c:if>
-             <br>
-             
-        	음향<c:if test="${sdto.sound==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.sound==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.sound==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.sound==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.sound==5 }"><img src="./img/star5.png"></c:if>        	 
-       	 서비스<c:if test="${sdto.service==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.service==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.service==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.service==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.service==5 }"><img src="./img/star5.png"></c:if> 
-             <br>
-             
-             
-                      좌석 <c:if test="${sdto.seat==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.seat==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.seat==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.seat==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.seat==5 }"><img src="./img/star5.png"></c:if>    
-	     주변 편의시설<c:if test="${sdto.around==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.around==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.around==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.around==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.around==5 }"><img src="./img/star5.png"></c:if>	
-             <br>
-             
-             
-      		매점<c:if test="${sdto.snack==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.snack==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.snack==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.snack==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.snack==5 }"><img src="./img/star5.png"></c:if>	
-         	 교통<c:if test="${sdto.trans==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.trans==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.trans==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.trans==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.trans==5 }"><img src="./img/star5.png"></c:if>	
-         	 	 <br>
-         	 	  
-         		${sdto.s_e }</td>
-         <td>
-            <input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./update.do?cCode=${sdto.cineCode }'"/>
-            <input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./delete.do?cCode=${sdto.cineCode }'"/>
-         </td> 
-         </tr>    
-   </c:forEach>
-   </table>
-</div>
-
-     <a href="./list.do?cineCode=${dto.cineCode }" > ${dto.brandName }  ${dto.cineName } 평가목록 </a>
-
 
 
 
