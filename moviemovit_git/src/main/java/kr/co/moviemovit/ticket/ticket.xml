@@ -14,6 +14,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ]]>
   </select>
   
+  <!-- 예매 중 영화목록 -->
+  <select id="movieList" resultType="MovieDTO">
+ 	<![CDATA[
+		SELECT mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date
+		FROM movieTable
+		ORDER BY mName ASC;	
+	]]>
+  </select>
+  
+  <!-- 예매 중 주소1 목록 -->
+  <select id="cineAddr1List" resultType="CinemaDTO">
+  <![CDATA[
+    SELECT cineCode, addr1
+    FROM cinemaTable
+    ORDER BY cineCode ASC; 
+  ]]>
+  </select>
+  
+  <!-- 예매 중 극장목록 -->
+  <select id="cineList" resultType="CinemaDTO">
+  <![CDATA[
+    SELECT cineCode, brandName, cineName
+    FROM cinemaTable
+    ORDER BY brandName ASC, cineName ASC; 
+  ]]>
+  </select>
+  
+  
+  
   
   <!-- 예매 등록 -->
   <!-- <insert id="create" parameterType="TicketDTO">

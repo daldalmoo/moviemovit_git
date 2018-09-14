@@ -5,7 +5,6 @@
 <head>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-latest.js"></script>
- <script type="text/javascript" src="../js/me.js" charset="utf-8"></script>
 <script type="text/javascript" src="../resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <style>
 
@@ -31,15 +30,12 @@ font-size:1.4em;
 .cbp-mc-column input{
 margin:auto;
 }
-/* input .cbc-mc-submit{
-margin-left:100;} */
 </style>
-
 </head>
 
 
-	<form class="cbp-mc-form"  method="POST" id="editor" action="./create.do" enctype="multipart/form-data">
-			<h1>QnA</h1>
+	<form class="cbp-mc-form"  method="POST" id="editor" action="./create.do" >
+			<h1>공지사항 등록</h1>
 
 		<table class="cbp-mc-column">	
 			<tr>
@@ -72,7 +68,7 @@ margin-left:100;} */
 	
 	</form>
 
-<script type="text/javascript">
+<script type="text/javascript" >
     $(function(){
         //전역변수
         var obj = [];              
@@ -92,7 +88,7 @@ margin-left:100;} */
         });
         //전송버튼
         $("#noticebutton").click(function(){
-            //id가 smarteditor인 textarea에 에디터에서 대입
+            //id가 s_e인 textarea에 에디터에서 대입
             obj.getById["s_e"].exec("UPDATE_CONTENTS_FIELD", []);
             var el = document.createElement('html');
           el.innerHTML = editor_object.getById["s_e"].elPlaceHolder.value; 

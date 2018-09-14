@@ -2,36 +2,36 @@
 
 -- userTable 생성
 CREATE TABLE userTable (
-	uid		  VARCHAR(20) 	NOT NULL PRIMARY KEY, -- 아이디
-  upw		  VARCHAR(15)		NOT NULL, -- 비밀번호(특문 포함)
-	uname	  VARCHAR(50) 	NOT NULL, -- 유저이름
-	gender	CHAR(1)	      NOT NULL, -- 성별 
-	birth	  VARCHAR(10)		NOT NULL, -- 생일
-	email	  VARCHAR(100)	NOT NULL, -- 이메일
-	phone	  VARCHAR(20)		NOT NULL, -- 전화번호
-	zipcode VARCHAR(7)    NULL,     -- 우편번호, 101-101
-	addr1	  VARCHAR(255)	NULL,	    -- 주소	1 
-	addr2	  VARCHAR(255)	NULL,	    -- 주소	2(나머지주소)		
-	grade	  VARCHAR(6)		DEFAULT 'SILVER' NOT NULL, -- 등급
-	wdate	  DATETIME		  NOT NULL  -- 가입일
+  uid     VARCHAR(20)   NOT NULL PRIMARY KEY, -- 아이디
+  upw     VARCHAR(15)   NOT NULL, -- 비밀번호(특문 포함)
+  uname   VARCHAR(50)   NOT NULL, -- 유저이름
+  gender  CHAR(1)       NOT NULL, -- 성별 
+  birth   VARCHAR(10)   NOT NULL, -- 생일
+  email   VARCHAR(100)  NOT NULL, -- 이메일
+  phone   VARCHAR(20)   NOT NULL, -- 전화번호
+  zipcode VARCHAR(7)    NULL,     -- 우편번호, 101-101
+  addr1   VARCHAR(255)  NULL,     -- 주소 1 
+  addr2   VARCHAR(255)  NULL,     -- 주소 2(나머지주소)    
+  grade   VARCHAR(6)    DEFAULT 'SILVER' NOT NULL, -- 등급
+  wdate   DATETIME      NOT NULL  -- 가입일
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- movieTable 생성
 CREATE TABLE movieTable(
-	mCode         INT           NOT NULL  PRIMARY KEY,
-	poster        VARCHAR(255),
-	mName         VARCHAR(100)  NOT NULL,
-	genre	        VARCHAR(20)   NOT NULL,
-	screen 	      VARCHAR(5)    NOT NULL,
-	age		        INT		        NOT NULL,
-	s_e		        VARCHAR(255)  NOT NULL,
-	country       VARCHAR(20)   NOT NULL,
-	director      VARCHAR(255)  NOT NULL,
-	actor	        VARCHAR(255)  NOT NULL,
-	DD		        VARCHAR(20)   NOT NULL,
-	runningTime   INT		        NOT NULL,
-	s_date	      VARCHAR(10) 	NOT NULL,
-  e_date	      VARCHAR(10) 	NOT NULL
+  mCode         INT           NOT NULL  PRIMARY KEY,
+  poster        VARCHAR(255),
+  mName         VARCHAR(100)  NOT NULL,
+  genre         VARCHAR(20)   NOT NULL,
+  screen        VARCHAR(5)    NOT NULL,
+  age           INT           NOT NULL,
+  s_e           VARCHAR(255)  NOT NULL,
+  country       VARCHAR(20)   NOT NULL,
+  director      VARCHAR(255)  NOT NULL,
+  actor         VARCHAR(255)  NOT NULL,
+  DD            VARCHAR(20)   NOT NULL,
+  runningTime   INT           NOT NULL,
+  s_date        VARCHAR(10)   NOT NULL,
+  e_date        VARCHAR(10)   NOT NULL
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- peopleTable 생성
@@ -116,42 +116,42 @@ CREATE TABLE noticeTable(
 -- QnATable 생성
 CREATE TABLE QnATable(
   qCode      INT NOT NULL PRIMARY KEY,
-  qType      CHAR(2) NOT NULL,
+  qType    VARCHAR(2) NOT NULL,
   uid        VARCHAR(20) NOT NULL,
   title      VARCHAR(100) NOT NULL,
   content    VARCHAR(255) ,
   wdate      DATETIME NOT NULL,
+  ip         VARCHAR(20) NOT NULL,
+  groupNum INT,
   groupNo    INT,               
   indent     INT,
-  groupNum   INT,
   FOREIGN KEY(uid) 
   REFERENCES userTable(uid) 
   ON DELETE CASCADE
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
--- --------------------------------- 나중에 추가해야할 컬럼 : ip         VARCHAR(20) NOT NULL,
 
 --  starTable 생성
 CREATE TABLE starTable(
-	sCode 	 INT	       NOT NULL   PRIMARY KEY,
-	mCode    INT  	     NOT NULL,
-	uid	     VARCHAR(20) NOT NULL,
-	star  	 INT		     NOT NULL,	
-	comment  VARCHAR(100),
-	wdate  	 DATETIME,
-	FOREIGN KEY(mCode) 
+  sCode    INT         NOT NULL   PRIMARY KEY,
+  mCode    INT         NOT NULL,
+  uid      VARCHAR(20) NOT NULL,
+  star     INT         NOT NULL,  
+  comment  VARCHAR(100),
+  wdate    DATETIME,
+  FOREIGN KEY(mCode) 
   REFERENCES movieTable(mCode) 
-	ON DELETE CASCADE,
-	FOREIGN KEY(uid) 
+  ON DELETE CASCADE,
+  FOREIGN KEY(uid) 
   REFERENCES userTable(uid) 
-	ON DELETE CASCADE
+  ON DELETE CASCADE
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- couponTable 생성
 CREATE TABLE couponTable(
-	cCode	     INT    	   NOT NULL PRIMARY KEY,
-	uid  	     VARCHAR(20) NOT NULL,
-	startDate  VARCHAR(10) NOT NULL,
-	expDate    VARCHAR(10) NOT NULL,
+  cCode      INT         NOT NULL PRIMARY KEY,
+  uid        VARCHAR(20) NOT NULL,
+  startDate  VARCHAR(10) NOT NULL,
+  expDate    VARCHAR(10) NOT NULL,
   FOREIGN KEY(uid)
   REFERENCES userTable(uid) 
   ON DELETE CASCADE
@@ -159,11 +159,11 @@ CREATE TABLE couponTable(
 
 -- screenTable 생성
 CREATE TABLE screenTable (
-  sCode		  INT	         NOT NULL PRIMARY KEY
- ,roomCode 	VARCHAR(20)	 NOT NULL
- ,sdate		  VARCHAR(10)	 NOT NULL
- ,stime		  VARCHAR(4)	 NOT NULL
- ,mCode		  INT	         NOT NULL
+  sCode     INT          NOT NULL PRIMARY KEY
+ ,roomCode  VARCHAR(20)  NOT NULL
+ ,sdate     VARCHAR(10)  NOT NULL
+ ,stime     VARCHAR(4)   NOT NULL
+ ,mCode     INT          NOT NULL
  ,FOREIGN KEY(roomCode)
   REFERENCES roomTable(roomCode) 
   ON DELETE CASCADE
@@ -174,13 +174,13 @@ CREATE TABLE screenTable (
 
 -- ticketTable 생성
 CREATE TABLE ticketTable (
-  tCode		  VARCHAR(20)	NOT NULL PRIMARY KEY
- ,wdate 		DATETIME	  NOT NULL
- ,uid		    VARCHAR(20)	NOT NULL
- ,sCode		  INT        	NOT NULL
- ,cCode		  INT        	NOT NULL
- ,seat		  VARCHAR(30)	NOT NULL
- ,auditType	VARCHAR(30)	NOT NULL
+  tCode     VARCHAR(20) NOT NULL PRIMARY KEY
+ ,wdate     DATETIME    NOT NULL
+ ,uid       VARCHAR(20) NOT NULL
+ ,sCode     INT         NOT NULL
+ ,cCode     INT         NOT NULL
+ ,seat      VARCHAR(30) NOT NULL
+ ,auditType VARCHAR(30) NOT NULL
  ,FOREIGN KEY(uid)
   REFERENCES userTable(uid) 
   ON DELETE CASCADE

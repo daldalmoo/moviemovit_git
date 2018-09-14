@@ -7,9 +7,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.moviemovit.qna.QnaDAO;
@@ -22,7 +25,7 @@ public class QnaCont {
   QnaDAO dao;
 
   public QnaCont() {
-    System.out.println("---QnaCont() °´Ã¼»ı¼º");
+    System.out.println("---QnaCont() ê°ì²´ìƒì„±");
   }// QnaCont
 
 
@@ -38,12 +41,35 @@ public class QnaCont {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("redirect:/qna/list.do");
     
-    // ºÎ¸ğ±ÛÀÏ¶§ groupNo, indent, groupNum ¼¼ÆÃ
+    // ë¶€ëª¨ê¸€ì¼ë•Œ groupNo, indent, groupNum ì„¸íŒ…
     if(dto.getIndent()==0) {
       dto.setGroupNo(dao.groupNoMax());
       dto.setIndent(0);
       dto.setGroupNum(0);
     }//if end
+    
+    // ip ê°€ì ¸ì˜¤ê¸°
+    String ip = ip = request.getRemoteAddr();
+    
+    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        ip = request.getHeader("Proxy-Client-IP");
+    }
+    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        ip = request.getHeader("WL-Proxy-Client-IP");
+    }
+    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        ip = request.getHeader("HTTP_CLIENT_IP");
+    }
+    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+    }
+    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        ip = request.getRemoteAddr();
+    }
+    if("0:0:0:0:0:0:0:1".equals(ip)){
+    ip="127.0.0.1";
+    }
+    dto.setIp(ip);
     
     int count = dao.create(dto);
     mav.addObject("count", count);
@@ -52,7 +78,8 @@ public class QnaCont {
 
   @RequestMapping(value = "/qna/list.do")
   public ModelAndView list(QnaDTO dto, @RequestParam(defaultValue = "1") int curPage, HttpServletRequest request) throws Exception {
-    HttpSession session = request.getSession();
+    /*  HttpSession session = request.getSession();*/
+    
     ModelAndView mav = new ModelAndView();
 
     int listCnt = dao.listCnt();
@@ -95,12 +122,12 @@ public class QnaCont {
 
     int cnt = dao.delete(dto);
     if (cnt == 0) {
-      mav.addObject("msg1", "<p>»èÁ¦¾ÈµÊ</p>");
+      mav.addObject("msg1", "<p>ì‚­ì œ ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤</p>");
       mav.addObject("img", "<img src='../img/fail.png'>");
       mav.addObject("link1", "<input type='button' value='1' onclick='javascript:history.back()'>");
       mav.addObject("link2", "<input type='button' value='2' onclick='location.href=\"./list.do\"'>");
     } else {
-      mav.addObject("msg1", "<p>»èÁ¦¿Ï·á</p>");
+      mav.addObject("msg1", "<p>ì‚­ì œ ë˜ì—ˆìŠµë‹ˆë‹¤</p>");
       mav.addObject("img", "<img src='../img/sound.png'>");
       mav.addObject("link1", "<input type='button' value='1' onclick='location.href=\"./create.do\"'>");
       mav.addObject("link2", "<input type='button' value='2' onclick='location.href=\"./list.do\"'>");
@@ -123,11 +150,11 @@ public class QnaCont {
 
     int cnt = dao.update(dto);
     if (cnt == 0) {
-      String msg = "¼öÁ¤½ÇÆĞ";
+      String msg = "ìˆ˜ì • ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤";
       mav.addObject("msg", msg);
       mav.setViewName("./qna/updateForm");
     } else {
-      String msg = "¼öÁ¤¼º°ø";
+      String msg = "ìˆ˜ì • ì„±ê³µí–ˆìŠµë‹ˆë‹¤.";
       mav.addObject("msg", msg);
       mav.setViewName("redirect:list.do");
     }
@@ -144,14 +171,15 @@ public class QnaCont {
   }// create() end
 
   @RequestMapping(value = "/qna/reply.do", method = RequestMethod.POST)
-  public ModelAndView replyProc(QnaDTO dto) {
+  public ModelAndView replyProc(QnaDTO dto,HttpServletRequest request) {
     ModelAndView mav = new ModelAndView();
-    //System.out.println("---------QnaCont 1 : dto.toString() : " + dto.toString());
+    System.out.println("---------QnaCont 1 : dto.toString() : " + dto.toString());
     
-    // ÇöÀç±ÛÀÇ groupNum ¼³Á¤ÇÏ±â À§ÇØ ÀúÀåµÉ À§Ä¡ ¹Ù·Î À§ÀÇ groupNumÀ» GNpoint º¯¼ö¿¡ ÀúÀå
-    int GNpoint = dto.getGroupNum();   // ºÎ¸ğ¿¡ ´ä±ÛÀÌ ÇÏ³ªµµ ¾øÀ» ¶© ºÎ¸ğ±Û ±Û¼ø¼­·Î ¼³Á¤
-    ArrayList<QnaDTO> groupnolist = dao.groupNoList(dto);  // ºÎ¸ğ±Û°ú °°Àº groupNo Áß ºÎ¸ğ±Û ±Û¼ø¼­ ÃÊ°úÀÎ °Í¸¸ °¡Á®¿À±â 
-    //System.out.println("---------QnaCont 2 : groupnolist.size() : "+groupnolist.size());
+    // í˜„ì¬ê¸€ì˜ groupNum ì„¤ì •í•˜ê¸° ìœ„í•´ ì €ì¥ë  ìœ„ì¹˜ ë°”ë¡œ ìœ„ì˜ groupNumì„ GNpoint ë³€ìˆ˜ì— ì €ì¥
+    int GNpoint = dto.getGroupNum();   // ë¶€ëª¨ì— ë‹µê¸€ì´ í•˜ë‚˜ë„ ì—†ì„ ë• ë¶€ëª¨ê¸€ ê¸€ìˆœì„œë¡œ ì„¤ì •
+    ArrayList<QnaDTO> groupnolist = dao.groupNoList(dto);  // ë¶€ëª¨ê¸€ê³¼ ê°™ì€ groupNo ì¤‘ ë¶€ëª¨ê¸€ ê¸€ìˆœì„œ ì´ìƒì¸ ê²ƒë§Œ ê°€ì ¸ì˜¤ê¸° 
+    System.out.println("---------QnaCont 2 : groupnolist.size() : "+groupnolist.size());
+    
     for(int i=0; i<groupnolist.size(); i++) {
       //System.out.println("---------QnaCont 2 : groupNolist.get("+i+").toString() : "+groupNolist.get(i).toString());
       QnaDTO q = groupnolist.get(i);
@@ -159,28 +187,31 @@ public class QnaCont {
         GNpoint = q.getGroupNum();
       }//if end
     }//for end
-    //System.out.println("---------QnaCont 3 : GNpoint : " + GNpoint);
     
-    // ÇöÀç ±ÛÀÌ ÀúÀåµÉ À§Ä¡ÀÇ ´ÙÀ½À¸·Î ¿Ã ÄÃ·³µéÀÇ ±Û¼ø¼­ ´Ù½Ã Á¶Á¤ Update
+    System.out.println("---------QnaCont 3 : GNpoint : " + GNpoint);
+    
+    // í˜„ì¬ ê¸€ì´ ì €ì¥ë  ìœ„ì¹˜ì˜ ë‹¤ìŒìœ¼ë¡œ ì˜¬ ì»¬ëŸ¼ë“¤ì˜ ê¸€ìˆœì„œ ë‹¤ì‹œ ì¡°ì • Update
     int groupnumupdate = dao.groupNumUpdate(GNpoint+1);
     if(groupnumupdate==0) {
-      //System.out.println("DB Update GroupNum+1 ½ÇÆĞ");
+      System.out.println("DB Update GroupNum+1 ì‹¤íŒ¨");
     }else {
-      //System.out.println("DB Update GroupNum+1 ¼º°ø");
+      System.out.println("DB Update GroupNum+1 ì„±ê³µ");
     }//if end
     
-    // ÇöÀç±ÛÀÇ groupNum ¼³Á¤
+    // í˜„ì¬ê¸€ì˜ groupNum ì„¤ì •
     dto.setGroupNum(GNpoint+1);
     
-    // ÇöÀç±ÛÀÇ indent ¼³Á¤
+    // í˜„ì¬ê¸€ì˜ indent ì„¤ì •
     dto.setIndent(dto.getIndent()+1);
     
-    // ÇöÀç±ÛÀÇ groupNo ´Â ºÎ¸ğ±Û°ú °°À¸¹Ç·Î µû·Î ¼³Á¤ X
+    // í˜„ì¬ê¸€ì˜ groupNo ëŠ” ë¶€ëª¨ê¸€ê³¼ ê°™ìœ¼ë¯€ë¡œ ë”°ë¡œ ì„¤ì • X
     
     System.out.println("---------QnaCont 4 : dto.toString() : " + dto.toString());
     
-    int cnt = dao.create(dto); // DB¿¡ insert
-
+    int cnt = dao.create(dto); // DBì— insert
+    
+    // ì„±ê³µì—¬ë¶€ë©”ì„¸ì§€ ë„ì›Œì•¼ í•¨ !!!
+    
     mav.addObject("cnt", cnt);
     mav.setViewName("redirect:./list.do");
     return mav;

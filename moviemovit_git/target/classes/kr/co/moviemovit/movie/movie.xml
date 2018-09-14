@@ -50,6 +50,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>	
 	</update>
 	
+	<select id="peopleNameList" parameterType="String" resultType="PeopleDTO">
+      <![CDATA[
+        SELECT peoCode, peoName, country, peoBirth, gender, peoPic
+        FROM peopleTable
+        WHERE peoName LIKE concat('%', #{peoName}, '%')
+        ORDER BY peoName DESC
+      ]]>
+    </select>
+    
+    <select id="peopleNameList2" parameterType="String" resultType="PeopleDTO">
+      <![CDATA[
+        SELECT peoCode, peoName, country, peoBirth, gender, peoPic
+        FROM peopleTable
+        WHERE peoName LIKE concat('%', #{peoName}, '%')
+        ORDER BY peoName DESC
+      ]]>
+    </select>
+    
+    <select id="star" parameterType="int" resultType="int">
+      <![CDATA[
+		SELECT star
+		FROM starTable
+	  ]]>    
+    </select>
+	
+	
+	
 	
 	
 	

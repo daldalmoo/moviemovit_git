@@ -13,5 +13,11 @@ public interface PeopleMapper {
 	public int delete(PeopleDTO dto);
 	
 	public int update(PeopleDTO dto);
+	
+	public ArrayList<PeopleDTO> peolist();
+	  
+	public ArrayList<PeopleDTO> peosearch(String searchfield);
+	
+	
 
 }

@@ -2,8 +2,6 @@ package kr.co.moviemovit.qna;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DaoSupport;
@@ -18,15 +16,15 @@ public class QnaDAO {
 	//@Autowired
 	//DbOpen dbopen;
 	
-	//root-context.xmlÀÇ <bean id="sqlSession" ~>
+	//root-context.xmlì˜ <bean id="sqlSession" ~>
 	@Autowired
 	SqlSession sqlSession;
 	
 	public QnaDAO() {
-		System.out.println("---NoticeDAO() °´Ã¼ »ı¼º");
-	}//±âº»»ı¼ºÀÚ
+		System.out.println("---NoticeDAO() ê°ì²´ ìƒì„±");
+	}//ê¸°ë³¸ìƒì„±ì
 	
-	/*ºñÁî´Ï½º ·ÎÁ÷*/
+	/*ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§*/
 	public int groupNoMax() {
 	  QnaMapper mapper = sqlSession.getMapper(QnaMapper.class);
     int count = mapper.groupNoMax();

@@ -5,7 +5,7 @@
 <%-- 본문시작 template.jsp --%>
 <head>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style rel="stylesheet">
 
 .container-fluid{
@@ -47,10 +47,6 @@ table td, table th {
 table td {
 	text-align: center;
 	vertical-align: middle;
-}
-
-table td:nth-child(2) {
-  text-align: left;
 }
 
 table td:last-child {
@@ -204,29 +200,36 @@ table tr:nth-child(2n+1) {
 </head>
 
 <div class="table-users">
-<div class="header">공지사항 목록</div>
+<div class="header">QnA목록</div>
 <table>
 	<tr>
-		<th>공지사항 번호</th>
-		<th>제목</th>
+		<th>No</th>
+		<th>유형</th>
 		<th>작성자</th>
+		<th>제목</th>
+		<th>내용</th>
 		<th>작성일</th>
 		
-		<th>수정버튼</th>
 	</tr>
 	
 	<c:forEach var="dto" items="${list }">
 		<tr class="brandtest">
 			<td>${dto.qCode}</td>
-			<td><a href="read.do?qCode=${dto.qCode}">${dto.title }</a></td>
+			<td>${dto.qType }</td>
 			<td>${dto.uid }</td>
-
+			<td>
+			   <c:if test="${dto.indent > 0}">
+                        <c:forEach begin="1" end="${dto.indent}">
+                            &nbsp;  <i class="fa fa-comment" aria-hidden="true"></i> <!-- 답변글일경우 글 제목 앞에 공백을 준다. -->
+                        </c:forEach>
+                    <!--     <i class="fa fa-caret-right" aria-hidden="true"></i> -->
+                    </c:if>
+                    <a href="read.do?qCode=${dto.qCode}">
+				${dto.title }</a></td>
+			<td>${dto.content }
 			<td>${dto.wdate }</td>
-		
-			  <td>
-               <input class="cbp-mc-button" type="button" value="수정" onclick="location.href='update.do?qCode=${dto.qCode}'"/>
-               <input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='delete.do?qCode=${dto.qCode}'"/>
-             </td>
+		  
+	
 		</tr>
 	</c:forEach>
 </table>
