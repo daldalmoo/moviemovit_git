@@ -1,9 +1,7 @@
 package kr.co.moviemovit.review;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -85,16 +82,29 @@ public class ReviewCont {
     dto.setCineCode(cineCode);
     int count = dao.cinemaForm(dto);
     
-    if(count==0) {
-      mav.addObject("msg1", "<p>영화관 등록 실패</p>");
-      mav.addObject("img", "<img src='../img/fail.png'>");
-      mav.addObject("link1", "<input type='button' value='다시시도' onclick='javascript:history.back()'>");
-      mav.addObject("link2", "<input type='button' value='목록으로' onclick='location.href=\"./cinemaList.do?cineCode=" + dto.getCineCode() + "\"'>");
+    String msg = "";
+    
+    if (count == 0) {
+      msg += "<!DOCTYPE html>";
+      msg += "<html><body>";
+      msg += "<script>";
+      msg += "  alert('등록 실패');";
+      msg += "  history.go(-1);";
+      msg += "</script>";
+      msg += "</html></body>";
+      mav.addObject("msg", msg);
+      mav.setViewName("msgView");
     } else {
-      mav.addObject("msg1", "<p>영화관 등록 성공</p>");
-      mav.addObject("img", "<img src='../img/success.jpg'>");
-      mav.addObject("link1", "<input type='button' value='목록으로' onclick='location.href=\"./cinemaList.do?cineCode=" + dto.getCineCode() + "\"'>");      
-    }
+      msg += "<!DOCTYPE html>";
+      msg += "<html><body>";
+      msg += "<script>";
+      msg += "  alert('등록 성공');";
+      msg += "  window.location='./cinemaList.do';";
+      msg += "</script>";
+      msg += "</html></body>";
+      mav.addObject("msg", msg);
+      mav.setViewName("msgView");
+    } // if end
 
     return mav;
   } // 
@@ -198,6 +208,8 @@ public class ReviewCont {
         msg += "  history.go(-1);";
         msg += "</script>";
         msg += "</html></body>";
+        mav.addObject("msg", msg);
+        mav.setViewName("msgView");
       } else {
         msg += "<!DOCTYPE html>";
         msg += "<html><body>";
@@ -206,9 +218,9 @@ public class ReviewCont {
         msg += "  window.location='./cinemaList.do';";
         msg += "</script>";
         msg += "</html></body>";
+        mav.addObject("msg", msg);
+        mav.setViewName("msgView");
       } // if end
-      
-      mav.addObject("msg", msg);
 
       return mav;
 
@@ -225,13 +237,20 @@ public class ReviewCont {
     String cineCode = req.getParameter("cineCode");
     
     mav.addObject("cineCode", cineCode);
-    mav.addObject("msg1", "<p>삭제하시겠습니까?</p>");
-    mav.addObject("img", "<img src='/img/default.png'>");
-    mav.addObject("link2", "<input type='button' value='취소' onclick='javascript:history.back()'>");
-    mav.addObject("link1", "<input type='button' value='확인' onclick='location.href=\"./cinemaDeletePro.do?cineCode="
-        + cineCode + "\"'>");
     
-    mav.setViewName("msgView");
+    String msg = "";
+
+      msg += "<!DOCTYPE html>";
+      msg += "<html><body>";
+      msg += "<p>삭제하시겠습니까?</p>";
+      msg += "<input type='button' value='확인' onclick='location.href=\"./cinemaDeletePro.do?cineCode="
+          + cineCode + "\"'>";
+      msg += "<input type='button' value='취소' onclick='javascript:history.back()'>";
+      msg += "</html></body>";
+      
+      mav.addObject("msg", msg);
+      mav.setViewName("msgView");
+
     return mav;
   }//userUpdateForm() end
   
@@ -254,6 +273,8 @@ public class ReviewCont {
       msg += "  history.go(-1);";
       msg += "</script>";
       msg += "</body></html>";
+      mav.addObject("msg", msg);
+      mav.setViewName("msgView");
     } else {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
@@ -262,11 +283,10 @@ public class ReviewCont {
       msg += "  window.location='./cinemaList.do';";
       msg += "</script>";
       msg += "</body></html>";
+      mav.addObject("msg", msg);
+      mav.setViewName("msgView");
     } // if end
 
-    mav.addObject("msg", msg);
-    mav.setViewName("msgView");
-    
    return mav;
    
   }
