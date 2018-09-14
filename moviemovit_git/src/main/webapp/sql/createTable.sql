@@ -1,22 +1,22 @@
 -- ------------------------- create table
 
--- userTable ìƒì„±
+-- userTable »ı¼º
 CREATE TABLE userTable (
-  uid     VARCHAR(20)   NOT NULL PRIMARY KEY, -- ì•„ì´ë””
-  upw     VARCHAR(15)   NOT NULL, -- ë¹„ë°€ë²ˆí˜¸(íŠ¹ë¬¸ í¬í•¨)
-  uname   VARCHAR(50)   NOT NULL, -- ìœ ì €ì´ë¦„
-  gender  CHAR(1)       NOT NULL, -- ì„±ë³„ 
-  birth   VARCHAR(10)   NOT NULL, -- ìƒì¼
-  email   VARCHAR(100)  NOT NULL, -- ì´ë©”ì¼
-  phone   VARCHAR(20)   NOT NULL, -- ì „í™”ë²ˆí˜¸
-  zipcode VARCHAR(7)    NULL,     -- ìš°í¸ë²ˆí˜¸, 101-101
-  addr1   VARCHAR(255)  NULL,     -- ì£¼ì†Œ 1 
-  addr2   VARCHAR(255)  NULL,     -- ì£¼ì†Œ 2(ë‚˜ë¨¸ì§€ì£¼ì†Œ)    
-  grade   VARCHAR(6)    DEFAULT 'SILVER' NOT NULL, -- ë“±ê¸‰
-  wdate   DATETIME      NOT NULL  -- ê°€ì…ì¼
+  uid     VARCHAR(20)   NOT NULL PRIMARY KEY, -- ¾ÆÀÌµğ
+  upw     VARCHAR(15)   NOT NULL, -- ºñ¹Ğ¹øÈ£(Æ¯¹® Æ÷ÇÔ)
+  uname   VARCHAR(50)   NOT NULL, -- À¯ÀúÀÌ¸§
+  gender  CHAR(1)       NOT NULL, -- ¼ºº° 
+  birth   VARCHAR(10)   NOT NULL, -- »ıÀÏ
+  email   VARCHAR(100)  NOT NULL, -- ÀÌ¸ŞÀÏ
+  phone   VARCHAR(20)   NOT NULL, -- ÀüÈ­¹øÈ£
+  zipcode VARCHAR(7)    NULL,     -- ¿ìÆí¹øÈ£, 101-101
+  addr1   VARCHAR(255)  NULL,     -- ÁÖ¼Ò 1 
+  addr2   VARCHAR(255)  NULL,     -- ÁÖ¼Ò 2(³ª¸ÓÁöÁÖ¼Ò)    
+  grade   VARCHAR(6)    DEFAULT 'SILVER' NOT NULL, -- µî±Ş
+  wdate   DATETIME      NOT NULL  -- °¡ÀÔÀÏ
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- movieTable ìƒì„±
+-- movieTable »ı¼º
 CREATE TABLE movieTable(
   mCode         INT           NOT NULL  PRIMARY KEY,
   poster        VARCHAR(255),
@@ -34,17 +34,17 @@ CREATE TABLE movieTable(
   e_date        VARCHAR(10)   NOT NULL
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- peopleTable ìƒì„±
+-- peopleTable »ı¼º
 CREATE TABLE peopleTable (
-    peoCode    INT           NOT NULL PRIMARY KEY, -- ì‚¬ëŒì½”ë“œ 
-    peoName    VARCHAR(50)   NOT NULL, -- ì‚¬ëŒì´ë¦„
-    country    VARCHAR(20)   NOT NULL, -- êµ­ì 
-    peoBirth   CHAR(10)       NOT NULL,     -- ì¶œìƒë…„ë„
-    gender     CHAR(2)       NOT NULL, -- ì„±ë³„
+    peoCode    INT           NOT NULL PRIMARY KEY, -- »ç¶÷ÄÚµå 
+    peoName    VARCHAR(50)   NOT NULL, -- »ç¶÷ÀÌ¸§
+    country    VARCHAR(20)   NOT NULL, -- ±¹Àû
+    peoBirth   CHAR(10)       NOT NULL,     -- Ãâ»ı³âµµ
+    gender     CHAR(2)       NOT NULL, -- ¼ºº°
     peoPic     VARCHAR(255)  DEFAULT 'profile.png' NOT NULL
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- cinemaTable ìƒì„±
+-- cinemaTable »ı¼º
 CREATE TABLE cinemaTable (
   cineCode   CHAR(4)       NOT NULL  PRIMARY KEY
  ,brandName  VARCHAR(10)   NOT NULL
@@ -59,9 +59,9 @@ CREATE TABLE cinemaTable (
  ,wdate      DATETIME      NOT NULL
  ,etc        VARCHAR(255)  NOT NULL
  ,home       VARCHAR(100)  NOT NULL
-)ENGINE=MyISAM DEFAULT CHARSET=utf8;  -- ì´í´ë¦½ìŠ¤ì—ì„œ í•œê¸€ ê¹¨ì§ ì²˜ë¦¬
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;  -- ÀÌÅ¬¸³½º¿¡¼­ ÇÑ±Û ±úÁü Ã³¸®
 
--- roomTable ìƒì„±
+-- roomTable »ı¼º
 CREATE TABLE roomTable (
   roomCode  VARCHAR(20)   NOT NULL  PRIMARY KEY
  ,cineCode  CHAR(4)       NOT NULL
@@ -73,9 +73,9 @@ CREATE TABLE roomTable (
  ,FOREIGN KEY(cineCode) 
   REFERENCES cinemaTable(cineCode) 
   ON DELETE CASCADE
-)ENGINE=MyISAM DEFAULT CHARSET=utf8;  -- ì´í´ë¦½ìŠ¤ì—ì„œ í•œê¸€ ê¹¨ì§ ì²˜ë¦¬
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;  -- ÀÌÅ¬¸³½º¿¡¼­ ÇÑ±Û ±úÁü Ã³¸®
 
--- reviewStarTable ìƒì„±
+-- reviewStarTable »ı¼º
 CREATE TABLE reviewStarTable(
   no        INT          NOT NULL  PRIMARY KEY
  ,cineCode  CHAR(4)      NOT NULL
@@ -100,7 +100,7 @@ CREATE TABLE reviewStarTable(
   ON DELETE CASCADE
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- noticeTable ìƒì„±
+-- noticeTable »ı¼º
 CREATE TABLE noticeTable(
   noticeno INT NOT NULL PRIMARY KEY,
   title    VARCHAR(100) NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE noticeTable(
   ON DELETE CASCADE
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- QnATable ìƒì„±
+-- QnATable »ı¼º
 CREATE TABLE QnATable(
   qCode      INT NOT NULL PRIMARY KEY,
   qType    VARCHAR(2) NOT NULL,
@@ -130,7 +130,7 @@ CREATE TABLE QnATable(
   ON DELETE CASCADE
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---  starTable ìƒì„±
+--  starTable »ı¼º
 CREATE TABLE starTable(
   sCode    INT         NOT NULL   PRIMARY KEY,
   mCode    INT         NOT NULL,
@@ -146,7 +146,7 @@ CREATE TABLE starTable(
   ON DELETE CASCADE
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- couponTable ìƒì„±
+-- couponTable »ı¼º
 CREATE TABLE couponTable(
   cCode      INT         NOT NULL PRIMARY KEY,
   uid        VARCHAR(20) NOT NULL,
@@ -157,7 +157,7 @@ CREATE TABLE couponTable(
   ON DELETE CASCADE
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- screenTable ìƒì„±
+-- screenTable »ı¼º
 CREATE TABLE screenTable (
   sCode     INT          NOT NULL PRIMARY KEY
  ,roomCode  VARCHAR(20)  NOT NULL
@@ -172,7 +172,7 @@ CREATE TABLE screenTable (
   ON DELETE CASCADE
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ticketTable ìƒì„±
+-- ticketTable »ı¼º
 CREATE TABLE ticketTable (
   tCode     VARCHAR(20) NOT NULL PRIMARY KEY
  ,wdate     DATETIME    NOT NULL
@@ -191,5 +191,4 @@ CREATE TABLE ticketTable (
   REFERENCES couponTable(cCode) 
   ON DELETE CASCADE
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
 
