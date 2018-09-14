@@ -64,15 +64,11 @@ margin:auto;
 	<table class="cbp-mc-column">
 	<tr>
 	<th>공지사항번호</th>
-	<td><input type="text" id="qCode"name="qCode" size="50"   value="${dto.qCode }" readonly></td>
+	<td><input type="text" id="noticeno"name="noticeno" size="50"   value="${dto.noticeno }" readonly></td>
 	</tr>
 		<tr>
 			<th>제목</th>
 			<td><input type="text" id="title"name="title" size="50"   value="${dto.title }" readonly></td>
-		</tr>
-		<tr>
-		<th>유형</th>
-		<td><input type="text" id="qType" name="qType" value="${dto.qType }" readonly></td>
 		</tr>
 		<tr>
 			<th>작성자</th>
@@ -80,20 +76,19 @@ margin:auto;
 			</tr>
 		<tr>
 			<th>내용</th>
-			<td><textarea name="content" id="content"  readonly>${dto.content}</textarea></td>
+			<td><textarea name="s_e" id="s_e"  readonly>${dto.s_e}</textarea></td>
+		</tr>
+		<tr>
+			<th>공개여부</th>
+			<td><input type="text" id="open"name="open" size="50" value="${dto.open}" readonly></td>
 		</tr>
 		 
 	</table>
-	<input type="hidden" name="groupNum" value="${dto.groupNum}"/>
-  <input type="hidden" name="indent" value="${dto.indent}"/>
-  <input type="hidden" name="qType" value="${dto.qType}"/>
-  <input type="hidden" name="groupNo" value="${dto.groupNo }"/>
 
 	<div class="bottom">
-	  <input type="button" class="cbp-mc-submit"  value="답변" onclick="location.href='reply.do?qCode=${dto.qCode}'">
 		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='list.do'">
-		<input type="button" class="cbp-mc-submit" value="수정" onclick="location.href='update.do?qCode=${dto.qCode}'">
-		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='delete.do?qCode=${dto.qCode}'">
+		<input type="button" class="cbp-mc-submit" value="수정" onclick="location.href='update.do?noticeno=${dto.noticeno}'">
+		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='delete.do?noticeno=${dto.noticeno}'">
 	</div>
 
 </form>
