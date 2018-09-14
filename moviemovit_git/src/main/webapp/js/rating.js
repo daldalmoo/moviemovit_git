@@ -127,5 +127,4 @@
                 .data('rating').callback(rate, e);
         }
     });
-    
 })(jQuery);
