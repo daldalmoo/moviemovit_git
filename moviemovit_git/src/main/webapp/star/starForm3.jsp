@@ -197,9 +197,9 @@ table tr:nth-child(2n+1) {
      <div class="header">MOVIE LIST</div>
    </div>
    <form class="cbp-mc-form" name="regForm" method="POST" action="./create.do" >
-   <input type='hidden' name='mCode' value='${mCode }'>
+   <input type='hidden' name='mCode' value='${dto.mCode }'>
    <div >
-   
+     s_uid
      <div class="box-image" >
        <span class="thumb-image">
          <a href="./movieRead.do?mCode=${dto.mCode }">
@@ -212,16 +212,16 @@ table tr:nth-child(2n+1) {
       <strong class="title">${dto.mName }</strong><br>
       <!-- 별점test -->
       <div class="starRev">
-      <span class="starR on">1</span>
-        <input type="hidden" id="star" name="star" value="1">
-      <span class="starR">2</span>
-        <input type="hidden" id="star" name="star" value="2">
-      <span class="starR">3</span>
-        <input type="hidden" id="star" name="star" value="3">
-      <span class="starR">4</span>                 
-        <input type="hidden" id="star" name="star" value="4">
-      <span class="starR">5</span>                 
-        <input type="hidden" id="star" name="star" value="5">
+      <span class="starR on">별1</span>
+        <input type="hidden" id="star" name="star" >
+      <span class="starR">별2</span>
+        <input type="hidden" id="star" name="star" >
+      <span class="starR">별3</span>
+        <input type="hidden" id="star" name="star" >
+      <span class="starR">별4</span>               
+        <input type="hidden" id="star" name="star" >
+      <span class="starR">별5</span>               
+        <input type="hidden" id="star" name="star" >
    </div>
      
       
