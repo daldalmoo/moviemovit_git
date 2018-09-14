@@ -9,7 +9,9 @@
 <head>
 
 <!-- <link href="../css/ticketForm_content.css" rel="stylesheet" type="text/css"> -->
-
+<link rel="stylesheet" href="../css/normalize.css">
+<link rel="stylesheet" href="../css/calstyle.css">
+<!-- <link rel="stylesheet" href="../css/calstyle2.css" /> -->
 </head>
 
 <!-- ------------------------------ 소스 복붙 ---------------------------------- -->
@@ -26,7 +28,7 @@
   content: '';
 }
 
-.movie_area {
+#movie_area {
   float: left;
   position: relative;
   left: -200px;
@@ -39,7 +41,7 @@
   width: 60%
 }
 
-.aside {
+#date_area {
   float: left;
   position: relative;
   left: 200px;
@@ -55,14 +57,14 @@
   background: #e5e5e5
 }
 
-.movie_area {
+#movie_area {
   left: -190px;
   width: 400px;
   height: 200px;
   margin-top: 10px;
   border: 1px solid #bdbdbd;
   background: #fff;
-  text-align: left
+  text-align: center
 }
 
 #cinema_area {
@@ -74,20 +76,20 @@
   text-align: center
 }
 
-.aside {
+#date_area {
   left: 190px;
   width: 400px;
-  height: 200px;
+  height: 415px;
   margin-top: 10px;
   border: 1px solid #bdbdbd;
   background: #fff;
   text-align: center
 }
 
-#screentime_area {
+#time_area {
   position: relative;
   height: 200px;
-  width: 96%;
+  width: 70%;
   margin-top: 245px;
   left: -190px;
   border: 1px solid #bdbdbd;
@@ -95,9 +97,9 @@
   text-align: center
 }
 
-.rbottom {
-  margin-left: 910px;
-  width: 400px;
+#people_area {
+  margin-left: 610px;
+  width: 290px;
   height: 200px;
   margin-top: -200px;
   border: 1px solid #bdbdbd;
@@ -105,7 +107,7 @@
   text-align: center
 }
 
-.movieinfo {
+#movieinfo_area {
   position: relative;
   left: -190px;
   width: 132%;
@@ -118,37 +120,29 @@
 
 /*********** 예매 view 페이지 css ***********/
 /*********** 1) 영화선택 ***********/
-.lst_movie {
-  overflow: hidden;
-  width: 266px;
-  padding: 5px 0 6px;
-}
-
-.movie_area h2 {
-  margin: 0px;
-  padding: 0px;
-}
-
-ul li {
-  list-style: none;
-}
-
-.lst_movie li {
-  height: 18px;
-  padding: 7px 0 0 9px;
-  font-weight: bold;
-  color: black;
-  vertical-align: top;
-  white-space: nowrap;
-  margin-top: 5px;
-}
-
-.movie_area .movie_areaTitle {
+#movie_area .movie_title { /* 영화선택 타이틀 */
   background: linear-gradient(to top, #3b3d58 0%, #5d607d 100%);
+}
+
+.movie_title span { /* 영화선택 글씨 */
   font-size: 12pt;
   font-weight: bold;
   color: white;
-  text-align: center;
+}
+
+#movie_list {
+    list-style: none;
+	height: 18px;
+	padding: 7px 0 0 9px;
+	color: black;
+	vertical-align: top;
+	white-space: nowrap;
+	margin-top: 5px;
+    text-align: left;
+}
+
+#movie_list li {
+    padding:0 0 5px 15px;
 }
 
 /*********** 2) 극장선택 ***********/
@@ -234,8 +228,15 @@ ul li {
 
 
 /*********** 3) 날짜선택 ***********/
+#date_area .date_title { /* 날짜선택 타이틀 */
+  background: linear-gradient(to top, #3b3d58 0%, #5d607d 100%);
+}
 
-
+.date_title span { /* 날짜선택 글씨 */
+  font-size: 12pt;
+  font-weight: bold;
+  color: white;
+}
 
 
 /*********** 4) 상영시간선택 ***********/
@@ -283,11 +284,9 @@ ul li {
 
     
     <!-- -------------------------- movie_area : 영화선택  ----------------------------- -->
-	<div class="movie_area">
-		<h2>
-			<p class="movie_areaTitle">영화선택</p>
-		</h2>
-		<ul id="1st_movie">
+	<div id="movie_area">
+      <div class="movie_title"><span>영화선택</span></div>   
+		<ul id="movie_list">
 			<c:forEach var="movie" items="${movieList }">
 				<li id="SelMovieList" value="${movie.mCode }">
 					<a href="javascript:void(0);" onclick="SelMovieList(${movie.mCode})">${movie.mName }</a>
@@ -302,7 +301,8 @@ ul li {
 				<option id="mCode" value="${mCode }">${mName }</option>
 			</c:forEach>	
 			</select>
-		 -->	
+		 -->
+
 	</div>
 	  <!-- -------------------------- movie_area : 영화선택 end -------------------------- -->
     
@@ -367,21 +367,33 @@ ul li {
           </c:forEach>
         </ul>
       </div>
-        
-        
-        
+      
     </div>
     <!-- ------------------------------ cinema_area : 극장선택 end ------------------------------ -->
     
     
-    <!--aside -->
-    <div class="aside">
-      <p>날짜선택</p>
+    <!-- -------------------------- date_area : 날짜 선택 ----------------------------------- -->
+    <div id="date_area">
+      <div class="date_title"><span>날짜선택</span></div>
+        <!-- ------------ calendar start ------------------  -->
+          <!--         <div class="jquery-calendar"></div> -->
+        <!-- ------------ calendar end ------------------  -->
+        
+        <!-- ------------ calendar start ------------------  -->
+        <div id="c"> 
+          <div id="disp">
+            <div id="prev" class="nav">←</div>
+            <div id="month">Hello world</div>
+            <div id="next" class="nav">→</div>
+          </div>
+          <div id="cal"></div>
+          </div>
+        <!-- ------------ calendar end ------------------  -->
     </div>
-    <!-- aside end -->
+    <!-- -------------------------- date_area : 날짜 선택  end ------------------------------- -->
     
     
-    <!-- screentime_area : 상영시간선택 -->
+    <!-- -------------------------- screentime_area : 상영시간 선택 ----------------------------------- -->
     <div id="screentime_area">
       <div class="screentime_title">
         <span style="font-size: 12pt;">상영시간표</span>
@@ -397,21 +409,21 @@ ul li {
         - 관
       </div>
     </div>
-    <!-- screentime_area : 상영시간선택 end -->
+    <!-- -------------------------- screentime_area : 상영시간 선택 end -------------------------------- -->
     
     
-    <!-- rbottom -->
-	  <div class="rbottom">
-    	<p>인원선택</p>
+    <!-- -------------------------- people_area : 인원 선택 ----------------------------------- -->
+	  <div id="people_area">
+    	
    	</div>
-    <!-- rbottom end -->
+    <!-- -------------------------- people_area : 인원 선택 end ----------------------------------- -->
     
     
-	  <!-- movieinfo -->
-	  <div class="movieinfo">
-		  <p>영화정보</p>
+	  <!-- -------------------------- movieinfo_area : 영화정보 ----------------------------------- -->
+	  <div id="movieinfo_area">
+		  
 	  </div>
-	  <!-- movieinfo end -->
+	  <!-- -------------------------- movieinfo_area : 영화정보 end -------------------------------- -->
 
   </div>
   <!-- container end -->
@@ -426,7 +438,7 @@ ul li {
 </div>
 
 <!-- --------------------- 예매하기 AJAX ----------------------- -->	
-<script src="js/jquery.js"></script>
+<script src="../js/jquery.js"></script>
 <script>
 
 //영화선택
@@ -442,6 +454,11 @@ function theaterNameList(data) {
 
 
 </script>
-
+<!-- --------------------- 예매하기 AJAX end ----------------------- -->
+  
+<!-- -------------------- 달력 script ------------------------ -->
+<script src='../js/jquery.min.js'></script>
+<script type="text/javascript" src="../js/index.js"></script>
+<!-- -------------------- 달력 script end ------------------------ -->
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>
