@@ -210,7 +210,7 @@ table tr:nth-child(2n+1) {
 
 <% 
    String uid=(String)session.getAttribute("s_id");
-   out.println("세션확인:" + uid);
+   //out.println("세션확인:" + uid);
    session.setAttribute("uid", uid);
 %> 
     
