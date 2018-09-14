@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kr.co.moviemovit.movie.MovieDTO;
+import kr.co.moviemovit.review.CinemaDTO;
 
 @Component
 public class TicketDAO {
@@ -34,5 +35,17 @@ public class TicketDAO {
 	ArrayList<MovieDTO> movieList = mapper.movieList();
 	return movieList;
   }//movieList() end
+
+  public ArrayList<CinemaDTO> cineAddr1List() {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<CinemaDTO> cineaddr1list = mapper.cineAddr1List();
+    return cineaddr1list;
+  }//cineAddr1List() end
+  
+  public ArrayList<CinemaDTO> cineList() {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<CinemaDTO> cinelist = mapper.cineList();
+    return cinelist;
+  }//cineList() end
   
 }//class end
