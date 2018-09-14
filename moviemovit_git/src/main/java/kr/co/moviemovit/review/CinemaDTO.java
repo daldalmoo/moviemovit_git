@@ -25,7 +25,7 @@ public class CinemaDTO {
   //∆‰¿Ã¬°
   private int pageNo;
   private int countPerPage;
-
+  
   
   public String getCineCode() {
     return cineCode;
@@ -123,7 +123,6 @@ public class CinemaDTO {
   public void setReviewStar(ReviewStar reviewStar) {
     ReviewStar = reviewStar;
   }
-  
   public int getPageNo() {
     return pageNo;
   }
@@ -136,5 +135,9 @@ public class CinemaDTO {
   public void setCountPerPage(int countPerPage) {
     this.countPerPage = countPerPage;
   }
+  
+  
+  
+  
  
 } // class end

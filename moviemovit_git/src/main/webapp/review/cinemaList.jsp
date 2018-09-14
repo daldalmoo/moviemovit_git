@@ -15,9 +15,10 @@
   text-align: center;
   text-transform: uppercase;        
 }
-img {        /* 영화관 목록안의 영화관이미지 */
-  height: 100px;
+.cinemaimg img {        /* 영화관 목록안의 영화관이미지 0913 지영변경*/
+   height: 100px;
   width: 150px;
+
 }
 .table-users {
   border: 1px solid #327a81;
@@ -176,7 +177,21 @@ table tr:nth-child(2n+1) {
     box-shadow: none;
     overflow: visible;
   }
+  
+   .review {
+    text-align: left;
+    color:  black;
+    
+ }
+ 
+ /* 0913 별 사이즈 조정 */
+ .startotal img {
+    height: 30px !important;
+ }
+
 }
+
+
 </style>
 
 <table>
@@ -221,12 +236,12 @@ table tr:nth-child(2n+1) {
 <div class="table-users">
    <div class="header">영화관 목록</div>
 <div id="resulttable">
-   <table id="testcategory">
+   <table class="reviewtable">
       <tr>
-         <th>영화관</th>
+         <!-- <th>영화관</th> -->
          <th>브랜드</th>
          <th>지점</th>
-         <th>별점</th>
+         <!-- <th>별점</th> -->
          <th>주소</th>
          <th width="230">문의전화</th>
          <th>수정버튼</th>
@@ -234,15 +249,18 @@ table tr:nth-child(2n+1) {
       
        <c:forEach var="dto" items="${list }"> 
            <tr class="brandtest">
-           <td>
+<%--            <td>
+           <div class="cinemaimg">
          <c:choose>
-               <c:when test="${dto.logoImg == '' || dto.logoImg eq null}">
+               <c:when test="${dto.logoImg == '' || empty dto.logoImg}">
                <img src="img/default.png" alt="" /></td>
                </c:when>
                <c:otherwise>
-               <img src="${dto.logoImg}" alt="" /></td>
+               <img src="img/${dto.logoImg}" alt="" /></td>
                </c:otherwise> 
            </c:choose> 
+           </div>
+           <td> --%>
            <td>
            <c:choose>
                <c:when test="${dto.brandName == 'CGV'}">
@@ -260,16 +278,33 @@ table tr:nth-child(2n+1) {
            </c:choose>
            </td>
            <td>${dto.cineName }</td>
-           <td>
-           <c:forEach var="reviewstar" items="${reviewstar }">
-           <c:choose>
-              <c:when test="${dto.cineCode == reviewstar.cineCode}">
-               ${reviewstar.startotal}
-               </c:when>
-               <c:otherwise> </c:otherwise> 
-            </c:choose>
-            </c:forEach> 
-           </td>
+<%--            <td>
+         <!-- 별점별 이미지출력 -->
+          <c:forEach var="reviewstar" items="${reviewstar }">
+          <div class="startotal">
+               <c:choose>
+                      <c:when test="${reviewstar.startotal < 3 && dto.cineCode eq reviewstar.cineCode}">
+                      <img src = "./img/star1.png" width="150">
+                      </c:when>
+                      <c:when test="${reviewstar.startotal < 5 && dto.cineCode eq reviewstar.cineCode}">
+                            <img src = "./img/star2.png" width="150">
+                      </c:when>
+                      <c:when test="${reviewstar.startotal < 7  && dto.cineCode eq reviewstar.cineCode}">
+                            <img src = "./img/star3.png" width="150">
+                      </c:when>
+                      <c:when test="${reviewstar.startotal < 9  && dto.cineCode eq reviewstar.cineCode}">
+                            <img src = "./img/star4.png" width="150">
+                      </c:when>
+                      <c:when test="${reviewstar.startotal < 11  && dto.cineCode eq reviewstar.cineCode} ">
+                            <img src = "./img/star5.png" width="150">
+                      </c:when>
+                      <c:when test="${reviewstar.startotal == '' || empty reviewstar.startotal}">
+                      <img src = "./img/star0.png" width="150">
+                      </c:when>
+                </c:choose>
+          </c:forEach>
+          </div> 
+          </td>--%>
            <td>
             <a href="./cinemaRead.do?cineCode=${dto.cineCode }" >${dto.addr2}  ${dto.addr3}</a></td>
            <td>${dto.tel}</td>
@@ -279,7 +314,6 @@ table tr:nth-child(2n+1) {
              </td>
          </tr>  
      </c:forEach>
-
    </table>
 </div> 
 </div>
@@ -336,6 +370,7 @@ jQuery('#form_search #sch_type value').val('${mapSearch.sch_type}');
  
  */
 
+ /*
 function cate() {
 
     var checkArr = new Array();
@@ -349,34 +384,44 @@ function cate() {
     //값 확인 
     alert(checkArr);
     alert(checkArr2);
-   
+        
         $.ajax({
-        type: 'POST',
-        url: 'categorize.do',
-        data: { checkArr : checkArr, },
-        cache: false,
-        async : false,
-        datatype : 'html',
-        success: function(data){
-            $("#resulttable").html(data);
-            alert('완료');
-         }
-    });
+            type: "POST",
+            cache: false,
+            url: "categorize.do",
+            dataType: "html",
+            data: { 
+            	checkArr : checkArr,
+            	checkArr2 : checkArr2
+            },
+            success: function(data) {  // DB 처리 성공 시 수행 내용 작성
+              //alert("ajax 성공\n"+data);  // couponCont.java에서 out.println(resultList); 했던거 data로 받아옴
+              
+              $("#resulttable").html(data); // .html page 자체를 받아서 <div id="resulttable"></div>에 출력
+              alert('완료');
+              return true;
+            },//success end
+            error: function(request,status,error){  // 실패 시 수행 내용
+              alert("ajax 실패\n"+"code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+              return false;
+            }//error end
+          });//ajax end
         
  }   
-        
+     
+ */
 // 전체 체크 박스
 $(function(){ 
-    //전체선택 체크박스 클릭 
-    $("#allCheck").click(function(){ 
-        //만약 전체 선택 체크박스가 체크된상태일경우 
-        if($("#allCheck").prop("checked")) { 
-            //해당화면에 전체 checkbox들을 체크해준다
-            $("input[type=checkbox]").prop("checked",true); 
-            // 전체선택 체크박스가 해제된 경우 
-            } else { 
-                //해당화면에 모든 checkbox들의 체크를해제시킨다. 
-                $("input[type=checkbox]").prop("checked",false); } }) })
+	//전체선택 체크박스 클릭 
+	$("#allCheck").click(function(){ 
+		//만약 전체 선택 체크박스가 체크된상태일경우 
+		if($("#allCheck").prop("checked")) { 
+			//해당화면에 전체 checkbox들을 체크해준다
+			$("input[type=checkbox]").prop("checked",true); 
+			// 전체선택 체크박스가 해제된 경우 
+			} else { 
+				//해당화면에 모든 checkbox들의 체크를해제시킨다. 
+				$("input[type=checkbox]").prop("checked",false); } }) })
 
 
 </script>

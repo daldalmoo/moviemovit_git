@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.co.moviemovit.notice.NoticeDTO;
 import kr.co.moviemovit.review.CinemaDTO;
 
 public interface ReviewMapper {
@@ -48,10 +47,6 @@ public interface ReviewMapper {
   //////////////////////////////////////// REVIEW ///////////////////////////////////////
   
   // Create
-  public int create(ReviewStar sdto);
-  
-  // list
-  public ArrayList<ReviewStar> list();
-  
+  public int reviewForm(ReviewStar sdto);
   
 } // class end

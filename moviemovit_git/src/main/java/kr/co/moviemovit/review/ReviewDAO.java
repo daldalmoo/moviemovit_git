@@ -2,7 +2,6 @@ package kr.co.moviemovit.review;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +45,8 @@ public class ReviewDAO {
     
   }
   
+  //LIST : 페이징
+ 
   // LIST : 영화관 별점 토탈값
   public ArrayList<ReviewStar> reviewstar(){  
     ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
@@ -92,6 +93,14 @@ public class ReviewDAO {
   }// delete end
   
 
+
+  /* public ReviewStarDTO reviewread(ReviewStarDTO reviewstardto){
+  ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
+  reviewstardto = mapper.reviewstardto(reviewstardto);
+  return reviewstardto;
+}//read
+*/
+  
   //LIST : select+ limit를 이용한 페이징 영역 구분
   
   public ArrayList<CinemaDTO> listCriteria(Criteria cri){
@@ -99,24 +108,17 @@ public class ReviewDAO {
     ArrayList<CinemaDTO> list = mapper.listCriteria(cri);
     return list;
   }
+
   
   ////////////////////////////////////////// REVIEW  //////////////////////////////////////////////////////////
   
-  /* insert 등록 */
-  public int create(ReviewStar sdto) {
+  /*0905sj*/
+  public int reviewForm(ReviewStar sdto) {
     ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
-    int count = mapper.create(sdto);
+    int count = mapper.reviewForm(sdto);
+    System.out.println(sdto.getPixel());
+    System.out.println(sdto.getCineCode());
     return count;
   }// create() end
-  
-   //review 목록
-   public ArrayList<ReviewStar> list() {
-     ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
-     ArrayList<ReviewStar> list = mapper.list();
-     return list;
-   }//list() end
-
-   
-   
 
 } //class end

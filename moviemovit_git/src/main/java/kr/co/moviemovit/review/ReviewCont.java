@@ -1,7 +1,9 @@
 package kr.co.moviemovit.review;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -123,7 +126,7 @@ public class ReviewCont {
   } // 
   
   
-  ///////////////////////////////READ
+  /////////////////////////////////////// READ
 
   @RequestMapping(value="/review/cinemaRead.do", method=RequestMethod.GET)
   public ModelAndView cinemaRead(CinemaDTO dto) {
@@ -131,13 +134,12 @@ public class ReviewCont {
     mav.setViewName("review/cinemaRead");
     dto = dao.cinemaRead(dto);
     ArrayList<ReviewStar> reviewstar = dao.reviewstar();
-    //0912 test
-    ArrayList<ReviewStar> list = dao.list();
-    mav.addObject("list", list);
-    
+ /*   ReviewStarDTO reviewstardto = dao.reviewstardto();*/
+//    mav.addObject("reviewstardto", reviewstardto);
     mav.addObject("reviewstar", reviewstar);
     mav.addObject("dto", dto);
     return mav;
+    
   }
   
 
@@ -186,19 +188,27 @@ public class ReviewCont {
       }
 
       int cnt = dao.cinemaUpdate(dto);
+      String msg = "";
 
       if (cnt == 0) {
-        mav.addObject("msg1", "<p>수정</p>");
-        mav.addObject("img", "<img src='../img/fail.png'>");
-        mav.addObject("link1", "<input type='button' value='다시시도' onclick='javascript:history.back()'>");
-        mav.addObject("link2", "<input type='button' value='그룹목록' onclick='location.href=\"./reviewlist.do?cineCode="
-            + dto.getCineCode() + "\"'>");
+        msg += "<!DOCTYPE html>";
+        msg += "<html><body>";
+        msg += "<script>";
+        msg += "  alert('수정 실패');";
+        msg += "  history.go(-1);";
+        msg += "</script>";
+        msg += "</html></body>";
       } else {
-        mav.addObject("msg1", "<p>수정 성공</p>");
-        mav.addObject("img", "<img src='../img/success.jpg'>");
-        mav.addObject("link1", "<input type='button' value='그룹목록' onclick='location.href=\"./reviewlist.do?cineCode="
-            + dto.getCineCode() + "\"'>");
+        msg += "<!DOCTYPE html>";
+        msg += "<html><body>";
+        msg += "<script>";
+        msg += "  alert('수정 성공');";
+        msg += "  window.location='./cinemaList.do';";
+        msg += "</script>";
+        msg += "</html></body>";
       } // if end
+      
+      mav.addObject("msg", msg);
 
       return mav;
 
@@ -234,18 +244,27 @@ public class ReviewCont {
     String cineCode = req.getParameter("cineCode");
     
     int count = dao.cinemaDeletePro(cineCode);
+    String msg = "";
     
-    if (count==0) {
-      mav.addObject("msg1", "<p>삭제 실패</p>");
-      mav.addObject("img", "<img src='../img/fail.png'>");
-      mav.addObject("link1", "<input type='button' value='다시시도' onclick='javascript:history.back()'>");
-      mav.addObject("link2", "<input type='button' value='목록' onclick='location.href=\"./cinemaList.do'>");
+    if (count == 0) {
+      msg += "<!DOCTYPE html>";
+      msg += "<html><body>";
+      msg += "<script>";
+      msg += "  alert('삭제 실패');";
+      msg += "  history.go(-1);";
+      msg += "</script>";
+      msg += "</body></html>";
     } else {
-      mav.addObject("msg1", "<p>삭제 성공</p>");
-      mav.addObject("img", "<img src='../img/success.jpg'>");
-      mav.addObject("link1", "<input type='button' value='목록' onclick='location.href=\"./cinemaList.do'>");
+      msg += "<!DOCTYPE html>";
+      msg += "<html><body>";
+      msg += "<script>";
+      msg += "  alert('삭제 성공');";
+      msg += "  window.location='./cinemaList.do';";
+      msg += "</script>";
+      msg += "</body></html>";
     } // if end
 
+    mav.addObject("msg", msg);
     mav.setViewName("msgView");
     
    return mav;
@@ -343,34 +362,21 @@ public class ReviewCont {
     
     return mav;
    
-  
-  }  
+  }
+ 
 
-  
   ////////////////////////////// REVIEW  ////////////////////////////////////////////////////////////////////////////
+  
 
   /*0906 리뷰점수 매기는 폼*/
-  @RequestMapping(value="/review/create.do", method=RequestMethod.GET)
+  @RequestMapping(value="/review/reviewForm.do", method=RequestMethod.GET)
   public ModelAndView reviewForm() {
     ModelAndView mav= new ModelAndView();
     mav.setViewName("review/reviewForm");
     return mav;
   } // 
   
-  @RequestMapping(value="/review/create.do", method=RequestMethod.POST)
-  public ModelAndView createProc(ReviewStar sdto, HttpServletRequest req) {
-    ModelAndView mav = new ModelAndView();
-    mav.setViewName("review/msgView");
-    int count = dao.create(sdto);
-    mav.addObject("count", count);
-    return mav;
-  }
-  
-  
-  
-  
-  /*
-  
+  /*0905*/
   @RequestMapping(value="/review/reviewForm.do", method=RequestMethod.POST)
   public ModelAndView reviewform(ReviewStar sdto) {
     ModelAndView mav= new ModelAndView();
@@ -378,19 +384,6 @@ public class ReviewCont {
     int count = dao.reviewForm(sdto);
     mav.addObject("count", count);
     return mav;
-  } // POST*/
-  
-  
-  /* review 목록                              결과확인하는 값
-  @RequestMapping(value="/review/cinemaRead.do")
-  public ModelAndView list(ReviewStar sdto) {
-      ModelAndView mav = new ModelAndView();
-      ArrayList<ReviewStar> list = dao.list();
-      // 페이지 이동 및 값 올리기
-      mav.setViewName("review/cinemaRead"); //reviewList
-      mav.addObject("list", list);
-      return mav; 
-  }*/ //list() end
+  } // POST
 
-  
 } // class end
