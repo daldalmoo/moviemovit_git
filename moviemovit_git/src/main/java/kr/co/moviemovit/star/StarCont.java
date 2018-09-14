@@ -26,8 +26,6 @@ public class StarCont {
 	   ModelAndView mav= new ModelAndView();
 	   mav.setViewName("/star/starForm");
 	   dto=dao.movieList(dto);
-	   uid=dao.uidList(uid);
-	   System.out.println(uid);
 	   mav.addObject("dto", dto);
 	   mav.addObject("udto", uid);
 	   //mav.addObject("uidList", dao.uidList(uid));
@@ -59,7 +57,6 @@ public class StarCont {
 	     ModelAndView mav = new ModelAndView();
 	     mav.setViewName("star/List");
 	     ArrayList<StarDTO> list = dao.list();
-	     
 	     mav.addObject("list", list);
 	     return mav;
 	 }//list() end

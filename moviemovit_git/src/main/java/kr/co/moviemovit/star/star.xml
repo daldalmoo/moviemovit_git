@@ -23,12 +23,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="create" parameterType="StarDTO">
-        <selectKey keyProperty="sCode" resultType="int" order="BEFORE">
+       <selectKey keyProperty="sCode" resultType="int" order="BEFORE">
 			<![CDATA[
 				SELECT IFNULL(MAX(sCode),0) + 1 AS sCode
 				FROM starTable
 			]]>
 		</selectKey>
+		
+		<!-- <selectKey keyProperty="mCode" resultType="int" order="BEFORE">
+			<![CDATA[
+				SELECT mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date
+			    FROM movieTable
+			    WHERE mCode = #{mCode}
+			]]>
+		</selectKey> -->
+		
 		    <![CDATA[	
 				INSERT INTO starTable(sCode, mCode, uid, star, comment, wdate)
 				VALUES(#{sCode}, #{mCode}, #{uid}, #{star}, #{comment}, now())                        

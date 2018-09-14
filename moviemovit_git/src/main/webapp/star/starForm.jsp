@@ -210,7 +210,7 @@ table tr:nth-child(2n+1) {
 
 <% 
    String uid=(String)session.getAttribute("s_id");
-   out.println("세션확인:" + uid);
+   //out.println("세션확인:" + uid);
    session.setAttribute("uid", uid);
 %> 
     
@@ -239,8 +239,9 @@ table tr:nth-child(2n+1) {
         <input type="radio" name="star" class="rating" value="4" />
         <input type="radio" name="star" class="rating" value="5" />
     </div>
+    <br>
     <div>
-      
+        <input type="text" id="comment" name="comment" placeholder="한줄 감상">
     </div>
     
    </div>

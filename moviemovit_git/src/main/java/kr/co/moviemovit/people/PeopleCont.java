@@ -64,8 +64,6 @@ public class PeopleCont {
 	    } else if(dto.getGender().equals("M")) {
 	    	dto.setGender("³²ÀÚ");
 	    }
-	    
-	    
 	    	    
 	    int cnt=dao.create(dto);
 	    if(cnt==0) {

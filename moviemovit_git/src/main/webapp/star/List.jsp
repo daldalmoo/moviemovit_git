@@ -188,22 +188,22 @@ table tr:nth-child(2n+1) {
    <div class="header">MOVIE LIST</div>
  </div>
 
-   <c:forEach var="dto" items="${List }">
+   <c:forEach var="dto" items="${list }">
    
    <div>
    <div class="box-image" >
      <span class="thumb-image">
-       <strong class="title">${dto.mCode }</strong><br>
+       <strong class="title">영화코드: ${dto.mCode }</strong><br>
      </span>
      <span class="thumb-image">
-       <strong class="title">${dto.uid }</strong><br>
+       <strong class="title">유저아이디: ${dto.uid }</strong><br>
      </span>
      </div>
    
    <div class="box">
        
      <span>
-       <strong>${dto.star }
+       <strong>별범: ${dto.star }
        <c:if test="${dto.star==0 }">
            <img class="simg" src="../img/star0.png"> 
        </c:if>
@@ -223,6 +223,11 @@ table tr:nth-child(2n+1) {
            <img class="simg" src="../img/star5.png">
        </c:if>
        </strong>
+      </span><br>
+      <span>
+        <strong>  
+          한줄평: ${dto.comment } 
+        </strong>
       </span><br>
          
     </div>

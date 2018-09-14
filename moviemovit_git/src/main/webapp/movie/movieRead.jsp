@@ -12,8 +12,8 @@
   text-transform: uppercase;        
 }
 mimg {        /* 영화 포스터 */
-  height: 400px;
-  width: 200px;
+  height: 250px;
+  width: 150px;
 }
 .table-users {
   border: 1px solid #327a81;
