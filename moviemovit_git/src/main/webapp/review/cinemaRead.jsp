@@ -184,7 +184,7 @@ table td:last-child {
 <c:set var="cineCode" value="${dto.cineCode}"/> 
 <table>
     <tr>																						  <!-- style="float: left; " -->		
-       <td rowspan="10"><img src="${dto.logoImg }" width="400" height="270"></td>
+       <td rowspan="10"><img src="./img/${dto.logoImg }" width="400" height="270"></td>
   </tr> 
        <tr style="font-size: 2em;">
        <th colspan="2"> ${dto.brandName } &nbsp; ${dto.cineName }</th>
