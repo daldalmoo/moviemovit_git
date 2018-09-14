@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.moviemovit.movie.MovieDTO;
+import kr.co.moviemovit.review.CinemaDTO;
 
 @Controller
 public class TicketCont {
@@ -45,15 +46,20 @@ public class TicketCont {
 		ModelAndView mav = new ModelAndView();
 		
 		//영화목록
-	    ArrayList<MovieDTO> movieList = dao.movieList();
-	    mav.addObject("movieList", movieList);
+	  ArrayList<MovieDTO> movieList = dao.movieList();
+	  mav.addObject("movieList", movieList);
+	  
+	  //극장목록
+    ArrayList<CinemaDTO> cinelist = dao.cineList();
+    mav.addObject("cinelist", cinelist);
+    
 		mav.setViewName("ticket/ticketForm");
 		return mav;
 	}//ticketForm() end
 	
 	//영화 선택하면 해당영화를 상영하는 극장 목록
-	@RequestMapping(value="/ticket/theaterNameList.do", method = RequestMethod.POST)
-	public ModelAndView TheaterNameList() {
+	@RequestMapping(value="/ticket/cinelist.do", method = RequestMethod.POST)
+	public ModelAndView cinelist() {
 		ModelAndView mav = new ModelAndView();
 		
 		
