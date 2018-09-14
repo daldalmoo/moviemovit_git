@@ -82,15 +82,18 @@ margin:auto;
 			<th>내용</th>
 			<td><textarea name="content" id="content"  readonly>${dto.content}</textarea></td>
 		</tr>
-		 
+		 <tr>
+		 <th>아이피</th>
+		 <td>${dto.ip }</td>
+		 </tr>
 	</table>
 	<input type="hidden" name="groupNum" value="${dto.groupNum}"/>
-  <input type="hidden" name="indent" value="${dto.indent}"/>
-  <input type="hidden" name="qType" value="${dto.qType}"/>
-  <input type="hidden" name="groupNo" value="${dto.groupNo }"/>
+               <input type="hidden" name="indent" value="${dto.indent}"/>
+               <input type="hidden" name="qType" value="${dto.qType}"/>
+               <input type="hidden" name="groupNo" value="${dto.groupNo }"/>
 
 	<div class="bottom">
-	  <input type="button" class="cbp-mc-submit"  value="답변" onclick="location.href='reply.do?qCode=${dto.qCode}'">
+	    <input type="button" class="cbp-mc-submit"  value="답변" onclick="location.href='reply.do?qCode=${dto.qCode}'">
 		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='list.do'">
 		<input type="button" class="cbp-mc-submit" value="수정" onclick="location.href='update.do?qCode=${dto.qCode}'">
 		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='delete.do?qCode=${dto.qCode}'">

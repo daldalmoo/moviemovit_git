@@ -200,61 +200,52 @@ table tr:nth-child(2n+1) {
 </head>
 
 <div class="table-users">
-<div class="header">공지사항 목록</div>
+<div class="header">QnA목록</div>
 <table>
 	<tr>
-		<th>공지사항 번호</th>
-		<th>제목</th>
+		<th>No</th>
+		<th>유형</th>
 		<th>작성자</th>
+		<th>제목</th>
+		<th>내용</th>
 		<th>작성일</th>
-		<th>공개여부</th>
-		<th>수정버튼</th>
+		
 	</tr>
 	
 	<c:forEach var="dto" items="${list }">
 		<tr class="brandtest">
-			<td>${dto.noticeno }</td>
-			<td><a href="read.do?noticeno=${dto.noticeno }">${dto.title }</a></td>
+			<td>${dto.qCode}</td>
+			<td>${dto.qType }</td>
 			<td>${dto.uid }</td>
+			<td>
+			   <c:if test="${dto.indent > 0}">
+                        <c:forEach begin="1" end="${dto.indent}">
+                            &nbsp;  <i class="fa fa-comment" aria-hidden="true"></i> <!-- 답변글일경우 글 제목 앞에 공백을 준다. -->
+                        </c:forEach>
+                    <!--     <i class="fa fa-caret-right" aria-hidden="true"></i> -->
+                    </c:if>
+                    <a href="read.do?qCode=${dto.qCode}">
+				${dto.title }</a></td>
+			<td>${dto.content }
 
 			<td>${dto.wdate }</td>
-			<td>
-			<c:choose>
-			
-    <c:when test="${dto.open=='Y'}">
- <i class="fa fa-unlock" aria-hidden="true"></i>
-   </c:when>
-   
- <c:when test="${dto.open=='N'}">
-<i class="fa fa-lock" aria-hidden="true"></i>
-</c:when>
-
-   </c:choose>
-   
-
-
-			
-				      </td>
-			  <td>
-               <input class="cbp-mc-button" type="button" value="수정" onclick="location.href='update.do?noticeno=${dto.noticeno}'"/>
-               <input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='delete.do?noticeno=${dto.noticeno}'"/>
-             </td>
+		  
+	
 		</tr>
 	</c:forEach>
-
 </table>
-
-<input class="cbp-mc-button" type="button" value="공지사항 등록" onclick="location.href='createForm.jsp'"/>
+</div>
+<input class="cbp-mc-button" type="button" value="qna 등록" onclick="location.href='createForm.jsp'"/>
  <div>
-                    <c:if test="${noticepage.curPage ne 1 }">
-                        <a href="list.do?curpage=${noticepage.startPage }" ><i class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i></a> 
+                    <c:if test="${qnapage.curPage ne 1 }">
+                        <a href="list.do?curpage=${noticepage.startPage }" >[처음]</a> 
                     </c:if>
-                    <c:if test="${noticepage.curPage ne 1}">
-                        <a href="list.do?curpage=${noticepage.prevPage }" ><i class="fa fa-angle-left fa-2x" aria-hidden="true"></i></a> 
+                    <c:if test="${qnapage.curPage ne 1}">
+                        <a href="list.do?curpage=${noticepage.prevPage }" >[이전]</a> 
                     </c:if>
-                    <c:forEach var="pageNum" begin="${noticepage.startPage }" end="${noticepage.endPage }">
+                    <c:forEach var="pageNum" begin="${qnapage.startPage }" end="${qnapage.endPage }">
                         <c:choose>
-                            <c:when test="${pageNum eq  noticepage.curPage}">
+                            <c:when test="${pageNum eq  qnapage.curPage}">
                                 <span style="font-weight: bold;"><a href="list.do?curPage=${pageNum }" >${pageNum }</a></span> 
                             </c:when>
                             <c:otherwise>
@@ -262,16 +253,16 @@ table tr:nth-child(2n+1) {
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
-                    <c:if test="${noticepage.curPage ne noticepage.pageCnt && noticepage.pageCnt > 0}">
-                        <a href="list.do?curPage=${noticepage.nextPage}"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a> 
+                    <c:if test="${qnapage.curPage ne qnapage.pageCnt && qnapage.pageCnt > 0}">
+                        <a href="list.do?curPage=${qnapage.nextPage}">[다음]</a> 
                     </c:if>
-                    <c:if test="${noticepage.curRange ne endPage}">
-                        <a href="list.do?curPage=${noticepage.endPage}"><i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a> 
+                    <c:if test="${qnapage.curRange ne qnapage.rangeCnt && qnapage.rangeCnt > 0}">
+                        <a href="list.do?curPage=${qnapage.curPage}">[끝]</a> 
                     </c:if>
                 </div>
                 
                 <div>
-                    총 게시글 수 : ${noticepage.listCnt }  
+                    총 게시글 수 : ${qnapage.listCnt } /    총 페이지 수 : ${qnapage.pageCnt } / 현재 페이지 : ${qnapage.curPage } / 현재 블럭 : ${qnapage.curRange } / 총 블럭 수 : ${qnapage.rangeCnt }
                 </div>
 
 

@@ -5,17 +5,11 @@
 <head>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-latest.js"></script>
+ <script type="text/javascript" src="../js/me.js" charset="utf-8"></script>
 <script type="text/javascript" src="../resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <style>
 
-.cbp-mc-column td{
-	padding:10px;
-	
-}
-.abc{
- font-style: italic;
-}
-h2{
+h1{
   font-family: 'Lato', Calibri, Arial, sans-serif;
   line-height: 1.5;
  
@@ -23,52 +17,68 @@ h2{
   font-weight:bold;
   text-align:center;
 }
+
+
 th{
 font-size:1.4em;
+text-align:center;
 }
 
-.cbp-mc-column input{
+.cbp-mc-column{
 margin:auto;
 }
+
+
+
+select .abc{
+width:auto;
+}
+
+.cbp-mc-column input:nth-child(1){
+float:left;
+
+} */
 </style>
+
 </head>
 
 
-	<form class="cbp-mc-form"  method="POST" id="editor" action="./create.do" >
-			<h1>공지사항 등록</h1>
+	<form class="cbp-mc-form" method="POST" id="editor" action="./create.do">
+			<h1>QnA</h1>
 
 		<table class="cbp-mc-column">	
 			<tr>
+			
 				<th> 제목</th>
-				<td><input type="text" id="title"name="title" size="50"  placeholder="공지사항제목" ></td>
+				   <td width="120px">
+				   <select id="qType" class="abc" name="qType"  style="width:125px;">
+			    <option value="q1">예매</option>
+			    <option value="q2">회원이용</option>
+			    <option value="q3">극장이용</option>
+			    <option value="q4">기타</option>
+			    </select></td>
+				<td width="500px"><input type="text" id="title" name="title" size="50"  placeholder="제목" style="width:100%;" ></td>
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" id="uid"name="uid" size="50" ></td>
+				<td colspan="2" width="50px"><input type="text" id="uid" name="uid" style="width:100%;" ></td>
 			<tr>
 				<th>내용</th>
-				<td><textarea name="s_e" id="s_e" style="width: 700px; height: 400px;"></textarea>
+				<td colspan="2"><textarea name="content" id="content" style="width: 700px; height: 400px;"></textarea>
 				
 
 </td>
-			</tr>
-            <tr>
-            <th>공개여부</th>
-            <td><select class="abc" id="open" name="open">
-            <option value="Y">공개</option>
-            <option value="N">비공개</option>
-            </select>
-</td></tr>
+
 		</table>
 		<div class="cbp-mc-submit-wrap">
-			<input class="cbp-mc-submit" id="noticebutton" type="submit" value="등록">
+			<input class="cbp-mc-submit" id="qnabutton" type="submit" value="등록">
 			 <input	class="cbp-mc-submit" type="button" value="취소" onclick="location.href='./list.do'">
 		</div>
 
 	
 	</form>
 
-<script type="text/javascript" >
+<!-- <script type="text/javascript">
     $(function(){
         //전역변수
         var obj = [];              
@@ -88,7 +98,7 @@ margin:auto;
         });
         //전송버튼
         $("#noticebutton").click(function(){
-            //id가 s_e인 textarea에 에디터에서 대입
+            //id가 smarteditor인 textarea에 에디터에서 대입
             obj.getById["s_e"].exec("UPDATE_CONTENTS_FIELD", []);
             var el = document.createElement('html');
           el.innerHTML = editor_object.getById["s_e"].elPlaceHolder.value; 
@@ -97,7 +107,7 @@ margin:auto;
             $("#editor").submit();
         });
     });
-</script> 
+</script>  -->
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

@@ -125,7 +125,7 @@ footer {
           <ul>
             <li><a href="../notice/list.do" title="공지사항">Notice</a></li>
             <li><a href="#Link" title="정보">Info</a></li>
-            <li><a href="#Link" title="연락">Contact</a></li>
+            <li><a href="../qna/list.do" title="연락">Contact</a></li>
           </ul></li>
         <li><a href="#Link" title="예매">Ticket</a></li>
         <li><a href="#Link" title="영화관 리뷰 게시판">Review</a></li>

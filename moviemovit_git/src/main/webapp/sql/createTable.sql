@@ -130,12 +130,13 @@ CREATE TABLE noticeTable(
 -- QnATable »ý¼º
 CREATE TABLE QnATable(
   qCode      INT NOT NULL PRIMARY KEY,
-  qType      CHAR(2) NOT NULL,
+  qType    VARCHAR(2) NOT NULL,
   uid        VARCHAR(20) NOT NULL,
   title      VARCHAR(100) NOT NULL,
   content    VARCHAR(255) ,
   wdate      DATETIME NOT NULL,
   ip         VARCHAR(20) NOT NULL,
+  groupNum INT,
   groupNo    INT,               
   indent     INT,
   FOREIGN KEY(uid) 

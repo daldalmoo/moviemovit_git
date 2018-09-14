@@ -20,19 +20,12 @@ public class NoticeCont {
 	NoticeDAO dao;
 
 	public NoticeCont() {
-		System.out.println("---NoticeCont() �뜝�럥占쎈뿰�삕占쎈뿰�삕占쏙옙");
-	}// 占쎈쐻占쎈쑆癰귣ŀ�쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲
+		System.out.println("---NoticeCont()��ü����");
+	}
 
-	// 占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈뼍�뜝�뜴�쐻占쎈짗占쎌굲
-	// http://localhost:9090/notice5/notice/create.do
-
-	/*
-	 * //1) 占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲 占쎈쐻占쎈짗占쎌굲占쎈쐻�뜝占� 占쎈쐻占쎈짗占쎌굲
-	 * 
-	 * @RequestMapping(value = "/notice/create.do", method = RequestMethod.GET)
-	 * public String createForm() { return "notice/createForm"; }// create() end
-	 */
-
+	
+	    //���Ȯ��
+		//http://localhost:9090/moviemovit/notice/create.do
 	@RequestMapping(value = "/notice/create.do", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView mav = new ModelAndView();
@@ -40,7 +33,7 @@ public class NoticeCont {
 		return mav;
 	}// create() end
 
-	// 2) 占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲 占쎈쐻占쎈짗占쎌굲占쎈쐻�뜝占� 筌ｏ옙
+	//����Ʈ�� createform���� ������������ ����Ʈ�� �ֱ�
 	@RequestMapping(value = "/notice/create.do", method = RequestMethod.POST)
 	public ModelAndView createProc(NoticeDTO dto) {
 		ModelAndView mav = new ModelAndView();
@@ -51,12 +44,12 @@ public class NoticeCont {
 		return mav;
 	}// createProc() end
 
-	// 3) 占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲 占쎈쐻占쎈짗占쎌굲占쎈쐻�뜝占�
+	// ����Ʈ��ϰ� �������� �Ѹ���
 	@RequestMapping(value = "/notice/list.do")
 	public  ModelAndView list(NoticeDTO dto, @RequestParam(defaultValue="1") int curPage,
             HttpServletRequest request )throws Exception{
 		
-        HttpSession session = request.getSession();
+      /*  HttpSession session = request.getSession();*/
 		ModelAndView mav = new ModelAndView();
 		
 		int listCnt = dao.listCnt();
@@ -77,7 +70,7 @@ public class NoticeCont {
 	}// list() end
 
 
-	// 4) 占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲 占쎈쐻占쎈＋占쎄쉭�뇡�빘�굲占쎈쐻占쎈짗占쎌굲
+	// �󼼺���
 	@RequestMapping(value = "/notice/read.do", method = RequestMethod.GET)
 	public ModelAndView read(NoticeDTO dto) {
 		ModelAndView mav = new ModelAndView();
@@ -87,6 +80,8 @@ public class NoticeCont {
 		return mav;
 	}// read() end
 
+	
+	// ������ϰ�������
 	@RequestMapping(value = "/notice/delete.do", method = RequestMethod.GET)
 	public ModelAndView deleteForm(NoticeDTO dto) {
 		ModelAndView mav = new ModelAndView();
@@ -96,26 +91,33 @@ public class NoticeCont {
 		return mav;
 	}// deleteForm() end
 
+	// ����
 	@RequestMapping(value = "/notice/delete.do", method = RequestMethod.POST)
 	public ModelAndView deleteProc(NoticeDTO dto) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:list.do");
 
 		int cnt = dao.delete(dto);
-		if (cnt == 0) {
-			mav.addObject("msg1", "<p>怨듭��궗�빆 �궘�젣 �떎�뙣</p>");
-			mav.addObject("img", "<img src='../img/fail.png'>");
-			mav.addObject("link1","<input type='button' value='�떎�떆�떆�룄' onclick='javascript:history.back()'>");
-			mav.addObject("link2","<input type='button' value='怨듭�紐⑸줉' onclick='location.href=\"./list.do\"'>");
-		} else {
-			mav.addObject("msg1", "<p>怨듭��궗�빆 �궘�젣 �꽦怨�</p>");
-			mav.addObject("img", "<img src='../img/sound.png'>");
-			mav.addObject("link1","<input type='button' value='怨듭��벑濡�' onclick='location.href=\"./create.do\"'>");
-			mav.addObject("link2","<input type='button' value='怨듭�紐⑸줉' onclick='location.href=\"./list.do\"'>");
-		} // if end
+		String msg = "";
+			if(cnt == 0) {
+				msg += "<!DOCTYPE html>";
+				msg += "<html><body>";
+				msg += "<script>";
+				msg += "  alert('���� �����߽��ϴ�');";
+				msg += "  history.go(-1);";
+				msg += "</script>";
+				msg += "</html></body>";
+				mav.addObject("msg", msg);
+				mav.setViewName("msgView");
+			}else {
+				mav.addObject("cnt", cnt);
+				mav.setViewName("redirect:/list.do");
+			}//if end
 		return mav;
 	}// deleteProc() end
 
+	
+	//������� ��������
 	@RequestMapping(value = "/notice/update.do", method = RequestMethod.GET)
 	public ModelAndView updateForm(NoticeDTO dto) {
 		ModelAndView mav = new ModelAndView();
@@ -125,50 +127,31 @@ public class NoticeCont {
 		return mav;
 	}// deleteForm() end
 
+	
+	//����
 	@RequestMapping(value = "/notice/update.do", method = RequestMethod.POST)
 	public ModelAndView updateProc(NoticeDTO dto) {
 		ModelAndView mav = new ModelAndView();
 		
 		int cnt = dao.update(dto);
+		
+		String msg = "";
 		if(cnt == 0) {
-		String msg = "�닔�젙�떎�뙣�뻽�뒿�땲�떎";
-		mav.addObject("msg", msg);
-		mav.setViewName("./notice/updateForm");
-	} else {
-		 
-		String msg="�닔�젙�뻽�뒿�땲�떎";
-		mav.addObject("msg", msg);
-	mav.setViewName("redirect:list.do");
-	}
+			msg += "<!DOCTYPE html>";
+			msg += "<html><body>";
+			msg += "<script>";
+			msg += "  alert('���� �����߽��ϴ�');";
+			msg += "  history.go(-1);";
+			msg += "</script>";
+			msg += "</html></body>";
+			mav.addObject("msg", msg);
+			mav.setViewName("msgView");
+		}else {
+			mav.addObject("cnt", cnt);
+			mav.setViewName("redirect:/read.do");
+		}//if end
 		return mav;
 	}// updateProc() end
 	
-	 /*@RequestMapping(value="/notice/list.do")
-	    
-	    public String noticelist(@ModelAttribute("noticeVO") NoticeVO noticeVO,
-	            @RequestParam(defaultValue="1") int curPage,
-	            HttpServletRequest request,Model model) throws Exception{
-	        
-	        HttpSession session = request.getSession();
-	        LoginVO loginVO = (LoginVO)session.getAttribute("loginVO");
-	 
-	        // �쟾泥대━�뒪�듃 媛쒖닔
-	        int listCnt = boardServiceImpl.selectBoardListCnt(boardVO);
-	        
-	        Pagination pagination = new Pagination(listCnt, curPage);
-	        
-	        boardVO.setStartIndex(pagination.getStartIndex());
-	        boardVO.setCntPerPage(pagination.getPageSize());
-	        // �쟾泥대━�뒪�듃 異쒕젰
-	        List<BoardVO> list = boardServiceImpl.selectBoardList(boardVO);
-	                
-	        model.addAttribute("list", list);
-	        model.addAttribute("listCnt", listCnt);
-	        model.addAttribute("loginVO", loginVO);
-	        
-	        model.addAttribute("pagination", pagination);
-	        
-	        return "board/boardList";
-	    }*/
-	
+
 }// class end
