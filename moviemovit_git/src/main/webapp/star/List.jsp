@@ -188,7 +188,7 @@ table tr:nth-child(2n+1) {
    <div class="header">MOVIE LIST</div>
  </div>
 
-   <c:forEach var="dto" items="${List }">
+   <c:forEach var="dto" items="${list }">
    
    <div>
    <div class="box-image" >
