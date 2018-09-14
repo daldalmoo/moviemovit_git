@@ -11,11 +11,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace='kr.co.moviemovit.review.ReviewMapper'>
 
 
-<!-- ////////////////////////////////// CINEMA //////////////////////////////////////// -->
+	<!-- ////////////////////////////////// CINEMA //////////////////////////////////////// -->
 
-    <!-- CREATE  -->
+	<!-- CREATE -->
 	<!-- 1) cineCode 삽입을 위한 select문 -->
-	<select id="setCineCode" parameterType="String" resultType="String">  
+	<select id="setCineCode" parameterType="String"
+		resultType="String">  
 		<![CDATA[
 		SELECT concat(left(brandName, 1), cineCode) as cineCode
 		FROM (SELECT brandName,
@@ -30,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM cinemaTable
 		WHERE brandName=#{brandName}) as AA) as BB) as CC
 		        ]]>
-	 </select>
+	</select>
 
 	<!-- 2) 1)에서 선택한 cineCode dto에 set후 insert 실행 -->
 	<insert id="cinemaForm" parameterType="cinemaDTO">
@@ -39,19 +40,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         VALUES(#{cineCode}, #{brandName}, #{cineName}, #{tel}, #{addr1}, #{addr2}, #{addr3}, #{logoImg}, #{home}, #{etc}, #{wido}, #{kyengdo}, now())
       ]]>
 	</insert>
-	
-	<!--  READ -->
-    <!--  0907 지영 위도경도 추가 -->
-    <select id="cinemaRead" parameterType="cinemaDTO" resultType="cinemaDTO">
+
+	<!-- READ -->
+	<!-- 0907 지영 위도경도 추가 -->
+	<select id="cinemaRead" parameterType="cinemaDTO"
+		resultType="cinemaDTO">
         <![CDATA[
             SELECT cineCode, brandName, cineName, tel, addr1, addr2, addr3, logoImg, home, etc, wido, kyengdo
             FROM cinematable
             WHERE cineCode = #{cineCode}
         ]]>
-    </select>
-	
+	</select>
+
 	<!-- UPDATE -->
-    <update id="cinemaUpdate" parameterType="cinemaDTO">
+	<update id="cinemaUpdate" parameterType="cinemaDTO">
         <![CDATA[
          UPDATE cinemaTable
          SET brandName = #{brandName}, cineName = #{cineName}, tel = #{tel}, addr1 = #{addr1}, 
@@ -59,26 +61,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              etc = #{etc}, wido = #{wido}, kyengdo = #{kyengdo}
          WHERE cineCode = #{cineCode}
         ]]>
-    </update>
+	</update>
 
-    <!-- DELETE -->
-    <delete id="cinemaDeletePro" parameterType="String">
+	<!-- DELETE -->
+	<delete id="cinemaDeletePro" parameterType="String">
         <![CDATA[
             DELETE FROM cinemaTable
             WHERE cineCode = #{cineCode}
-        ]]> 
-    </delete>   
-    
-   
-   <!-- LIST --> 
-   <select id="cinemaList" resultType="cinemaDTO">
+        ]]>
+	</delete>
+
+
+	<!-- LIST -->
+	<select id="cinemaList" resultType="cinemaDTO">
     <![CDATA[
         SELECT cineCode, brandName, cineName, tel, addr1, addr2, addr3, logoImg
         from cinematable
         ]]>
-    </select>
-    
-    <!-- 1) List : 검색 -->
+	</select>
+
+	<!-- 1) List : 검색 -->
 	<select id="search" parameterType="map" resultType="cinemaDTO"> 
 	<![CDATA[
 	SELECT * 
@@ -86,19 +88,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE cineName like CONCAT('%', #{sch_value} , '%')
 	 ]]>
 	</select>
-	
-	<!-- 2) List : 카테고리 -->   
-    <select id="cate" parameterType="java.util.List" resultType="cinemaDTO">
-    SELECT *
-    FROM cinemaTable
-    WHERE brandName IN 
-    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
-    #{item}
-    </foreach>
-    </select>
-	
-   
-   
+
+	<!-- 2) List : 카테고리 -->
+    <select id="cate" resultType="cinemaDTO">
+		SELECT cineCode, brandName, cineName, tel, addr1, addr2, addr3, logoImg
+		FROM cinemaTable
+        WHERE cineCode!=''
+		<if test = "list != null">
+		AND brandName IN <foreach collection="list" item="item" index="index" open="("
+            separator="," close=")">
+            #{item}
+        </foreach>
+		</if>
+        <if test = "list2 != null">
+		AND addr1 IN<foreach collection="list2" item="item" index="index" open="("
+            separator="," close=")">
+            #{item}
+        </foreach>
+        </if>
+	</select>
+
+	<!-- 3) List : 페이징 -->
+	<!-- criteria 를 적용한 게시판 페이징 조회 -->
+	<select id="listCriteria" resultType="cinemaDTO">
+		<![CDATA[
+		select cineCode, brandName, cineName, tel, addr1, addr2, addr3, logoImg
+		from cinemaTable
+		limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+
    <!-- ////////////////////////////////// REVIEW //////////////////////////////////////// -->   
     <!-- REVIEWSTAR -->
     <select id="reviewstar" resultType="kr.co.moviemovit.review.ReviewStar">
@@ -139,5 +158,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   seat; around;  snack;  trans; s_e; ip; heart; 
   wdate; startotal; -->
    
-    
+   
 </mapper>

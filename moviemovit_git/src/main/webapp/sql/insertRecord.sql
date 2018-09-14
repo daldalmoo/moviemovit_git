@@ -24,19 +24,19 @@ values((SELECT IFNULL(MAX(peocode),0)+1 FROM peopleTable as peo),'차태현','ko
 -- cinemaTable 레코드 삽입
 -- 지영 2018/08/31 수정 
 insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,kyengdo,logoImg,wdate,etc,home)
-values('C001','CGV','송파','1544-1122','SEO','서울시 송파구 충민로 66','가든파이브라이프','37.477633','127.1249435','img/cWang.jpg',now(),'운영시간 : 8:00~2:00','http://www.cgv.co.kr');
+values('C001','CGV','송파','1544-1122','SEO','서울시 송파구 충민로 66','가든파이브라이프','37.477633','127.1249435','cWang.jpg',now(),'운영시간 : 8:00~2:00','http://www.cgv.co.kr');
 insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,kyengdo,logoImg,wdate,etc,home)
-values('L001','LOTTE','월드타워점','1544-8855','SEO','서울시 송파구 올림픽로 300','롯데월드몰 5F','37.513689','127.1044541','img/lWord.jpg',now(),'운영시간 : 8:00~2:00','http://www.lottecinema.co.kr');
+values('L001','LOTTE','월드타워점','1544-8855','SEO','서울시 송파구 올림픽로 300','롯데월드몰 5F','37.513689','127.1044541','lWord.jpg',now(),'운영시간 : 8:00~2:00','http://www.lottecinema.co.kr');
 insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,kyengdo,logoImg,wdate,etc,home)
-values('M001','MEGABOX','송파파크하비오','1544-0070','SEO','서울시 송파구 송파대로 111','하비오푸르지오','37.4776339','127.124934','img/mSongpa.jpg',now(),'운영시간 : 8:00~2:00','http://www.megabox.co.kr');
+values('M001','MEGABOX','송파파크하비오','1544-0070','SEO','서울시 송파구 송파대로 111','하비오푸르지오','37.4776339','127.124934','mSongpa.jpg',now(),'운영시간 : 8:00~2:00','http://www.megabox.co.kr');
 insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,kyengdo,logoImg,wdate,etc,home)
-values('C002','CGV','의정부','1544-1122','GGD','경기도 의정부시 평화로 525','의정부민자역사','37.7334609','127.6805888','img/default.png',now(),'운영시간 : 8:00~2:00','http://www.cgv.co.kr');
+values('C002','CGV','의정부','1544-1122','GGD','경기도 의정부시 평화로 525','의정부민자역사','37.7334609','127.6805888','default.png',now(),'운영시간 : 8:00~2:00','http://www.cgv.co.kr');
 insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,kyengdo,logoImg,wdate,etc,home)
-values('D001','INDEP','영화공간주안','032-427-6777','ICH','인천 미추홀구 미추홀대로','716','37.461241','126.680588','img/default.png',now(),'운영시간 : 8:00~2:00','http://www.indiespace.kr');
+values('D001','INDEP','영화공간주안','032-427-6777','ICH','인천 미추홀구 미추홀대로','716','37.461241','126.680588','default.png',now(),'운영시간 : 8:00~2:00','http://www.indiespace.kr');
 insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,kyengdo,logoImg,wdate,etc,home)
-values('C003','CGV','원주','1544-1122','GWD','강원도 원주시','서원대 171','37.3448535','127.9308469','img/default.png',now(),'운영시간 : 8:00~2:00','http://www.cgv.co.kr');
+values('C003','CGV','원주','1544-1122','GWD','강원도 원주시','서원대 171','37.3448535','127.9308469','default.png',now(),'운영시간 : 8:00~2:00','http://www.cgv.co.kr');
 insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,kyengdo,logoImg,wdate,etc,home)
-values('M002','MEGABOX','제주','1544-0070','JJD','제주도 제주시 중앙로14길','18','33.5116003','126.5226707','img/default.png',now(),'운영시간 : 8:00~2:00','http://www.megabox.co.kr');
+values('M002','MEGABOX','제주','1544-0070','JJD','제주도 제주시 중앙로14길','18','33.5116003','126.5226707','default.png',now(),'운영시간 : 8:00~2:00','http://www.megabox.co.kr');
 
 -- roomTable 레코드 삽입
 insert into roomTable(roomCode,cineCode,roomName,seatCnt,DD,seatImg)
@@ -84,5 +84,4 @@ values('2018080711330601',now(),'member1',1,'A1,A2,A3,A4','adu,you,sen,kid',1);
 
 insert into ticketTable(tCode,wdate,uid,sCode,seat,auditType,cCode)
 values('2018080711330602',now(),'member2',2,'D10,D11','you,sen',8);
-
 
