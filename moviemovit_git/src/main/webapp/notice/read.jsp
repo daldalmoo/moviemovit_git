@@ -82,8 +82,8 @@ margin:auto;
 			<th>공개여부</th>
 			<td><input type="text" id="open"name="open" size="50" value="${dto.open}" readonly></td>
 		</tr>
+		 
 	</table>
-	
 
 	<div class="bottom">
 		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='list.do'">

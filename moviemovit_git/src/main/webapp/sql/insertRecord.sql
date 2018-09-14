@@ -1,44 +1,44 @@
 -- ------------------------- insert record
--- userTable ·¹ÄÚµå »ğÀÔ
+-- userTable ë ˆì½”ë“œ ì‚½ì…
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
-VALUES('member1', 'me1234!', '±â°æ¹Î', 'W', '19940426', 'cheerup_km@naver.com', '01012345678',now(), 'ADMIN');
+VALUES('member1', 'me1234!', 'ê¸°ê²½ë¯¼', 'W', '19940426', 'cheerup_km@naver.com', '01012345678',now(), 'ADMIN');
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
-VALUES('member2', 's1234!', '¿ì½ÅÇı', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'SELLER');
+VALUES('member2', 's1234!', 'ìš°ì‹ í˜œ', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'SELLER');
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
-VALUES('member3', 's1234!', '¿ì½ÅÇı', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'VIP');
+VALUES('member3', 's1234!', 'ìš°ì‹ í˜œ', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'VIP');
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
-VALUES('member4', 's1234!', '¿ì½ÅÇı', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'GOLD');
+VALUES('member4', 's1234!', 'ìš°ì‹ í˜œ', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'GOLD');
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
-VALUES('member5', 's1234!', '¿ì½ÅÇı', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'SILVER');
+VALUES('member5', 's1234!', 'ìš°ì‹ í˜œ', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'SILVER');
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
-VALUES('member6', 's1234!', '¿ì½ÅÇı', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'F');
+VALUES('member6', 's1234!', 'ìš°ì‹ í˜œ', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'F');
 
--- movieTable ·¹ÄÚµå »ğÀÔ
+-- movieTable ë ˆì½”ë“œ ì‚½ì…
 INSERT INTO movieTable(mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date)
-VALUES ((SELECT ifnull(MAX(mCode),0)+1 FROM movieTable as movie), 'moving/images/poster02.jpg', '½Å°úÇÔ²²', 'comedy', 'ing', '0', 'Àú½Â¿¡ °¡´Â ¿µÈ­', 'Korea', '7,8', '1,2,3', '3D', '140', '2018-06-15', '2018-06-30');
+VALUES ((SELECT ifnull(MAX(mCode),0)+1 FROM movieTable as movie), 'moving/images/poster02.jpg', 'ì‹ ê³¼í•¨ê»˜', 'comedy', 'ing', '0', 'ì €ìŠ¹ì— ê°€ëŠ” ì˜í™”', 'Korea', '7,8', '1,2,3', '3D', '140', '2018-06-15', '2018-06-30');
 
--- peopleTable ·¹ÄÚµå »ğÀÔ
+-- peopleTable ë ˆì½”ë“œ ì‚½ì…
 insert into peopleTable(peoCode, peoName, country, peoBirth, gender, peoPic)
-values((SELECT IFNULL(MAX(peocode),0)+1 FROM peopleTable as peo),'Â÷ÅÂÇö','korea','1988', 'M', 'moving/images/peo0001.jpg'); 
+values((SELECT IFNULL(MAX(peocode),0)+1 FROM peopleTable as peo),'ì°¨íƒœí˜„','korea','1988', 'M', 'moving/images/peo0001.jpg'); 
 
--- cinemaTable ·¹ÄÚµå »ğÀÔ
--- Áö¿µ 2018/08/31 ¼öÁ¤ 
+-- cinemaTable ë ˆì½”ë“œ ì‚½ì…
+-- ì§€ì˜ 2018/08/31 ìˆ˜ì • 
 insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,kyengdo,logoImg,wdate,etc,home)
-values('C001','CGV','¼ÛÆÄ','1544-1122','SEO','¼­¿ï½Ã ¼ÛÆÄ±¸ Ãæ¹Î·Î 66','°¡µçÆÄÀÌºê¶óÀÌÇÁ','37.477633','127.1249435','img/cWang.jpg',now(),'¿î¿µ½Ã°£ : 8:00~2:00','http://www.cgv.co.kr');
+values('C001','CGV','ì†¡íŒŒ','1544-1122','SEO','ì„œìš¸ì‹œ ì†¡íŒŒêµ¬ ì¶©ë¯¼ë¡œ 66','ê°€ë“ íŒŒì´ë¸Œë¼ì´í”„','37.477633','127.1249435','img/cWang.jpg',now(),'ìš´ì˜ì‹œê°„ : 8:00~2:00','http://www.cgv.co.kr');
 insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,kyengdo,logoImg,wdate,etc,home)
-values('L001','LOTTE','¿ùµåÅ¸¿öÁ¡','1544-8855','SEO','¼­¿ï½Ã ¼ÛÆÄ±¸ ¿Ã¸²ÇÈ·Î 300','·Ôµ¥¿ùµå¸ô 5F','37.513689','127.1044541','img/lWord.jpg',now(),'¿î¿µ½Ã°£ : 8:00~2:00','http://www.lottecinema.co.kr');
+values('L001','LOTTE','ì›”ë“œíƒ€ì›Œì ','1544-8855','SEO','ì„œìš¸ì‹œ ì†¡íŒŒêµ¬ ì˜¬ë¦¼í”½ë¡œ 300','ë¡¯ë°ì›”ë“œëª° 5F','37.513689','127.1044541','img/lWord.jpg',now(),'ìš´ì˜ì‹œê°„ : 8:00~2:00','http://www.lottecinema.co.kr');
 insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,kyengdo,logoImg,wdate,etc,home)
-values('M001','MEGABOX','¼ÛÆÄÆÄÅ©ÇÏºñ¿À','1544-0070','SEO','¼­¿ï½Ã ¼ÛÆÄ±¸ ¼ÛÆÄ´ë·Î 111','ÇÏºñ¿ÀÇª¸£Áö¿À','37.4776339','127.124934','img/mSongpa.jpg',now(),'¿î¿µ½Ã°£ : 8:00~2:00','http://www.megabox.co.kr');
+values('M001','MEGABOX','ì†¡íŒŒíŒŒí¬í•˜ë¹„ì˜¤','1544-0070','SEO','ì„œìš¸ì‹œ ì†¡íŒŒêµ¬ ì†¡íŒŒëŒ€ë¡œ 111','í•˜ë¹„ì˜¤í‘¸ë¥´ì§€ì˜¤','37.4776339','127.124934','img/mSongpa.jpg',now(),'ìš´ì˜ì‹œê°„ : 8:00~2:00','http://www.megabox.co.kr');
 insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,kyengdo,logoImg,wdate,etc,home)
-values('C002','CGV','ÀÇÁ¤ºÎ','1544-1122','GGD','°æ±âµµ ÀÇÁ¤ºÎ½Ã ÆòÈ­·Î 525','ÀÇÁ¤ºÎ¹ÎÀÚ¿ª»ç','37.7334609','127.6805888','img/default.png',now(),'¿î¿µ½Ã°£ : 8:00~2:00','http://www.cgv.co.kr');
+values('C002','CGV','ì˜ì •ë¶€','1544-1122','GGD','ê²½ê¸°ë„ ì˜ì •ë¶€ì‹œ í‰í™”ë¡œ 525','ì˜ì •ë¶€ë¯¼ìì—­ì‚¬','37.7334609','127.6805888','img/default.png',now(),'ìš´ì˜ì‹œê°„ : 8:00~2:00','http://www.cgv.co.kr');
 insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,kyengdo,logoImg,wdate,etc,home)
-values('D001','INDEP','¿µÈ­°ø°£ÁÖ¾È','032-427-6777','ICH','ÀÎÃµ ¹ÌÃßÈ¦±¸ ¹ÌÃßÈ¦´ë·Î','716','37.461241','126.680588','img/default.png',now(),'¿î¿µ½Ã°£ : 8:00~2:00','http://www.indiespace.kr');
+values('D001','INDEP','ì˜í™”ê³µê°„ì£¼ì•ˆ','032-427-6777','ICH','ì¸ì²œ ë¯¸ì¶”í™€êµ¬ ë¯¸ì¶”í™€ëŒ€ë¡œ','716','37.461241','126.680588','img/default.png',now(),'ìš´ì˜ì‹œê°„ : 8:00~2:00','http://www.indiespace.kr');
 insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,kyengdo,logoImg,wdate,etc,home)
-values('C003','CGV','¿øÁÖ','1544-1122','GWD','°­¿øµµ ¿øÁÖ½Ã','¼­¿ø´ë 171','37.3448535','127.9308469','img/default.png',now(),'¿î¿µ½Ã°£ : 8:00~2:00','http://www.cgv.co.kr');
+values('C003','CGV','ì›ì£¼','1544-1122','GWD','ê°•ì›ë„ ì›ì£¼ì‹œ','ì„œì›ëŒ€ 171','37.3448535','127.9308469','img/default.png',now(),'ìš´ì˜ì‹œê°„ : 8:00~2:00','http://www.cgv.co.kr');
 insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,kyengdo,logoImg,wdate,etc,home)
-values('M002','MEGABOX','Á¦ÁÖ','1544-0070','JJD','Á¦ÁÖµµ Á¦ÁÖ½Ã Áß¾Ó·Î14±æ','18','33.5116003','126.5226707','img/default.png',now(),'¿î¿µ½Ã°£ : 8:00~2:00','http://www.megabox.co.kr');
+values('M002','MEGABOX','ì œì£¼','1544-0070','JJD','ì œì£¼ë„ ì œì£¼ì‹œ ì¤‘ì•™ë¡œ14ê¸¸','18','33.5116003','126.5226707','img/default.png',now(),'ìš´ì˜ì‹œê°„ : 8:00~2:00','http://www.megabox.co.kr');
 
--- roomTable ·¹ÄÚµå »ğÀÔ
+-- roomTable ë ˆì½”ë“œ ì‚½ì…
 insert into roomTable(roomCode,cineCode,roomName,seatCnt,DD,seatImg)
 values('C001_1','C001',1,50,'2D, 3D','moving/images/seat1.jpg');
 insert into roomTable(roomCode,cineCode,roomName,seatCnt,DD,seatImg)
@@ -46,41 +46,39 @@ values('C001_2','C001',2,100,'2D','moving/images/seat2.jpg');
 insert into roomTable(roomCode,cineCode,roomName,seatCnt,DD,seatImg)
 values('C001_3','C001',3,150,'imax','moving/images/seat3.jpg');
 insert into roomTable(roomCode,cineCode,roomName,seatCnt,DD,seatImg,etc)
-values('L001_4','L001',4,100,'4D','moving/images/seat4.jpg','·¹µåº§ºª ½Å°î±â³ä°ü');
+values('L001_4','L001',4,100,'4D','moving/images/seat4.jpg','ë ˆë“œë²¨ë²³ ì‹ ê³¡ê¸°ë…ê´€');
 
 
--- reviewTable°ú reviewStarTable ÇÕÃÄÁü _ 0911 ½ÂÁö
--- reviewStarTable ·¹ÄÚµå »ğÀÔ
+-- reviewTableê³¼ reviewStarTable í•©ì³ì§ _ 0911 ìŠ¹ì§€
+-- reviewStarTable ë ˆì½”ë“œ ì‚½ì…
 insert into reviewStarTable(no,cineCode,uid,pixel,sound,clean,service,seat,around,snack,trans,wdate,s_e,ip,heart)
-values((SELECT IFNULL(MAX(no),0)+1 FROM reviewStarTable as rst),'C001','member1',5,3,1,2,3,3,3,5,now(),'ÁÂ¼®ÀÌ Æø½ÅÆø½ÅÇÏ°í ³Ğ¾î¼­ Æí¾ÈÇÕ´Ï´Ù','172.168.0.20',10);
+values((SELECT IFNULL(MAX(no),0)+1 FROM reviewStarTable as rst),'C001','member1',5,3,1,2,3,3,3,5,now(),'ì¢Œì„ì´ í­ì‹ í­ì‹ í•˜ê³  ë„“ì–´ì„œ í¸ì•ˆí•©ë‹ˆë‹¤','172.168.0.20',10);
 insert into reviewStarTable(no,cineCode,uid,pixel,sound,service,seat,around,snack,trans,wdate,s_e,ip,heart)
-values((SELECT IFNULL(MAX(no),0)+1 FROM reviewStarTable as rst),'L001','member2',4,2,2,3,2,2,5,now(),'ÀÚ¸®¾Õ¿¡ ÆËÄÜ ¶³¾îÁø°Ô ¾ÆÁ÷µµ ÀÖ´õ¶ó±¸¿ä','152.168.0.18',2);
+values((SELECT IFNULL(MAX(no),0)+1 FROM reviewStarTable as rst),'L001','member2',4,2,2,3,2,2,5,now(),'ìë¦¬ì•ì— íŒì½˜ ë–¨ì–´ì§„ê²Œ ì•„ì§ë„ ìˆë”ë¼êµ¬ìš”','152.168.0.18',2);
 
--- noticeTable ·¹ÄÚµå »ğÀÔ
+-- noticeTable ë ˆì½”ë“œ ì‚½ì…
 insert into  noticeTable(noticeno,title,s_e,uid,wdate,open)
-values((SELECT ifnull(MAX(noticeno),0)+1 FROM noticeTable as notice),'»çÀÌÆ®¸¦ Ã³À½ ÀÌ¿ëÇÏ½Ã´Â ºĞµé',' ','admin1',now(),'Y');
+values((SELECT ifnull(MAX(noticeno),0)+1 FROM noticeTable as notice),'ì‚¬ì´íŠ¸ë¥¼ ì²˜ìŒ ì´ìš©í•˜ì‹œëŠ” ë¶„ë“¤',' ','admin1',now(),'Y');
 
--- QnATable ·¹ÄÚµå »ğÀÔ
---insert into  QnATable(qCode,qType,uid,title,content,wdate,ip,groupNo,indent,groupNum)
---values((SELECT ifnull(MAX(qCode),0)+1 FROM QnATable as q),'q1','member1','¿¹¸Å¾î¶»°Ô ÇØ¿ä','¿¹¸ÅÇÏ´Â ¹æ¹ıÀ» ¸ğ¸£°Ú½À´Ï´Ù. ¤Ğ¤Ğ',now(),'172.168.0.20',0,0,0);
-insert into  QnATable(qCode,qType,uid,title,content,wdate,groupNo,indent,groupNum)
-values((SELECT ifnull(MAX(qCode),0)+1 FROM QnATable as q),'q1','member1','¿¹¸Å¾î¶»°Ô ÇØ¿ä','¿¹¸ÅÇÏ´Â ¹æ¹ıÀ» ¸ğ¸£°Ú½À´Ï´Ù. ¤Ğ¤Ğ',now(),0,0,0);
+-- QnATable ë ˆì½”ë“œ ì‚½ì…
+insert into  QnATable(qCode,qType,uid,title,content,wdate,ip,groupNo,groupNum,indent)
+values((SELECT ifnull(MAX(qCode),0)+1 FROM QnATable as q),'q1','member1','ì˜ˆë§¤ì–´ë–»ê²Œ í•´ìš”','ì˜ˆë§¤í•˜ëŠ” ë°©ë²•ì„ ëª¨ë¥´ê² ìŠµë‹ˆë‹¤. ã… ã… ',now(),'172.168.0.20',0,0,0);
 
 -- starTable
 insert into starTable(sCode, mCode, uid, star, comment, wdate)
-values((SELECT IFNULL(MAX(sCode),0)+1 FROM starTable as star), '2', 'member1', '5', '³» ÀÎ»ı¿¡¼­ º» º£½ºÆ® ¿µÈ­', now());
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM starTable as star), '2', 'member1', '5', 'ë‚´ ì¸ìƒì—ì„œ ë³¸ ë² ìŠ¤íŠ¸ ì˜í™”', now());
 
--- couponTable ·¹ÄÚµå »ğÀÔ
+-- couponTable ë ˆì½”ë“œ ì‚½ì…
 insert into couponTable(cCode,uid,startDate,expDate)
 values((SELECT IFNULL(MAX(cCode),0)+1 FROM couponTable as coupon), 'member1', '2018-08-10', '2019-08-10');
 
--- screenTable ·¹ÄÚµå »ğÀÔ
+-- screenTable ë ˆì½”ë“œ ì‚½ì…
 insert into screenTable(sCode,roomCode,sdate,stime,mCode)
 values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C001_1', '2018-08-20', '1030', '1');
 insert into screenTable(sCode,roomCode,sdate,stime,mCode)
 values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C001_2', '2018-08-20', '1030', '1');
 
--- ticketTable ·¹ÄÚµå »ğÀÔ
+-- ticketTable ë ˆì½”ë“œ ì‚½ì…
 insert into ticketTable(tCode,wdate,uid,sCode,seat,auditType,cCode)
 values('2018080711330601',now(),'member1',1,'A1,A2,A3,A4','adu,you,sen,kid',1);
 

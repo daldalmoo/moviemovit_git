@@ -77,7 +77,7 @@ a:focus {
 
 nav { width: 100%; }
 
-/*180824 °æ¹Î ¼öÁ¤*/
+/*180824 ê²½ë¯¼ ìˆ˜ì •*/
 .nav_wrapper {
   position: fixed;
   left: 0;
@@ -422,7 +422,7 @@ a.menu-link.active:after { content: "\2715"; }
 .menu li.has-submenu > a.active:after { content: "-"; }
 
 .menu ul ul > li a {
-  background-color: #39484d;   /* ¸ğ¹ÙÀÏÈ­¸é Notice Info Contact ¹è°æ»ö»ó */
+  background-color: #39484d;   /* ëª¨ë°”ì¼í™”ë©´ Notice Info Contact ë°°ê²½ìƒ‰ìƒ */
   padding: 10px 18px 10px 30px;
 }
 
@@ -613,7 +613,7 @@ hr {
    display block;
 }
 
-/* 20180907 ½ÅÇı intro ·Î°íÀÌ¹ÌÁö ºÎºĞ Ãß°¡ */
+/* 20180907 ì‹ í˜œ intro ë¡œê³ ì´ë¯¸ì§€ ë¶€ë¶„ ì¶”ê°€ */
 #intro img {
   width: 100%;
   max-width: 500px;
