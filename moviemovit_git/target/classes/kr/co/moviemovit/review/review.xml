@@ -118,45 +118,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 
-	<!-- ////////////////////////////////// REVIEW //////////////////////////////////////// -->
-
-	<!-- REVIEWSTAR -->
-	<select id="reviewstar"
-		resultType="kr.co.moviemovit.review.ReviewStar">
-        <![CDATA[    
-        SELECT cineCode, pixel, sound, clean, service, seat, around, snack, trans, 
-                     sum(pixel+sound+clean+service+seat+around+snack+trans)/8 AS startotal
-        FROM reviewStarTable
-        GROUP BY cineCode
-          ]]>
-	</select>
-
-
-	<!-- REVIEWSTAR 02 -->
-	<select id="reviewstardto" parameterType="ReviewStarDTO"
-		resultType="kr.co.moviemovit.reviewstar.ReviewStarDTO">
-    <![CDATA[
-         SELECT no, cineCode, uid, pixel, sound, clean, service, seat, around, snack, trans, wdate
-         FROM reviewStarTable
-         WHERE cineCode = #{cineCode}
-    ]]>
-	</select>
-
-	<!-- CREATE -->
-	<insert id="reviewForm" parameterType="ReviewStar">
-		<selectKey keyProperty="no" resultType="int" order="BEFORE">
-             <![CDATA[
-                SELECT ifnull(MAX(no), 0)+1 as no
-                FROM reviewStarTable
-                ]]>
-		</selectKey>
-            <![CDATA[
-            INSERT INTO reviewStarTable(cineCode, pixel, sound, clean, service, seat, around, snack, trans)
-            VALUES( #{cineCode}, #{pixel}, #{sound}, #{clean}, #{service}, #{seat}, #{around}, #{snack}, #{trans})
-            ]]>
-	</insert>
-
-
    <!-- ////////////////////////////////// REVIEW //////////////////////////////////////// -->   
     <!-- REVIEWSTAR -->
     <select id="reviewstar" resultType="kr.co.moviemovit.review.ReviewStar">
@@ -196,5 +157,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    no, cineCode, uid, pixel, sound, clean, service,
   seat; around;  snack;  trans; s_e; ip; heart; 
   wdate; startotal; -->
+   
    
 </mapper>
