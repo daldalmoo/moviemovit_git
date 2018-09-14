@@ -22,7 +22,6 @@ public class CinemaDTO {
   private int startotal;
   private ReviewStar ReviewStar;
   
-  //ÆäÀÌÂ¡
   private int pageNo;
   private int countPerPage;
   
