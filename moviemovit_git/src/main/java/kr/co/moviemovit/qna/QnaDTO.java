@@ -1,19 +1,16 @@
 package kr.co.moviemovit.qna;
 
-
 public class QnaDTO {
-
-
 	private int qCode;
 	private String qType;
 	private String title;
 	private String content;
 	private String uid;
 	private String wdate;
+	private String ip;
 	private int groupNo;
 	private int groupNum;
 	private int indent;
-	
 	
 	public int getqCode() {
 		return qCode;
@@ -51,6 +48,12 @@ public class QnaDTO {
 	public void setWdate(String wdate) {
 		this.wdate = wdate;
 	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
 	public int getGroupNo() {
 		return groupNo;
 	}
@@ -69,15 +72,12 @@ public class QnaDTO {
 	public void setIndent(int indent) {
 		this.indent = indent;
 	}
+  
 	@Override
 	public String toString() {
 		return "QnaDTO [qCode=" + qCode + ", qType=" + qType + ", title=" + title + ", content=" + content + ", uid="
-				+ uid + ", wdate=" + wdate + ", groupNo=" + groupNo + ", indent=" + indent + ", groupNum=" + groupNum
-				+ "]";
+				+ uid + ", wdate=" + wdate + ", ip=" + ip + ", groupNo=" + groupNo + ", groupNum=" + groupNum
+				+ ", indent=" + indent + "]";
 	}
-	
-	
-	
-
 
 }//class end

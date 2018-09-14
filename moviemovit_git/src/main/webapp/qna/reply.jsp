@@ -53,7 +53,7 @@ margin:auto;
 	</tr>
 		<tr>
 			<th>제목</th>
-			<td><input type="text" id="title"name="title" size="50"   value="ㄴ답변입니다 ${dto.title }" readonly></td>
+			<td><input type="text" id="title"name="title" size="50"   value=" ${dto.title }" readonly></td>
 		</tr>
 		<tr>
 			<th>작성자</th>

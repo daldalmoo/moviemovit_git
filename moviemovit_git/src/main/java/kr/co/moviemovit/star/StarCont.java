@@ -22,13 +22,15 @@ public class StarCont {
 	}//기본 생성자
 	
 	@RequestMapping(value="/star/create.do", method=RequestMethod.GET)
-	public ModelAndView create(MovieDTO dto, String uid) {
+	public ModelAndView create(MovieDTO dto, ArrayList<String> uid) {
 	   ModelAndView mav= new ModelAndView();
 	   mav.setViewName("/star/starForm");
 	   dto=dao.movieList(dto);
-	   ArrayList<String> uidList=dao.uidList(uid);
+	   uid=dao.uidList(uid);
+	   System.out.println(uid);
 	   mav.addObject("dto", dto);
-	   mav.addObject("uidList", dao.uidList(uid));
+	   mav.addObject("udto", uid);
+	   //mav.addObject("uidList", dao.uidList(uid));
 	   return mav;
 	}//create() end
 	
@@ -52,7 +54,15 @@ public class StarCont {
 	   return mav;
 	 }//createProc() end
 	
-	
+	 @RequestMapping("/star/List.do")
+	 public ModelAndView list(StarDTO dto) {
+	     ModelAndView mav = new ModelAndView();
+	     mav.setViewName("star/List");
+	     ArrayList<StarDTO> list = dao.list();
+	     
+	     mav.addObject("list", list);
+	     return mav;
+	 }//list() end
 	
 	
 

@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
-	<select id="uidList" resultType="String">
+	<select id="uidList" resultType="String" parameterType="MovieDTO">
 		<![CDATA[
 			SELECT uid
 			FROM userTable
@@ -27,13 +27,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<![CDATA[
 				SELECT IFNULL(MAX(sCode),0) + 1 AS sCode
 				FROM starTable
-			]]>	
+			]]>
 		</selectKey>
 		    <![CDATA[	
 				INSERT INTO starTable(sCode, mCode, uid, star, comment, wdate)
-				VALUES(#{sCode}, #{mCode}, uid, #{star}, #{comment}, now())                        
+				VALUES(#{sCode}, #{mCode}, #{uid}, #{star}, #{comment}, now())                        
 			]]>	
 	</insert>
+	
+	<select id="list" resultType="StarDTO">
+	    <![CDATA[
+			SELECT sCode, mCode, uid, star, comment, wdate
+			FROM starTable
+			ORDER BY sCode DESC	
+		]]>
+	</select>
+	
 	
 	
 </mapper>

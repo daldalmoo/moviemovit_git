@@ -64,11 +64,11 @@ margin:auto;
 		</tr>
 	</table>
 	
-
 	<div class="bottom">
 		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='list.do'">
 		<input type="submit" id="noticebutton" class="cbp-mc-submit" value="수정">
 		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='delete.do?noticeno=${dto.noticeno}'">
+		
 	</div>
 
 </form>
