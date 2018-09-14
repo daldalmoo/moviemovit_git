@@ -211,7 +211,7 @@ table tr:nth-child(2n+1) {
    <div class="box-image" >
      <span class="thumb-image">
      <a href="./movieRead.do?mCode=${dto.mCode }">
-       <img class="mimg" src="./storage/${dto.poster }" width="400" height="800"/>
+       <img class="mimg" src="./storage/${dto.poster }" width="400" height="800" />
        </a>
      </span>
      </div>

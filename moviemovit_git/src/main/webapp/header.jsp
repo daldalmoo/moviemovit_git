@@ -127,11 +127,11 @@ footer {
             <li><a href="#Link" title="정보">Info</a></li>
             <li><a href="../qna/list.do" title="연락">Contact</a></li>
           </ul></li>
-        <li><a href="#Link" title="예매">Ticket</a></li>
-        <li><a href="#Link" title="영화관 리뷰 게시판">Review</a></li>
+        <li><a href="../ticket/ticketform.do" title="예매">Ticket</a></li>
+        <li><a href="../review/cinemaList.do" title="영화관 리뷰 게시판">Review</a></li>
         <li><a href="#Link" title="취향분석">Movit</a>
           <ul>
-            <li><a href="#Link" title="영화 평가하기">평가늘리기</a></li>
+            <li><a href="../movie/movieList.do" title="영화 평가하기">평가늘리기</a></li>
             <li><a href="#Link">평가결과</a></li>
             <li><a href="#Link">분석결과</a></li>
           </ul>
