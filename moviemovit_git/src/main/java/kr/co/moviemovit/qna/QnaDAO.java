@@ -16,15 +16,15 @@ public class QnaDAO {
 	//@Autowired
 	//DbOpen dbopen;
 	
-	//root-context.xmlì˜ <bean id="sqlSession" ~>
+	//root-context.xmlÀÇ <bean id="sqlSession" ~>
 	@Autowired
 	SqlSession sqlSession;
 	
 	public QnaDAO() {
-		System.out.println("---NoticeDAO() ê°ì²´ ìƒì„±");
-	}//ê¸°ë³¸ìƒì„±ì
+		System.out.println("---NoticeDAO() °´Ã¼ »ı¼º");
+	}//±âº»»ı¼ºÀÚ
 	
-	/*ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§*/
+	/*ºñÁî´Ï½º ·ÎÁ÷*/
 	public int groupNoMax() {
 	  QnaMapper mapper = sqlSession.getMapper(QnaMapper.class);
     int count = mapper.groupNoMax();
