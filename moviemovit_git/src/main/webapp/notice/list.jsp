@@ -5,7 +5,7 @@
 <%-- 본문시작 template.jsp --%>
 <head>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style rel="stylesheet">
 
 .container-fluid{
@@ -218,7 +218,23 @@ table tr:nth-child(2n+1) {
 			<td>${dto.uid }</td>
 
 			<td>${dto.wdate }</td>
-			<td>${dto.open}</td>
+			<td>
+			<c:choose>
+			
+    <c:when test="${dto.open=='Y'}">
+ <i class="fa fa-unlock" aria-hidden="true"></i>
+   </c:when>
+   
+ <c:when test="${dto.open=='N'}">
+<i class="fa fa-lock" aria-hidden="true"></i>
+</c:when>
+
+   </c:choose>
+   
+
+
+			
+				      </td>
 			  <td>
                <input class="cbp-mc-button" type="button" value="수정" onclick="location.href='update.do?noticeno=${dto.noticeno}'"/>
                <input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='delete.do?noticeno=${dto.noticeno}'"/>
@@ -231,10 +247,10 @@ table tr:nth-child(2n+1) {
 <input class="cbp-mc-button" type="button" value="공지사항 등록" onclick="location.href='createForm.jsp'"/>
  <div>
                     <c:if test="${noticepage.curPage ne 1 }">
-                        <a href="list.do?curpage=${noticepage.startPage }" >[처음]</a> 
+                        <a href="list.do?curpage=${noticepage.startPage }" ><i class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                     <c:if test="${noticepage.curPage ne 1}">
-                        <a href="list.do?curpage=${noticepage.prevPage }" >[이전]</a> 
+                        <a href="list.do?curpage=${noticepage.prevPage }" ><i class="fa fa-angle-left fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                     <c:forEach var="pageNum" begin="${noticepage.startPage }" end="${noticepage.endPage }">
                         <c:choose>
@@ -247,15 +263,15 @@ table tr:nth-child(2n+1) {
                         </c:choose>
                     </c:forEach>
                     <c:if test="${noticepage.curPage ne noticepage.pageCnt && noticepage.pageCnt > 0}">
-                        <a href="list.do?curPage=${noticepage.nextPage}">[다음]</a> 
+                        <a href="list.do?curPage=${noticepage.nextPage}"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
-                    <c:if test="${noticepage.curRange ne noticepage.rangeCnt && noticepage.rangeCnt > 0}">
-                        <a href="list.do?curPage=${noticepage.curPage}">[끝]</a> 
+                    <c:if test="${noticepage.curRange ne endPage}">
+                        <a href="list.do?curPage=${noticepage.endPage}"><i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                 </div>
                 
                 <div>
-                    총 게시글 수 : ${noticepage.listCnt } /    총 페이지 수 : ${noticepage.pageCnt } / 현재 페이지 : ${noticepage.curPage } / 현재 블럭 : ${noticepage.curRange } / 총 블럭 수 : ${noticepage.rangeCnt }
+                    총 게시글 수 : ${noticepage.listCnt }  
                 </div>
 
 

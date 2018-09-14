@@ -318,14 +318,14 @@ public class ReviewCont {
 
   /*0906 ¸®ºäÁ¡¼ö ¸Å±â´Â Æû*/
   @RequestMapping(value="/review/create.do", method=RequestMethod.GET)
-  public ModelAndView reviewForm() {
+  public ModelAndView create() {
     ModelAndView mav= new ModelAndView();
     mav.setViewName("review/reviewForm");
     return mav;
   } // 
   
   @RequestMapping(value="/review/create.do", method=RequestMethod.POST)
-  public ModelAndView createProc(ReviewStar sdto, HttpServletRequest req) {
+  public ModelAndView createProc(ReviewStar sdto) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("review/msgView");
     int count = dao.create(sdto);

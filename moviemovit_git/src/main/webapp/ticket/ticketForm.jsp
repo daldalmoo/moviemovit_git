@@ -166,7 +166,7 @@
 }
 
 #cinema_area .cinema_select { /* 극장선택 타이틀 & 검색 부분 div */
-  background: linear-gradient(to top, #e4e4e8 50%, #f3f3f4 50%);
+  ;
 }
 #cinema_area .cinema_select ul { /* 극장종류 리스트 */
   background: linear-gradient(to top, #e4e4e8 0%, #f3f3f4 100%);
@@ -204,13 +204,28 @@
   margin-left: 5px;
 }
 
-#cinema_area .cinema_addr1 {
+#cinema_area .cinema_addr1 {  /* 극장의 대분류주소 선택 div */
+  text-align: left;
+  border-bottom: 2px dotted;
+}
+#cinema_area .cinema_addr1 ul { /* 극장종류 리스트 */
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  padding-left: 15pt;
+}
+
+#cinema_area .cinema_list {  /* 극장의 대분류주소 선택 div */
   text-align: left;
 }
-#cinema_area .cinema_addr1 ul li {
+#cinema_area .cinema_list ul { /* 극장 리스트 */
   list-style: none;
-  display: inline;
+  margin: 0px;
+  padding: 0px;
+  padding-left: 15pt;
+  font-size: 10pt;
 }
+
 
 /*********** 3) 날짜선택 ***********/
 #date_area .date_title { /* 날짜선택 타이틀 */
@@ -222,6 +237,41 @@
   font-weight: bold;
   color: white;
 }
+
+
+/*********** 4) 상영시간선택 ***********/
+#screentime_area .screentime_title { /* 상영시간표 타이틀 부분 div */
+  background: linear-gradient(to top, #e4e4e8 0%, #f3f3f4 100%);
+  text-align: left;
+  font-size: 10pt;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-top: 3px;
+  padding-bottom: 2px;
+}
+#screentime_area .screentime_title .select { /* 상영시간표 타이틀 부분 div - 영화극장날짜 선택되면 */
+  background: linear-gradient(to top, #3b3d58 0%, #5d607d 100%);
+}
+#screentime_area .cinemainfo {
+  border-bottom: 1px;
+  border-color: gray;
+  width: 100%;
+}
+#screentime_area .cinemainfo_logo_empty {
+  position: absolute;
+  top: 25%;
+  left: 3%;
+  width: 55px;
+  height: 45px;
+  border: 1px solid #000;
+  background-color: gray;
+  opacity: .1;
+  filter: alpha(opacity=10);
+}
+#screentime_area .screentime {
+  top: 50%;
+}
+
 
 </style>
 
@@ -291,26 +341,33 @@
         <ul>
           <li>
             <span id="cinema_list_addr1">
-              <a href="javascript:moreArea();" onclick="nclk(this, 'the.loc', '', 1);" class="">서울(<strong>58</strong>)
+              <a href="javascript:moreArea();" onclick="nclk(this, 'the.loc', '', 1);" class="">서울(<strong>5</strong>)
                 <img src="./img/listbtn1.gif">
               </a>
             </span>
           </li>
         </ul>
-        
-        <c:forEach var="dto" items="${list }">
-        
-            <td>${dto.qCode}</td>
-            <td><a href="read.do?qCode=${dto.qCode}">${dto.title }</a></td>
-            <td>${dto.uid }</td>
-
-            <td>${dto.wdate }</td>
-
-        </c:forEach>
       </div>
         
-        
-        
+      <div class="cinema_list">
+        <ul>
+          <c:forEach var="cine" items="${cinelist }">
+            <li>
+              <a href="#">
+                <input type="hidden" name="cineCode" value="${cine.cineCode }">
+                <c:choose>
+                  <c:when test="${cine.brandName == 'CGV' }">CGV</c:when>
+                  <c:when test="${cine.brandName == 'LOTTE' }">롯데시네마</c:when>
+                  <c:when test="${cine.brandName == 'MEGABOX' }">메가박스</c:when>
+                  <c:when test="${cine.brandName == 'INDEP' }">독립영화관</c:when>
+                </c:choose>
+                - ${cine.cineName}
+              </a>
+            </li>
+          </c:forEach>
+        </ul>
+      </div>
+      
     </div>
     <!-- ------------------------------ cinema_area : 극장선택 end ------------------------------ -->
     
@@ -336,18 +393,31 @@
     <!-- -------------------------- date_area : 날짜 선택  end ------------------------------- -->
     
     
-    <!-- -------------------------- time_area : 상영시간 선택 ----------------------------------- -->
-    <div id="time_area">
-    	
+    <!-- -------------------------- screentime_area : 상영시간 선택 ----------------------------------- -->
+    <div id="screentime_area">
+      <div class="screentime_title">
+        <span style="font-size: 12pt;">상영시간표</span>
+        <input type="image" src="./img/screentimeicon.PNG" style="height:9px; margin-bottom:1px;">
+        <span style="color:red;">영화/극장/날짜</span>
+        <span> 를 선택해주세요</span>
+      </div>
+      <div class="cinemainfo">
+        <span class="cinemainfo_logo_empty"></span>
+        <span class="cinemainfo_name"></span>
+      </div>
+      <div class="screentime">
+        - 관
+      </div>
     </div>
-    <!-- -------------------------- time_area : 상영시간 선택 end -------------------------------- -->
+    <!-- -------------------------- screentime_area : 상영시간 선택 end -------------------------------- -->
     
     
     <!-- -------------------------- people_area : 인원 선택 ----------------------------------- -->
-	<div id="people_area">
+	  <div id="people_area">
     	
    	</div>
     <!-- -------------------------- people_area : 인원 선택 end ----------------------------------- -->
+    
     
 	  <!-- -------------------------- movieinfo_area : 영화정보 ----------------------------------- -->
 	  <div id="movieinfo_area">
@@ -374,12 +444,14 @@
 //영화선택
 function SelMovieList(mCode) {
 	//해당 영화를 상영하는 극장 출력
-	$.post("./theaterNameList.do",mCode,theaterNameList);
+	$.post("./cinelist.do",mCode,cinelist);
 };//SelMovieList() end
 
 function theaterNameList(data) {
 	alert("data");
 }//theaterNameList() end
+
+
 
 </script>
 <!-- --------------------- 예매하기 AJAX end ----------------------- -->

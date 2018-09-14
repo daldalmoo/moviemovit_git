@@ -29,7 +29,7 @@ public class StarDAO {
         return list;
     }//movieList() end
 	
-	public ArrayList<String> uidList(String uid) {
+	public ArrayList<String> uidList(ArrayList<String> uid) {
 		StarMapper mapper = sqlSession.getMapper(StarMapper.class);
 		ArrayList<String> list = mapper.uidList(uid);
 	    return list;
@@ -40,6 +40,12 @@ public class StarDAO {
 		int count = mapper.create(dto);
 	    return count;
 	}//create() end
+	
+	public ArrayList<StarDTO> list() {
+		StarMapper mapper = sqlSession.getMapper(StarMapper.class);
+		ArrayList<StarDTO> list=mapper.list();
+		return list;
+	}//list() end
 	
 	
 	

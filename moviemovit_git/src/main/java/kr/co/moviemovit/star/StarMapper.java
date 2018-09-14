@@ -8,10 +8,11 @@ public interface StarMapper {
 	
 	public MovieDTO movieList(MovieDTO dto);
 	
-	public ArrayList<String> uidList(String uid);
+	public ArrayList<String> uidList(ArrayList<String> uid);
 	
 	public int create(StarDTO dto); 
 	
+	public ArrayList<StarDTO> list();
 	
 	
 	
