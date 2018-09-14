@@ -18,7 +18,6 @@ h1{
   text-align:center;
 }
 
-
 th{
 font-size:1.4em;
 text-align:center;
@@ -41,7 +40,6 @@ float:left;
 </style>
 
 </head>
-
 
 	<form class="cbp-mc-form" method="POST" id="editor" action="./create.do">
 			<h1>QnA</h1>
@@ -74,9 +72,9 @@ float:left;
 			<input class="cbp-mc-submit" id="qnabutton" type="submit" value="등록">
 			 <input	class="cbp-mc-submit" type="button" value="취소" onclick="location.href='./list.do'">
 		</div>
-
 	
 	</form>
+
 
 <!-- <script type="text/javascript">
     $(function(){

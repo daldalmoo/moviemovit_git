@@ -50,8 +50,8 @@
 		<tr>
 			<th>*영화이름</th>
 			<td class="list">
-				<input type="text" name="mName" id="mName" readonly="readonly">&nbsp;
-				
+				<input type="text" name="keyWord" id="keyWord"><br>
+				<div id="mName"></div>	
 			</td>
 		</tr>
 		<tr>
@@ -84,7 +84,7 @@
 		
 		$("#brandName").change(function() {
 			//alert("test");
-			alert($(this).val());
+			//alert($(this).val());
 			var brandName = "brandName=" + $(this).val(); 
 			//$.post(URL,data,function(data,status,xhr)
 			/*
@@ -96,16 +96,54 @@
 			$.post("./cineNameList.do",brandName,cineNameList); //post() end
 		});//change() end
 
-		//Controller에서 out에 보낸 값을 CineMsg에 담아서 data로 받아옴
+		//Controller에서 out에 보낸 값을 cineMsg에 담아서 data로 받아옴
 		function cineNameList(data) {
-			alert(data);
+			//alert(data);
 			$("#cineNameList").html(data);
 		}; //cineNameList() end
 		
 		//--------------------------------------------------
 		/*영화 검색*/
-
+		$("#keyWord").keyup(function() {
+			//alert("test");
+			var keyWord = $("#keyWord").val();
+			var params = "keyWord=" + keyWord;
+			
+			if($("#keyWord").val() == "") {//검색어가 존재하지 않으면
+				$("#mName").hide(); //출력결과 숨기기
+			}
+			$.post("./movieNameList.do",params,movieNameList);
+		});//keyup() end
 		
+		function movieNameList(data) {
+			if(data.length>0) { //응답받은 내용이 있는지?					
+				var result = data.split("|");
+				var param = result[0];
+				alert("param : " + param);
+				var movieList = result[1].split(",");
+				alert(movieList);
+				var str = "";
+				$.each(movieList, function(index,key) {
+					str += "<a href='#keyWord'>" + key + "</a>";
+					str += "<br>";
+				}); //each() end
+				$("#mName").html(str);
+				$("#mName").show();
+			} else {
+				$("#mName").hide();
+			}//if end
+		}//movieNameList() end
+		//-------------------------------------------------
+		/*영화목록 중 영화이름 클릭하면 input 태그에 입력*/
+		$("#mName").click(function() {
+			alert("test");
+			var mName = ("#mName").val();
+			alert(mName);
+			$("#keyWord").text(mName);
+			$("#mName").hide();
+		});//click() end
+		
+		//-------------------------------------------------
 		//1) 상영관이 숫자인지
 		//2) 영화명 적었는지
 		//3) 상영시간 4글자인지

@@ -58,6 +58,25 @@ table tr:nth-child(2n+1) {
   background-color: #bfe1ff;
 }
 
+.box-image {
+  width:100%;
+  height:180px;
+  max-width: calc(100% - 85em);
+  background-color: white;;
+  border: 8px solid #3366cc; 
+  box-sizing: content-box;
+  margin: 1em auto;
+}
+
+.mimg {        /* 영화관 목록안의 영화관이미지 */
+  font-size: 0;
+  text-align: center;
+  width: 100px;
+  max-width: calc(100% - 50em);
+  height: 180px;
+  
+}
+
 
 
 /*공개,수정,삭제 스타일*/
@@ -169,26 +188,28 @@ table tr:nth-child(2n+1) {
 
  <div class="table-users">
    <div class="header">PEOPLE LIST</div>
-
-   <table>
+ </div>
+  
+   
      <c:forEach var="dto" items="${list }">
+     <table class="box-image">
      <tr>
        <td>
        <a href="./peoRead.do?peoCode=${dto.peoCode }"><img class="mimg" src="./storage/${dto.peoPic }" width="400" height="800"></a>
-       <c:if test="${dto.gender eq 'null' }"> <img src='../img/people.jpg'> </c:if>
+       <c:if test="${dto.gender eq null }"> <img src='../img/people.jpg'> </c:if>
        </td>
-       <td>${dto.peoName}</td>
      </tr>
+     <tr>
+      <td>${dto.peoName}</td>
+     </tr>
+     </table>
      </c:forEach>
-   </table>
+   
    
    <!-- 하단버튼 -->
    <div class="cbp-mc-submit-wrap">
 		<input class="cbp-mc-button" type="button" value="인물등록" onclick="location.href='./create.do'"/>
    </div>
-    
- </div>    
-
 
 
 <%-- 본문끝 --%>

@@ -7,7 +7,7 @@ input.cbp-mc-submit {
 	border: none;
 	color: #fff;
 	width: auto;
-	cursor: pointer;s
+	cursor: pointer;
 	text-transform: uppercase;
 	display: inline-block;
 	padding: 15px 30px;

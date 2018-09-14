@@ -1,9 +1,6 @@
 package kr.co.moviemovit.qna;
 
-
 public class QnaDTO {
-
-
 	private int qCode;
 	private String qType;
 	private String title;
@@ -75,15 +72,12 @@ public class QnaDTO {
 	public void setIndent(int indent) {
 		this.indent = indent;
 	}
+  
 	@Override
 	public String toString() {
 		return "QnaDTO [qCode=" + qCode + ", qType=" + qType + ", title=" + title + ", content=" + content + ", uid="
 				+ uid + ", wdate=" + wdate + ", ip=" + ip + ", groupNo=" + groupNo + ", groupNum=" + groupNum
 				+ ", indent=" + indent + "]";
 	}
-	
-	
-	
-
 
 }//class end

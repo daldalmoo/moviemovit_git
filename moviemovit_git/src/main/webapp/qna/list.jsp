@@ -227,7 +227,6 @@ table tr:nth-child(2n+1) {
                     <a href="read.do?qCode=${dto.qCode}">
 				${dto.title }</a></td>
 			<td>${dto.content }
-
 			<td>${dto.wdate }</td>
 		  
 	

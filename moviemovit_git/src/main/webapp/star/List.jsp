@@ -2,7 +2,7 @@
 <%@ include file="../header.jsp"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%-- 본문시작 template.jsp --%>
+<%-- 본문시작 movieList.jsp --%>
 
 <style rel="stylesheet">
 .header {   /* 영화관목록  */
@@ -13,15 +13,12 @@
   text-align: center;
   text-transform: uppercase;        
 }
-img {        /* 영화관 목록안의 영화관이미지 */
-  height: 100px;
-  width: 150px;
-}
+
 .table-users {
   border: 1px solid #327a81;
   border-radius: 10px;
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
-  max-width: calc(100% - 2em);
+  max-width: calc(100% - 50em);
   margin: 1em auto;
   overflow: hidden;
   width: 100%;
@@ -48,21 +45,40 @@ table th {
   text-align: center;
   font-weight: bold;
 }
-/* 0905 th 첫번째 요소 스타일넣기*/
- table th:first-child{
-    width: 20%;
- }
- 
-/* 0905 th 마지막 요소 스타일넣기 */
- table th:last-child {
-  width: 150px;
-} 
 table tr:nth-child(2n) {
   background-color: white;
 }
 table tr:nth-child(2n+1) {
   background-color: #bfe1ff;
 }
+
+.box-image {
+  width:100%;
+  height:180px;
+  max-width: calc(100% - 85em);
+  background-color: white;;
+  border: 8px solid #3366cc; 
+  box-sizing: content-box;
+  margin: 1em auto;
+}
+
+.simg {
+  font-size: 0;
+  text-align: center;
+  width: 100px;
+  
+  
+}
+
+.mimg {        /* 영화관 목록안의 영화관이미지 */
+  font-size: 0;
+  text-align: center;
+  width: 100px;
+  max-width: calc(100% - 50em);
+  height: 180px;
+  
+}
+
 /*공개,수정,삭제 스타일*/
 .cbp-mc-button {
   background: #40bf80;
@@ -80,6 +96,9 @@ table tr:nth-child(2n+1) {
 .cbp-mc-button:hover {
   background: #2b8256;
 }
+
+
+
 @media screen and (max-width: 700px) {
   table, tr, td {
     display: block;
@@ -106,29 +125,7 @@ table tr:nth-child(2n+1) {
     position: absolute;
   }
   
-  /* 사이즈 줄일때 나타나는 아이*/
-  td:nth-child(2):before {
-    content: '브랜드:';
-  }
-  td:nth-child(3):before {
-    content: '지점:';
-  }
-  td:nth-child(4):before {
-    content: '별점:';
-  }
-  td:nth-child(5):before {
-    content: '주소:';
-  }
-  td:nth-child(6):before {
-    content: '문의전화:';
-  }
-  tr {
-    padding: 10px 0;
-    position: relative;
-  }
-  tr:first-child {
-    display: none;
-  }
+ 
 }
 @media screen and (max-width: 500px) {
   .header {
@@ -177,46 +174,70 @@ table tr:nth-child(2n+1) {
     margin: 0.5rem 0;
     padding: 0;
   }
-  
   .table-users {
     border: none;
     box-shadow: none;
     overflow: visible;
   }
 }
+
 </style>
 
 
-<div class="table-users">
-   <div class="header">리뷰 목록</div>
+ <div class="table-users">
+   <div class="header">MOVIE LIST</div>
+ </div>
 
-   <table>
-      <tr>
-         <th>아이디공간</th>
-         <th> 평가 </th>
-         <th> 관리자</th>
-      </tr> 
-      
-       <c:forEach var="dto" items="${list }"> 
-      <c:forEach var="reviewstar" items="${reviewstar }">
-      
-       <tr class="brandtest">
-         <td> ${reviewstar.clean }</td>
-         <td> 내용임 </td>
-         
-             <td>
-                <input class="cbp-mc-button" type="button" value="공개" onclick=""/>
-                <input class="cbp-mc-button" type="button" value="수정" onclick=""/>
-                <input class="cbp-mc-button" type="button" value="삭제" onclick=""/>
-             </td>
-         </tr> 
-   </c:forEach>
-   </c:forEach>
-   </table>
+   <c:forEach var="dto" items="${List }">
    
-</div>
+   <div>
+   <div class="box-image" >
+     <span class="thumb-image">
+       <strong class="title">${dto.mCode }</strong><br>
+     </span>
+     <span class="thumb-image">
+       <strong class="title">${dto.uid }</strong><br>
+     </span>
+     </div>
+   
+   <div class="box">
+       
+     <span>
+       <strong>${dto.star }
+       <c:if test="${dto.star==0 }">
+           <img class="simg" src="../img/star0.png"> 
+       </c:if>
+       <c:if test="${dto.star==1 }">
+           <img class="simg" src="../img/star1.png"> 
+       </c:if>
+       <c:if test="${dto.star==2 }">
+           <img class="simg" src="../img/star2.png"> 
+       </c:if>
+       <c:if test="${dto.star==3 }">
+           <img class="simg" src="../img/star3.png"> 
+       </c:if>
+       <c:if test="${dto.star==4 }">
+           <img class="simg" src="../img/star4.png"> 
+       </c:if>
+       <c:if test="${dto.star==5 }">
+           <img class="simg" src="../img/star5.png">
+       </c:if>
+       </strong>
+      </span><br>
+         
+    </div>
+   </div>
+   </c:forEach>
+    
 
-
+     
+     
+   <!-- 하단 버튼 -->
+   <br>
+   <div class="cbp-mc-submit-wrap">
+     <input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='../movie/create.do'"/>
+     <input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />
+   </div>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

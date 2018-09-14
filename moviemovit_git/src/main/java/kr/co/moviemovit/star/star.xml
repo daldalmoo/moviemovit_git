@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace="팩키지.인터페이스" -->
+<mapper namespace="kr.co.moviemovit.star.StarMapper">
+
+    <select id="movieList" resultType="MovieDTO" parameterType="MovieDTO">
+		<![CDATA[
+			SELECT mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date
+			FROM movieTable
+			WHERE mCode = #{mCode}
+		]]>
+	</select>
+	
+	<select id="uidList" resultType="String" parameterType="MovieDTO">
+		<![CDATA[
+			SELECT uid
+			FROM userTable
+			ORDER BY uid DESC
+		]]>
+	</select>
+	
+	<insert id="create" parameterType="StarDTO">
+        <selectKey keyProperty="sCode" resultType="int" order="BEFORE">
+			<![CDATA[
+				SELECT IFNULL(MAX(sCode),0) + 1 AS sCode
+				FROM starTable
+			]]>
+		</selectKey>
+		    <![CDATA[	
+				INSERT INTO starTable(sCode, mCode, uid, star, comment, wdate)
+				VALUES(#{sCode}, #{mCode}, #{uid}, #{star}, #{comment}, now())                        
+			]]>	
+	</insert>
+	
+	<select id="list" resultType="StarDTO">
+	    <![CDATA[
+			SELECT sCode, mCode, uid, star, comment, wdate
+			FROM starTable
+			ORDER BY sCode DESC	
+		]]>
+	</select>
+	
+	
+	
+</mapper>
+
+
+
+
+

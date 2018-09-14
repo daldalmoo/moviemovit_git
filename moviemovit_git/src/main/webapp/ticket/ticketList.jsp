@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
 <%@ include file="../header.jsp"%>
-<%-- 본문시작 bookList.jsp --%>
+<%-- 본문시작 ticketList.jsp --%>
 
 <style>
 .header {
@@ -176,7 +176,7 @@ td:nth-child(4) {
 
     <c:forEach var="dto" items="${list }">
       <tr>
-        <td>${dto.bCode }</td>
+        <td>${dto.tCode }</td>
         <td>${dto.wdate }</td>
         <td>${dto.uid }</td>
         <td>${dto.sCode }</td>
@@ -184,8 +184,8 @@ td:nth-child(4) {
         <td>${dto.seat}</td>
         <td>${dto.auditType}</td>
         <td>
-           <input class="listbutton" type="button" value="수정" onclick="location.href='./update.do?cCode=${dto.bCode }'"/>
-           <input class="listbutton" type="button" value="삭제" onclick="location.href='./delete.do?cCode=${dto.bCode }'"/>
+           <input class="listbutton" type="button" value="수정" onclick="location.href='./update.do?tCode=${dto.tCode }'"/>
+           <input class="listbutton" type="button" value="삭제" onclick="location.href='./delete.do?tCode=${dto.tCode }'"/>
         </td>
       </tr>
     </c:forEach>

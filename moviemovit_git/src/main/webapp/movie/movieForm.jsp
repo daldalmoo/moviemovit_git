@@ -246,22 +246,26 @@
 	<tr>
 		<th>*감독</th>
 		<td class="list">
-	      <input type="button" id="director" name="director" value="default" readonly required>	
-		</td>
+	      <input type="text" name="director" id="keyWord" required><br>
+		    <div id="peoName"></div>	
+	    </td>
 	</tr>
 	<tr>
 		<th>*주연배우</th>
 		<td class="list">
-	      <input type="button" id="actor" name="actor" value="default" readonly required>
+	      <input type="text" name="actor" id="keyWord2" required><br>
+		    <div id="peoName2"></div>
 		</td>
 	</tr>
 	<tr>
 		<th>*영화타입</th>
 		<td class="list">
-	      <input type="checkbox" name="DD" value="2D" checked> 2D
-          <input type="checkbox" name="DD" value="3D"> 3D
-          <input type="checkbox" name="DD" value="4D"> 4D
-          <input type="checkbox" name="DD" value="IMAX"> IMAX
+		  <select id="DD" name="DD" multiple="multiple" required>
+	        <option value="2D" selected>2D</option>
+            <option value="3D">3D</option>
+            <option value="4D">4D</option>
+            <option value="IMAX">IMAX</option>
+          </select>    
         </td>
 	</tr>
 	<tr>  
@@ -302,6 +306,95 @@
 		<input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='./movieList.do'"/>
 	</div>
 	
+	
+	<!-- 배우, 감독 불러오기 -->
+	<script src="js/jquery.js"></script>
+	<script>
+	//감독
+	$("#keyWord").keyup(function() {
+		//alert(keyWord);
+		var keyWord = $("#keyWord").val();
+		var params = "keyWord=" + keyWord;
+		
+		if($("#keyWord").val() == "") {//검색어가 존재하지 않으면
+			$("#peoName").hide(); //출력결과 숨기기
+		}
+		
+		$.post("./peopleNameList.do",params,peopleNameList);
+	});//keyup() end
+	
+	function peopleNameList(data) {
+		if(data.length>0) { //응답받은 내용이 있는지?					
+			var result = data.split("|");
+			var peopleList = result[1].split(",");
+			var str = "";
+			$.each(peopleList, function(index,key) {
+				str += "<a href='./peoNameClick.do'>" + key + "</a>";
+				str += "<br>";
+			}); //each() end
+			$("#peoName").html(str);
+			$("#peoName").show();
+		} else {
+			$("#peoName").hide();
+		}//if end
+	}//movieNameList() end
+	//-------------------------------------------------
+	//영화목록 중 영화이름 클릭하면 input 태그에 입력
+	$("#peoName #peoNameClick").click(function() {
+		alert("test");
+		var peoName = ("#peoName #peoNameClick").val();
+		$("#keyWord").text(mName); 
+	});//click() end
+	
+	//-------------------------------------------------
+	$("#peoNameClick").click(function(){
+    // 해당 줄의 uid 값 가져오기
+    var uid = $(this).parent().prev().text();
+    //alert(uid);
+    
+    // 부모창에 uid 입력
+    opener.document.getElementById("uid").value = uid;
+    window.close();
+    });
+	//-------------------------------------------------
+	//배우
+	$("#keyWord2").keyup(function() {
+		//alert(keyWord);
+		var keyWord2 = $("#keyWord2").val();
+		var params = "keyWord2=" + keyWord2;
+		
+		if($("#keyWord2").val() == "") {//검색어가 존재하지 않으면
+			$("#peoName2").hide(); //출력결과 숨기기
+		}
+		
+		$.post("./peopleNameList2.do",params,peopleNameList2);
+	 });//keyup() end
+	
+	 function peopleNameList2(data) {
+	 	if(data.length>0) { //응답받은 내용이 있는지?					
+			var result = data.split("|");
+			var peopleList = result[1].split(",");
+			var str = "";
+			$.each(peopleList, function(index,key) {
+				str += "<a href='./peoNameClick.do'>" + key + "</a>";
+				str += "<br>";
+			}); //each() end
+			$("#peoName2").html(str);
+			$("#peoName2").show();
+		} else {
+			$("#peoName2").hide();
+		}//if end
+	 }//movieNameList() end
+	 //-------------------------------------------------
+	 //영화목록 중 영화이름 클릭하면 input 태그에 입력
+	 $("#peoName2 #peoNameClick2").click(function() {
+		alert("test");
+		var poeName = ("#peoName2 #peoNameClick2").val();
+		$("#keyWord2").text(peoName); 
+	 });//click() end
+	
+	 //-------------------------------------------------
+	 </script>
 	
 </form>
 

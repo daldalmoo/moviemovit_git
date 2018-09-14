@@ -40,10 +40,12 @@ margin:auto;
 <!-- 인풋타입 가져와서 create디자인이랑 통일1 -->
 <form class="cbp-mc-form" name="editor" method="POST" action="./reply.do" >
 	<h2>공지사항</h2>
-	   <input type="hidden" name="groupNum" value="${dto.groupNum}"/>
-       <input type="hidden"  name="indent" value="${dto.indent}"/>
-       <input type="hidden" name="qType" value="${dto.qType}"/>
-       <input type="hidden" name="groupNo" value="${dto.groupNo}"/>
+	
+  <input type="hidden" name="groupNum" value="${dto.groupNum}"/>
+  <input type="hidden"  name="indent" value="${dto.indent}"/>
+  <input type="hidden" name="qType" value="${dto.qType}"/>
+  <input type="hidden" name="groupNo" value="${dto.groupNo}"/>
+  
 	<table class="cbp-mc-column">
 	<tr>
 	<th>공지사항번호</th>
@@ -51,8 +53,7 @@ margin:auto;
 	</tr>
 		<tr>
 			<th>제목</th>
-			<td>
-			<input type="text" id="title"name="title" size="50"   value=" ${dto.title }" readonly></td>
+			<td><input type="text" id="title"name="title" size="50"   value=" ${dto.title }" readonly></td>
 		</tr>
 		<tr>
 			<th>작성자</th>
@@ -62,11 +63,6 @@ margin:auto;
 			<th>내용</th>
 			<td><textarea name="content" id="content" >${dto.content}</textarea></td>
 		</tr>
-	
-		<%-- <tr>
-			<th>공개여부</th>
-			<td><input type="text" id="open"name="open" size="50" value="${dto.open}" ></td>
-		</tr> --%>
 	</table>
 	
 

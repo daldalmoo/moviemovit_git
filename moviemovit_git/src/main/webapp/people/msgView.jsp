@@ -3,7 +3,7 @@
 <html> 
 <head> 
 <meta charset="UTF-8"> 
-<title>movie/msgView.jsp</title> 
+<title>review/msgView.jsp</title> 
 <style type="text/css"> 
 *{ 
   font-family: gulim; 
