@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
+import kr.co.moviemovit.screen.ScreenDTO;
 
 public interface TicketMapper {
 
@@ -17,5 +18,8 @@ public interface TicketMapper {
 
   //<select id="cineList" resultType="CinemaDTO">
 	public ArrayList<CinemaDTO> cineList();
+	
+	//<select id="cinelistFromMovie" parameterType="int" resultType="CinemaDTO">
+	public ArrayList<CinemaDTO> cinelistFromMovie(int mCode);
 	
 }// interface end

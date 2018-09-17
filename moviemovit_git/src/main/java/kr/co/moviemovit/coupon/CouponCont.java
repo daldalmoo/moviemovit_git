@@ -85,7 +85,7 @@ public class CouponCont {
   
   // 쿠폰 등록하는 폼
   @RequestMapping(value="/coupon/create.do", method=RequestMethod.GET)  // link 클릭해서 넘어오는건 다 GET 방식
-  public ModelAndView createForm(HttpServletRequest req) {
+  public ModelAndView createForm() {
     ModelAndView mav = new ModelAndView();
     
     // startDate 기본값 오늘날짜로 세팅, expDate 기본값 오늘날짜 + 1년후로 세팅
