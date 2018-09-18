@@ -41,9 +41,10 @@
 
 /* 극장선택 타이틀 */
 .cinema_title .refreshbtn { /* 새로고침 버튼 */
-  position: relative;
-  top: 13px;
-  transform: translateY(-50%);
+  cursor: pointer;
+  width: 19px;
+  height: 19px;
+  margin-bottom: 1px;
 }
 .cinema_title .searchtxt{ /* 검색창 */
   text-align: center;
@@ -289,8 +290,8 @@ dd, dt {
       
       <th class="cinema_title">
         <span>극장선택</span>
-        <input type="image" class="refreshbtn" src="./img/refresh_btn.gif" alt="새로고침" onclick="ResetCinema();">
-        &nbsp;&nbsp;
+        <img class="refreshbtn" src="./img/refreshbtn.jpg" onmouseover="this.src='./img/refreshbtn_hover.jpg'" onmouseout="this.src='./img/refreshbtn.jpg'" onclick="ResetCinema();">
+        &nbsp;
         <input type="text" class="searchtxt" placeholder=" 극장검색">
         <input type="image" class="searchbtn" src="./img/btn_search.gif" alt="검색" onclick="SearchCinema();">
       </th>
@@ -306,9 +307,8 @@ dd, dt {
         <div class="scrollBlind">
           <ul id="movie_list">
             <c:forEach var="movie" items="${movieList }">
-              <li id="SelMovieList" value="${movie.mCode }"><a
-                href="javascript:void(0);"
-                onclick="SelMovieList(${movie.mCode})">${movie.mName }</a>
+              <li id="SelMovieList" value="${movie.mCode }">
+                <a href="javascript:void(0);" onclick="SelMovieList(${movie.mCode})">${movie.mName }</a>
               </li>
             </c:forEach>
           </ul>
@@ -323,17 +323,17 @@ dd, dt {
           <!-- 활성화시 class 'on' -->
           <ul class="tab_menu">
             <li class="t_tab1">
-              <a href="javascript:TabTheaterMode('1',0);" onclick="nclk(this, 'the.all', '', 1)" class="on">
+              <a href="javascript:cinemaSelect(1)" class="on">
                 <span>전체극장</span>
               </a>
             </li>
             <li class="t_tab2">
-              <a href="javascript:TabTheaterMode('1',1);" onclick="nclk(this, 'the.play', '', 1)" class="">
+              <a href="javascript:cinemaSelect(2);" class="">
                 <span>상영극장</span>
               </a>
             </li>
             <li class="t_tab3">
-              <a href="javascript:TabTheaterMode('1',2);" onclick="nclk(this, 'the.chain', '', 1)" class="">
+              <a href="javascript:cinemaSelect(3);" class="">
                 <span>체인별</span>
               </a>
             </li>
@@ -383,14 +383,11 @@ dd, dt {
 	  <td id="movieinfo_area" rowspan="3" style="background: linear-gradient(to top, #3b3d58 0%, #5d607d 100%); color: white;">
         <div class="section_result">
           <div id="btn_reset">
-            <input type="image" class="initReserve"
-              src="./img/btn_initReserve.PNG" alt="예매다시하기"
-              onclick="javascript:InitReserveMovie('0')">
+            <input type="image" class="initReserve" src="./img/btn_initReserve.PNG" alt="예매다시하기" onclick="javascript:InitReserveMovie('0')">
           </div>
 
           <div id="thumb_poster" class="thumb_poster">
-            <input type="image" class="movie_poster"
-              src="./img/default.png">
+            <input type="image" class="movie_poster" src="./img/default.png">
           </div>
 
           <h3>
@@ -457,8 +454,8 @@ dd, dt {
       <td id="screentime_area" colspan="2" style="vertical-align: top;">
         <div class="time_area">
           <div class="cinemainfo">
-            <img src="./img/default.png" class="cinema_logo"> <span
-              class="cinemainfo_name">영화관-지점</span>
+            <img src="./img/default.png" class="cinema_logo">
+            <span class="cinemainfo_name">영화관-지점</span>
           </div>
           <hr>
 
@@ -503,10 +500,18 @@ dd, dt {
 <script>
   // 극장목록 새로고침
   function ResetCinema() {
-    $(".t_tab1").removeClass('on');
-    $(".t_tab2").addClass('on');
-    $(".t_tab3").addClass('on');
-  }
+    alert("ResetCinema() 클릭");
+    
+  }//ResetCinema() end
+  
+  // 극장종류 선택
+  function cinemaSelect(i) {
+    alert("cinemaSelect() 클릭");
+    for(var j=1; j<=3; j++) {
+      $(".t_tab"+j+" a").removeClass("on");
+    }//for end
+    $(".t_tab"+i+" a").addClass('on');
+  }//cinemaSelect() end
   
   /* --------- 영화선택 -> 상영극장 가져오기 AJAX --------- */
   $.ajaxSetup({datatype:"text"});

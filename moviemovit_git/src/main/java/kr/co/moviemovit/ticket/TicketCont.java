@@ -44,7 +44,7 @@ public class TicketCont {
   
   
 /************************************ µî·Ï *************************************************/
-	@RequestMapping(value="/ticket/ticketform.do", method = RequestMethod.GET)
+	@RequestMapping(value="/ticket/create.do", method = RequestMethod.GET)
 	public ModelAndView ticketForm() {
 		ModelAndView mav = new ModelAndView();
 		
