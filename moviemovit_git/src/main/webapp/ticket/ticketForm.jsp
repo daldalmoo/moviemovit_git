@@ -226,8 +226,7 @@ dd, dt {
 </style>
 
 
-<form class="cbp-mc-form" name="regForm" method='POST'
-  action='./create.do' onsubmit="return couponCheck(this)">
+<form class="cbp-mc-form" name="regForm" method='POST' action='./create.do' onsubmit="return couponCheck(this)">
   <table id="ticketArea">
     <!-------------------------------- 1행 타이틀  --------------------------------------->
     <tr>
