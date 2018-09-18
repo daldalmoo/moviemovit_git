@@ -1,0 +1,62 @@
+#date_area{
+   margin:auto;
+   width:75%;
+   height:10%;
+}
+.calendar {
+  width: 100%;
+  overflow: visible;
+  text-align: center;
+  display: table;
+  border-collapse: separate;
+  border-spacing: 2px;
+  border-color: grey;
+}
+.calendar .week {
+  background: #f1f0f0;
+  color: #515151;
+  font-size: 16px;
+  font-weight: bold;
+  border-bottom: 1px solid #d6d6d6;
+  height: 40px;
+}
+.calendar .saturday {
+  background: white;
+  color: #3a87ad;
+  font-size: 16px;
+  font-weight: bold;
+  height: 55px;
+  border: 2px solid #f1f0f0;
+}
+.calendar .sunday {
+  background: white;
+  color: crimson;
+  font-size: 16px;
+  font-weight: bold;
+  height: 55px;
+  border: 2px solid #f1f0f0;
+}
+.calendar .today {
+  background: white;
+  color: darkblue;
+  font-size: 16px;
+  font-weight: bold;
+  height: 55px;
+  border: 2px solid darkblue;
+}
+.calendar .blank {
+  background: white;
+  color: brown;
+  font-size: 16px;
+  font-weight: bold;
+  height: 55px;
+  border: 2px solid #f1f0f0;
+}
+.calendar .day {
+  background: white;
+  color: #515151;
+  font-size: 16px;
+  font-weight: bold;
+  height: 55px;
+  border: 2px solid #f1f0f0;
+}
