@@ -35,6 +35,27 @@ from QnATable
 where groupNo=5;
 
 
+-- screenTable, roomTable insert
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C001_1', '2018-09-17', '1030', '2');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L001_2', '2018-09-17', '1030', '3');
+insert into roomTable(roomCode,cineCode,roomName,seatCnt,DD,seatImg)
+values('L001_2','C001',1,50,'2D, 3D','moving/images/seat1.jpg');
 
 
+-- 영화선택(mCode) -> 상영극장(cineCode,brandName,cineName,logoImgMF) 가져오기
+SELECT sCode,roomCode,sdate,stime
+FROM screenTable
+WHERE mCode=2
+ORDER BY sCode ASC;
 
+SELECT *
+FROM cinemaTable CT
+INNER JOIN roomTable RT
+ON CT.cineCode=RT.cineCode
+INNER JOIN screenTable ST
+ON RT.roomCode=ST.roomCode
+WHERE mCode=1
+GROUP BY CT.cineCode
+ORDER BY brandName ASC, cineName ASC;
