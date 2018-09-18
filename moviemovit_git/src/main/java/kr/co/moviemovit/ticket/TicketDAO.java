@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
+import kr.co.moviemovit.screen.ScreenDTO;
 
 @Component
 public class TicketDAO {
@@ -47,5 +48,12 @@ public class TicketDAO {
     ArrayList<CinemaDTO> cinelist = mapper.cineList();
     return cinelist;
   }//cineList() end
+  
+  public ArrayList<CinemaDTO> cinelistFromMovie(int mCode) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<CinemaDTO> cinelist = mapper.cinelistFromMovie(mCode);
+    return cinelist;
+  }//screenlistFromMovie() end
+  
   
 }//class end

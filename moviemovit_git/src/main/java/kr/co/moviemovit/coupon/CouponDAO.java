@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /*
-private int cCode;    // ì¿ í°ì½”ë“œ
-private String uid;   // ìœ ì € ì•„ì´ë””
-private String startDate;   // ë°œê¸‰ì¼
-private String expDate;     // ë§Œë£Œì¼
+private int cCode;    // ÄíÆùÄÚµå
+private String uid;   // À¯Àú ¾ÆÀÌµğ
+private String startDate;   // ¹ß±ŞÀÏ
+private String expDate;     // ¸¸·áÀÏ
 */
 @Component
 public class CouponDAO {
@@ -18,17 +18,17 @@ public class CouponDAO {
   //@Autowired
   //DBOpen dbopen;
   
-  //root-context.xmlì˜ <bean id=sqlSession> ì˜ì¡´ ê´€ê³„ë¥¼ ìë™ìœ¼ë¡œ ì—°ê²° ë° ê°ì²´ ìë™ ìƒì„±
+  //root-context.xmlÀÇ <bean id=sqlSession> ÀÇÁ¸ °ü°è¸¦ ÀÚµ¿À¸·Î ¿¬°á ¹× °´Ã¼ ÀÚµ¿ »ı¼º
   @Autowired
   SqlSession sqlSession;
   
   public CouponDAO() {
-    System.out.println("---------- CouponDAO() ê°ì²´ ìƒì„±");
+    System.out.println("---------- CouponDAO() °´Ã¼ »ı¼º");
   }//default constructor
   
   
-/*********************************** ì¿ í° ëª©ë¡ *********************************************/
-  // ì¿ í° ëª©ë¡ select
+/*********************************** ÄíÆù ¸ñ·Ï *********************************************/
+  // ÄíÆù ¸ñ·Ï select
   public ArrayList<CouponDTO> list() {
     CouponMapper mapper = sqlSession.getMapper(CouponMapper.class);
     ArrayList<CouponDTO> list = mapper.list();
@@ -36,22 +36,22 @@ public class CouponDAO {
   }//list() end
   
 
-/************************************ ë“±ë¡ *************************************************/
-  // ì¿ í° ë“±ë¡ insert
+/************************************ µî·Ï *************************************************/
+  // ÄíÆù µî·Ï insert
   public int create(CouponDTO dto) {
     CouponMapper mapper = sqlSession.getMapper(CouponMapper.class);
     int count = mapper.create(dto);
     return count;
   }//create() end
   
-  // ì¿ í° ë“±ë¡&ìˆ˜ì •ì‹œ í•„ìš”í•œ íšŒì› ì•„ì´ë”” ëª©ë¡ ê°€ì ¸ì˜¤ê¸° select
+  // ÄíÆù µî·Ï&¼öÁ¤½Ã ÇÊ¿äÇÑ È¸¿ø ¾ÆÀÌµğ ¸ñ·Ï °¡Á®¿À±â select
   public ArrayList<String> uidlist() {
     CouponMapper mapper = sqlSession.getMapper(CouponMapper.class);
     ArrayList<String> list = mapper.uidlist();
     return list;
   }//uidlist() end
   
-  // ì¿ í° ë“±ë¡&ìˆ˜ì •ì‹œ ê²€ìƒ‰ì–´ì™€ ì¼ì¹˜í•˜ëŠ” íšŒì› ì•„ì´ë”” ëª©ë¡ ê°€ì ¸ì˜¤ê¸° select where
+  // ÄíÆù µî·Ï&¼öÁ¤½Ã °Ë»ö¾î¿Í ÀÏÄ¡ÇÏ´Â È¸¿ø ¾ÆÀÌµğ ¸ñ·Ï °¡Á®¿À±â select where
   public ArrayList<String> uidsearch(String uid) {
     CouponMapper mapper = sqlSession.getMapper(CouponMapper.class);
     ArrayList<String> list = mapper.uidsearch(uid);
@@ -59,15 +59,15 @@ public class CouponDAO {
   }//uidsearch() end
   
   
-/************************************ ìˆ˜ì • *************************************************/
-  // ì¿ í° í•œê°œ ìƒì„¸ë°ì´í„° ê°€ì ¸ì˜¤ê¸° select
+/************************************ ¼öÁ¤ *************************************************/
+  // ÄíÆù ÇÑ°³ »ó¼¼µ¥ÀÌÅÍ °¡Á®¿À±â select
   public CouponDTO read(int cCode) {
     CouponMapper mapper = sqlSession.getMapper(CouponMapper.class);
     CouponDTO dto = mapper.read(cCode);
     return dto;
   }//read() end
   
-  // ì¿ í° ìˆ˜ì • update
+  // ÄíÆù ¼öÁ¤ update
   public int update(CouponDTO dto) {
     CouponMapper mapper = sqlSession.getMapper(CouponMapper.class);
     int count = mapper.update(dto);
@@ -75,8 +75,8 @@ public class CouponDAO {
   }//update() end
   
   
-/************************************ ì‚­ì œ *************************************************/
-  // ì¿ í° ì‚­ì œ delete
+/************************************ »èÁ¦ *************************************************/
+  // ÄíÆù »èÁ¦ delete
   public int delete(int cCode) {
     CouponMapper mapper = sqlSession.getMapper(CouponMapper.class);
     int count = mapper.delete(cCode);

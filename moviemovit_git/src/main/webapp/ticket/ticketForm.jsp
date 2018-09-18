@@ -159,6 +159,9 @@
   top: 12px;
   transform: translateY(-50%);
 }
+#cinema_area .cinema_title .searchtxt{ /* 검색창 */
+  text-align: center;
+}
 #cinema_area .cinema_title .searchbtn { /* 검색 버튼 */
   position: relative;
   top: 13.5px;
@@ -273,6 +276,20 @@
 }
 
 
+
+/* placeholder 속성 */
+::-webkit-input-placeholder {  /* 크롬 */
+  font-size: 14px;
+}
+:-moz-placeholder {    /* 파이어폭스 */
+  font-size: 14px;
+}
+::-moz-placeholder {
+  font-size: 14px;
+}
+:-ms-input-placeholder {   /* 익스 */
+  font-size: 14px;
+}
 </style>
 
 <form class="cbp-mc-form" name="regForm" method='POST'
@@ -311,9 +328,10 @@
     <div id="cinema_area">
       <div class="cinema_title">
         <span>극장선택</span>
-        <input type="image" class="refreshbtn" src="./img/refresh_btn.gif" alt="새로고침" onclick="javascript:ResetSelTheaterList('0');nclk(this, 'the.ref', '', 1)">
-        <input type="text" id="txtTheater" title="극장검색" class="search">
-        <input type="image" class="searchbtn" src="./img/btn_search.gif" alt="검색" onclick="javascript:TheaterSearchBtnClick();nclk(this, 'the.enter', '', 1);">
+        <input type="image" class="refreshbtn" src="./img/refresh_btn.gif" alt="새로고침" onclick="ResetCinema();">
+        &nbsp;&nbsp;
+        <input type="text" class="searchtxt" placeholder=" 극장검색">
+        <input type="image" class="searchbtn" src="./img/btn_search.gif" alt="검색" onclick="SearchCinema();">
       </div>
       
       <div class="cinema_select">
@@ -350,7 +368,7 @@
       </div>
         
       <div class="cinema_list">
-        <ul>
+        <ul id="cineList">
           <c:forEach var="cine" items="${cinelist }">
             <li>
               <a href="#">
@@ -440,19 +458,47 @@
 <!-- --------------------- 예매하기 AJAX ----------------------- -->	
 <script src="../js/jquery.js"></script>
 <script>
-
-//영화선택
-function SelMovieList(mCode) {
-	//해당 영화를 상영하는 극장 출력
-	$.post("./cinelist.do",mCode,cinelist);
-};//SelMovieList() end
-
-function theaterNameList(data) {
-	alert("data");
-}//theaterNameList() end
-
-
-
+  // 극장목록 새로고침
+  function ResetCinema() {
+    $(".t_tab1").removeClass('on');
+    $(".t_tab2").addClass('on');
+    $(".t_tab3").addClass('on');
+  }
+  
+  /* --------- 영화선택 -> 상영극장 가져오기 AJAX --------- */
+  $.ajaxSetup({datatype:"text"});
+  
+  function SelMovieList(mCode) {
+  	//alert("SelMovieList(mCode) 호출. mCode:" + mCode);
+    var mCode = "mCode=" + mCode;
+    /*
+      $.post(URL,data,function(data,status,xhr)
+      - URL : 서버에 요청하는 명령어
+      - ★data : 서버에 전송하는 값(변수1=값1&변수2=값2)
+      - function : 콜백함수
+    */
+    $.post("./cinelist.do",mCode,cineList);
+  };//SelMovieList() end
+  
+  function cineList(data) {  // Controller에서 msg 값 data로 받아옴
+    //alert("cineList() 호출. data:"+data);
+    $("#cineList").html(data);
+  }//cineList() end
+  /* --------- 영화선택 -> 상영극장 가져오기 AJAX end--------- */
+  
+  
+  
+  /* --------- 영화,극장,날짜 선택 -> 상영시간표 가져오기 AJAX --------- */
+  /*
+  function screentimeList(data) {  // Controller에서 msg 값 data로 받아옴
+    alert("screentimeList() 호출. data:"+data);
+    $(".screentime").html(data);
+  }//cineList() end
+  */
+  /* --------- 영화선택 -> 상영극장 가져오기 AJAX end--------- */
+  
+  
+  
 </script>
 <!-- --------------------- 예매하기 AJAX end ----------------------- -->
   
