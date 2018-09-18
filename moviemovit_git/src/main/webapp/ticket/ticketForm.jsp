@@ -35,7 +35,7 @@
   border: 1px solid #000;
 }
 
-td {
+#ticketArea>tbody>tr>td {
   border: 1px solid #000;
 }
 
@@ -321,7 +321,7 @@ dd, dt {
     
     
       <!-- -------------------------- date_area : 날짜 선택 ----------------------------------- -->
-      <td id="date_area" style="border-left: 1px solid black;"></td>
+      <td id="date_area"></td>
       <!-- -------------------------- date_area : 날짜 선택  end ------------------------------- -->
       
 
@@ -421,7 +421,7 @@ dd, dt {
       
       
       <!-- -------------------------- people_area : 인원 선택 ----------------------------------- -->
-	  <td id="people_area" style="border-left: 1px solid black;"></td>
+	  <td id="people_area"></td>
       <!-- -------------------------- people_area : 인원 선택 end ----------------------------------- -->
       
     </tr>
