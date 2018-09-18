@@ -223,6 +223,61 @@ dd, dt {
   color: black;
   font-weight: bold;
 }
+
+/*********** 6) 인원선택 ***********/
+.select_people {
+  margin:auto;
+}
+.ticket {
+  width: 300px;  
+}
+.ticket ul {
+  margin: 0;
+  padding: 0;
+}
+.ticket ul li {
+  list-style: none;
+}
+.ticket dt {
+  position: relative;
+  margin-bottom: 3px;
+  font-weight: bold;
+  color: #b2b6c3;
+  margin: 0;
+  padding: 0;
+}
+.ticket dt em {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  font-size: 11px;
+  font-weight: normal;
+  color: #ceced5;
+}
+.ticket dd {
+  overflow: hidden;
+  zoom:1;
+  margin:0;
+  padding:0;
+}
+.ticket dd li.dimmed {
+  display: inline-block;
+  width: 25px;
+  height: 30px;
+  padding-top: 2px;
+  background-position: -90px -63px;
+  color: #d0d0d8;
+}
+.ticket dd li {
+  margin: 0 1px 0 0;
+  padding: 0;
+  float: left;
+  background:;
+  font-family: tahoma;
+  font-size: 11px;
+  font-weight: bold;
+  text-align: center;
+}
 </style>
 
 
@@ -420,7 +475,14 @@ dd, dt {
       
       
       <!-- -------------------------- people_area : 인원 선택 ----------------------------------- -->
-	  <td id="people_area"></td>
+	  <td id="people_area" style="border-left: 1px solid black;">
+        <div id="select_people">
+          <div id="price_1st">
+            <table>
+            </table>
+          </div>
+        </div>
+      </td>
       <!-- -------------------------- people_area : 인원 선택 end ----------------------------------- -->
       
     </tr>
