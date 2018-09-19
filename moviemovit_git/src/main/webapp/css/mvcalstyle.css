@@ -1,4 +1,4 @@
-#date_area{
+#cal_area{
    margin:auto;
    width:75%;
    height:10%;
@@ -59,4 +59,24 @@
   font-weight: bold;
   height: 55px;
   border: 2px solid #f1f0f0;
+}
+#prev {
+  color: black;
+  float: left;
+  vertical-align: bottom;
+  width: 10px;
+  height: 10px;
+  line-height: 5px;
+  margin: 7px 0 0 0;
+  cursor: pointer;
+}
+#next {
+  color: black;
+  float: right;
+  vertical-align: bottom;
+  width: 10px;
+  height: 10px;
+  line-height: 5px;
+  margin: 7px 7px 0 0;
+  cursor: pointer;
 }

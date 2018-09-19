@@ -225,58 +225,43 @@ dd, dt {
 }
 
 /*********** 6) 인원선택 ***********/
-.select_people {
-  margin:auto;
+#price_lst_area {
+  margin: 0 0 0 10px;
 }
-.ticket {
-  width: 300px;  
-}
-.ticket ul {
-  margin: 0;
-  padding: 0;
-}
-.ticket ul li {
-  list-style: none;
-}
-.ticket dt {
-  position: relative;
+
+#price_lst_area .ticket_title th {
+  color:#2d2d3f;
   margin-bottom: 3px;
   font-weight: bold;
-  color: #b2b6c3;
-  margin: 0;
-  padding: 0;
+  background: #fff;
+  border: none;
+  line-height: 20px;
+  text-align: left;
 }
-.ticket dt em {
-  position: absolute;
-  top: 2px;
-  right: 0;
-  font-size: 11px;
-  font-weight: normal;
-  color: #ceced5;
-}
-.ticket dd {
-  overflow: hidden;
-  zoom:1;
-  margin:0;
-  padding:0;
-}
-.ticket dd li.dimmed {
-  display: inline-block;
-  width: 25px;
-  height: 30px;
-  padding-top: 2px;
-  background-position: -90px -63px;
-  color: #d0d0d8;
-}
-.ticket dd li {
-  margin: 0 1px 0 0;
-  padding: 0;
-  float: left;
-  background:;
-  font-family: tahoma;
-  font-size: 11px;
+#price_lst_area .ticket_title .per_price {
+  float: right;
+  padding-right: 10px;
+  position: relative;
+  font-size: 13px;
+  color: #a8a4b9;
   font-weight: bold;
+}
+.ticket_data li {
+  background: url('./img/selectBefore_people.PNG')
+}
+.ticket_data li.dimmed {
+  display: inline-block;
+  width: 30px;
+  height: 27px;
+  color: #d0d0d8;
+  float: left;
   text-align: center;
+  padding-top: 3px;
+  
+}
+#price_lst_area .ticket_data td{
+  vertical-align: bottom;
+  padding-left: 30px;
 }
 </style>
 
@@ -473,12 +458,80 @@ dd, dt {
       </td>
       <!-- -------------------------- screentime_area : 상영시간 선택 end -------------------------------- -->
       
-      
       <!-- -------------------------- people_area : 인원 선택 ----------------------------------- -->
 	  <td id="people_area" style="border-left: 1px solid black;">
         <div id="select_people">
-          <div id="price_1st">
-            <table>
+          <div id="price_lst">
+          
+            <table id="price_lst_area">
+              <tr class="ticket_title">
+                <th>성인<span class="per_price">1매/10,000원</span></th>
+              </tr>
+
+              <tr class="ticket_data">
+                <td>
+                  <ul>
+                    <li class="dimmed">0</li>
+                    <li class="dimmed">1</li>
+                    <li class="dimmed">2</li>
+                    <li class="dimmed">3</li>
+                    <li class="dimmed">4</li>
+                    <li class="dimmed">5</li>
+                  </ul>
+                </td>
+              </tr>
+
+              <tr class="ticket_title">
+                <th>청소년<span class="per_price">1매/8,000원</span></th>
+              </tr>
+
+              <tr class="ticket_data">
+                <td>
+                  <ul>
+                    <li class="dimmed">0</li>
+                    <li class="dimmed">1</li>
+                    <li class="dimmed">2</li>
+                    <li class="dimmed">3</li>
+                    <li class="dimmed">4</li>
+                    <li class="dimmed">5</li>
+                  </ul>
+                </td>
+              </tr>
+
+              <tr class="ticket_title">
+                <th>경로우대<span class="per_price">1매/6,000원</span></th>
+              </tr>
+
+              <tr class="ticket_data">
+                <td>
+                  <ul>
+                    <li class="dimmed">0</li>
+                    <li class="dimmed">1</li>
+                    <li class="dimmed">2</li>
+                    <li class="dimmed">3</li>
+                    <li class="dimmed">4</li>
+                    <li class="dimmed">5</li>
+                  </ul>
+                </td>
+              </tr>
+
+              <tr class="ticket_title">
+                <th>아이<span class="per_price">1매/5,000원</span></th>
+              </tr>
+
+              <tr class="ticket_data">
+                <td>
+                  <ul>
+                    <li class="dimmed">0</li>
+                    <li class="dimmed">1</li>
+                    <li class="dimmed">2</li>
+                    <li class="dimmed">3</li>
+                    <li class="dimmed">4</li>
+                    <li class="dimmed">5</li>
+                  </ul>
+                </td>
+              </tr>
+
             </table>
           </div>
         </div>
@@ -491,13 +544,6 @@ dd, dt {
 
   <br>
 </form>
-<!-- 예매 버튼 -->
-<div class="cbp-mc-submit-wrap">
-	<input class="cbp-mc-submit" type="submit" value="예매" />
-	<input class="cbp-mc-submit" type="reset" value="다시입력" />
-	<input class="cbp-mc-submit" type="button" value="취소" onclick="javascript:history.back()" />
-</div>
-
 <!-- --------------------- 예매하기 AJAX ----------------------- -->	
 <script src="../js/jquery.js"></script>
 <script>
@@ -582,8 +628,8 @@ var TD_saturday_start = "<td class='saturday'>";//토
 var TD_sunday_start = "<td class='sunday'>";    //일
 var TD_end = "</td>";                           //테이블 만들기
 
-str = "<table id='date_area' border=1 cellspacing=0 cellpadding=0 bordercolor=bbbbbb><tr><td style='text-align:center'>";
-str += "<strong>" + year + ". " + month_of_year[month] + "</strong>";
+str = "<table id='cal_area' border=1 cellspacing=0 cellpadding=0 bordercolor=bbbbbb><tr><td style='text-align:center'>";
+str += "<strong>" + "<div id='prev' onclick='changeCal(this)'>◀</div>" + year + ". " + month_of_year[month] + "<div id='next' onclick='changeCal(this)'>▶</div>" + "</strong>";
 str += "<table class='calendar' border=0 cellspacing=0 cellpadding=2>";
 
 //본격적인 tr시작. 맨첫줄은 요일
@@ -635,10 +681,22 @@ for(var i=0; i<DAYS_OF_MONTH; ++i) {
   
   //다음 날짜로 넘어간다
   Calendar.setDate(Calendar.getDate() + 1);
+  
 }//for end
 
+//달력 클릭
+function changeCal(t) {
+  alert("test");
+  if(t.id == 'next') {
+    month++;
+    if(month>12) { year++; month=1; }
+  } else if(t.id == 'prev') {
+    month--;
+    if(month<1) {year--; month=12; }
+  }  
+}//changeCal() end
+
 str += "</table></td></tr></table>";
-//document.write(str);
 document.getElementById("date_area").innerHTML = str;
 </script>
 <!-- -------------------- 달력 script end ------------------------ -->
