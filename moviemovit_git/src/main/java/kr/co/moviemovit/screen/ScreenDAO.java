@@ -15,12 +15,12 @@ public class ScreenDAO {
 	SqlSession sqlSession;
 	
 	public ScreenDAO() {
-		System.out.println("---ScreenDAO() ê°ì²´ ìƒì„±");
-	}//ê¸°ë³¸ ìƒì„±ì
+		System.out.println("---ScreenDAO() °´Ã¼ »ı¼º");
+	}//±âº» »ı¼ºÀÚ
 	
-	/*ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§*/
+	/*ºñÁî´Ï½º ·ÎÁ÷*/
 	
-	//ì˜í™”ê´€ ë¸Œëœë“œì— í•´ë‹¹í•˜ëŠ” ì§€ì ê°€ì ¸ì˜¤ê¸°
+	//¿µÈ­°ü ºê·£µå¿¡ ÇØ´çÇÏ´Â ÁöÁ¡°¡Á®¿À±â
 	public ArrayList<CinemaDTO> cineNameList(String brandName) {
 		ScreenMapper mapper = sqlSession.getMapper(ScreenMapper.class);
 		System.out.println("---ScreenCont 7");
@@ -29,7 +29,7 @@ public class ScreenDAO {
 		return cineList;
 	}//ChoosecineName() end
 	
-	//ì˜í™” ëª©ë¡ ê°€ì ¸ì˜¤ê¸°
+	//¿µÈ­ ¸ñ·Ï °¡Á®¿À±â
 	public ArrayList<MovieDTO> movieNameList(String mName) {
 		ScreenMapper mapper = sqlSession.getMapper(ScreenMapper.class);
 		ArrayList<MovieDTO> movieList = mapper.movieNameList(mName);
