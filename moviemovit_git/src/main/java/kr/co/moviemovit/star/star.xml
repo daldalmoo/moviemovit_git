@@ -23,35 +23,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="create" parameterType="StarDTO">
-       <selectKey keyProperty="sCode" resultType="int" order="BEFORE">
+        <selectKey keyProperty="sCode" resultType="int" order="BEFORE">
 			<![CDATA[
 				SELECT IFNULL(MAX(sCode),0) + 1 AS sCode
 				FROM starTable
 			]]>
 		</selectKey>
-		
-		<!-- <selectKey keyProperty="mCode" resultType="int" order="BEFORE">
-			<![CDATA[
-				SELECT mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date
-			    FROM movieTable
-			    WHERE mCode = #{mCode}
-			]]>
-		</selectKey> -->
-		
+				
 		    <![CDATA[	
 				INSERT INTO starTable(sCode, mCode, uid, star, comment, wdate)
 				VALUES(#{sCode}, #{mCode}, #{uid}, #{star}, #{comment}, now())                        
 			]]>	
+			
+		<!-- <selectKey keyProperty="star" resultType="int" order="AFTER">
+			<![CDATA[
+				SELECT avg(star) AS star
+				FROM starTable
+			]]>
+		</selectKey> -->
 	</insert>
 	
-	<select id="list" resultType="StarDTO">
+	<!-- <select id="list" resultType="StarDTO">
 	    <![CDATA[
-			SELECT sCode, mCode, uid, star, comment, wdate
-			FROM starTable
-			ORDER BY sCode DESC	
+			SELECT sCode, mCode, uid, (select avg(star) from starTable) AS star, comment, wdate
+            FROM starTable
+           	ORDER BY sCode DESC
 		]]>
-	</select>
+	</select> -->
 	
+	<!-- <select id="starlist" parameterType="hashMap" resultMap="hashMap">
+	    <![CDATA[
+	        select *
+            from (SELECT sCode, mCode, uid, (select avg(star) from starTable where mCode=#{mCode}) as star, comment, wdate
+                  FROM starTable) st join movieTable mt
+            ON mt.mCode = st.mCode
+	    ]]>
+	</select> -->
 	
 	
 </mapper>

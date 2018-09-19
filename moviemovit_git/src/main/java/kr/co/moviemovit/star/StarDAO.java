@@ -1,6 +1,8 @@
 package kr.co.moviemovit.star;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +49,12 @@ public class StarDAO {
 		return list;
 	}//list() end
 	
-	
+	public HashMap<MovieDTO, StarDTO> starlist() {
+		StarMapper mapper = sqlSession.getMapper(StarMapper.class);
+		HashMap<MovieDTO, StarDTO> starlist=mapper.starlist();
+		return starlist;
+	}//starlist() end
 	
 	
 
-}
+}//class end

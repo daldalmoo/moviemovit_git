@@ -1,6 +1,8 @@
 package kr.co.moviemovit.star;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import kr.co.moviemovit.movie.MovieDTO;
 
@@ -14,6 +16,7 @@ public interface StarMapper {
 	
 	public ArrayList<StarDTO> list();
 	
+	public HashMap<MovieDTO, StarDTO> starlist();
 	
 	
 	

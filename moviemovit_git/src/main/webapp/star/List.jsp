@@ -187,46 +187,49 @@ table tr:nth-child(2n+1) {
  <div class="table-users">
    <div class="header">MOVIE LIST</div>
  </div>
-
-   <c:forEach var="dto" items="${list }">
+   
+   <c:forEach var="dto" items="${starlist }">
    
    <div>
    <div class="box-image" >
      <span class="thumb-image">
-       <strong class="title">영화코드: ${dto.mCode }</strong><br>
+       <strong class="title">영화코드: ${dto.st.mCode }</strong><br>
      </span>
      <span class="thumb-image">
-       <strong class="title">유저아이디: ${dto.uid }</strong><br>
+       <strong class="title">유저아이디: ${dto.st.uid }</strong><br>
      </span>
+     <span class="thumb-image">
+       <img class="mimg" src="../movie/storage/${dto.mt.poster }" width="400" height="800"/>
+     </span>  
      </div>
    
    <div class="box">
        
-     <span>
-       <strong>별범: ${dto.star }
-       <c:if test="${dto.star==0 }">
+      <span>
+       <strong>별점: ${dto.st.star} &nbsp;
+       <c:if test="${dto.st.star==0 }">
            <img class="simg" src="../img/star0.png"> 
        </c:if>
-       <c:if test="${dto.star==1 }">
+       <c:if test="${dto.st.star==1 }">
            <img class="simg" src="../img/star1.png"> 
        </c:if>
-       <c:if test="${dto.star==2 }">
+       <c:if test="${dto.st.star==2 }">
            <img class="simg" src="../img/star2.png"> 
        </c:if>
-       <c:if test="${dto.star==3 }">
+       <c:if test="${dto.st.star==3 }">
            <img class="simg" src="../img/star3.png"> 
        </c:if>
-       <c:if test="${dto.star==4 }">
+       <c:if test="${dto.st.star==4 }">
            <img class="simg" src="../img/star4.png"> 
        </c:if>
-       <c:if test="${dto.star==5 }">
+       <c:if test="${dto.st.star==5 }">
            <img class="simg" src="../img/star5.png">
        </c:if>
        </strong>
       </span><br>
-      <span>
+      
         <strong>  
-          한줄평: ${dto.comment } 
+          한줄평: ${dto.st.comment } 
         </strong>
       </span><br>
          
@@ -240,7 +243,7 @@ table tr:nth-child(2n+1) {
    <!-- 하단 버튼 -->
    <br>
    <div class="cbp-mc-submit-wrap">
-     <input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='../movie/create.do'"/>
+     <input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='../movie/movieList.do'"/>
      <input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />
    </div>
 
