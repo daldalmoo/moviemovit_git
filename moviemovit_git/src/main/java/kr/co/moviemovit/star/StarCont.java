@@ -1,6 +1,8 @@
 package kr.co.moviemovit.star;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +28,6 @@ public class StarCont {
 	   ModelAndView mav= new ModelAndView();
 	   mav.setViewName("/star/starForm");
 	   dto=dao.movieList(dto);
-	   uid=dao.uidList(uid);
-	   System.out.println(uid);
 	   mav.addObject("dto", dto);
 	   mav.addObject("udto", uid);
 	   //mav.addObject("uidList", dao.uidList(uid));
@@ -54,15 +54,24 @@ public class StarCont {
 	   return mav;
 	 }//createProc() end
 	
-	 @RequestMapping("/star/List.do")
+	 /*@RequestMapping("/star/List.do")
 	 public ModelAndView list(StarDTO dto) {
 	     ModelAndView mav = new ModelAndView();
 	     mav.setViewName("star/List");
 	     ArrayList<StarDTO> list = dao.list();
-	     
 	     mav.addObject("list", list);
 	     return mav;
 	 }//list() end
+     */	 
+	 
+	 @RequestMapping("/star/List.do")
+	 public ModelAndView starlist(StarDTO sdto, MovieDTO mdto) {
+	     ModelAndView mav = new ModelAndView();
+	     HashMap<MovieDTO, StarDTO> starlist = dao.starlist(); 
+	     mav.addObject("starlist", starlist);
+	     return mav;
+	 }//list() end
+	 
 	
 	
 

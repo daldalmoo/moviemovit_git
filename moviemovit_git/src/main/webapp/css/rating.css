@@ -8,6 +8,7 @@
     float:left;
     cursor: pointer;
     zoom:1;
+    
 }
 
 .fullStar{
@@ -16,6 +17,7 @@
 
 .stars{
     overflow: hidden;
+    
 }
 
 .tmp_es{

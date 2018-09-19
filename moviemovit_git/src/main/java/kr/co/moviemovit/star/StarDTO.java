@@ -61,12 +61,8 @@ public class StarDTO {
 	public void setWdate(String wdate) {
 		this.wdate = wdate;
 	}
-	
-	
-	
-	
-	
+
 	
 	
 
-}
+}//class end

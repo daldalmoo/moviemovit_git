@@ -3,7 +3,6 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-
 <%-- 본문시작 starList.jsp --%>
 <!-- CSS -->
 <link href="../css/rating.css" rel="stylesheet" type="text/css">
@@ -12,6 +11,7 @@
 <script src="../js/rating.js"></script>
 
 <style rel="stylesheet">
+
 .header {   /* 영화관목록  */
   background-color: #3366cc;
   color: white; 
@@ -21,30 +21,28 @@
   text-transform: uppercase;        
 }
 
-#starbox {
-  max-width: calc(100% - 85em);
-  background-color: white;;
-  margin: center;
+.scontainer {
+  width:100px;
+  max-width: calc(100% - 50em);
+  background-color: white;
+  margin: auto;
 }
-
 
 /* 0912 찬홍 test */
-.star_rating {font-size:0; letter-spacing:-4px;}
-.star_rating a {
+.rating {font-size:0; }
+
+.rating a {
     font-size:22px;
-    letter-spacing:0;
+    letter-spacing:200;
     display:inline-block;
-    margin-left:5px;
+    margin-left:50px;
     color:#ccc;
     text-decoration:none;
+    
 }
-.star_rating a:first-child {margin:center;}
+.rating a:first-child {margin:center;}
 
 .star_rating a.on {color:#777;}
-
-
-/* 별점  0904*/
-
 
 .table-users {
   border: 1px solid #327a81;
@@ -55,6 +53,7 @@
   overflow: hidden;
   width: 100%;
 }
+
 table {
   width: 100%;
 }
@@ -231,25 +230,40 @@ table tr:nth-child(2n+1) {
    
    <div class="box">
       <strong class="title">${dto.mName }</strong><br>
+   </div><br>
     <!-- 별점 -->
-    <div class="container" id="starbox">
+    <div class="scontainer">
         <input type="radio" name="star" class="rating" value="1" />
         <input type="radio" name="star" class="rating" value="2" />
         <input type="radio" name="star" class="rating" value="3" />
         <input type="radio" name="star" class="rating" value="4" />
         <input type="radio" name="star" class="rating" value="5" />
     </div>
+    <br>
     <div>
-      
+        <input type="text" id="comment" name="comment" placeholder="한줄 감상">
+        
     </div>
-    
-   </div>
+ 
+       
+    </div>
+  
+     <br>
+     
+     
+     <!-- 하단 버튼 -->
+      <div class="cbp-mc-submit-wrap">
+		<input class="cbp-mc-button" type="submit" value="평점등록" />
+		<input class="cbp-mc-button" type="button" value="예매하기" onclick="" />
+	  </div>
+      
+  
      
       
       <!-- 별점test -->
       
       <script>
-      $('.container').click(function(){
+      $('.scontainer').click(function(){
     	  
          $(this).parent().children('span').removeClass('on');
          $(this).addClass('on').prevAll('span').addClass('on');
@@ -267,7 +281,7 @@ table tr:nth-child(2n+1) {
       
 
 
-      $('.container').rating(function(vote, event){
+      $('.scontainer').rating(function(vote, event){
     	    // write your ajax code here
     	    // For example;
     	    // $.get(document.URL, {vote: vote});
@@ -275,18 +289,6 @@ table tr:nth-child(2n+1) {
 
 
 	  </script>	
-       
-    </div>
-  
-     <br>
-     
-     
-     <!-- 하단 버튼 -->
-      <div class="cbp-mc-submit-wrap">
-		<input class="cbp-mc-button" type="submit" value="평점등록" />
-		<input class="cbp-mc-button" type="button" value="예매하기" onclick="" />
-	  </div>
-   
    </form>
 
 

@@ -19,6 +19,7 @@
 			<td>${dto.gender }</td>
 			<td><img class="mimg" src="./storage/${dto.peoPic }"></td>
 			<!-- <td><input class="selectbutton" type='button' value='V'></td> -->
+			
 		</tr>
 	</c:forEach>
 </table>

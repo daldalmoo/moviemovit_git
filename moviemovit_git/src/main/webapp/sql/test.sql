@@ -1,5 +1,5 @@
 
--- ¡ˆøµ¿Ã≤® : øµ»≠∞¸∫∞ ∫∞¡° ∆Ú±’
+-- ÏßÄÏòÅÏù¥Í∫º : ÏòÅÌôîÍ¥ÄÎ≥Ñ Î≥ÑÏ†ê ÌèâÍ∑†
 SELECT aa.cineCode, brandName, cineName, tel, addr1, addr2, addr3, logoImg, startotal
 from cinematable as aa
 JOIN 
@@ -9,31 +9,30 @@ JOIN
    GROUP BY cineCode) AS bb
 ON aa.cineCode = bb.cineCode;
 
--- ƒÌ∆˘ µ•¿Ã≈Õ ¿‘∑¬ Ω√ ∞ÀªˆæÓøÕ ¿œƒ°«œ¥¬ »∏ø¯ æ∆¿Ãµ ∏Ò∑œ ∞°¡Æø¿±‚
+-- Ïø†Ìè∞ Îç∞Ïù¥ÌÑ∞ ÏûÖÎ†• Ïãú Í≤ÄÏÉâÏñ¥ÏôÄ ÏùºÏπòÌïòÎäî ÌöåÏõê ÏïÑÏù¥Îîî Î™©Î°ù Í∞ÄÏ†∏Ïò§Í∏∞
 SELECT uid
 FROM userTable
 WHERE uid LIKE '%1%'
 ORDER BY uid ASC
 
--- »∏ø¯ √ﬂ∞°
+-- ÌöåÏõê Ï∂îÍ∞Ä
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
-VALUES('m1', 'me1234!', '±‚∞ÊπŒ', 'W', '19940426', 'cheerup_km@naver.com', '01012345678',now(), 'ADMIN');
+VALUES('m1', 'me1234!', 'Í∏∞Í≤ΩÎØº', 'W', '19940426', 'cheerup_km@naver.com', '01012345678',now(), 'ADMIN');
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
-VALUES('m2', 's1234!', 'øÏΩ≈«˝', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'SELLER');
+VALUES('m2', 's1234!', 'Ïö∞Ïã†Ìòú', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'SELLER');
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
-VALUES('m3', 's1234!', 'øÏΩ≈«˝', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'VIP');
+VALUES('m3', 's1234!', 'Ïö∞Ïã†Ìòú', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'VIP');
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
-VALUES('m4', 's1234!', 'øÏΩ≈«˝', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'GOLD');
+VALUES('m4', 's1234!', 'Ïö∞Ïã†Ìòú', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'GOLD');
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
-VALUES('m5', 's1234!', 'øÏΩ≈«˝', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'SILVER');
+VALUES('m5', 's1234!', 'Ïö∞Ïã†Ìòú', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'SILVER');
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
-VALUES('m6', 's1234!', 'øÏΩ≈«˝', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'F');
+VALUES('m6', 's1234!', 'Ïö∞Ïã†Ìòú', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'F');
 
--- QnATable ∏Ò∑œ ¥‰∫ØæÀ∞Ì∏Æ¡Ú∫Œ∫–∏∏ ∫∏±‚
+-- QnATable Î™©Î°ù ÎãµÎ≥ÄÏïåÍ≥†Î¶¨Ï¶òÎ∂ÄÎ∂ÑÎßå Î≥¥Í∏∞
 select title, uid, groupNo, indent, groupNum
 from QnATable
 where groupNo=5;
-
 
 -- screenTable, roomTable insert
 insert into screenTable(sCode,roomCode,sdate,stime,mCode)
@@ -44,7 +43,7 @@ insert into roomTable(roomCode,cineCode,roomName,seatCnt,DD,seatImg)
 values('L001_2','C001',1,50,'2D, 3D','moving/images/seat1.jpg');
 
 
--- øµ»≠º±≈√(mCode) -> ªÛøµ±ÿ¿Â(cineCode,brandName,cineName,logoImgMF) ∞°¡Æø¿±‚
+-- ÏòÅÌôîÏÑ†ÌÉù(mCode) -> ÏÉÅÏòÅÍ∑πÏû•(cineCode,brandName,cineName,logoImgMF) Í∞ÄÏ†∏Ïò§Í∏∞
 SELECT sCode,roomCode,sdate,stime
 FROM screenTable
 WHERE mCode=2
@@ -59,3 +58,18 @@ ON RT.roomCode=ST.roomCode
 WHERE mCode=3
 GROUP BY CT.cineCode
 ORDER BY brandName ASC, cineName ASC;
+
+
+-- Ï∞¨Ìôç 0917 ÌèâÍ∑† test
+SELECT sCode, mCode, uid, (select avg(star) from starTable where mCode=1) as star , comment, wdate
+FROM starTable
+
+select st.star, mt.poster
+from (SELECT sCode, mCode, uid, (select avg(star) from starTable where mCode=1) as star, comment, wdate
+      FROM starTable ) st join movieTable mt
+ON mt.mCode = st.mCode
+WHERE st.mCode = mt.mCode AND 
+
+SELECT mt.mCode, mt.poster, mt.mName, st.star
+FROM movieTable mt join starTable st
+ON mt.mCode = st.mCode
