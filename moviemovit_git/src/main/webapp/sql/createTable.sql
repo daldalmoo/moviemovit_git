@@ -78,6 +78,7 @@ CREATE TABLE roomTable (
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;  -- ÀÌÅ¬¸³½º¿¡¼­ ÇÑ±Û ±úÁü Ã³¸®
 
 -- reviewStarTable »ý¼º
+--  0919 ½ÂÁö heart   not null -> null
 CREATE TABLE reviewStarTable(
   no        INT          NOT NULL  PRIMARY KEY
  ,cineCode  CHAR(4)      NOT NULL
@@ -93,7 +94,7 @@ CREATE TABLE reviewStarTable(
  ,wdate     DATETIME     NOT NULL
  ,s_e       VARCHAR(255)  NOT NULL
  ,ip        VARCHAR(20)   NOT NULL
- ,heart     INT           NOT NULL
+ ,heart     INT                                --  0919 ½ÂÁö heart   not null -> null
  ,FOREIGN KEY(cineCode) 
   REFERENCES cinemaTable(cineCode) 
   ON DELETE CASCADE
