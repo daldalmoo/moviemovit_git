@@ -2,6 +2,7 @@ package kr.co.moviemovit.review;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ public class ReviewDAO {
 
 
 /////////////////////////// CINEMA ////////////////////////////////////
-  
   
   // LIST
   public ArrayList<CinemaDTO> cinemaList(){   
@@ -94,12 +94,6 @@ public class ReviewDAO {
   
 
 
-  /* public ReviewStarDTO reviewread(ReviewStarDTO reviewstardto){
-  ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
-  reviewstardto = mapper.reviewstardto(reviewstardto);
-  return reviewstardto;
-}//read
-*/
   
   //LIST : select+ limit를 이용한 페이징 영역 구분
   
@@ -108,17 +102,33 @@ public class ReviewDAO {
     ArrayList<CinemaDTO> list = mapper.listCriteria(cri);
     return list;
   }
-
+  
+  ////////////////////////////////////////// ROOM //////////////////////////////////////////////////////////
+  
+  /* insert 등록 */
+  public int roomForm(RoomDTO dto) {
+    ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
+    int count = mapper.roomForm(dto);
+    return count;
+  }// roominsert() end
+  
   
   ////////////////////////////////////////// REVIEW  //////////////////////////////////////////////////////////
-  
-  /*0905sj*/
-  public int reviewForm(ReviewStar sdto) {
+  /* insert 등록 */
+  public int create(ReviewStar sdto) {
     ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
-    int count = mapper.reviewForm(sdto);
-    System.out.println(sdto.getPixel());
-    System.out.println(sdto.getCineCode());
+    int count = mapper.create(sdto);
     return count;
   }// create() end
+  
+   //review 목록
+   public ArrayList<ReviewStar> list() {
+     ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
+     ArrayList<ReviewStar> list = mapper.list();
+     return list;
+   }//list() end
+
+   
+   
 
 } //class end
