@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.co.moviemovit.ticket.TicketMapper">
-  
+  <!-- ******************** createForm.jsp 에서 사용한 SQL문 ******************** -->
   <!-- 예매 목록 -->
   <select id="list" resultType="TicketDTO">
     <![CDATA[
@@ -32,8 +32,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   ]]>
   </select>
   
+  <!-- ************* 극장선택 부분 ************* -->
   <!-- 예매 중 극장목록 -->
-  <select id="cineList" resultType="CinemaDTO">
+  <select id="cinemaList" resultType="CinemaDTO">
   <![CDATA[
     SELECT cineCode, brandName, cineName
     FROM cinemaTable
@@ -41,8 +42,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   ]]>
   </select>
   
+  <!-- 영화선택 -> 상영극장 가져오기 -->
+  <select id="cinemaSelListFromMovie" parameterType="int" resultType="CinemaDTO">
+    <![CDATA[
+      SELECT CT.cineCode,brandName,cineName
+      FROM cinemaTable CT
+      INNER JOIN roomTable RT
+      ON CT.cineCode=RT.cineCode
+      INNER JOIN screenTable ST
+      ON RT.roomCode=ST.roomCode
+      WHERE mCode=#{mCode}
+      GROUP BY CT.cineCode
+      ORDER BY brandName ASC, cineName ASC
+    ]]>
+  </select>
+  <!-- ************* 극장선택 부분 END ************* -->
   
-  
+  <!-- 영화선택 -> 상영관및시간 가져오기 -->
+  <!-- <select id="screenlistFromMovie" parameterType="int" resultType="ScreenDTO">
+    <![CDATA[
+      SELECT sCode,roomCode,sdate,stime
+      FROM screenTable
+      WHERE mCode=#{mCode}
+      ORDER BY sCode ASC
+    ]]>
+  </select> -->
+
   
   <!-- 예매 등록 -->
   <!-- <insert id="create" parameterType="TicketDTO">

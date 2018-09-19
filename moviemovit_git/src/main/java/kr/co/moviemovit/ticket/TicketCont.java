@@ -1,9 +1,8 @@
 package kr.co.moviemovit.ticket;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +40,7 @@ public class TicketCont {
   
   
 /************************************ 등록 *************************************************/
-	@RequestMapping(value="/ticket/ticketform.do", method = RequestMethod.GET)
+	@RequestMapping(value="/ticket/create.do", method = RequestMethod.GET)
 	public ModelAndView ticketForm() {
 		ModelAndView mav = new ModelAndView();
 		
@@ -49,21 +48,76 @@ public class TicketCont {
 	  ArrayList<MovieDTO> movieList = dao.movieList();
 	  mav.addObject("movieList", movieList);
 	  
-	  //극장목록
-    ArrayList<CinemaDTO> cinelist = dao.cineList();
-    mav.addObject("cinelist", cinelist);
+	  // 극장목록
+	  ArrayList<CinemaDTO> cinemalist = dao.cinemaList();
+    mav.addObject("cinemalist", cinemalist);
     
 		mav.setViewName("ticket/ticketForm");
 		return mav;
 	}//ticketForm() end
 	
-	//영화 선택하면 해당영화를 상영하는 극장 목록
-	@RequestMapping(value="/ticket/cinelist.do", method = RequestMethod.POST)
-	public ModelAndView cinelist() {
-		ModelAndView mav = new ModelAndView();
+	/* -------------------- 극장선택 부분 AJAX -------------------- */
+	// 극장선택 새로고침
+	@RequestMapping(value="/ticket/cinemaRefresh.do", method = RequestMethod.POST)
+  public void cinemaRefresh(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    String msg = "";
+    ArrayList<CinemaDTO> cinemalist = dao.cinemaList();
+    for(int j=0; j<cinemalist.size(); j++) {
+      CinemaDTO cinema = cinemalist.get(j);
+      msg += "<ul>";
+      msg += "<li>";
+      msg += "  <a href='#"+cinema.getCineCode()+"'>";
+      if(cinema.getBrandName().equals("CGV")) { msg += "CGV"; }
+      else if(cinema.getBrandName().equals("LOTTE")) { msg += "롯데시네마"; }
+      else if(cinema.getBrandName().equals("MEGABOX")) { msg += "메가박스"; }
+      else if(cinema.getBrandName().equals("INDEP")) { msg += "독립영화관"; }//if end
+      msg += " - "+cinema.getCineName();
+      msg += "  </a>";
+      msg += "</li>";
+      msg += "</ul>";
+    }//for end
+    
+    // 출력
+    resp.setContentType("text/plain; charset=UTF-8");
+    PrintWriter out = resp.getWriter();
+    out.println(msg);
+    out.flush();
+    out.close();
+  }//cinemaRefresh() end
+	
+	// 영화선택 -> 상영극장 가져오기
+	@RequestMapping(value="/ticket/cinemalist.do", method = RequestMethod.POST)
+	public void cinemaSelList(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		String msg = "";
 		
+    int mCode = Integer.parseInt(req.getParameter("mCode"));
+		//System.out.println("TicketCont : mCode : "+mCode);
 		
-		//극장 목록
-		return mav;
-	}//theaterNameList() end
+		ArrayList<CinemaDTO> cinemaSellist = dao.cinemaSelListFromMovie(mCode);
+	  //System.out.println(cinemaSellist.get(0).getBrandName() + " - " + cinemaSellist.get(0).getCineName());
+		for(int j=0; j<cinemaSellist.size(); j++) {
+		  CinemaDTO cinema = cinemaSellist.get(j);
+		  msg += "<ul>";
+		  msg += "<li>";
+	    msg += "  <a href='#"+cinema.getCineCode()+"'>";
+	    if(cinema.getBrandName().equals("CGV")) { msg += "CGV"; }
+	    else if(cinema.getBrandName().equals("LOTTE")) { msg += "롯데시네마"; }
+      else if(cinema.getBrandName().equals("MEGABOX")) { msg += "메가박스"; }
+      else if(cinema.getBrandName().equals("INDEP")) { msg += "독립영화관"; }//if end
+	    msg += " - "+cinema.getCineName();
+	    msg += "  </a>";
+	    msg += "</li>";
+	    msg += "</ul>";
+		}//for end
+		
+		// 출력
+    resp.setContentType("text/plain; charset=UTF-8");
+    PrintWriter out = resp.getWriter();
+    out.println(msg);
+    out.flush();
+    out.close();
+	}//cineList() end
+	/* -------------------- 극장선택 부분 AJAX END -------------------- */
+	
+	
 }//class end
