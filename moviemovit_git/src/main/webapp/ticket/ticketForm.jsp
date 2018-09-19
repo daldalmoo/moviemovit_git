@@ -39,20 +39,21 @@
   border: 1px solid #000;
 }
 
-/* 극장선택 타이틀 */
+/* 극장선택 타이틀 부분 th 시작 */
 .cinema_title .refreshbtn { /* 새로고침 버튼 */
   cursor: pointer;
   width: 19px;
-  height: 19px;
-  margin-bottom: 1px;
+  height: 22px;
+  padding-bottom: 3px;
 }
 .cinema_title .searchtxt{ /* 검색창 */
   text-align: center;
 }
 .cinema_title .searchbtn { /* 검색 버튼 */
-  position: relative;
-  top: 13.5px;
-  transform: translateY(-50%);
+  cursor: pointer;
+  width: 22px;
+  height: 25px;
+  padding-bottom: 3px;
 }
 /* 극장선택 타이틀 - placeholder 속성 */
 .cinema_title ::-webkit-input-placeholder {  /* 크롬 */
@@ -67,6 +68,7 @@
 .cinema_title :-ms-input-placeholder {   /* 익스 */
   font-size: 15px;
 }
+/* 극장선택 타이틀 부분 th 끝 */
 
 /*********** 1) 영화선택 ***********/
 #ticketArea .1st_area {
@@ -92,10 +94,7 @@
 }
 
 /*********** 2) 극장선택 ***********/
-#cinema_area .cinema_select { /* 극장선택 타이틀 & 검색 부분 div */
-  ;
-}
-#cinema_area .cinema_select ul { /* 극장종류 리스트 */
+#cinema_area .cinema_select ul {     /* 극장 종류 div */
   background: linear-gradient(to top, #e4e4e8 0%, #f3f3f4 100%);
   list-style: none;
   font-weight: bold;
@@ -105,7 +104,7 @@
 }
 #cinema_area .cinema_select ul li {
   display: inline;      /* 리스트를 가로로 */
-  font-size: 10pt;
+  font-size: 11pt;
   font-weight: bold;
   letter-spacing: 1px;  /* 글자간격 */
   text-align: center;
@@ -119,39 +118,44 @@
 }
 #cinema_area .cinema_select ul li a {
   text-decoration: none;
-  color: #4e5073;
+  color: gray;
 }
 #cinema_area .cinema_select ul li a:hover {
-  color: #222538;
+  color: #000;
 }
 #cinema_area .cinema_select ul li .on {
   background-color: white;
   border: 1px solid #bcbcbc;
+  color: #000;
 }
 #cinema_area .cinema_select ul li span {
   margin-left: 5px;
 }
 
-#cinema_area .cinema_addr1 {  /* 극장의 대분류주소 선택 div */
+#cinema_area .cinema_addr1 {   /* 극장 대분류주소 div */
   text-align: left;
-  border-bottom: 2px dotted;
+  border-bottom: 2px solid;
+  font-size: 11pt;
 }
-#cinema_area .cinema_addr1 ul { /* 극장종류 리스트 */
+#cinema_area .cinema_addr1 ul {
   list-style: none;
   margin: 0px;
-  padding: 0px;
+  padding: 1px 0px 1px 0px;
   padding-left: 15pt;
 }
 
-#cinema_area .cinema_list {  /* 극장의 대분류주소 선택 div */
+#cinema_area .main_list {  /* 극장 리스트 div */
   text-align: left;
 }
-#cinema_area .cinema_list ul { /* 극장 리스트 */
+#cinema_area .main_list ul {
   list-style: none;
   margin: 0px;
   padding: 0px;
   padding-left: 15pt;
-  font-size: 10pt;
+  font-size: 11pt;
+}
+#cinema_area .main_list ul .on{
+  font-weight: bold;
 }
 
 /*********** 3) 날짜선택 ***********/
@@ -282,7 +286,7 @@ dd, dt {
 </style>
 
 
-<form class="cbp-mc-form" name="regForm" method='POST' action='./create.do' onsubmit="return couponCheck(this)">
+<form class="cbp-mc-form" name="regForm" method='POST' action='./create.do'>
   <table id="ticketArea">
     <!-------------------------------- 1행 타이틀  --------------------------------------->
     <tr>
@@ -290,10 +294,10 @@ dd, dt {
       
       <th class="cinema_title">
         <span>극장선택</span>
-        <img class="refreshbtn" src="./img/refreshbtn.jpg" onmouseover="this.src='./img/refreshbtn_hover.jpg'" onmouseout="this.src='./img/refreshbtn.jpg'" onclick="ResetCinema();">
+        <img class="refreshbtn" src="./img/refreshbtn.jpg" onmouseover="this.src='./img/refreshbtn_hover.png'" onmouseout="this.src='./img/refreshbtn.jpg'" onclick="ResetCinema();">
         &nbsp;
         <input type="text" class="searchtxt" placeholder=" 극장검색">
-        <input type="image" class="searchbtn" src="./img/btn_search.gif" alt="검색" onclick="SearchCinema();">
+        <img class="searchbtn" src="./img/searchbtn.gif" onmouseover="this.src='./img/searchbtn_hover.png'" onmouseout="this.src='./img/searchbtn.gif'" onclick="SearchCinema();">
       </th>
 
       <th>날짜선택</th>
@@ -340,35 +344,36 @@ dd, dt {
           </ul>
         </div>
         
-        <div class="cinema_addr1">
-          <ul>
-            <li>
-              <span id="cinema_list_addr1">
-                <a href="javascript:moreArea();" onclick="nclk(this, 'the.loc', '', 1);" class="">서울(<strong>5</strong>)
-                  <img src="./img/listbtn1.gif">
-                </a>
-              </span>
-            </li>
-          </ul>
-        </div>
-          
         <div class="cinema_list">
-          <ul id="cineList">
-            <c:forEach var="cine" items="${cinelist }">
+          <div class="cinema_addr1">
+            <ul>
               <li>
-                <a href="#">
-                  <input type="hidden" name="cineCode" value="${cine.cineCode }">
-                  <c:choose>
-                    <c:when test="${cine.brandName == 'CGV' }">CGV</c:when>
-                    <c:when test="${cine.brandName == 'LOTTE' }">롯데시네마</c:when>
-                    <c:when test="${cine.brandName == 'MEGABOX' }">메가박스</c:when>
-                    <c:when test="${cine.brandName == 'INDEP' }">독립영화관</c:when>
-                  </c:choose>
-                  - ${cine.cineName}
-                </a>
+                <span class="cinema_addr1_list">
+                  <a href="javascript:moreArea();" onclick="nclk(this, 'the.loc', '', 1);" class="">서울(<strong>5</strong>)
+                    <img src="./img/listbtn1.gif">
+                  </a>
+                </span>
               </li>
-            </c:forEach>
-          </ul>
+            </ul>
+          </div>
+          <div class="main_list">
+            <ul>
+              <c:forEach var="cinema" items="${cinemalist }">
+                <li>
+                  <a href="#">
+                    <input type="hidden" name="cineCode" value="${cinema.cineCode }">
+                    <c:choose>
+                      <c:when test="${cinema.brandName == 'CGV' }">CGV</c:when>
+                      <c:when test="${cinema.brandName == 'LOTTE' }">롯데시네마</c:when>
+                      <c:when test="${cinema.brandName == 'MEGABOX' }">메가박스</c:when>
+                      <c:when test="${cinema.brandName == 'INDEP' }">독립영화관</c:when>
+                    </c:choose>
+                    - ${cinema.cineName}
+                  </a>
+                </li>
+              </c:forEach>
+            </ul>
+          </div>
         </div>
       </td>
       <!-- ------------------------------ cinema_area : 극장선택 end ------------------------------ -->
@@ -498,42 +503,68 @@ dd, dt {
 <!-- --------------------- 예매하기 AJAX ----------------------- -->	
 <script src="../js/jquery.js"></script>
 <script>
+  var MCODE = "";
+  
+  /* ----------- 극장선택 부분 AJAX ------------ */
   // 극장목록 새로고침
+  $.ajaxSetup({datatype:"text"});
+  
   function ResetCinema() {
     alert("ResetCinema() 클릭");
+    $(".t_tab1 a").addClass("on");
+    $(".t_tab2 a").removeClass("on");
+    $(".t_tab3 a").removeClass("on");
+
+    $(".cinema_addr1_list a").html("서울");
     
+    $.post("./cinemaRefresh.do","",mainList);
   }//ResetCinema() end
   
   // 극장종류 선택
   function cinemaSelect(i) {
-    alert("cinemaSelect() 클릭");
+    //alert("cinemaSelect() 클릭");
     for(var j=1; j<=3; j++) {
       $(".t_tab"+j+" a").removeClass("on");
     }//for end
     $(".t_tab"+i+" a").addClass('on');
+    
+    if(i==1) {  // 전체극장
+      $(".cinema_addr1_list a").html("서울");
+      $.post("./cinemaRefresh.do","",mainList);
+    } else if(i==2) {  // 상영극장
+      //alert(MCODE);
+      if(MCODE=="") {
+        var msg = "<div style='color:black; padding-top:100px;'>"
+        msg += "  <strong>상영극장이 없습니다.</strong>";
+        msg += "  <br>영화 또는 날짜를 선택해 주세요.";
+        msg += "</div>"
+        $(".cinema_list").html(msg);
+      }
+    } else if(i==3) {  // 체인별
+      ;
+    }//if end
+    
   }//cinemaSelect() end
   
-  /* --------- 영화선택 -> 상영극장 가져오기 AJAX --------- */
-  $.ajaxSetup({datatype:"text"});
-  
+  //영화선택 -> 상영극장 가져오기
   function SelMovieList(mCode) {
-  	//alert("SelMovieList(mCode) 호출. mCode:" + mCode);
-    var mCode = "mCode=" + mCode;
+    //alert("SelMovieList(mCode) 호출. mCode:" + mCode);
+    MCODE = "mCode=" + mCode;
     /*
       $.post(URL,data,function(data,status,xhr)
       - URL : 서버에 요청하는 명령어
       - ★data : 서버에 전송하는 값(변수1=값1&변수2=값2)
       - function : 콜백함수
     */
-    $.post("./cinelist.do",mCode,cineList);
+    $.post("./cinemalist.do",MCODE,mainList);
   };//SelMovieList() end
   
-  function cineList(data) {  // Controller에서 msg 값 data로 받아옴
-    //alert("cineList() 호출. data:"+data);
-    $("#cineList").html(data);
+  // 극장목록 보여주기
+  function mainList(data) {  // Controller에서 msg 값 data로 받아옴
+    //alert("mainList() 호출. data:"+data);
+    $(".main_list").html(data);
   }//cineList() end
-  /* --------- 영화선택 -> 상영극장 가져오기 AJAX end--------- */
-  
+  /* ----------- 극장선택 부분 AJAX END ------------ */
   
   
   /* --------- 영화,극장,날짜 선택 -> 상영시간표 가져오기 AJAX --------- */

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
-import kr.co.moviemovit.screen.ScreenDTO;
 
 public interface TicketMapper {
 
@@ -13,13 +12,15 @@ public interface TicketMapper {
 	//<select id="movieList">
 	public ArrayList<MovieDTO> movieList();
 	
+	/* -------------------- 극장선택 부분 -------------------- */
 	//<select id="cineAddr1List" resultType="CinemaDTO">
 	public ArrayList<CinemaDTO> cineAddr1List();
 
   //<select id="cineList" resultType="CinemaDTO">
-	public ArrayList<CinemaDTO> cineList();
+	public ArrayList<CinemaDTO> cinemaList();
 	
 	//<select id="cinelistFromMovie" parameterType="int" resultType="CinemaDTO">
-	public ArrayList<CinemaDTO> cinelistFromMovie(int mCode);
+	public ArrayList<CinemaDTO> cinemaSelListFromMovie(int mCode);
+	/* -------------------- 극장선택 부분 END -------------------- */
 	
 }// interface end
