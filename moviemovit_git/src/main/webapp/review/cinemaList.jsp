@@ -18,7 +18,6 @@
 .cinemaimg img {        /* 영화관 목록안의 영화관이미지 0913 지영변경*/
    height: 100px;
   width: 150px;
-
 }
 .table-users {
   border: 1px solid #327a81;
@@ -188,10 +187,7 @@ table tr:nth-child(2n+1) {
  .startotal img {
     height: 30px !important;
  }
-
 }
-
-
 </style>
 
 <table>
@@ -199,10 +195,9 @@ table tr:nth-child(2n+1) {
     <tr>
         <th style="background-color: lightgray; color: gray; text-align: center;">브랜드</th>
         <td style="background-color:white; text-align: left; color: gray;">
-
             <input type="checkbox" name="categorybox" value="CGV" onclick="cate()"/><label for="CGV">CGV</label>
             &nbsp;  &nbsp;  &nbsp; 
-            <input type="checkbox" name="categorybox" value="LOTTE" onclick="cate()" class="checkSelect""><label for="LOTTE">롯데시네마</label> 
+            <input type="checkbox" name="categorybox" value="LOTTE" onclick="cate()"><label for="LOTTE">롯데시네마</label> 
             &nbsp;  &nbsp;  &nbsp;
             <input type="checkbox" name="categorybox" value="MEGABOX" onclick="cate()" class="checkSelect""><label for="MEGABOX">메가박스</label>
             &nbsp;  &nbsp;  &nbsp;
@@ -210,7 +205,7 @@ table tr:nth-child(2n+1) {
         </td>
     </tr>   
     <tr> 
-        <th style="background-color: lightgray; color: gray; text-align: center;"> 지역별</th>
+        <th style="background-color:lightgray; color: gray; text-align: center;"> 지역별</th>
         <td style="background-color:white; text-align: left; color: gray;">
            
             <input  type="checkbox" name="addrbox" value="SEO" id="SEO" onclick="cate()"><label for="brand_3">서울</label> 
@@ -238,10 +233,10 @@ table tr:nth-child(2n+1) {
 <div id="resulttable">
    <table class="reviewtable">
       <tr>
-         <!-- <th>영화관</th> -->
+         <th>영화관</th> 
          <th>브랜드</th>
          <th>지점</th>
-         <!-- <th>별점</th> -->
+         <th>별점</th>
          <th>주소</th>
          <th width="230">문의전화</th>
          <th>수정버튼</th>
@@ -249,7 +244,7 @@ table tr:nth-child(2n+1) {
       
        <c:forEach var="dto" items="${list }"> 
            <tr class="brandtest">
-<%--            <td>
+         <td>
            <div class="cinemaimg">
          <c:choose>
                <c:when test="${dto.logoImg == '' || empty dto.logoImg}">
@@ -260,7 +255,7 @@ table tr:nth-child(2n+1) {
                </c:otherwise> 
            </c:choose> 
            </div>
-           <td> --%>
+           </td> 
            <td>
            <c:choose>
                <c:when test="${dto.brandName == 'CGV'}">
@@ -278,37 +273,39 @@ table tr:nth-child(2n+1) {
            </c:choose>
            </td>
            <td>${dto.cineName }</td>
-<%--            <td>
+        <td>
          <!-- 별점별 이미지출력 -->
-          <c:forEach var="reviewstar" items="${reviewstar }">
           <div class="startotal">
-               <c:choose>
-                      <c:when test="${reviewstar.startotal < 3 && dto.cineCode eq reviewstar.cineCode}">
-                      <img src = "./img/star1.png" width="150">
-                      </c:when>
-                      <c:when test="${reviewstar.startotal < 5 && dto.cineCode eq reviewstar.cineCode}">
-                            <img src = "./img/star2.png" width="150">
-                      </c:when>
-                      <c:when test="${reviewstar.startotal < 7  && dto.cineCode eq reviewstar.cineCode}">
-                            <img src = "./img/star3.png" width="150">
-                      </c:when>
-                      <c:when test="${reviewstar.startotal < 9  && dto.cineCode eq reviewstar.cineCode}">
-                            <img src = "./img/star4.png" width="150">
-                      </c:when>
-                      <c:when test="${reviewstar.startotal < 11  && dto.cineCode eq reviewstar.cineCode} ">
-                            <img src = "./img/star5.png" width="150">
-                      </c:when>
-                      <c:when test="${reviewstar.startotal == '' || empty reviewstar.startotal}">
+             <c:choose>
+                      <c:when test="${dto.startotal == 0}">
                       <img src = "./img/star0.png" width="150">
                       </c:when>
-                </c:choose>
-          </c:forEach>
+                      <c:when test="${dto.startotal < 3 }">
+                      <img src = "./img/star1.png" width="150">
+                      </c:when>
+                      <c:when test="${dto.startotal < 5}">
+                            <img src = "./img/star2.png" width="150">
+                      </c:when>
+                      <c:when test="${dto.startotal < 7}">
+                            <img src = "./img/star3.png" width="150">
+                      </c:when>
+                      <c:when test="${dto.startotal < 9}">
+                            <img src = "./img/star4.png" width="150">
+                      </c:when>
+                      <c:when test="${dto.startotal < 11} ">
+                            <img src = "./img/star5.png" width="150">
+                      </c:when>
+                      <c:when test="${dto.startotal eq '' || empty dto.startotal }">
+                      <img src = "./img/star0.png" width="150">
+                      </c:when>
+                </c:choose>  
           </div> 
-          </td>--%>
+          </td>
            <td>
             <a href="./cinemaRead.do?cineCode=${dto.cineCode }" >${dto.addr2}  ${dto.addr3}</a></td>
            <td>${dto.tel}</td>
            <td>
+               <input class="cbp-mc-button" type="button" value="영화관추가" onclick="location.href='./roomForm.do?cineCode=${dto.cineCode }'"/>
                <input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./cinemaUpdate.do?cineCode=${dto.cineCode }'"/>
                <input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./cinemaDelete.do?cineCode=${dto.cineCode }'"/>
              </td>
@@ -344,7 +341,6 @@ table tr:nth-child(2n+1) {
         </ul>
 </div>  
 
-
 <form id="form_search" method="get" action="/moviemovit/review/search.do"> 
 <select id="sch_type" name="sch_type"> 
 <option value="cineName">영화관이름</option> 
@@ -353,26 +349,19 @@ table tr:nth-child(2n+1) {
 
 <script src="../js/jquery.js"></script>
 <script> 
-
 // 검색
 function search() { var sch_value = jQuery('#form_search #sch_value').val(); 
-
 if (sch_value == '') { alert('검색어를 입력하세요.'); } 
 else { jQuery('#form_search').submit(); } } 
-
 //jQuery('#form_search #sch_type option').val('${mapSearch.sch_type}');
 jQuery('#form_search #sch_type value').val('${mapSearch.sch_type}'); 
-
 /*
  일단 체크 된 값들을 받아오기 > 받아온 다음  
  select해서 list를 다시 만들어서 받아오는 것보다
  카테고리박스가 체크된 값들 중에서 brandName이랑 일치하는 것을 for문으로 돌려서 받기...?
  
  */
-
- /*
 function cate() {
-
     var checkArr = new Array();
     $("input[name='categorybox']:checked").each(function(i) {
         checkArr.push($(this).val());
@@ -384,46 +373,46 @@ function cate() {
     //값 확인 
     alert(checkArr);
     alert(checkArr2);
-        
-        $.ajax({
+
+    //AJAX 시작
+    $.post("./category.do", { "checkArr" : checkArr, "checkArr2" : checkArr2}, categorize, "html");
+    
+    function categorize(result) {
+        //2단계 : 서버에서 응답받은 값 받기
+        $("#resulttable").html(result); 
+        alert('완료');
+    }//CheckIdProc() end
+    
+    
+/*         $.ajax({
             type: "POST",
             cache: false,
-            url: "categorize.do",
+            url: "category.do",
             dataType: "html",
-            data: { 
-            	checkArr : checkArr,
-            	checkArr2 : checkArr2
-            },
-            success: function(data) {  // DB 처리 성공 시 수행 내용 작성
-              //alert("ajax 성공\n"+data);  // couponCont.java에서 out.println(resultList); 했던거 data로 받아옴
-              
-              $("#resulttable").html(data); // .html page 자체를 받아서 <div id="resulttable"></div>에 출력
+            data: { "checkArr" : checkArr, "checkArr2" : checkArr2},
+            success: function(data) {  
+              $("#resulttable").html(data); 
               alert('완료');
-              return true;
-            },//success end
-            error: function(request,status,error){  // 실패 시 수행 내용
-              alert("ajax 실패\n"+"code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-              return false;
-            }//error end
-          });//ajax end
-        
- }   
+              return true;},
+              error : function(request,status,error) {
+                  alert(JSON.stringify(request,status,error));
+              }
+          });//ajax end */
+          
+ }  // cate is ended
      
- */
 // 전체 체크 박스
 $(function(){ 
-	//전체선택 체크박스 클릭 
-	$("#allCheck").click(function(){ 
-		//만약 전체 선택 체크박스가 체크된상태일경우 
-		if($("#allCheck").prop("checked")) { 
-			//해당화면에 전체 checkbox들을 체크해준다
-			$("input[type=checkbox]").prop("checked",true); 
-			// 전체선택 체크박스가 해제된 경우 
-			} else { 
-				//해당화면에 모든 checkbox들의 체크를해제시킨다. 
-				$("input[type=checkbox]").prop("checked",false); } }) })
-
-
+    //전체선택 체크박스 클릭 
+    $("#allCheck").click(function(){ 
+        //만약 전체 선택 체크박스가 체크된상태일경우 
+        if($("#allCheck").prop("checked")) { 
+            //해당화면에 전체 checkbox들을 체크해준다
+            $("input[type=checkbox]").prop("checked",true); 
+            // 전체선택 체크박스가 해제된 경우 
+            } else { 
+                //해당화면에 모든 checkbox들의 체크를해제시킨다. 
+                $("input[type=checkbox]").prop("checked",false); } }) })
 </script>
 
 <input class="cbp-mc-button" type="button" value="영화관 등록" onclick="location.href='cinemaForm.do'"/>

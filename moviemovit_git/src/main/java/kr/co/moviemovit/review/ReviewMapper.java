@@ -44,9 +44,18 @@ public interface ReviewMapper {
   // LIST : paging
   public ArrayList<CinemaDTO> listCriteria(Criteria cri);
   
+  //////////////////////////////////////// ROOM ///////////////////////////////////////
+  
+  // Create
+  public int roomForm(RoomDTO dto);
+  
   //////////////////////////////////////// REVIEW ///////////////////////////////////////
   
   // Create
-  public int reviewForm(ReviewStar sdto);
+  public int create(ReviewStar sdto);
+  
+  // list
+  public ArrayList<ReviewStar> list();
+  
   
 } // class end

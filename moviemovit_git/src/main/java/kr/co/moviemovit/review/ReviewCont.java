@@ -1,6 +1,9 @@
 package kr.co.moviemovit.review;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,7 +41,6 @@ public class ReviewCont {
     
   } //
   
-   
   //////////////////////////////// CINEMA  ////////////////////////////////
   
   
@@ -138,19 +140,17 @@ public class ReviewCont {
   
   /////////////////////////////////////// READ
 
-  @RequestMapping(value="/review/cinemaRead.do", method=RequestMethod.GET)
+/*  @RequestMapping(value="/review/cinemaRead.do", method=RequestMethod.GET)
   public ModelAndView cinemaRead(CinemaDTO dto) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("review/cinemaRead");
     dto = dao.cinemaRead(dto);
     ArrayList<ReviewStar> reviewstar = dao.reviewstar();
- /*   ReviewStarDTO reviewstardto = dao.reviewstardto();*/
-//    mav.addObject("reviewstardto", reviewstardto);
     mav.addObject("reviewstar", reviewstar);
     mav.addObject("dto", dto);
     return mav;
     
-  }
+  }*/
   
 
   
@@ -189,7 +189,6 @@ public class ReviewCont {
       if (logoImgMF.getSize() > 0) {
         UploadSaveManager.deleteFile(basePath, oldlogoImgMF);
         // 새로운 파일 있을 경우 삭제하고 하기
-        // poster posterMF ???
         String logoImg = UploadSaveManager.saveFileSpring30(logoImgMF, basePath);
         dto.setLogoImg(logoImg);
       } else {
@@ -310,8 +309,8 @@ public class ReviewCont {
     }
     
     //0이랑 10
-    System.out.println(cri.getPageStart());
-    System.out.println(cri.getPage());
+    //System.out.println(cri.getPageStart());
+   //System.out.println(cri.getPage());
     
     ArrayList<CinemaDTO> list = dao.listCriteria(cri);
     
@@ -359,13 +358,28 @@ public class ReviewCont {
 
   
   //LIST : 카테고리
-  @RequestMapping(value="/review/categorize.do", method=RequestMethod.POST) 
-  public ModelAndView cate(@RequestParam("checkArr[]")List<String> list, @RequestParam("checkArr2[]")List<String> list2) throws Exception{ 
+  @RequestMapping(value="/review/category.do") 
+  public ModelAndView cate(@RequestParam(value="checkArr[]", defaultValue="nth")List<String> list, 
+      @RequestParam(value="checkArr2[]", defaultValue="nth")List<String> addrlist) throws Exception{ 
     
     System.out.println(list);
-    System.out.println(list2);
-  
-    ArrayList<CinemaDTO> category = dao.cate(list, list2);
+    System.out.println(addrlist);
+    
+    //when brandName is null
+    if(list.get(0).equals("nth")) {
+      list.clear();
+      String [] brandNames = {"CGV", "LOTTE", "INDEP", "MEGABOX"};
+      list.addAll(Arrays.asList(brandNames));}
+    //when addr1 is null
+    if(addrlist.get(0).equals("nth")) {
+      addrlist.clear();
+      String [] addrs = {"SEO", "GGD", "ICH", "CCD", "KSD", "KSD", "JLD", "JJD"};
+      addrlist.addAll(Arrays.asList(addrs));}
+
+    System.out.println(list);
+    System.out.println(addrlist);
+    
+    ArrayList<CinemaDTO> category = dao.cate(list, addrlist);
     System.out.println(category);
     System.out.println(category.size());
     
@@ -382,53 +396,153 @@ public class ReviewCont {
     
     return mav;
    
-  }
- 
+  } // category end
+  
+  
+  
+  ////////////////////////////// ROOM  ////////////////////////////////////////////////////////////////////////////
+  
+  // ROOM INSERT
+  @RequestMapping(value="/review/roomForm.do", method=RequestMethod.GET)
+  public ModelAndView roomForm() {
+    
+    ModelAndView mav= new ModelAndView();
+    mav.setViewName("review/roomForm");
+    return mav;
+    
+  } // 
+  
+//CINEMA INSERT PROCESS
+ @RequestMapping(value="/review/roomForm.do", method=RequestMethod.POST)
+ public ModelAndView roomFormProc(RoomDTO dto, HttpServletRequest req) {
 
+   ModelAndView mav= new ModelAndView();
+   mav.setViewName("msgView");
+   
+   // cinema IMG file
+   mav.addObject("root", Utility.getRoot());
+   // Real Path
+   String basePath = req.getRealPath("/review/roomimg");
+   MultipartFile seatImgMF = dto.getSeatImgMF();
+   
+   // 좌석이미지 필수
+     String seatImg = UploadSaveManager.saveFileSpring30(seatImgMF, basePath);
+     dto.setSeatImg(seatImg);
+   
+   int count = dao.roomForm(dto);
+   
+   String msg = "";
+   
+   if (count == 0) {
+     msg += "<!DOCTYPE html>";
+     msg += "<html><body>";
+     msg += "<script>";
+     msg += "  alert('등록 실패');";
+     msg += "  history.go(-1);";
+     msg += "</script>";
+     msg += "</html></body>";
+     mav.addObject("msg", msg);
+     mav.setViewName("msgView");
+   } else {
+     msg += "<!DOCTYPE html>";
+     msg += "<html><body>";
+     msg += "<script>";
+     msg += "  alert('등록 성공');";
+     msg += "  window.location='./cinemaList.do';";
+     msg += "</script>";
+     msg += "</html></body>";
+     mav.addObject("msg", msg);
+     mav.setViewName("msgView");
+   } // if end
+
+   return mav;
+ } // 
+  
+  
+  
+  
   ////////////////////////////// REVIEW  ////////////////////////////////////////////////////////////////////////////
-
-  /*0906 리뷰점수 매기는 폼*/
+  //reviewCreate
   @RequestMapping(value="/review/create.do", method=RequestMethod.GET)
   public ModelAndView create() {
     ModelAndView mav= new ModelAndView();
     mav.setViewName("review/reviewForm");
     return mav;
-  } // 
+  } // get (view 보여주기)
   
   @RequestMapping(value="/review/create.do", method=RequestMethod.POST)
-  public ModelAndView createProc(ReviewStar sdto) {
+  public ModelAndView createProc(ReviewStar sdto, HttpServletRequest req) throws UnknownHostException {
     ModelAndView mav = new ModelAndView();
-    mav.setViewName("review/msgView");
-    //int count = dao.create(sdto);
-    //mav.addObject("count", count);
+    
+    /*ip가져오기*/
+    InetAddress local = InetAddress.getLocalHost();
+    String ip = local.getHostAddress();
+    sdto.setIp(ip);
+    
+   System.out.println(sdto.getAround());
+   System.out.println(sdto.getCineCode());
+   System.out.println(sdto.getClean());
+   System.out.println(sdto.getHeart());
+   System.out.println(sdto.getIp());
+   System.out.println(sdto.getPixel());
+   System.out.println(sdto.getS_e());
+   System.out.println(sdto.getSeat());
+   System.out.println(sdto.getService());
+   System.out.println(sdto.getSnack());
+   System.out.println(sdto.getSound());
+   System.out.println(sdto.getTrans());
+   System.out.println(sdto.getUid());
+   
+    int count = dao.create(sdto);  
+    
+    String msg = "";
+    
+    if (count == 0) {
+      msg += "<!DOCTYPE html>";
+      msg += "<html><body>";
+      msg += "<script>";
+      msg += "  alert('별점 등록 실패');";
+      msg += "  history.go(-1);";
+      msg += "</script>";
+      msg += "</html></body>";
+      mav.addObject("msg", msg);
+      mav.setViewName("msgView");
+    } else {
+      msg += "<!DOCTYPE html>";
+      msg += "<html><body>";
+      msg += "<script>";
+      msg += "  alert('별점 등록 성공');";
+      msg += "  window.location='./cinemaList.do';";
+      msg += "</script>";
+      msg += "</html></body>";
+      mav.addObject("msg", msg);
+      mav.setViewName("msgView");
+    } // if end
+    return mav;
+  } // post  (실제 실행되는애) 
+  
+  
+  
+  //cinemaRead ( 영화관 상세정보 ,리뷰보기, 리뷰매기기 ) 
+  @RequestMapping(value="/review/cinemaRead.do", method=RequestMethod.GET)
+  public ModelAndView cinemaRead(CinemaDTO dto) {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("review/cinemaRead");
+    dto = dao.cinemaRead(dto);
+    ArrayList<ReviewStar> reviewstar = dao.reviewstar();
+    ArrayList<ReviewStar> list = dao.list();
+    // 페이지 이동 및 값 올리기
+    
+    //사이즈값으로 제대로 찍히나 확인
+    System.out.println(list.size());
+    
+    mav.setViewName("review/cinemaRead"); //reviewList
+    mav.addObject("list", list);
+    mav.addObject("reviewstar", reviewstar);
+    mav.addObject("dto", dto);
     return mav;
   }
-  
-  
-  
-  
-  /*
-  
-  @RequestMapping(value="/review/reviewForm.do", method=RequestMethod.POST)
-  public ModelAndView reviewform(ReviewStar sdto) {
-    ModelAndView mav= new ModelAndView();
-    mav.setViewName("redirect:/review/cinemaList.do");
-    int count = dao.reviewForm(sdto);
-    mav.addObject("count", count);
-    return mav;
-  } // POST*/
-  
-  
-  /* review 목록                              결과확인하는 값
-  @RequestMapping(value="/review/cinemaRead.do")
-  public ModelAndView list(ReviewStar sdto) {
-      ModelAndView mav = new ModelAndView();
-      ArrayList<ReviewStar> list = dao.list();
-      // 페이지 이동 및 값 올리기
-      mav.setViewName("review/cinemaRead"); //reviewList
-      mav.addObject("list", list);
-      return mav; 
-  }*/ //list() end
+
 
   
 } // class end
