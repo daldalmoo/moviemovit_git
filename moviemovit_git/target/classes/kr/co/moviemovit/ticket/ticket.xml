@@ -32,8 +32,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   ]]>
   </select>
   
+  <!-- ************* 극장선택 부분 ************* -->
   <!-- 예매 중 극장목록 -->
-  <select id="cineList" resultType="CinemaDTO">
+  <select id="cinemaList" resultType="CinemaDTO">
   <![CDATA[
     SELECT cineCode, brandName, cineName
     FROM cinemaTable
@@ -42,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <!-- 영화선택 -> 상영극장 가져오기 -->
-  <select id="cinelistFromMovie" parameterType="int" resultType="CinemaDTO">
+  <select id="cinemaSelListFromMovie" parameterType="int" resultType="CinemaDTO">
     <![CDATA[
       SELECT CT.cineCode,brandName,cineName
       FROM cinemaTable CT
@@ -55,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       ORDER BY brandName ASC, cineName ASC
     ]]>
   </select>
-  
+  <!-- ************* 극장선택 부분 END ************* -->
   
   <!-- 영화선택 -> 상영관및시간 가져오기 -->
   <!-- <select id="screenlistFromMovie" parameterType="int" resultType="ScreenDTO">

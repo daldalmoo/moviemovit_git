@@ -56,6 +56,6 @@ INNER JOIN roomTable RT
 ON CT.cineCode=RT.cineCode
 INNER JOIN screenTable ST
 ON RT.roomCode=ST.roomCode
-WHERE mCode=1
+WHERE mCode=3
 GROUP BY CT.cineCode
 ORDER BY brandName ASC, cineName ASC;

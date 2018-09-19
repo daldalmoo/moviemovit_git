@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
-import kr.co.moviemovit.screen.ScreenDTO;
 
 @Component
 public class TicketDAO {
@@ -36,24 +35,26 @@ public class TicketDAO {
 	ArrayList<MovieDTO> movieList = mapper.movieList();
 	return movieList;
   }//movieList() end
-
+  
+  /* -------------------- 극장선택 부분 -------------------- */
   public ArrayList<CinemaDTO> cineAddr1List() {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     ArrayList<CinemaDTO> cineaddr1list = mapper.cineAddr1List();
     return cineaddr1list;
   }//cineAddr1List() end
   
-  public ArrayList<CinemaDTO> cineList() {
+  public ArrayList<CinemaDTO> cinemaList() {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
-    ArrayList<CinemaDTO> cinelist = mapper.cineList();
-    return cinelist;
+    ArrayList<CinemaDTO> cinemalist = mapper.cinemaList();
+    return cinemalist;
   }//cineList() end
   
-  public ArrayList<CinemaDTO> cinelistFromMovie(int mCode) {
+  public ArrayList<CinemaDTO> cinemaSelListFromMovie(int mCode) {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
-    ArrayList<CinemaDTO> cinelist = mapper.cinelistFromMovie(mCode);
+    ArrayList<CinemaDTO> cinelist = mapper.cinemaSelListFromMovie(mCode);
     return cinelist;
   }//screenlistFromMovie() end
+  /* -------------------- 극장선택 부분 END -------------------- */
   
   
 }//class end
