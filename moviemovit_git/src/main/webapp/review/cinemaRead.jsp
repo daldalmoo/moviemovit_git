@@ -43,7 +43,7 @@
   width: 80%;
 }
 .cinemaStar img {
-	width: 150px;
+    width: 150px;
 }
 .cinemaStar table td:first-child{
     align: right;
@@ -179,20 +179,19 @@ table td:last-child {
  
 }
 </style>
-
 <div class="main-table">
 <c:set var="cineCode" value="${dto.cineCode}"/> 
+
 <table>
-    <tr>																						  <!-- style="float: left; " -->		
-       <td rowspan="10"><img src="./img/${dto.logoImg }" width="400" height="270"></td>
+    <tr>                                                                                          <!-- style="float: left; " -->        
+       <td rowspan="10"><img src="img/${dto.logoImg }" width="400" height="270"></td>
   </tr> 
        <tr style="font-size: 2em;">
        <th colspan="2"> ${dto.brandName } &nbsp; ${dto.cineName }</th>
   </tr>
-  
   <tr>
      <td colspan="3">
-        <!-- 별점별 이미지출력 -->
+        <!-- dto.cineCode(영화관리스트의 cineCode) 와 reviewstar.cineCode(리뷰의 cineCode)가 일치할때 해당되는 별점 출력 -->
           <c:forEach var="reviewstar" items="${reviewstar }">
           <c:if test="${cineCode eq reviewstar.cineCode }">
                <%-- ${reviewstar.startotal } --%>
@@ -244,9 +243,9 @@ table td:last-child {
 <!-- 영화관에 대한 각 별점(8개) -->
 <div class="cinemaStar">
 <table>
-																																			        <!-- 각 영화관별로 평가점수 가져오기 -->
-																																			     <%--  <c:forEach var="reviewstar" items="${reviewstar }">
-																																			      <c:if test="${cineCode == reviewstar.cineCode }"> --%>
+                        <!-- 각 영화관별로 평가점수 가져오기 -->
+                     <%--  <c:forEach var="reviewstar" items="${reviewstar }">
+                      <c:if test="${cineCode == reviewstar.cineCode }"> --%>
                 <br>
                 <tr>
                    <td>화질 
@@ -440,9 +439,6 @@ table td:last-child {
 <br>
 </div>  <!-- 영화관별 평가보기 끝 -->
             
-            
-                
-                
                 
    <a href="./create.do?cineCode=${dto.cineCode }" > ${dto.brandName }  ${dto.cineName }영화관 평가 등록하기 </a>
    <!-- <input class="cbp-mc-button" type="button" value=" 나도 평가 등록하기!! " onclick="location.href='reviewForm.jsp'" > -->
@@ -460,74 +456,77 @@ table td:last-child {
       </tr> 
       
        <c:forEach var="sdto" items="${list }"> 
+       
+       <!-- 리뷰에 있는 cineCode와 지금 보여지는 cineRead의 cineCode가 일치하는 리뷰만 출력 -->
+       <c:if test="${sdto.cineCode eq dto.cineCode }">
        <tr>
          <td> ${sdto.uid }</td>
          <td> 
-			         화질 <c:if test="${sdto.pixel==0 }"><img src="./img/star0.png"></c:if>
-			       <c:if test="${sdto.pixel==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.pixel==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.pixel==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.pixel==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.pixel==5 }"><img src="./img/star5.png"></c:if>    
-	               청결도<c:if test="${sdto.clean==0 }"><img src="./img/star0.png"></c:if>
-	           <c:if test="${sdto.clean==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.clean==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.clean==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.clean==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.clean==5 }"><img src="./img/star5.png"></c:if>
+                     화질 <c:if test="${sdto.pixel==0 }"><img src="./img/star0.png"></c:if>
+                   <c:if test="${sdto.pixel==1 }"><img src="./img/star1.png"></c:if>
+                 <c:if test="${sdto.pixel==2 }"><img src="./img/star2.png"></c:if>
+                 <c:if test="${sdto.pixel==3 }"><img src="./img/star3.png"></c:if>
+                 <c:if test="${sdto.pixel==4 }"><img src="./img/star4.png"></c:if>
+                 <c:if test="${sdto.pixel==5 }"><img src="./img/star5.png"></c:if>    
+                   청결도<c:if test="${sdto.clean==0 }"><img src="./img/star0.png"></c:if>
+               <c:if test="${sdto.clean==1 }"><img src="./img/star1.png"></c:if>
+                 <c:if test="${sdto.clean==2 }"><img src="./img/star2.png"></c:if>
+                 <c:if test="${sdto.clean==3 }"><img src="./img/star3.png"></c:if>
+                 <c:if test="${sdto.clean==4 }"><img src="./img/star4.png"></c:if>
+                 <c:if test="${sdto.clean==5 }"><img src="./img/star5.png"></c:if>
              <br>
              
-        	음향 <c:if test="${sdto.sound==0 }"><img src="./img/star0.png"></c:if>
-        		 <c:if test="${sdto.sound==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.sound==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.sound==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.sound==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.sound==5 }"><img src="./img/star5.png"></c:if>        	 
-       	 서비스<c:if test="${sdto.service==0 }"><img src="./img/star0.png"></c:if>
-       	 		 <c:if test="${sdto.service==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.service==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.service==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.service==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.service==5 }"><img src="./img/star5.png"></c:if> 
+            음향 <c:if test="${sdto.sound==0 }"><img src="./img/star0.png"></c:if>
+                 <c:if test="${sdto.sound==1 }"><img src="./img/star1.png"></c:if>
+                 <c:if test="${sdto.sound==2 }"><img src="./img/star2.png"></c:if>
+                 <c:if test="${sdto.sound==3 }"><img src="./img/star3.png"></c:if>
+                 <c:if test="${sdto.sound==4 }"><img src="./img/star4.png"></c:if>
+                 <c:if test="${sdto.sound==5 }"><img src="./img/star5.png"></c:if>           
+         서비스<c:if test="${sdto.service==0 }"><img src="./img/star0.png"></c:if>
+                 <c:if test="${sdto.service==1 }"><img src="./img/star1.png"></c:if>
+                 <c:if test="${sdto.service==2 }"><img src="./img/star2.png"></c:if>
+                 <c:if test="${sdto.service==3 }"><img src="./img/star3.png"></c:if>
+                 <c:if test="${sdto.service==4 }"><img src="./img/star4.png"></c:if>
+                 <c:if test="${sdto.service==5 }"><img src="./img/star5.png"></c:if> 
              <br>
              
              
                       좌석 <c:if test="${sdto.seat==0 }"><img src="./img/star0.png"></c:if>
              <c:if test="${sdto.seat==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.seat==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.seat==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.seat==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.seat==5 }"><img src="./img/star5.png"></c:if>    
-	     주변 편의시설<c:if test="${sdto.around==0 }"><img src="./img/star0.png"></c:if>
-	     			 <c:if test="${sdto.around==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.around==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.around==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.around==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.around==5 }"><img src="./img/star5.png"></c:if>	
+                 <c:if test="${sdto.seat==2 }"><img src="./img/star2.png"></c:if>
+                 <c:if test="${sdto.seat==3 }"><img src="./img/star3.png"></c:if>
+                 <c:if test="${sdto.seat==4 }"><img src="./img/star4.png"></c:if>
+                 <c:if test="${sdto.seat==5 }"><img src="./img/star5.png"></c:if>    
+         주변 편의시설<c:if test="${sdto.around==0 }"><img src="./img/star0.png"></c:if>
+                     <c:if test="${sdto.around==1 }"><img src="./img/star1.png"></c:if>
+                 <c:if test="${sdto.around==2 }"><img src="./img/star2.png"></c:if>
+                 <c:if test="${sdto.around==3 }"><img src="./img/star3.png"></c:if>
+                 <c:if test="${sdto.around==4 }"><img src="./img/star4.png"></c:if>
+                 <c:if test="${sdto.around==5 }"><img src="./img/star5.png"></c:if> 
              <br>
              
              
-      		매점<c:if test="${sdto.snack==0 }"><img src="./img/star0.png"></c:if>
-      			 <c:if test="${sdto.snack==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.snack==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.snack==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.snack==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.snack==5 }"><img src="./img/star5.png"></c:if>	
-         	 교통<c:if test="${sdto.trans==0 }"><img src="./img/star0.png"></c:if>
-         	 	 <c:if test="${sdto.trans==1 }"><img src="./img/star1.png"></c:if>
-		         <c:if test="${sdto.trans==2 }"><img src="./img/star2.png"></c:if>
-		         <c:if test="${sdto.trans==3 }"><img src="./img/star3.png"></c:if>
-		         <c:if test="${sdto.trans==4 }"><img src="./img/star4.png"></c:if>
-		         <c:if test="${sdto.trans==5 }"><img src="./img/star5.png"></c:if>	
-         	 	 <br>
-         		<p style="line-height: 1.4;">${sdto.s_e }</p><hr> </td>
+            매점<c:if test="${sdto.snack==0 }"><img src="./img/star0.png"></c:if>
+                 <c:if test="${sdto.snack==1 }"><img src="./img/star1.png"></c:if>
+                 <c:if test="${sdto.snack==2 }"><img src="./img/star2.png"></c:if>
+                 <c:if test="${sdto.snack==3 }"><img src="./img/star3.png"></c:if>
+                 <c:if test="${sdto.snack==4 }"><img src="./img/star4.png"></c:if>
+                 <c:if test="${sdto.snack==5 }"><img src="./img/star5.png"></c:if>  
+             교통<c:if test="${sdto.trans==0 }"><img src="./img/star0.png"></c:if>
+                 <c:if test="${sdto.trans==1 }"><img src="./img/star1.png"></c:if>
+                 <c:if test="${sdto.trans==2 }"><img src="./img/star2.png"></c:if>
+                 <c:if test="${sdto.trans==3 }"><img src="./img/star3.png"></c:if>
+                 <c:if test="${sdto.trans==4 }"><img src="./img/star4.png"></c:if>
+                 <c:if test="${sdto.trans==5 }"><img src="./img/star5.png"></c:if>  
+                 <br>
+                <p style="line-height: 1.4;">${sdto.s_e }</p><hr> </td>
          <td>
             <input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./update.do?cCode=${sdto.cineCode }'"/>
             <input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./delete.do?cCode=${sdto.cineCode }'"/>
          
          </td> 
          </tr>
-            
+   </c:if>
    </c:forEach>
    </table>
 </div>
@@ -536,7 +535,7 @@ table td:last-child {
  
 <!-- 지도 표시 -->
 <div>
-        <!-- 지도생성  																					테두리 설정-->
+        <!--  지도생성                                                                                      테두리 설정 -->
         <div id="map" style="width:400px;height:270px; border: 2px solid #327a81; border-radius: 10px; margin-left: 10%"></div>
          <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5c0accc753a3f17e942b62e44cbe2426"></script>
             <script>

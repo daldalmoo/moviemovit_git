@@ -45,14 +45,16 @@ CREATE TABLE peopleTable (
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- cinemaTable 생성
+-- 180916 우번번호 추가
 CREATE TABLE cinemaTable (
   cineCode   CHAR(4)       NOT NULL  PRIMARY KEY
  ,brandName  VARCHAR(10)   NOT NULL
  ,cineName   VARCHAR(50)   NOT NULL
  ,tel        VARCHAR(20)   NOT NULL
+ ,zipcode    VARCHAR(7)    NULL
  ,addr1      CHAR(3)       NOT NULL
- ,addr2      VARCHAR(50)   
- ,addr3      VARCHAR(255)  
+ ,addr2      VARCHAR(50)   NOT NULL
+ ,addr3      VARCHAR(255)  NOT NULL
  ,wido       VARCHAR(20)   NOT NULL
  ,kyengdo    VARCHAR(20)   NOT NULL
  ,logoImg    VARCHAR(255)  NOT NULL
