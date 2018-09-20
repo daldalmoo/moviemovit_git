@@ -41,6 +41,8 @@ insert into screenTable(sCode,roomCode,sdate,stime,mCode)
 values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L001_2', '2018-09-17', '1030', '3');
 insert into roomTable(roomCode,cineCode,roomName,seatCnt,DD,seatImg)
 values('L001_2','C001',1,50,'2D, 3D','moving/images/seat1.jpg');
+INSERT INTO movieTable(mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date)
+VALUES ((SELECT ifnull(MAX(mCode),0)+1 FROM movieTable as movie), 'moving/images/poster02.jpg', '신과함께', 'comedy', 'ing', '0', '저승에 가는 영화', 'Korea', '7,8', '1,2,3', '3D', '140', '2018-06-15', '2018-06-30');
 
 
 -- 영화선택(mCode) -> 상영극장(cineCode,brandName,cineName,logoImgMF) 가져오기

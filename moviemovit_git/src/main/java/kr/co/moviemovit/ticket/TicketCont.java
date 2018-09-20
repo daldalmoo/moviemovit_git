@@ -91,7 +91,7 @@ public class TicketCont {
 		String msg = "";
 		
     int mCode = Integer.parseInt(req.getParameter("mCode"));
-		//System.out.println("TicketCont : mCode : "+mCode);
+		System.out.println("TicketCont : mCode : "+mCode);
 		
 		ArrayList<CinemaDTO> cinemaSellist = dao.cinemaSelListFromMovie(mCode);
 	  //System.out.println(cinemaSellist.get(0).getBrandName() + " - " + cinemaSellist.get(0).getCineName());

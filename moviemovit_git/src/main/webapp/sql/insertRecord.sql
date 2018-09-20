@@ -47,6 +47,8 @@ insert into roomTable(roomCode,cineCode,roomName,seatCnt,DD,seatImg)
 values('C001_3','C001',3,150,'imax','moving/images/seat3.jpg');
 insert into roomTable(roomCode,cineCode,roomName,seatCnt,DD,seatImg,etc)
 values('L001_4','L001',4,100,'4D','moving/images/seat4.jpg','·¹µåº§ºª ½Å°î±â³ä°ü');
+insert into roomTable(roomCode,cineCode,roomName,seatCnt,DD,seatImg)
+values('M001_1','C001',1,50,'2D, 3D','moving/images/seat1.jpg');
 
 
 -- reviewTable°ú reviewStarTable ÇÕÃÄÁü _ 0911 ½ÂÁö
@@ -77,6 +79,10 @@ insert into screenTable(sCode,roomCode,sdate,stime,mCode)
 values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C001_1', '2018-08-20', '1030', '1');
 insert into screenTable(sCode,roomCode,sdate,stime,mCode)
 values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C001_2', '2018-08-20', '1030', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'M001_1', '2018-09-17', '1030', '2');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L001_2', '2018-09-17', '1030', '3');
 
 -- ticketTable ·¹ÄÚµå »ðÀÔ
 insert into ticketTable(tCode,wdate,uid,sCode,seat,auditType,cCode)
