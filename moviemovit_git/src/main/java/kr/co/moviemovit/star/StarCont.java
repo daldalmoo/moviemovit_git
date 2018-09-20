@@ -75,13 +75,14 @@ public class StarCont {
      */	 
 	 
 	 @RequestMapping("/star/List.do")
-	 public ModelAndView starlist(StarDTO sdto) {
+	 public ModelAndView starlist(MovieDTO dto, StarDTO sdto) {
 		 ModelAndView mav = new ModelAndView();
 		 mav.setViewName("/star/List");
 		 ArrayList<HashMap<MovieDTO, StarDTO>> starlist=dao.starlist(sdto);
-		
+		 dto=dao.movieList(dto);
 		 System.out.println("»Æ¿Œ2: " + sdto.getmCode() + sdto.getStar() + sdto.getComment());
 		 mav.addObject("starlist", starlist);
+		 mav.addObject("dto", dto);
 		 return mav;
 	 }//starlist() end
 	

@@ -200,10 +200,11 @@ table tr:nth-child(2n+1) {
      </span>
    </div>
    
-   ${sdto.avgstar }
+   
    <c:forEach var="sdto" items="${starlist }">
    <div class="box">
       <span>
+       
        <strong>별점: ${sdto.star} &nbsp;
        <c:if test="${sdto.star==0 }">
            <img class="simg" src="../img/star0.png"> 
