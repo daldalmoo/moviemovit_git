@@ -188,57 +188,50 @@ table tr:nth-child(2n+1) {
    <div class="header">MOVIE LIST</div>
  </div>
    
-   <c:forEach var="dto" items="${starlist }">
-   
    <div>
    <div class="box-image" >
      <span class="thumb-image">
-       <strong class="title">영화코드: ${dto.st.mCode }</strong><br>
-     </span>
-     <span class="thumb-image">
-       <strong class="title">유저아이디: ${dto.st.uid }</strong><br>
-     </span>
-     <span class="thumb-image">
-       <img class="mimg" src="../movie/storage/${dto.mt.poster }" width="400" height="800"/>
+       <img class="mimg" src="../movie/storage/${dto.poster }" width="400" height="800"/>
      </span>  
-     </div>
+   </div>
+     <span class="thumb-image">
+       <strong>${dto.mName }</strong>
+     </span>
+   </div>
    
+   
+   <c:forEach var="sdto" items="${starlist }">
    <div class="box">
-       
       <span>
-       <strong>별점: ${dto.st.star} &nbsp;
-       <c:if test="${dto.st.star==0 }">
+       <strong>별점: ${sdto.star} &nbsp;
+       <c:if test="${sdto.star==0 }">
            <img class="simg" src="../img/star0.png"> 
        </c:if>
-       <c:if test="${dto.st.star==1 }">
+       <c:if test="${sdto.star==1 }">
            <img class="simg" src="../img/star1.png"> 
        </c:if>
-       <c:if test="${dto.st.star==2 }">
+       <c:if test="${sdto.star==2 }">
            <img class="simg" src="../img/star2.png"> 
        </c:if>
-       <c:if test="${dto.st.star==3 }">
+       <c:if test="${sdto.star==3 }">
            <img class="simg" src="../img/star3.png"> 
        </c:if>
-       <c:if test="${dto.st.star==4 }">
+       <c:if test="${sdto.star==4 }">
            <img class="simg" src="../img/star4.png"> 
        </c:if>
-       <c:if test="${dto.st.star==5 }">
+       <c:if test="${sdto.star==5 }">
            <img class="simg" src="../img/star5.png">
        </c:if>
        </strong>
       </span><br>
       
+      <span>
         <strong>  
-          한줄평: ${dto.st.comment } 
+          한줄평: ${dto.comment } 
         </strong>
       </span><br>
-         
     </div>
-   </div>
    </c:forEach>
-    
-
-     
      
    <!-- 하단 버튼 -->
    <br>

@@ -12,3 +12,7 @@ WHERE st.mCode = mt.mCode AND
 SELECT mt.mCode, mt.poster, mt.mName, st.star
 FROM movieTable mt join starTable st
 ON mt.mCode = st.mCode
+
+SELECT sCode, mCode, uid, (select avg(star) from starTable) as star, comment, wdate
+FROM starTable
+WHERE mCode=1

@@ -12,11 +12,11 @@ public interface StarMapper {
 	
 	public ArrayList<String> uidList(ArrayList<String> uid);
 	
-	public int create(StarDTO dto); 
+	public int create(StarDTO sdto); 
 	
-	public ArrayList<StarDTO> list();
+	/*public HashMap<Star> starlist(Star dto);*/
 	
-	public HashMap<MovieDTO, StarDTO> starlist();
+	public StarDTO starlist(StarDTO sdto);
 	
 	
 	
