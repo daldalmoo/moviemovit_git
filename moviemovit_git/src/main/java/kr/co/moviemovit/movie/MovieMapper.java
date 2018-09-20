@@ -3,6 +3,7 @@ package kr.co.moviemovit.movie;
 import java.util.ArrayList;
 
 import kr.co.moviemovit.people.PeopleDTO;
+import kr.co.moviemovit.star.StarDTO;
 
 public interface MovieMapper {
 	
@@ -20,5 +21,5 @@ public interface MovieMapper {
 	
 	public ArrayList<PeopleDTO> peopleNameList2(String peoName);
 	
-	public int star(int star);
+	public StarDTO star(StarDTO sdto);
 }//interface end

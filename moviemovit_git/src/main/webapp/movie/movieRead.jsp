@@ -9,9 +9,9 @@
   text-align: center;
   text-transform: uppercase;        
 }
-mimg {        /* 영화 포스터 */
+.mimg2 {        /* 영화 포스터 */
   height: 250px;
-  width: 150px;
+  width: 250px;
 }
 .table-users {
   border: 1px solid #327a81;
@@ -191,7 +191,7 @@ table tr:nth-child(2n+1) {
       </tr>
       <tr>
         <th>포스터</th>
-        <td><img class="mimg" src="./storage/${dto.poster }"></td>
+        <td><img class="mimg2" src="./img_poster/${dto.poster }"></td>
       </tr>
       <tr>
         <th>장르</th>

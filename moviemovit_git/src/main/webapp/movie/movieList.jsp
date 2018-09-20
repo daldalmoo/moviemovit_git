@@ -4,6 +4,34 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <style rel="stylesheet">
+.main{
+  width:1000px;
+  margin-left: 20em;
+  text-align: center;
+}
+
+.box-image {
+  display: inline-block;
+  width:250px;
+  height:180px;
+  background-color: white;;
+  border: 8px solid #3366cc; 
+  box-sizing: content-box;
+  margin: auto 0.5em;
+  float:left
+}
+
+.mimg {        /* 영화관 목록안의 영화관이미지 */
+  font-size: 0;
+  text-align: center;
+  width: 150px;
+  max-width: calc(100% - 50em);
+  height: 180px;
+  
+}
+
+
+
 .header {   /* 영화관목록  */
   background-color: #3366cc;
   color: white; 
@@ -51,26 +79,7 @@ table tr:nth-child(2n+1) {
   background-color: #bfe1ff;
 }
 
-.box-image {
-  width:100%;
-  height:180px;
-  max-width: calc(100% - 85em);
-  background-color: white;;
-  border: 8px solid #3366cc; 
-  box-sizing: content-box;
-  margin: 1em auto;
-}
 
-
-
-.mimg {        /* 영화관 목록안의 영화관이미지 */
-  font-size: 0;
-  text-align: center;
-  width: 100px;
-  max-width: calc(100% - 50em);
-  height: 180px;
-  
-}
 
 
 
@@ -182,55 +191,35 @@ table tr:nth-child(2n+1) {
  <div class="table-users">
    <div class="header">MOVIE LIST</div>
  </div>
-   <%-- <table>
-     <c:forEach var="dto" items="${list }">
-     <tr>
-       <td><a href="./movieRead.do?mCode=${dto.mCode }"><img class="mimg" src="./storage/${dto.poster }" width="400" height="800"></a></td>
-       <td>${dto.mName}</td>
-       <td>
-       <a href="#"></a>
-       <input class="cbp-mc-button" type="button" value="예매하기" id="예매하기">
-       </td>
-     </tr>
-     </c:forEach>
-   </table>
-    
-   <div class="cbp-mc-submit-wrap">
-		<input class="cbp-mc-button" type="button" value="영화등록" onclick="location.href='./create.do'"/>
-		<input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />
-   </div> --%>
+   
    <c:forEach var="dto" items="${list }">
    
-   <div>
+   <div class="main">
    <div class="box-image" >
      <span class="thumb-image">
      <a href="./movieRead.do?mCode=${dto.mCode }">
-       <img class="mimg" src="./storage/${dto.poster }" width="400" height="800" />
+       <img class="mimg" src="./img_poster/${dto.poster }" width="400" height="800" />
        </a>
      </span>
-     </div>
-   
-   <div class="box">
-       <strong class="title">${dto.mName }</strong><br>
+  <br><br>
+    <strong class="title">${dto.mName }</strong><br>
      <span>
        <strong>
        ${dto.s_date } 개봉<br> 
        <span>${dto.screen }</span><br>
        </strong>
      </span>
-         
+     <input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />    
     </div>
    </div>
-     </c:forEach>  
+  
+   </c:forEach>  
      
-     <!-- 하단 버튼 -->
-      <div class="cbp-mc-submit-wrap">
+   
+   
+    <br>
 		<input class="cbp-mc-button" type="button" value="영화등록" onclick="location.href='./create.do'"/>
-		<input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />
-      </div>
-   
-   
- </div>    
+
 
 
 

@@ -188,7 +188,7 @@ table tr:nth-child(2n+1) {
       </tr>
       <tr>
         <th>사진</th>
-        <td><img class="mimg" src="./storage/${dto.peoPic }"></td>
+        <td><img class="mimg" src="./img_people/${dto.peoPic }"></td>
       </tr>
       <tr>
         <th>국적</th>

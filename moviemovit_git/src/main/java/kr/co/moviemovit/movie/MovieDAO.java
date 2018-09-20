@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import kr.co.moviemovit.people.PeopleDTO;
 import kr.co.moviemovit.people.PeopleMapper;
 import kr.co.moviemovit.screen.ScreenMapper;
+import kr.co.moviemovit.star.StarDTO;
 
 @Component
 public class MovieDAO {
@@ -64,10 +65,10 @@ public class MovieDAO {
         return peoplelist2;
     }//peopleNameList() end
 	
-	public int star(int star) {
+	public StarDTO star(StarDTO sdto) {
 		MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
-		int count = mapper.star(star);
-		return count;
+		StarDTO star = mapper.star(sdto);
+		return star;
 	}//update() end
 	
 	

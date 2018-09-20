@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.moviemovit.people.PeopleDTO;
 import kr.co.moviemovit.review.CinemaDTO;
+import kr.co.moviemovit.star.StarDTO;
 import net.utility.UploadSaveManager;
 import net.utility.Utility;
 
@@ -50,7 +51,7 @@ public class MovieCont {
 	    mav.addObject("root", Utility.getRoot());
 	//------------------------------------------------------------    
 	//  전송된 파일이 저장되는 실제 경로
-	    String basePath = req.getRealPath("/movie/storage");
+	    String basePath = req.getRealPath("/movie/img_poster");
 	    MultipartFile posterMF = dto.getPosterMF();
 	    String poster = UploadSaveManager.saveFileSpring30(posterMF, basePath);
 	    dto.setPoster(poster);
@@ -104,12 +105,14 @@ public class MovieCont {
 	 }//createProc() end
 	
 	 @RequestMapping("/movie/movieList.do")
-	 public ModelAndView list(MovieDTO dto) {
+	 public ModelAndView list(MovieDTO dto, StarDTO sdto) {
 	     ModelAndView mav = new ModelAndView();
 	     mav.setViewName("movie/movieList");
 	     ArrayList<MovieDTO> list = dao.list();
-	     
+	     sdto=dao.star(sdto);
 	     mav.addObject("list", list);
+	     mav.addObject("sdto", sdto);
+	     
 	     return mav;
 	 }//list() end
 	 
