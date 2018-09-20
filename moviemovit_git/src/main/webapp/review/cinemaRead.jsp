@@ -174,10 +174,16 @@ table td:last-child {
   line-height: 1.4;
   text-align: center;
 }*/
-
- 
- 
 }
+
+
+/* 0919 revieewdelete test */
+<% 
+   String uid=(String)session.getAttribute("s_id");
+   //out.println("세션확인:" + uid);
+   session.setAttribute("uid", uid);
+%> 
+
 </style>
 <div class="main-table">
 <c:set var="cineCode" value="${dto.cineCode}"/> 
@@ -519,10 +525,10 @@ table td:last-child {
                  <c:if test="${sdto.trans==4 }"><img src="./img/star4.png"></c:if>
                  <c:if test="${sdto.trans==5 }"><img src="./img/star5.png"></c:if>  
                  <br>
-                <p style="line-height: 1.4;">${sdto.s_e }</p><hr> </td>
+                <p style="line-height: 1.4;">${sdto.s_e }  no값: ${sdto.no }</p><hr> </td>
          <td>
-            <input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./update.do?cCode=${sdto.cineCode }'"/>
-            <input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./delete.do?cCode=${sdto.cineCode }'"/>
+            <%-- <input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./update.do?cCode=${sdto.cineCode }'"/> --%>
+            <input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./delete.do?cineCode=${dto.cineCode }&no=${sdto.no }'"/>
          
          </td> 
          </tr>
@@ -580,7 +586,7 @@ table td:last-child {
                 position: position,
                 content: content,
                 yAnchor: 1 
-            });     ssas
+            });    
             
 </script>   
 </div>          
