@@ -211,7 +211,7 @@ table tr:nth-child(2n+1) {
       <tr>
         <th>포스터</th>
         <td class="list">
-        <img class="img2" src="./storage/${dto.poster }">
+        <img class="0img2" src="./storage/${dto.poster }">
         </td>
       </tr>
       <tr>

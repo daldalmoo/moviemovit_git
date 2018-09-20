@@ -57,9 +57,9 @@ public class StarDAO {
 	}//starlist() end
     */	
 	
-	public StarDTO starlist(StarDTO sdto) {
+	public ArrayList<HashMap<MovieDTO, StarDTO>> starlist(StarDTO sdto) {
 		StarMapper mapper = sqlSession.getMapper(StarMapper.class);
-		StarDTO starlist = mapper.starlist(sdto);
+		ArrayList<HashMap<MovieDTO, StarDTO>> starlist = mapper.starlist(sdto);
 		return starlist;
 	}//starlist() end
 	

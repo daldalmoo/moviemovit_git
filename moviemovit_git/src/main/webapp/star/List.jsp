@@ -200,7 +200,7 @@ table tr:nth-child(2n+1) {
      </span>
    </div>
    
-   
+   ${sdto.avgstar }
    <c:forEach var="sdto" items="${starlist }">
    <div class="box">
       <span>
@@ -228,7 +228,7 @@ table tr:nth-child(2n+1) {
       
       <span>
         <strong>  
-          한줄평: ${dto.comment } 
+          한줄평: ${sdto.comment } 
         </strong>
       </span><br>
     </div>
