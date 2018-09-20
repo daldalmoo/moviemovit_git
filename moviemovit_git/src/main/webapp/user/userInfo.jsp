@@ -1,23 +1,21 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ include file="../header.jsp"%>
-<%-- 본문시작 joinForm.jsp --%>
-<head>
-
+<%@ include file="../header1.jsp"%>
+<%-- 외부파일 또는 <style> 태그 여기 추가  --%>
+<link rel="stylesheet" href="../css/ticket_style.css" type="text/css" />
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 
 <style>
 /*180827 경민 list 클래스 추가*/
 .list {
-	text-align: left;
-	padding: 10px;
-	margin: auto;
+  text-align: left;
+  padding: 10px;
+  margin: auto;
 }
 </style>
-
-</head>
-
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 joinForm.jsp --%>
 <form class="cbp-mc-form" id="regForm" name="regForm">
 	<!-- 회원정보 상세보기 -->
 	<table class="cbp-mc-column">

@@ -1,7 +1,10 @@
-<%@ page contentType="text/html; charset=UTF-8"%> 
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../header1.jsp"%>
-
 <%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
+<link rel="stylesheet" href="../css/ticket_style.css" type="text/css" />
+
 <style>
 .header {
   background-color: #fed513; /* 테이블 이름 배경 색상 (COUPON LIST) */

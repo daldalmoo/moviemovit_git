@@ -1,22 +1,23 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header.jsp"%>
-<%-- 본문시작 userCheckForm.jsp --%>
-<head>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ include file="../header1.jsp"%>
+<%-- 외부파일 또는 <style> 태그 여기 추가  --%>
+<link rel="stylesheet" href="../css/ticket_style.css" type="text/css" />
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 
 <style>
 
 .list {
-	text-align:left;
-	padding:10px;
-	margin:auto;
+  text-align:left;
+  padding:10px;
+  margin:auto;
 }
 
 </style>
-
-</head>
-	<h3>User Check</h3>
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 userCheckForm.jsp --%>
+<h3>User Check</h3>
 <form class="cbp-mc-form" name="checkForm" method="post" action="./userUpdateForm.do">	
 	<!-- 회원확인 폼 -->
 	<table class="cbp-mc-column">	

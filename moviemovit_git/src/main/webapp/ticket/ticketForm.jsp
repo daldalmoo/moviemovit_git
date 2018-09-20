@@ -36,11 +36,11 @@ function prevCalendar() {
   if(month<0) { 
     year--;
     month=11;
-    Calendar.setFullYear(year);
+    //Calendar.setFullYear(year);
     //year--;
     //month = 11;
   }
-  Calendar.setMonth(month);
+  //Calendar.setMonth(month);
   buildCalendar();
 }
 
@@ -49,10 +49,10 @@ function nextCalendar() {
   month++;
   if(month>11) { 
     year++;
-    Calendar.setFullYear(year);
+    //Calendar.setFullYear(year);
     month = 0;
   }
-  Calendar.setMonth(month);
+  //Calendar.setMonth(month);
   buildCalendar();
 }
 
@@ -64,6 +64,8 @@ function nextCalendar() {
 
 //현재달 달력
 function buildCalendar() {
+  Calendar.setFullYear(year);
+  Calendar.setMonth(month);
   Calendar.setDate(1);  //달력은 1일부터 표시
     
   //tr
@@ -272,41 +274,34 @@ function buildCalendar() {
           </h3>
 
           <!-- 예매 결과 -->
-          <dl class="1st_result">
-            <dt>
-              <span class="space">극장</span>
-            </dt>
-            <dd>
-              <span id="select_space_txt">영화브랜드 지점</span>
-            </dd>
-
-            <dt>
-              <span class="date">날짜</span>
-            </dt>
-            <dd>
-              <span id="select_date_txt">yyyy.mm.dd(요일) 시:분</span>
-            </dd>
-
-            <dt>
-              <span class="people">인원</span>
-            </dt>
-            <dd>
-              <span id="select_people_txt">유형 인원</span>
-            </dd>
-
-            <dt>
-              <span class="price">금액</span>
-            </dt>
-            <dd>
-              <span class="total">총 금액</span>
-            </dd>
-          </dl>
+          <table id="1st_result">
+            <tr>
+              <th class="space">극장</th>
+              <td id="select_space_txt">ex)메가박스 강동</td>
+            </tr>
+            
+            <tr>
+              <th class="date">날짜</th>
+              <td id="select_date_txt">yyyy.mm.dd(요일) 시:분</td>
+            </tr>
+            
+            <tr>
+              <th class="people">인원</th>
+              <td id="select_people_txt">유형 인원</td>
+            </tr>
+            
+            <tr>
+              <th class="price">금액</th>
+              <td id="select_price_txt">총 금액</td>
+            </tr>           
+          </table>
 
           <div id="btn_area">
             <input type="image" class="reserve"
               src="./img/btn_reserve.PNG" alt="예매하기"
               onclick="javascript:NextBtn();">
           </div>
+          
         </div>
 
       </td>

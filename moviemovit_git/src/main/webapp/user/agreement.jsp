@@ -1,22 +1,28 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ include file="../header.jsp"%>
-<!-- 본문시작 agreement.jsp-->
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ include file="../header1.jsp"%>
+<%-- 외부파일 또는 <style> 태그 여기 추가  --%>
+<link rel="stylesheet" href="../css/ticket_style.css" type="text/css" />
+
 <style>
 input.cbp-mc-submit {
-	background: #40bf80;
-	border: none;
-	color: #fff;
-	width: auto;
-	cursor: pointer;
-	text-transform: uppercase;
-	display: inline-block;
-	padding: 15px 30px;
-	font-size: 1.1em;
-	border-radius: 2px;
-	letter-spacing: 1px;
+  background: #40bf80;
+  border: none;
+  color: #fff;
+  width: auto;
+  cursor: pointer;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 1.1em;
+  border-radius: 2px;
+  letter-spacing: 1px;
 }
 </style>
 
+<%@ include file="../header2.jsp"%>
+<!-- 본문시작 agreement.jsp-->
 <div style="text-align: center">* 회/원/약/관 *</div>
 <br>	    
 <!--
