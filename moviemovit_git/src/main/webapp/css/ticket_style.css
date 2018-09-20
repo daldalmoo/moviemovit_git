@@ -1,0 +1,404 @@
+@charset "UTF-8";
+
+/*********** 예매 view 페이지 css ***********/
+/********* 티켓예매 테이블 형태로 *********************/
+#ticketArea {
+  border-collapse: collapse;
+  border: 1px solid #000;
+  width: 90%;
+  height: 700px;
+  margin: auto;
+}
+/*상단 타이틀*/
+#ticketArea th {
+  vertical-align: text-top;
+  text-align: center;
+  background: linear-gradient(to top, #3b3d58 0%, #5d607d 100%);
+  font-size: 12pt;
+  font-weight: bold;
+  color: white;
+  height: 3%;
+  width: 25%;
+  border: 1px solid #000;
+}
+
+#ticketArea>tbody>tr>td {
+  border: 1px solid #000;
+}
+
+/* 영화선택 타이틀 부분 th 시작 */
+.movie_title .refreshbtn { /* 새로고침 버튼 */
+  cursor: pointer;
+  width: 19px;
+  height: 22px;
+  padding-bottom: 3px;
+}
+/* 영화선택 타이틀 부분 th 끝 */
+
+/* 극장선택 타이틀 부분 th 시작 */
+.cinema_title .refreshbtn { /* 새로고침 버튼 */
+  cursor: pointer;
+  width: 19px;
+  height: 22px;
+  padding-bottom: 3px;
+}
+.cinema_title .searchtxt{ /* 검색창 */
+  text-align: center;
+}
+.cinema_title .searchbtn { /* 검색 버튼 */
+  cursor: pointer;
+  width: 22px;
+  height: 25px;
+  padding-bottom: 3px;
+}
+/* 극장선택 타이틀 - placeholder 속성 */
+.cinema_title ::-webkit-input-placeholder {  /* 크롬 */
+  font-size: 15px;
+}
+.cinema_title :-moz-placeholder {    /* 파이어폭스 */
+  font-size: 15px;
+}
+.cinema_title ::-moz-placeholder {
+  font-size: 15px;
+}
+.cinema_title :-ms-input-placeholder {   /* 익스 */
+  font-size: 15px;
+}
+/* 극장선택 타이틀 부분 th 끝 */
+
+/*********** 1) 영화선택 ***********/
+#ticketArea .1st_area {
+  vertical-align: text-top;
+  width: 25%;
+}
+
+#movie_list { /*ul*/
+  list-style: none;
+  height: 420px;
+  padding: 2px 0 2px 0;
+  margin: 0;
+  color: black;
+  vertical-align: top;
+  white-space: nowrap;
+  text-align: left;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+#movie_list .SelMovieList {  /* li */
+  padding: 2px 0px 2px 10px;
+  font-size: 11pt;
+}
+#movie_list .SelMovieList:hover {
+  font-weight: bold;
+  background-color: #ecedf4;
+}
+#movie_list .on {  /* li */
+  font-weight: bold;
+  background-color: #999eca;
+}
+
+/*********** 2) 극장선택 ***********/
+#cinema_area .nocinema {  /* 영화또는날짜 선택안됐을경우 block */
+  display: none;
+  color: black;
+  margin-top: 100px;
+}
+#cinema_area .cinema_addr1,
+#cinema_area .main_list {  /* 영화또는날짜 선택안됐을경우 none */
+  display: block;
+}
+#cinema_area .cinema_select ul {     /* 극장 종류 div */
+  position: relative;
+  background: linear-gradient(to top, #e4e4e8 0%, #f3f3f4 100%);
+  list-style: none;
+  font-weight: bold;
+  padding: 0px;
+  margin: 0px;
+  margin-top: -208px;
+}
+#cinema_area .cinema_select ul li {
+  display: inline;      /* 리스트를 가로로 */
+  font-size: 11pt;
+  font-weight: bold;
+  letter-spacing: 1px;  /* 글자간격 */
+  text-align: center;
+  float: center;
+  border-left: 1px solid #bcbcbc;
+  padding-left: 1pt;
+  padding-right: 1pt;
+}
+#cinema_area .cinema_select ul li:first-child {
+  border-left: none;
+}
+#cinema_area .cinema_select ul li a {
+  text-decoration: none;
+  color: gray;
+}
+#cinema_area .cinema_select ul li a:hover {
+  color: #000;
+}
+#cinema_area .cinema_select ul li .on {
+  background-color: white;
+  border: 1px solid #bcbcbc;
+  border-radius: 10%;
+  color: #000;
+}
+#cinema_area .cinema_select ul li span {
+  margin-left: 5px;
+}
+
+#cinema_area .cinema_addr1 {   /* 극장 대분류주소 div */
+  text-align: left;
+  border-bottom: 2px solid;
+  font-size: 11pt;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+#cinema_area .cinema_addr1 .addr1Selected {
+  list-style: none;
+  padding-left: 15pt;
+}
+#cinema_area .cinema_addr1 .addr1Selected:hover {
+  text-decoration: underline;
+}
+#cinema_area .cinema_addr1 .addr1Selectedbtn {
+  margin-top: -3px;
+}
+/* #cinema_area .cinema_addr1 .addr1Selectedbtn click하면 css 변경{
+  background: url("./img/listbtn_click.gif");
+} */
+#cinema_area .cinema_addr1 .addr1list {
+  z-index: 10;
+  background-color: white;
+  border: 1px solid;
+  position: absolute;
+  width: 130px;
+  height: 185px;
+  margin-top: 5px;
+  margin-left: 15px;
+  padding-top: 2px;
+}
+#cinema_area .cinema_addr1 .addr1list ul {
+  list-style: none;
+  color: black;
+  padding-left: 15pt;
+}
+#cinema_area .cinema_addr1 .addr1list li {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+#cinema_area .main_list {  /* 극장 리스트 div */
+  text-align: left;
+}
+#cinema_area .main_list ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  padding-left: 15pt;
+  font-size: 11pt;
+}
+#cinema_area .main_list ul .on{
+  font-weight: bold;
+}
+
+/*********** 3) 날짜선택 ***********/
+#cal_area{
+   margin:auto;
+   width:75%;
+   height:10%;
+}
+.calendar {
+  width: 100%;
+  overflow: visible;
+  text-align: center;
+  display: table;
+  border-collapse: separate;
+  border-spacing: 2px;
+  border-color: grey;
+}
+.calendar .week {
+  background: #f1f0f0;
+  color: #515151;
+  font-size: 16px;
+  font-weight: bold;
+  border-bottom: 1px solid #d6d6d6;
+  height: 40px;
+}
+.calendar .saturday {
+  background: white;
+  color: #3a87ad;
+  font-size: 16px;
+  font-weight: bold;
+  height: 55px;
+  border: 2px solid #f1f0f0;
+}
+.calendar .sunday {
+  background: white;
+  color: crimson;
+  font-size: 16px;
+  font-weight: bold;
+  height: 55px;
+  border: 2px solid #f1f0f0;
+}
+.calendar .today {
+/*
+  background: white;
+  color: darkblue;
+  font-size: 16px;
+  font-weight: bold;
+  height: 55px;
+  border: 2px solid darkblue;
+*/
+  background: white;
+  color: #515151;
+  font-size: 16px;
+  font-weight: bold;
+  height: 55px;
+  border: 2px solid #f1f0f0;
+}
+.calendar .blank {
+  background: white;
+  color: brown;
+  font-size: 16px;
+  font-weight: bold;
+  height: 55px;
+  border: 2px solid #f1f0f0;
+}
+.calendar .day {
+  background: white;
+  color: #515151;
+  font-size: 16px;
+  font-weight: bold;
+  height: 55px;
+  border: 2px solid #f1f0f0;
+}
+#prev {
+  color: black;
+  float: left;
+  vertical-align: bottom;
+  width: 10px;
+  height: 10px;
+  line-height: 5px;
+  margin: 7px 0 0 0;
+  cursor: pointer;
+}
+#next {
+  color: black;
+  float: right;
+  vertical-align: bottom;
+  width: 10px;
+  height: 10px;
+  line-height: 5px;
+  margin: 7px 7px 0 0;
+  cursor: pointer;
+}
+/*********** 4) 영화정보 **************/
+.section_result {
+  display: inline-block;
+  position: relative;
+}
+/*예매 다시하기 버튼
+.initReserve { 
+  position: relative;
+  transform: translateY(-50%);
+  padding:0px;
+}*/
+.section_result #btn_reset {;
+  
+}
+
+.thumb_poster .movie_poster { /*영화 포스터*/
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.section_result h3 { /*영화 제목*/
+  color: white;
+  font-size: 18px;
+  line-height: 21px;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+dt {
+  margin-left: 50px;
+  float: left;
+}
+
+dd, dt {
+  line-height: 2;
+}
+
+.section_result .btn_area a {
+  display: block;
+  background: url("../ticket/img/btn_reserve.PNG");
+}
+
+/*********** 5) 상영시간선택 ***********/
+.time_area {
+  position: relative;
+  top: 0;
+}
+
+.cinemainfo, .screentime {
+  padding: 0 0 20px 20px;
+  text-align: left;
+  color: #6670bc;
+}
+
+.cinemainfo .cinema_logo {
+  width: 15%;
+  height: 15%;
+  position: relative;
+  top: 15px;
+  margin: auto;
+}
+
+.cinemainfo .cinemainfo_name {
+  vertical-align: bottom;
+  color: black;
+  font-weight: bold;
+}
+
+/*********** 6) 인원선택 ***********/
+#price_lst_area {
+  margin: 0 0 0 10px;
+}
+
+#price_lst_area .ticket_title th {
+  color:#2d2d3f;
+  margin-bottom: 3px;
+  font-weight: bold;
+  background: #fff;
+  border: none;
+  line-height: 20px;
+  text-align: left;
+}
+#price_lst_area .ticket_title .per_price {
+  float: right;
+  padding-right: 10px;
+  position: relative;
+  font-size: 13px;
+  color: #a8a4b9;
+  font-weight: bold;
+}
+.ticket_data li {
+  background: url('../ticket/img/selectBefore_people.PNG');
+}
+.ticket_data li.dimmed {
+  display: inline-block;
+  width: 30px;
+  height: 27px;
+  color: #d0d0d8;
+  float: left;
+  text-align: center;
+  padding-top: 3px;
+  
+}
+#price_lst_area .ticket_data td{
+  vertical-align: bottom;
+  padding-left: 30px;
+}
