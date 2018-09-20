@@ -1,10 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ include file="../header.jsp"%>
-<%-- 본문시작 screenForm.jsp --%>
-<head>
+<%@ include file="../header1.jsp"%>
 
+<%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 
 <style>
@@ -16,7 +15,8 @@
 }
 </style>
 
-</head>
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 screenForm.jsp --%>
 
 <form class="cbp-mc-form" id="screenForm" name="screenForm" method="post" action="./screeninsert.do">
 	<span style="font-weight: bold">상영시간 등록</span><br>

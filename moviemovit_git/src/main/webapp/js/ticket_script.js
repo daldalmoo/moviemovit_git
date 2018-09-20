@@ -27,19 +27,21 @@ $(".SelMovieList").click(function(){
   if($(this).hasClass("on")==true) {
     $(this).removeClass("on");
     MCODE = "";
+    $.post("./cinemaRefresh.do","",mainList);
   } else {
     $(".movie_area li").removeClass("on");
     $(this).addClass("on");
     MCODE = $(this).val();  // 전역변수 할당
+
+    /*
+      $.post(URL,data,function(data,status,xhr)
+      - URL : 서버에 요청하는 명령어
+      - ★data : 서버에 전송하는 값(변수1=값1&변수2=값2)
+      - function : 콜백함수
+    */
+    $.post("./cinemalist.do","mCode="+MCODE,mainList);  // 영화선택 -> 상영극장 가져오기
   }//if end
   
-  /*
-    $.post(URL,data,function(data,status,xhr)
-    - URL : 서버에 요청하는 명령어
-    - ★data : 서버에 전송하는 값(변수1=값1&변수2=값2)
-    - function : 콜백함수
-  */
-  $.post("./cinemalist.do","mCode="+MCODE,mainList);  // 영화선택 -> 상영극장 가져오기
 });//SelMovieList() end
 
 /* ----------- 영화선택 부분 AJAX END ------------ */
