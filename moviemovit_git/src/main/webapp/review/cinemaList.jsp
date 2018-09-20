@@ -5,12 +5,7 @@
 
 <%-- 본문시작 template.jsp --%>
 
-<%
 
-String cineCode = request.getParameter("cineCode");
-request.setAttribute("cineCode", cineCode);
-
-%>
 <style rel="stylesheet">
 .header {   /* 영화관목록  */
   background-color: #3366cc;
@@ -310,7 +305,7 @@ table tr:nth-child(2n+1) {
             <a href="./cinemaRead.do?cineCode=${dto.cineCode }" >${dto.addr2}  ${dto.addr3}</a></td>
            <td>${dto.tel}</td>
            <td>
-               <input class="cbp-mc-button" type="button" value="상영관" onclick="location.href='./roomList.do?cineCode=${dto.cineCode }'"/>
+               <input class="cbp-mc-button" type="button" value="영화관추가" onclick="location.href='./roomForm.do?cineCode=${dto.cineCode }'"/>
                <input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./cinemaUpdate.do?cineCode=${dto.cineCode }'"/>
                <input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./cinemaDelete.do?cineCode=${dto.cineCode }'"/>
              </td>
