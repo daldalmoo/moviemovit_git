@@ -1,7 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8"%> 
-<%@ include file="../header.jsp"%>
-<%-- 본문시작 ticketList.jsp --%>
-
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ include file="../header1.jsp"%>
+<%-- 외부파일 또는 <style> 태그 여기 추가  --%>
+<link rel="stylesheet" href="../css/ticket_style.css" type="text/css" />
 <style>
 .header {
   background-color: #fed513; /* 테이블 이름 배경 색상 (COUPON LIST) */
@@ -145,7 +147,8 @@ td:nth-child(4) {
   background: #2b8256; /* 공개 수정 삭제 버튼 마우스 오버시 색상 */
 }
 </style>
-
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 ticketList.jsp --%>
 
 <!-- 회원페이지일 경우 제외부분 : 회원 아이디, 관리자 영역
                        수정부분 : 상영코드로부터 정보 가져오기

@@ -6,8 +6,6 @@
 <link rel="stylesheet" href="../css/ticket_style.css" type="text/css" />
 
 <%@ include file="../header2.jsp"%>
-
-
 <%-- 본문시작 ticketForm.jsp : 회원들이 예매하는 폼 --%>
 
 <!-- -------------------- 달력 script ------------------------ -->
@@ -36,11 +34,11 @@ function prevCalendar() {
   if(month<0) { 
     year--;
     month=11;
-    Calendar.setFullYear(year);
+    //Calendar.setFullYear(year);
     //year--;
     //month = 11;
   }
-  Calendar.setMonth(month);
+  //Calendar.setMonth(month);
   buildCalendar();
 }
 
@@ -49,10 +47,10 @@ function nextCalendar() {
   month++;
   if(month>11) { 
     year++;
-    Calendar.setFullYear(year);
+    //Calendar.setFullYear(year);
     month = 0;
   }
-  Calendar.setMonth(month);
+  //Calendar.setMonth(month);
   buildCalendar();
 }
 
@@ -64,6 +62,8 @@ function nextCalendar() {
 
 //현재달 달력
 function buildCalendar() {
+  Calendar.setFullYear(year);
+  Calendar.setMonth(month);
   Calendar.setDate(1);  //달력은 1일부터 표시
     
   //tr

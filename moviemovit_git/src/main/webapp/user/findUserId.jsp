@@ -1,22 +1,23 @@
-<%@ page contentType="text/html; charset=UTF-8"%> 
-<%@ include file="../header.jsp"%>
-<%-- 본문시작 findUserId.jsp --%>
-<head>
-
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ include file="../header1.jsp"%>
+<%-- 외부파일 또는 <style> 태그 여기 추가  --%>
+<link rel="stylesheet" href="../css/ticket_style.css" type="text/css" />
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 
 <style>
 
 .list {
-	text-align:left;
-	padding:10px;
-	margin:auto;
+  text-align:left;
+  padding:10px;
+  margin:auto;
 }
 
 </style>
-
-</head>
-	<h3>Find User Id</h3>
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 findUserId.jsp --%>
+<h3>Find User Id</h3>
 <form class="cbp-mc-form" name="findForm" method="post" action="./findUserIdProc.do">
 	<span style="color: red; font-weight: bold">*회원가입 시 등록한 이름과 Email 주소를 입력해 주세요*</span><br>
 	<span style="color: red; font-weight: bold">*아이디는 해당 이메일로 전송됩니다*</span><br>	
