@@ -1,14 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
-<%@ include file="../header.jsp"%>
+<%@ include file="../header1.jsp"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%-- 본문시작 starList.jsp --%>
+
 <!-- CSS -->
 <link href="../css/rating.css" rel="stylesheet" type="text/css">
-
-<!-- Core JavaScript Files -->
-<script src="../js/rating.js"></script>
 
 <style rel="stylesheet">
 
@@ -206,7 +203,12 @@ table tr:nth-child(2n+1) {
 
 </style>
 
+<%@ include file="../header2.jsp"%>
 
+<%-- 본문시작 starList.jsp --%>
+
+<!-- Core JavaScript Files -->
+<script src="../js/rating.js"></script>
 <% 
    String uid=(String)session.getAttribute("s_id");
    //out.println("세션확인:" + uid);

@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
-<%@ include file="../header.jsp"%>
-<%-- 본문시작 movieList.jsp --%>
+<%@ include file="../header1.jsp"%>
 
 <style rel="stylesheet">
 .header {   /* 영화관목록  */
@@ -180,6 +179,8 @@ table tr:nth-child(2n+1) {
 }
 
 </style>
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 movieList.jsp --%>
 
 <div class="table-users">
    <div class="header">Movie List</div>

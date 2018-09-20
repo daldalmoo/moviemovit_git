@@ -1,10 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ include file="../header.jsp"%>
-<%-- 본문시작 people/createForm.jsp --%>
-<head>
-
+<%@ include file="../header1.jsp"%>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 
 <style>
@@ -21,7 +18,9 @@
 }
 
 </style>
-</head>
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 people/createForm.jsp --%>
+
 <div class="header2">인물 등록</div>
 <form class="cbp-mc-form" name="regForm" method="POST" action="./create.do"
       enctype="multipart/form-data" onsubmit="return peopleCheck(this)" >

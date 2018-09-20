@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ include file="../header.jsp"%>
-<%-- 본문시작 updateForm.jsp --%>
+<%@ include file="../header1.jsp"%>
+
 
 <!-- <style rel="stylesheet">
 .header {   /* 영화관목록  */
@@ -196,8 +196,8 @@ table tr:nth-child(2n+1) {
     heigth:200px;
 }
 </style>
-
-
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 updateForm.jsp --%>
 <div class="table-users">
    <div class="header">People Update</div>
    <form class="cbp-mc-form" name='regForm' method='POST' action='./update.do' enctype="multipart/form-data" onsubmit="return confirm('수정하시겠습니까?')">

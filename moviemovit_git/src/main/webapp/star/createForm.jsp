@@ -1,7 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header.jsp"%>
-<%-- 본문시작 movieForm.jsp --%>
-<head>
+<%@ include file="../header1.jsp"%>
 
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 
@@ -20,7 +18,11 @@
 
 
 </style>
-</head>
+
+<%@ include file="../header2.jsp"%>
+
+<%-- 본문시작 movieForm.jsp --%>
+
 <div class="header2">별점 등록</div>
 <form class="cbp-mc-form" name="regForm" method="POST" action="./create.do"
       enctype="multipart/form-data">
