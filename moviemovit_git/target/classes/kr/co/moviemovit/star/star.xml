@@ -14,13 +14,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
-	<select id="uidList" resultType="String" parameterType="MovieDTO">
+	<!-- <select id="uidList" resultType="String" parameterType="MovieDTO">
 		<![CDATA[
 			SELECT uid
 			FROM userTable
 			ORDER BY uid DESC
 		]]>
-	</select>
+	</select> -->
 	
 	<insert id="create" parameterType="StarDTO">
         <selectKey keyProperty="sCode" resultType="int" order="BEFORE">
@@ -34,14 +34,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				INSERT INTO starTable(sCode, mCode, uid, star, comment, wdate)
 				VALUES(#{sCode}, #{mCode}, #{uid}, #{star}, #{comment}, now())                        
 			]]>	
-			
-		<!-- <selectKey keyProperty="star" resultType="int" order="AFTER">
-			<![CDATA[
-				SELECT avg(star) AS star
-				FROM starTable
-			]]>
-		</selectKey> -->
 	</insert>
+	
+	<select id="starlist" parameterType="StarDTO" resultType="StarDTO">
+	    <![CDATA[
+	        SELECT sCode, mCode, uid, (select avg(star) from starTable) as star, comment, wdate
+            FROM starTable
+        ]]>
+	</select>
 	
 	<!-- <select id="list" resultType="StarDTO">
 	    <![CDATA[
@@ -51,14 +51,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select> -->
 	
-	<!-- <select id="starlist" parameterType="hashMap" resultMap="hashMap">
+	<!-- <select id="starlist" parameterType="Map" resultType="HashMap">
 	    <![CDATA[
-	        select *
-            from (SELECT sCode, mCode, uid, (select avg(star) from starTable where mCode=#{mCode}) as star, comment, wdate
+	        SELECT st.sCode, st.mCode, mt.mName, st.star, mt.poster
+            FROM (SELECT sCode, mCode, uid, (select avg(star) from starTable) as star, comment, wdate
                   FROM starTable) st join movieTable mt
             ON mt.mCode = st.mCode
+            WHERE st.mCode=#{st.mCode}
 	    ]]>
 	</select> -->
+	
+	<!-- <resultMap type="MovieDTO" id="MovieDTO">
+	    <result column="mCode"  property="mCode"/>
+	    <result column="mName"  property="mName"/> 
+	    <result column="poster" property="poster"/>
+	</resultMap> -->
+	
+	<!-- <resultMap type="movieDTO" id="movieDTO">
+	    <result column="mCode"   property="mCode"/> 
+	    <result column="poster"  property="poster"/>
+	    <result column="mName"   property="mName"/> 
+	    <result column="s_date"  property="s_date"/>
+	    
+	    <association javaType="StarDTO" property="StarDTO">
+	      <id column="mCode" property="mCode"/>
+          <result column="sCode"   property="sCode"/>
+	      <result column="mCode"   property="mCode"/> 
+	      <result column="uid"     property="uid"/> 
+	      <result column="star"    property="star"/> 
+	      <result column="comment" property="comment"/> 
+	      <result column="wdate"   property="wdate"/> 
+	    </association>
+	</resultMap> -->
+	
+	
 	
 	
 </mapper>

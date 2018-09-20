@@ -1,5 +1,6 @@
 package kr.co.moviemovit.star;
 
+import java.util.HashMap;
 
 public class StarDTO {
 	
@@ -61,7 +62,7 @@ public class StarDTO {
 	public void setWdate(String wdate) {
 		this.wdate = wdate;
 	}
-
+	
 	
 	
 
