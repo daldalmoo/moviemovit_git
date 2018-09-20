@@ -272,27 +272,35 @@ function buildCalendar() {
           </h3>
 
           <!-- 예매 결과 -->
-          <table id="1st_result">
-            <tr>
-              <th class="space">극장</th>
-              <td id="select_space_txt">ex)메가박스 강동</td>
-            </tr>
-            
-            <tr>
-              <th class="date">날짜</th>
-              <td id="select_date_txt">yyyy.mm.dd(요일) 시:분</td>
-            </tr>
-            
-            <tr>
-              <th class="people">인원</th>
-              <td id="select_people_txt">유형 인원</td>
-            </tr>
-            
-            <tr>
-              <th class="price">금액</th>
-              <td id="select_price_txt">총 금액</td>
-            </tr>           
-          </table>
+          <dl class="1st_result">
+            <dt>
+              <span class="space">극장</span>
+            </dt>
+            <dd>
+              <span id="select_space_txt">영화브랜드 지점</span>
+            </dd>
+
+            <dt>
+              <span class="date">날짜</span>
+            </dt>
+            <dd>
+              <span id="select_date_txt">yyyy.mm.dd(요일) 시:분</span>
+            </dd>
+
+            <dt>
+              <span class="people">인원</span>
+            </dt>
+            <dd>
+              <span id="select_people_txt">유형 인원</span>
+            </dd>
+
+            <dt>
+              <span class="price">금액</span>
+            </dt>
+            <dd>
+              <span class="total">총 금액</span>
+            </dd>
+          </dl>
 
           <div id="btn_area">
             <input type="image" class="reserve"
