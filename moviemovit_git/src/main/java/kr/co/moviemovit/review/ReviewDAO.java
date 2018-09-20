@@ -105,71 +105,29 @@ public class ReviewDAO {
   
   ////////////////////////////////////////// ROOM //////////////////////////////////////////////////////////
   
-  //CREATE
+  /* insert 등록 */
   public int roomForm(RoomDTO dto) {
     ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
     int count = mapper.roomForm(dto);
     return count;
   }// roominsert() end
   
-  // CREATE : roomCode, roomName 생성
-  public RoomDTO setRoomCode(String cineCode){
-    ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
-    RoomDTO dto = mapper.setRoomCode(cineCode);
-    return dto;
-  } // create setroomCode end
-  
-  // READ 
-  public RoomDTO roomRead(RoomDTO dto){
-    ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
-    dto = mapper.roomRead(dto);
-    return dto;
-  }//room read end
-  
-  // UPDATE
-  public int roomUpdate(RoomDTO dto) {
-    ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
-    int count = mapper.roomUpdate(dto);
-    return count;
-  }// roomupdate end
-  
-  // DELETE
-  public int roomDeletePro(String roomCode) {
-    ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
-    int count = mapper.roomDeletePro(roomCode);
-    return count;
-  }// roomdelete end
- 
-  //List
-  public ArrayList<RoomDTO> roomList(String cineCode){
-    ReviewMapper mapper= sqlSession.getMapper(ReviewMapper.class);
-    ArrayList<RoomDTO> list = mapper.roomList(cineCode);
-    return list;
-  }
   
   ////////////////////////////////////////// REVIEW  //////////////////////////////////////////////////////////
-  // insert 등록
+  /* insert 등록 */
   public int create(ReviewStar sdto) {
     ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
     int count = mapper.create(sdto);
     return count;
   }// create() end
   
-  //review 목록
-  public ArrayList<ReviewStar> list() {
-    ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
-    ArrayList<ReviewStar> list = mapper.list();
-    return list;
-  }//list() end
-  
-   
-  //review 삭제
-  public int deleteProc(String no) {
-    ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
-    int count = mapper.delete(no);
-    return count;
-  }// delete end
-   
+   //review 목록
+   public ArrayList<ReviewStar> list() {
+     ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
+     ArrayList<ReviewStar> list = mapper.list();
+     return list;
+   }//list() end
+
    
    
 

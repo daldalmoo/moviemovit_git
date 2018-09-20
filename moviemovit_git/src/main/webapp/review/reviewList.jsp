@@ -208,7 +208,7 @@ table tr:nth-child(2n+1) {
          		<br>
          			매점 ${sdto.snack } 교통 ${sdto.trans }
          		<br> 
-         		${sdto.s_e }  no값: ${sdto.no }</td>
+         		${sdto.s_e }</td>
          <td>
             <input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./update.do?cCode=${sdto.cineCode }'"/>
             <input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./delete.do?cCode=${sdto.cineCode }'"/>

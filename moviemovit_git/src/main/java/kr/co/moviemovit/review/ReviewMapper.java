@@ -45,34 +45,17 @@ public interface ReviewMapper {
   public ArrayList<CinemaDTO> listCriteria(Criteria cri);
   
   //////////////////////////////////////// ROOM ///////////////////////////////////////
+  
   // Create
   public int roomForm(RoomDTO dto);
   
-  // Create : roomCode, roomName
-  public RoomDTO setRoomCode(String cineCode);
-  
-  // Read
-  public RoomDTO roomRead(RoomDTO dto);
- 
-  // Update
-  public int roomUpdate(RoomDTO dto);
-  
-  // Delete
-  public int roomDeletePro(String roomCode);
-  
-  // List
-  public ArrayList<RoomDTO> roomList(String cineCode);
-
-  
   //////////////////////////////////////// REVIEW ///////////////////////////////////////
+  
   // Create
   public int create(ReviewStar sdto);
   
   // list
   public ArrayList<ReviewStar> list();
-  
-  // Delete
-  public int delete(String no);
   
   
 } // class end
