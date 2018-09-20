@@ -1,13 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header.jsp"%>
-
-<%
-
-String cineCode = request.getParameter("cineCode");
-request.setAttribute("cineCode", cineCode);
-
-%>
-<%-- 본문시작 roomList.jsp --%>
+<%@ include file="../header1.jsp"%>
 
 <style rel="stylesheet"><style>
 .header {
@@ -140,6 +132,14 @@ td:nth-child(4) {
   background: #2b8256; /* 공개 수정 삭제 버튼 마우스 오버시 색상 */
 }
 </style>
+
+<%@ include file="../header2.jsp"%>
+
+<%
+String cineCode = request.getParameter("cineCode");
+request.setAttribute("cineCode", cineCode);
+%>
+
 <div class="cbp-mc-submit-wrap">
 <input class="cbp-mc-submit" type="button" value="상영관 등록" onclick="location.href='./roomForm.do?cineCode=${cineCode }'"/>
 </div>

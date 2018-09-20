@@ -1,9 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header.jsp"%>
+<%@ include file="../header1.jsp"%>
 
-
-<%-- 본문시작 theaterForm.jsp --%>
-<head>
 
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 
@@ -15,6 +12,10 @@
 	margin: auto;
 }
 </style>
+
+<%@ include file="../header2.jsp"%>
+
+
 <body onload="selectboxes()">
 <FORM class="cbp-mc-form" name='regForm' method='POST' action='./cinemaUpdate.do'
       enctype="multipart/form-data">

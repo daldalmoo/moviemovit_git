@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
-<%@ include file="../header.jsp"%>
+<%@ include file="../header1.jsp"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
@@ -122,6 +122,9 @@ table tr:nth-child(2n+1) {
   background: #2b8256;
 }
 </style>
+
+
+<%@ include file="../header2.jsp"%>
 
 <!--  
    reviewStarTable

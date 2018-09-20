@@ -1,12 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header.jsp"%>
+<%@ include file="../header1.jsp"%>
 <%
   //주소 값에서 cineCode 가져오기
 			String cineCode = request.getParameter("cineCode");
 			request.setAttribute("cineCode", cineCode);
 %>
 <%-- 본문시작 theaterForm.jsp --%>
-<head>
 
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 
@@ -18,7 +17,11 @@
 	margin: auto;
 }
 </style>
-</head>
+
+
+<%@ include file="../header2.jsp"%>
+
+
 <!-- 상영관 등록 FORM -->
 
 <FORM class="cbp-mc-form" name='roomForm' method='POST' action='./roomForm.do'

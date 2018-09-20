@@ -1,8 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
-<%@ include file="../header.jsp"%>
+<%@ include file="../header1.jsp"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%-- 본문시작 template.jsp --%>
 
 <style rel="stylesheet">
 
@@ -175,7 +174,7 @@ table td:last-child {
   text-align: center;
 }*/
 }
-
+<%@ include file="../header2.jsp"%>
 
 /* 0919 revieewdelete test */
 <% 
