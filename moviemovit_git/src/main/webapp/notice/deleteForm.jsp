@@ -1,10 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header.jsp"%>
-<!DOCTYPE html> 
-<html> 
-<head> 
-<meta charset="UTF-8"> 
-<title>공지사항 삭제</title> 
+<%@ include file="../header1.jsp"%>
+
+<%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <style type="text/css"> 
 *{ 
@@ -13,8 +10,10 @@
 } 
 </style> 
 <link href="../css/style.css" rel="stylesheet" type="text/css">
-</head> 
-<body>
+
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 --%>
+
 <div class="title">공지사항 삭제</div>
 <form method="post" action="./delete.do">
 	<input type="hidden" name="noticeno" value="${dto.noticeno }">
@@ -27,7 +26,5 @@
 	</div>
 </form>
 
-</body> 
-</html> 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

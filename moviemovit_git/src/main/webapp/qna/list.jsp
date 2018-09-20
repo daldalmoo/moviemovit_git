@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%-- 본문시작 template.jsp --%>
-<head>
+<%@ include file="../header1.jsp"%>
+
+<%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style rel="stylesheet">
@@ -195,9 +195,8 @@ table tr:nth-child(2n+1) {
 }
 </style>
 
-
-
-</head>
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 template.jsp --%>
 
 <div class="table-users">
 <div class="header">QnA목록</div>

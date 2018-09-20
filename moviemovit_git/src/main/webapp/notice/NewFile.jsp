@@ -1,10 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
-<%@ include file="../header.jsp"%>
-<%-- 본문시작 couponForm.jsp --%>
-<head>
+<%@ include file="../header1.jsp"%>
 
-
-
+<%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
 <style rel="stylesheet">
 
 .header {
@@ -167,12 +164,9 @@ img{margin:auto;color:white;width:100%;font-size:2rem;text-align:center;margin-b
 
 
 </style>
-</head>
 
-
-
-
-
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 --%>
 
 <form class="cbp-mc-form">
   <div class="cbp-mc-column">

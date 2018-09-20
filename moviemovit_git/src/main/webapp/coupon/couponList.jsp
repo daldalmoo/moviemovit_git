@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
-<%@ include file="../header.jsp"%>
-<%-- 본문시작 couponList.jsp --%>
+<%@ include file="../header1.jsp"%>
 
+<%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
 <style>
 .header {
   background-color: #fed513; /* 테이블 이름 배경 색상 (COUPON LIST) */
@@ -134,6 +134,8 @@ td:nth-child(4) {
 }
 </style>
 
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 couponList.jsp --%>
 
 <div class="cbp-mc-submit-wrap">
   <input class="cbp-mc-submit" type="button" value="쿠폰 등록" onclick="location.href='create.do'"/>

@@ -1,8 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header.jsp"%>
+<%@ include file="../header1.jsp"%>
 
-
-<head>
+<%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
 
 <!-- <script type="text/javascript" src="../js/me.js" charset="utf-8"></script> -->
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
@@ -33,7 +32,8 @@ margin:auto;
 
 </style>
 
-</head>
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 template.jsp --%>
 
 <!-- <script type="text/javascript">
     $(function(){

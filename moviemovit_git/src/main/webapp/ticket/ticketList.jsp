@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
-<%@ include file="../header.jsp"%>
-<%-- 본문시작 ticketList.jsp --%>
+<%@ include file="../header1.jsp"%>
 
+<%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
 <style>
 .header {
   background-color: #fed513; /* 테이블 이름 배경 색상 (COUPON LIST) */
@@ -146,6 +146,8 @@ td:nth-child(4) {
 }
 </style>
 
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 ticketList.jsp --%>
 
 <!-- 회원페이지일 경우 제외부분 : 회원 아이디, 관리자 영역
                        수정부분 : 상영코드로부터 정보 가져오기

@@ -1,10 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header.jsp"%>
-<%-- 본문시작 ticketUpdate.jsp : 예매 수정 폼 --%>
+<%@ include file="../header1.jsp"%>
 
-<!-- 예매는 수정이 안되지 않나 ??? 회의하기!! -->
-
-<head>
+<%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 <style>
 .cbp-mc-column th {
@@ -42,9 +39,11 @@
   font-style: normal;
 }
 </style>
-</head>
 
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 ticketUpdate.jsp : 예매 수정 폼 --%>
 
+<!-- 예매는 수정이 안되지 않나 ??? 회의하기!! -->
 
 <form class="cbp-mc-form" name="regForm" method='POST' action='./update.do' onsubmit="return couponCheck(this)">
   <span style="color: red; font-weight: bold">* 필수입력</span><br>

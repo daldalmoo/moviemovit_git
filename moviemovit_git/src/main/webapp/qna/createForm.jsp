@@ -1,11 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header.jsp"%>
+<%@ include file="../header1.jsp"%>
 
-
-<head>
+<%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-latest.js"></script>
- <script type="text/javascript" src="../js/me.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/me.js" charset="utf-8"></script>
 <script type="text/javascript" src="../resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <style>
 
@@ -38,6 +37,9 @@ float:left;
 
 } */
 </style>
+
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 template.jsp --%>
 
 </head>
 

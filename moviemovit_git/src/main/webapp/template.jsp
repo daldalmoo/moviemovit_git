@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../header1.jsp"%>
-<%-- 외부파일 또는 <style> 태그 여기 추가  --%>
+
+<%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
 <link rel="stylesheet" href="../css/ticket_style.css" type="text/css" />
 
 <%@ include file="../header2.jsp"%>
