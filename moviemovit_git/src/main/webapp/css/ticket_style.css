@@ -322,7 +322,7 @@
   letter-spacing: -1px;
   font-weight: bold;
 }
-
+/*
 dt {
   margin-left: 50px;
   float: left;
@@ -331,12 +331,19 @@ dt {
 dd, dt {
   line-height: 2;
 }
-
+*/
 .section_result .btn_area a {
   display: block;
   background: url("../ticket/img/btn_reserve.PNG");
 }
 
+#movieinfo_area #1st_result {/*예매 결과*/
+  margin: auto;
+}
+#movieinfo_area 
+#1st_result>tbody>tr>th {
+  border: none;
+}
 /*********** 5) 상영시간선택 ***********/
 .time_area {
   position: relative;
