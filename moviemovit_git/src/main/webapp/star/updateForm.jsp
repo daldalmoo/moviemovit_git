@@ -1,8 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ include file="../header.jsp"%>
-<%-- 본문시작 updateForm.jsp --%>
+<%@ include file="../header1.jsp"%>
 
 <!-- <style rel="stylesheet">
 .header {   /* 영화관목록  */
@@ -197,6 +196,8 @@ table tr:nth-child(2n+1) {
 }
 </style>
 
+<%@ include file="../header2.jsp"%>
+<%-- 본문시작 updateForm.jsp --%>
 
 <div class="table-users">
    <div class="header">Movie Update</div>
@@ -210,7 +211,7 @@ table tr:nth-child(2n+1) {
       <tr>
         <th>포스터</th>
         <td class="list">
-        <img class="img2" src="./storage/${dto.poster }">
+        <img class="0img2" src="./storage/${dto.poster }">
         </td>
       </tr>
       <tr>

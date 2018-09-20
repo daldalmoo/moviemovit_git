@@ -16,7 +16,7 @@ public interface StarMapper {
 	
 	/*public HashMap<Star> starlist(Star dto);*/
 	
-	public StarDTO starlist(StarDTO sdto);
+	public ArrayList<HashMap<MovieDTO, StarDTO>> starlist(StarDTO sdto);
 	
 	
 	
