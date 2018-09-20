@@ -1,16 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
-<%@ include file="../header.jsp"%>
+<%@ include file="../header1.jsp"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%-- 본문시작 template.jsp --%>
-
-<%
-
-String cineCode = request.getParameter("cineCode");
-request.setAttribute("cineCode", cineCode);
-
-%>
 <style rel="stylesheet">
 .header {   /* 영화관목록  */
   background-color: #3366cc;
@@ -194,6 +186,14 @@ table tr:nth-child(2n+1) {
  }
 }
 </style>
+
+
+<%@ include file="../header2.jsp"%>
+
+<%
+String cineCode = request.getParameter("cineCode");
+request.setAttribute("cineCode", cineCode);
+%>
 
 <table>
         <tr></tr>
