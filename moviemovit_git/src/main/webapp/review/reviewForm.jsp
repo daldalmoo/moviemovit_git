@@ -220,6 +220,7 @@ table tr:nth-child(2n+1) {
         </div>
        </div>
     </div>
+	  
 	    
 	    
 <!--<input type="text" name="s_e" id="s_e" value="181818181818188"/> -->
@@ -229,6 +230,9 @@ table tr:nth-child(2n+1) {
     <input type="hidden" name="uid" 		 id="uid" 		 value="${uid }"/>      
   
   
+  <%-- no값 안뜸
+  <input type="text" name="no" id="no" value="${no }"/>
+   --%>
      <br>
          <textarea rows="5" cols="50" name="s_e" id="s_e"></textarea>
      
@@ -258,7 +262,6 @@ table tr:nth-child(2n+1) {
   
   
   <input type="button" id="heart" onclick="heart_click();" value="하트" />
-  
 	<script>
 		var heart = 0;
 		

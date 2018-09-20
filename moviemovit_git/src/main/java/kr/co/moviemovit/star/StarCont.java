@@ -35,25 +35,26 @@ public class StarCont {
 	}//create() end
 	
 	 @RequestMapping(value="/star/create.do", method=RequestMethod.POST)
-	 public ModelAndView createProc(StarDTO dto) {
+	 public ModelAndView createProc(StarDTO sdto) {
 	   ModelAndView mav= new ModelAndView();
 	   mav.setViewName("star/msgView");
-	   int count = dao.create(dto);
+	   int count = dao.create(sdto);
 	   mav.addObject("count", count);
+	   
 	   if(count==0) {
 		  mav.addObject("msg1", "<p>별점 등록 실패</p>");
 		  mav.addObject("img", "<img src='../img/fail.png'>");
 		  mav.addObject("link1", "<input type='button' value='다시시도' onclick='javascript:history.back()'>");
-		  mav.addObject("link2", "<input type='button' value='목록으로' onclick='location.href=\"./List.do\"'>");
-		}else {
+		  mav.addObject("link2", "<input type='button' value='목록으로' onclick='location.href=\"./List.do?mCode=" + sdto.getmCode() + "\"'>");
+	    }else {
 		  mav.addObject("msg1", "<p>별점 등록 성공</p>");
 		  mav.addObject("img", "<img src='../img/success.jpg'>");
-		  mav.addObject("link1", "<input type='button' value='목록으로' onclick='location.href=\"./List.do\"'>");      
+		  mav.addObject("link1", "<input type='button' value='목록으로' onclick='location.href=\"./List.do?mCode=" + sdto.getmCode() + "\"'>");      
 		}//if end
 	   
 	   return mav;
 	 }//createProc() end
-	
+	 
 	 /*@RequestMapping("/star/List.do")
 	 public ModelAndView list(StarDTO dto) {
 	     ModelAndView mav = new ModelAndView();
@@ -64,15 +65,27 @@ public class StarCont {
 	 }//list() end
      */	 
 	 
-	 @RequestMapping("/star/List.do")
-	 public ModelAndView starlist(StarDTO sdto, MovieDTO mdto) {
+	 /*@RequestMapping("/star/List.do")
+	 public ModelAndView starlist(StarDTO sdto) {
 	     ModelAndView mav = new ModelAndView();
-	     HashMap<MovieDTO, StarDTO> starlist = dao.starlist(); 
+	     HashMap<MovieDTO, StarDTO>  starlist = dao.starlist(sdto);
 	     mav.addObject("starlist", starlist);
 	     return mav;
-	 }//list() end
+	 }//starlist() end
+     */	 
 	 
-	
+	 @RequestMapping("/star/List.do")
+	 public ModelAndView starlist(MovieDTO dto, StarDTO sdto) {
+		 ModelAndView mav = new ModelAndView();
+		 mav.setViewName("/star/List");
+		 dto=dao.movieList(dto);
+		 sdto=dao.starlist(sdto);
+		 System.out.println("확인: " + dto.getmCode() + dto.getmName());
+		 System.out.println("확인2: " + sdto.getmCode() + sdto.getStar() + sdto.getComment());
+		 mav.addObject("mdto", dto);
+		 mav.addObject("stdo", sdto);
+		 return mav;
+	 }//starlist() end
 	
 
 }//class end
