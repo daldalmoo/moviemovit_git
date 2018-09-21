@@ -61,3 +61,10 @@ WHERE mCode=3
 GROUP BY CT.cineCode
 ORDER BY brandName ASC, cineName ASC;
 
+
+
+SELECT COUNT(cineCode)
+FROM cinemaTable
+WHERE addr1="SEO";
+
+

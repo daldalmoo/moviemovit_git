@@ -5,6 +5,22 @@ $.ajaxSetup({datatype:"text"});
 var MCODE = "";
 var CCODE = "";
 
+// html이 모두 읽히고 난 후 onload 실행
+window.onload = function() {
+  $.post("./addr1cnt.do","",addr1cntList);  // 극장 주소1 리스트 가져오기
+  $.post("./addr1selected.do","",addr1Selected);  // 극장 주소1 기본값 서울로 보여주기
+};
+
+// 극장 주소1 리스트 보내기
+function addr1cntList(data) {
+  $(".addr1list").html(data);
+}//addr1cntList() end
+
+// 극장 주소1 기본값 서울로 보여주기
+function addr1Selected(data) {
+  $(".addr1Selected").prepend(data);
+}//addr1cntList() end
+
 /* ----------- 영화선택 부분 AJAX ---------------- */
 // 영화목록 새로고침
 function ResetMovie() {
@@ -91,6 +107,27 @@ function mainList(data) {  // Controller에서 msg 값 data로 받아옴
   //alert("mainList() 호출. data:"+data);
   $(".main_list").html(data);
 }//mainList() end
+
+// 주소1 목록 class="click" 일때 보여주기
+$(".cinema_addr1 .addr1Selected").click(function(){
+  $(this).toggleClass("click");
+  if($(this).hasClass("click")==true) {
+    $(".cinema_addr1 .addr1list").css('display','block');
+  } else {
+    $(".cinema_addr1 .addr1list").css('display','none');
+  }//if end
+});//.addr1Selected.click() end
+
+/***************************** 왜 여기 안먹냐 ㅠㅠㅠㅠ ************/
+$(".cinema_addr1 .addr1list li").click(function(){
+  alert(".cinema_addr1 .addr1list li clicked");
+  /*if($(this).hasClass("click")==true) {
+    $(".addr1Selected").css('display','block');
+  } else {
+    $(".cinema_addr1 .addr1list").css('display','none');
+  }//if end
+*/});//.addr1Selected.click() end
+
 /* ----------- 극장선택 부분 AJAX END ------------ */
 
 

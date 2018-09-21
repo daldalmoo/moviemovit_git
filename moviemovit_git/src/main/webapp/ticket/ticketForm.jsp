@@ -214,20 +214,10 @@ function buildCalendar() {
             <br>영화 또는 날짜를 선택해 주세요.
           </div>
           <div class="cinema_addr1">
-            <a href="javascript:addr1Select();" class="addr1Selected">서울(<strong>5</strong>)
+            <a href="#" class="addr1Selected">
               <img src="./img/listbtn.gif" class="addr1Selectedbtn">
             </a>
             <div class="addr1list">
-              <ul>
-                <li value="SEO">서울</li>
-                <li value="GGD">경기도</li>
-                <li value="ICH">인천</li>
-                <li value="KWD">강원도</li>
-                <li value="CCD">충청도</li>
-                <li value="KSD">경상도</li>
-                <li value="JLD">전라도</li>
-                <li value="JJD">제주도</li>
-              </ul>
             </div>
           </div>
           <div class="main_list">
@@ -340,11 +330,6 @@ function buildCalendar() {
           <hr>
 
           <div class="screentime">
-            <dl id="st_time_lst1" class="num_time"></dl>
-            <dt>ex)8관</dt>
-            <dd>
-              <ul></ul>
-            </dd>
           </div>
         </div>
       </td>

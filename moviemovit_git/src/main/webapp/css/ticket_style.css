@@ -165,28 +165,38 @@
 #cinema_area .cinema_addr1 .addr1Selectedbtn {
   margin-top: -3px;
 }
-/* #cinema_area .cinema_addr1 .addr1Selectedbtn click하면 css 변경{
-  background: url("./img/listbtn_click.gif");
-} */
-#cinema_area .cinema_addr1 .addr1list {
+#cinema_area .cinema_addr1 .click .addr1Selectedbtn {
+  content: url("../ticket/img/listbtn_click.gif");
+}
+#cinema_area .cinema_addr1 .addr1list {  /* 극장 대분류주소 목록 div */
   z-index: 10;
   background-color: white;
   border: 1px solid;
   position: absolute;
   width: 130px;
-  height: 185px;
+  height: 198px;
   margin-top: 5px;
   margin-left: 15px;
   padding-top: 2px;
+  display: none;
 }
 #cinema_area .cinema_addr1 .addr1list ul {
   list-style: none;
   color: black;
-  padding-left: 15pt;
+  padding-left: 0px;
 }
 #cinema_area .cinema_addr1 .addr1list li {
-  padding-top: 1px;
+  padding: 0.5px 0px 0.5px 10px;
+}
+#cinema_area .cinema_addr1 .addr1list li:first-child {
   padding-bottom: 1px;
+}
+#cinema_area .cinema_addr1 .addr1list li:nth-child(2) {
+  padding-top: 1.5px;
+}
+#cinema_area .cinema_addr1 .addr1list li:hover {
+  text-decoration: underline;
+  background-color: #ecedf4;
 }
 
 #cinema_area .main_list {  /* 극장 리스트 div */

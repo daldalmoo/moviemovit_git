@@ -4,8 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.co.moviemovit.ticket.TicketMapper">
-  <!-- ******************** createForm.jsp 에서 사용한 SQL문 ******************** -->
-  <!-- 예매 목록 -->
+  <!-- ******************** 예매 목록 ******************** -->
   <select id="list" resultType="TicketDTO">
     <![CDATA[
       SELECT tCode, wdate, uid, sCode, cCode, seat, auditType
@@ -14,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ]]>
   </select>
   
+  <!-- *********************** 예매 *********************** -->
   <!-- 예매 중 영화목록 -->
   <select id="movieList" resultType="MovieDTO">
  	<![CDATA[
@@ -23,16 +23,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	]]>
   </select>
   
-  <!-- 예매 중 주소1 목록 -->
-  <select id="cineAddr1List" resultType="CinemaDTO">
+  <!-- ********* 예매 : 극장선택 부분 ********* -->
+  <!-- 예매 중 주소1의 개수 -->
+  <select id="cinemacnt" resultType="int">
   <![CDATA[
-    SELECT cineCode, addr1
-    FROM cinemaTable
-    ORDER BY cineCode ASC; 
+    SELECT COUNT(cineCode)
+    FROM cinemaTable;
   ]]>
   </select>
   
-  <!-- ************* 극장선택 부분 ************* -->
+  <!-- 예매 중 주소1의 개수 -->
+  <select id="addr1cnt" parameterType="String" resultType="int">
+  <![CDATA[
+    SELECT COUNT(cineCode)
+    FROM cinemaTable
+    WHERE addr1=#{addr1};
+  ]]>
+  </select>
+  
   <!-- 예매 중 극장목록 -->
   <select id="cinemaList" resultType="CinemaDTO">
   <![CDATA[
@@ -56,7 +64,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       ORDER BY brandName ASC, cineName ASC
     ]]>
   </select>
-  <!-- ************* 극장선택 부분 END ************* -->
+  <!-- ********* 예매 : 극장선택 부분 END ******** -->
+  
+  
+  
   
   <!-- 영화선택 -> 상영관및시간 가져오기 -->
   <!-- <select id="screenlistFromMovie" parameterType="int" resultType="ScreenDTO">

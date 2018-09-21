@@ -57,6 +57,44 @@ public class TicketCont {
 	}//ticketForm() end
 	
 	/* -------------------- 극장선택 부분 AJAX -------------------- */
+	// 극장 주소1 리스트 가져오기 AJAX
+  @RequestMapping(value="/ticket/addr1cnt.do", method = RequestMethod.POST)
+  public void addr1cnt(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    String msg = "";
+    msg += "<ul>";
+    msg += "  <li value='all' style='border-bottom: 1px dotted gray;'>전국(<strong>"+dao.cinemacnt()+"</strong>)</li>";
+    msg += "  <li value='SEO'>서울(<strong>"+dao.addr1cnt("SEO")+"</strong>)</li>";
+    msg += "  <li value='GGD'>경기도(<strong>"+dao.addr1cnt("GGD")+"</strong>)</li>";
+    msg += "  <li value='ICH'>인천(<strong>"+dao.addr1cnt("ICH")+"</strong>)</li>";
+    msg += "  <li value='KWD'>강원도(<strong>"+dao.addr1cnt("KWD")+"</strong>)</li>";
+    msg += "  <li value='CCD'>충청도(<strong>"+dao.addr1cnt("CCD")+"</strong>)</li>";
+    msg += "  <li value='KSD'>경상도(<strong>"+dao.addr1cnt("KSD")+"</strong>)</li>";
+    msg += "  <li value='JLD'>전라도(<strong>"+dao.addr1cnt("JLD")+"</strong>)</li>";
+    msg += "  <li value='JJD'>제주도(<strong>"+dao.addr1cnt("JJD")+"</strong>)</li>";
+    msg += "</ul>";
+    
+    // 출력
+    resp.setContentType("text/plain; charset=UTF-8");
+    PrintWriter out = resp.getWriter();
+    out.println(msg);
+    out.flush();
+    out.close();
+  }//ticketForm() end
+  
+  //극장 주소1 리스트 가져오기 AJAX
+  @RequestMapping(value = "/ticket/addr1selected.do", method = RequestMethod.POST)
+  public void addr1selected(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    String msg = "";
+    msg += "서울(<strong>"+dao.addr1cnt("SEO")+"</strong>)";
+
+    // 출력
+    resp.setContentType("text/plain; charset=UTF-8");
+    PrintWriter out = resp.getWriter();
+    out.println(msg);
+    out.flush();
+    out.close();
+  }// ticketForm() end
+  
 	// 극장선택 새로고침
 	@RequestMapping(value="/ticket/cinemaRefresh.do", method = RequestMethod.POST)
   public void cinemaRefresh(HttpServletRequest req, HttpServletResponse resp) throws IOException {
