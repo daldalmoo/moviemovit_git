@@ -1,6 +1,7 @@
 package kr.co.moviemovit.movie;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import kr.co.moviemovit.people.PeopleDTO;
 import kr.co.moviemovit.star.StarDTO;
@@ -21,5 +22,5 @@ public interface MovieMapper {
 	
 	public ArrayList<PeopleDTO> peopleNameList2(String peoName);
 	
-	public StarDTO star(StarDTO sdto);
+	public ArrayList<HashMap<MovieDTO, StarDTO>> star(StarDTO sdto);
 }//interface end

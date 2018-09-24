@@ -38,11 +38,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="starlist" parameterType="StarDTO" resultType="StarDTO">
 	    <![CDATA[
-	        SELECT sCode, mCode, uid, (select avg(star) from starTable) as avgstar, comment, wdate, star
+	        SELECT sCode, mCode, uid, comment, wdate, star
             FROM starTable
             WHERE mCode=#{mCode }
             ORDER BY sCode DESC
         ]]>
+	</select>
+	
+	<select id="avgstar" resultType="int">
+	    <![CDATA[
+	        SELECT (select avg(star) from starTable WHERE mCode=#{mCode }) AS avgstar
+	        FROM starTable
+	    ]]>
 	</select>
 	
 	<!-- <select id="list" resultType="StarDTO">

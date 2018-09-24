@@ -192,7 +192,7 @@ table tr:nth-child(2n+1) {
    <div>
    <div class="box-image" >
      <span class="thumb-image">
-       <img class="mimg" src="../movie/storage/${dto.poster }" width="400" height="800"/>
+       <img class="mimg" src="../movie/img_poster/${dto.poster }" width="400" height="800"/>
      </span>  
    </div>
      <span class="thumb-image">
@@ -200,29 +200,29 @@ table tr:nth-child(2n+1) {
      </span>
    </div>
    
-   
+   <strong>평균: ${avgstar }</strong>
    <c:forEach var="sdto" items="${starlist }">
    <div class="box">
       <span>
        
        <strong>별점: ${sdto.star} &nbsp;
        <c:if test="${sdto.star==0 }">
-           <img class="simg" src="../img/star0.png"> 
+           <img class="simg" src="./img_star/star0.png"> 
        </c:if>
        <c:if test="${sdto.star==1 }">
-           <img class="simg" src="../img/star1.png"> 
+           <img class="simg" src="./img_star/star1.png"> 
        </c:if>
        <c:if test="${sdto.star==2 }">
-           <img class="simg" src="../img/star2.png"> 
+           <img class="simg" src="./img_star/star2.png"> 
        </c:if>
        <c:if test="${sdto.star==3 }">
-           <img class="simg" src="../img/star3.png"> 
+           <img class="simg" src="./img_star/star3.png"> 
        </c:if>
        <c:if test="${sdto.star==4 }">
-           <img class="simg" src="../img/star4.png"> 
+           <img class="simg" src="./img_star/star4.png"> 
        </c:if>
        <c:if test="${sdto.star==5 }">
-           <img class="simg" src="../img/star5.png">
+           <img class="simg" src="./img_star/star5.png">
        </c:if>
        </strong>
       </span><br>

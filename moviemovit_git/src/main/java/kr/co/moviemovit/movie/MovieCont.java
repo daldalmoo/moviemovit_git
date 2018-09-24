@@ -30,7 +30,7 @@ public class MovieCont {
 
 	public MovieCont() {
 		System.out.println("-----MovieCont() 객체 생성");
-	}
+	}//기본생성자
 	//결과확인
 	//http://localhost:9090/moviemovit/movie/create.do
 	
@@ -42,7 +42,7 @@ public class MovieCont {
 	    mav.addObject("root", Utility.getRoot());
 	    mav.addObject("mCode", dto.getmCode());    
 	    return mav;
-	  }//createForm() end 
+	}//createForm() end 
 		
 	@RequestMapping(value="/movie/create.do", method=RequestMethod.POST)
 	  public ModelAndView createProc(MovieDTO dto, HttpServletRequest req) {
@@ -88,7 +88,6 @@ public class MovieCont {
 	    	dto.setScreen("상영종료");
 	    }//if end
 
-	    
 	    int cnt=dao.create(dto);
 	    if(cnt==0) {
 	      mav.addObject("msg1", "<p>영화 등록 실패</p>");
@@ -109,10 +108,9 @@ public class MovieCont {
 	     ModelAndView mav = new ModelAndView();
 	     mav.setViewName("movie/movieList");
 	     ArrayList<MovieDTO> list = dao.list();
-	     sdto=dao.star(sdto);
+	     ArrayList<HashMap<MovieDTO, StarDTO>> star = dao.star(sdto);
 	     mav.addObject("list", list);
-	     mav.addObject("sdto", sdto);
-	     
+	     mav.addObject("star", star);
 	     return mav;
 	 }//list() end
 	 

@@ -11,6 +11,7 @@
   text-align: center;
   text-transform: uppercase;        
 }
+
 img {        /* 영화관 목록안의 영화관이미지 */
   height: 100px;
   width: 150px;

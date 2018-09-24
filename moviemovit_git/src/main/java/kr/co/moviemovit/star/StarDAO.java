@@ -63,6 +63,10 @@ public class StarDAO {
 		return starlist;
 	}//starlist() end
 	
-	
+	public int avgstar(int avgstar) {
+		StarMapper mapper = sqlSession.getMapper(StarMapper.class);
+		int count=mapper.avgstar(avgstar);
+		return count;
+	}//avgstar() end
 
 }//class end

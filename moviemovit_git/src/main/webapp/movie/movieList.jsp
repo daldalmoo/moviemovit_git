@@ -5,20 +5,23 @@
 
 <style rel="stylesheet">
 .main{
-  width:1000px;
-  margin-left: 20em;
+  width:1200px;
+  margin-left: 5em;
   text-align: center;
 }
 
 .box-image {
   display: inline-block;
   width:250px;
-  height:180px;
-  background-color: white;;
+  height: 300px;
+  background-color: white;
   border: 8px solid #3366cc; 
   box-sizing: content-box;
-  margin: auto 0.5em;
-  float:left
+  margin-left: 3px;
+  margin-top: 20px;
+  padding: 1px 1px 1px 1px;
+  float:left;
+  
 }
 
 .mimg {        /* 영화관 목록안의 영화관이미지 */
@@ -199,7 +202,7 @@ table tr:nth-child(2n+1) {
      <span class="thumb-image">
      <a href="./movieRead.do?mCode=${dto.mCode }">
        <img class="mimg" src="./img_poster/${dto.poster }" width="400" height="800" />
-       </a>
+     </a>
      </span>
   <br><br>
     <strong class="title">${dto.mName }</strong><br>
@@ -208,20 +211,25 @@ table tr:nth-child(2n+1) {
        ${dto.s_date } 개봉<br> 
        <span>${dto.screen }</span><br>
        </strong>
-     </span>
+       
+      
+     </span><br>
+     
      <input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />    
     </div>
+    
    </div>
   
+  
    </c:forEach>  
-     
    
    
-    <br>
-		<input class="cbp-mc-button" type="button" value="영화등록" onclick="location.href='./create.do'"/>
-
-
-
+   <br><br><br>
+   <input class="cbp-mc-button" type="button" value="영화등록" onclick="location.href='./create.do'"/>  
+   
+   
+    
+	
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

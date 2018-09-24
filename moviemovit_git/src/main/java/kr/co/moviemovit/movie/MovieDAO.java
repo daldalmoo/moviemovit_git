@@ -65,11 +65,11 @@ public class MovieDAO {
         return peoplelist2;
     }//peopleNameList() end
 	
-	public StarDTO star(StarDTO sdto) {
+	public ArrayList<HashMap<MovieDTO, StarDTO>> star(StarDTO sdto) {
 		MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
-		StarDTO star = mapper.star(sdto);
+		ArrayList<HashMap<MovieDTO, StarDTO>> star = mapper.star(sdto);
 		return star;
-	}//update() end
+	}//star() end
 	
 	
 	

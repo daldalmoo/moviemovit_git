@@ -75,14 +75,15 @@ public class StarCont {
      */	 
 	 
 	 @RequestMapping("/star/List.do")
-	 public ModelAndView starlist(MovieDTO dto, StarDTO sdto) {
+	 public ModelAndView starlist(MovieDTO dto, StarDTO sdto, int avgstar) {
 		 ModelAndView mav = new ModelAndView();
 		 mav.setViewName("/star/List");
 		 ArrayList<HashMap<MovieDTO, StarDTO>> starlist=dao.starlist(sdto);
 		 dto=dao.movieList(dto);
-		 System.out.println("»Æ¿Œ2: " + sdto.getmCode() + sdto.getStar() + sdto.getComment());
+		 int count=dao.avgstar(avgstar);
 		 mav.addObject("starlist", starlist);
 		 mav.addObject("dto", dto);
+		 mav.addObject("avgstar", count);
 		 return mav;
 	 }//starlist() end
 	

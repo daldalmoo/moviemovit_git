@@ -16,3 +16,11 @@ ON mt.mCode = st.mCode
 SELECT sCode, mCode, uid, (select avg(star) from starTable) as star, comment, wdate
 FROM starTable
 WHERE mCode=1
+SELECT mCode, (select avg(star) from starTable where mCode=3) as avgstar
+FROM starTable
+where 
+
+
+SELECT (select avg(star) from starTable ) AS avgstar, mCode
+	        FROM starTable
+	        WHERE mCode=4
