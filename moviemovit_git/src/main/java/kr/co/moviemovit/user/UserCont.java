@@ -2,6 +2,7 @@ package kr.co.moviemovit.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.*;
@@ -15,10 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import net.utility.*;
 
@@ -149,8 +152,33 @@ public class UserCont {
 			mav.addObject("msg", msg);
 			mav.setViewName("msgView");
 		}else {
-			//로그인 성공 시 로그인 한 값 session 영역에 올리기
-			if(!(dto.getGrade().equals("F"))) {
+			 if (dto.getGrade().equals("ADMIN")) {
+					
+					HttpSession session = req.getSession();
+					session.setAttribute("s_id", dto.getUid());
+					session.setAttribute("s_passwd", dto.getUpw());
+					//180903 경민 추가
+					session.setAttribute("s_grade", dto.getGrade());
+					
+					//쿠키(아이디 저장)
+					String c_id = req.getParameter("c_id");
+					if(c_id==null) { //체크하지 않은 경우
+						c_id="";
+					}
+					
+					Cookie cookie = null;
+					if(c_id.equals("SAVE")) {
+						cookie = new Cookie("c_id", dto.getUid());
+						cookie.setMaxAge(60*60*24*31); //한달
+					}else {
+						cookie = new Cookie("c_id", "");
+						cookie.setMaxAge(0);
+					}
+					resp.addCookie(cookie);
+					mav.addObject("dto",dto);
+					mav.setViewName("redirect:/admin/adminStart.jsp");
+					
+			 }else if(!(dto.getGrade().equals("F"))) {
 				HttpSession session = req.getSession();
 				session.setAttribute("s_id", dto.getUid());
 				session.setAttribute("s_passwd", dto.getUpw());
@@ -560,4 +588,29 @@ public class UserCont {
 	    return sb.toString();
 	  }//randomPasswd() end
 	
+	  
+	  @RequestMapping(value = "/user/list.do")
+		public  ModelAndView list(UserDTO dto, @RequestParam(defaultValue="1") int curPage,
+	            HttpServletRequest request )throws Exception{
+			
+	      /*  HttpSession session = request.getSession();*/
+			ModelAndView mav = new ModelAndView();
+			
+			int listCnt = dao.listCnt();
+			System.out.println("listCnt = "+listCnt);
+			System.out.println("curPage = "+curPage);
+			
+			UserPage userpage = new UserPage(listCnt, curPage);
+		    //dto.
+			
+			
+			ArrayList<UserDTO> list = dao.list(userpage);
+			System.out.println("list.toString()" + list.toString());
+			
+			mav.setViewName("user/list");
+			mav.addObject("list", list);
+			mav.addObject("userpage", userpage);
+			return mav;
+		}// list() end
+
 }//class end

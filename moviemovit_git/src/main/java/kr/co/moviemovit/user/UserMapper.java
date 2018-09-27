@@ -1,5 +1,10 @@
 package kr.co.moviemovit.user;
 
+import java.util.ArrayList;
+
+import kr.co.moviemovit.notice.NoticeDTO;
+import kr.co.moviemovit.notice.NoticePage;
+
 public interface UserMapper {
 	/*
 		MyBatis3의 매퍼(notice.xml)에 등록되어 있는 id를 인터페이스의 메소드에
@@ -47,4 +52,9 @@ public interface UserMapper {
 	/*임시비밀번호 업데이트*/
 	//<update id="setRandomPw">
 	public int setRandomPw(UserDTO dto);
+	
+	
+	public ArrayList<UserDTO> list(UserPage userpage);
+
+	public int listCnt();
 }//interface end

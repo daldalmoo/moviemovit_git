@@ -59,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			UPDATE userTable
 			SET grade = 'F'
 			WHERE uid = #{uid} AND upw = #{upw}
-		]]>
+		]]>	
 	</update>
 	
 	<!-- 회원수정 -->
@@ -97,5 +97,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			SET upw = #{upw}
 			WHERE uid = #{uid} AND uname = #{uname} AND email = #{email}
 		]]>
-	</update>	
+	</update>
+	
+			 <select id="list" parameterType="UserPage" resultType="UserDTO">
+		<![CDATA[
+		SELECT *
+		FROM (
+					SELECT @NO := @NO + 1 AS ROWNUM, A.*
+					FROM (
+    							SELECT *
+    							FROM userTable
+  				 			 ) A,
+  				 			 ( SELECT @NO := 0 ) B 
+				 ) C
+		WHERE C.ROWNUM BETWEEN #{startIndex}+1 AND #{startIndex}+#{pageSize};
+
+		]]>
+	</select>
+	
+	 <select id="listCnt" resultType="int">
+		<![CDATA[
+			SELECT count(uid) as cnt
+			FROM userTable
+		]]>
+	</select>
 </mapper>
