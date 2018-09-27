@@ -22,7 +22,7 @@ if(session.getAttribute("s_admin_id")==null ||
     <script>
     function jumpTo() {
     	//로그인하지 않았다면 로그인페이지로 이동
-    	window.top.location.href="<%=root %>" + "/admin/adminLogin.jsp";
+    	window.top.location.href="<%=root %>" + "/adminLogin.jsp";
     }
     </script>
 	<body onload="jumpTo()"></body>

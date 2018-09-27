@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ include file="../header1.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ include file="../header1.jsp"%>
-
-<%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
+<%-- 본문시작 template.jsp --%>
+<head>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style rel="stylesheet">
@@ -196,36 +196,63 @@ table tr:nth-child(2n+1) {
 </style>
 
 <%@ include file="../header2.jsp"%>
-<%-- 본문시작 template.jsp --%>
+
+</head>
 
 <div class="table-users">
-<div class="header">QnA목록</div>
+<div class="header">QnA</div>
 <table>
 	<tr>
 		<th>No</th>
-		<th>유형</th>
-		<th>작성자</th>
-		<th>제목</th>
+		<th style="width:407px;">제목</th>
 		<th>내용</th>
+		<th>작성자</th>
 		<th>작성일</th>
 		
 	</tr>
 	
 	<c:forEach var="dto" items="${list }">
 		<tr class="brandtest">
-			<td>${dto.qCode}</td>
-			<td>${dto.qType }</td>
+			<td> <a href="read.do?qCode=${dto.qCode}">${dto.qCode}</a></td>
+		<%-- 	<td>   <c:choose>
+               <c:when test="${dto.qType == 'q1'}">
+               예매 :
+               </c:when>
+               <c:when test="${dto.qType =='q2'}">
+               회원이용 :
+               </c:when>
+               <c:when test="${dto.qType == 'q3'}">
+               극장이용 :
+               </c:when>
+               <c:when test="${dto.qType == 'q4'}">
+             기타 :
+               </c:when>
+           </c:choose></td> --%>
+
+				<td style="text-align: left"><c:if test="${dto.indent > 0}">
+						<c:forEach begin="1" end="${dto.indent}">
+							<i class="fa fa-comment fa-2x" aria-hidden="true"></i>
+							<!-- 답변글일경우 글 제목 앞에 공백을 준다. -->
+
+						</c:forEach>
+						<!--     <i class="fa fa-caret-right" aria-hidden="true"></i> -->
+					</c:if> <a href="read.do?qCode=${dto.qCode}"> <c:choose>
+							<c:when test="${dto.qType == 'q1'}">
+               예매 :
+               </c:when>
+							<c:when test="${dto.qType =='q2'}">
+               회원이용 :
+               </c:when>
+							<c:when test="${dto.qType == 'q3'}">
+               극장이용 :
+               </c:when>
+							<c:when test="${dto.qType == 'q4'}">
+             기타 :
+               </c:when>
+						</c:choose> 
+						                  ${dto.title }</a></td>
+				<td> <a href="read.do?qCode=${dto.qCode}">${dto.content }</a></td>
 			<td>${dto.uid }</td>
-			<td>
-			   <c:if test="${dto.indent > 0}">
-                        <c:forEach begin="1" end="${dto.indent}">
-                            &nbsp;  <i class="fa fa-comment" aria-hidden="true"></i> <!-- 답변글일경우 글 제목 앞에 공백을 준다. -->
-                        </c:forEach>
-                    <!--     <i class="fa fa-caret-right" aria-hidden="true"></i> -->
-                    </c:if>
-                    <a href="read.do?qCode=${dto.qCode}">
-				${dto.title }</a></td>
-			<td>${dto.content }
 			<td>${dto.wdate }</td>
 		  
 	
@@ -236,10 +263,10 @@ table tr:nth-child(2n+1) {
 <input class="cbp-mc-button" type="button" value="qna 등록" onclick="location.href='createForm.jsp'"/>
  <div>
                     <c:if test="${qnapage.curPage ne 1 }">
-                        <a href="list.do?curpage=${noticepage.startPage }" >[처음]</a> 
+                        <a href="list.do?curpage=${noticepage.startPage }" ><i class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                     <c:if test="${qnapage.curPage ne 1}">
-                        <a href="list.do?curpage=${noticepage.prevPage }" >[이전]</a> 
+                        <a href="list.do?curpage=${noticepage.prevPage }" ><i class="fa fa-angle-left fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                     <c:forEach var="pageNum" begin="${qnapage.startPage }" end="${qnapage.endPage }">
                         <c:choose>
@@ -252,15 +279,15 @@ table tr:nth-child(2n+1) {
                         </c:choose>
                     </c:forEach>
                     <c:if test="${qnapage.curPage ne qnapage.pageCnt && qnapage.pageCnt > 0}">
-                        <a href="list.do?curPage=${qnapage.nextPage}">[다음]</a> 
+                        <a href="list.do?curPage=${qnapage.nextPage}"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                     <c:if test="${qnapage.curRange ne qnapage.rangeCnt && qnapage.rangeCnt > 0}">
-                        <a href="list.do?curPage=${qnapage.curPage}">[끝]</a> 
+                        <a href="list.do?curPage=${qnapage.curPage}"><i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                 </div>
                 
                 <div>
-                    총 게시글 수 : ${qnapage.listCnt } /    총 페이지 수 : ${qnapage.pageCnt } / 현재 페이지 : ${qnapage.curPage } / 현재 블럭 : ${qnapage.curRange } / 총 블럭 수 : ${qnapage.rangeCnt }
+                    총 게시글 수 : ${qnapage.listCnt }
                 </div>
 
 

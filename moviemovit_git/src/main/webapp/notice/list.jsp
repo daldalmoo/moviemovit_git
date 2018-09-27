@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ include file="../header1.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ include file="../header1.jsp"%>
-
-<%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
+<%-- 본문시작 template.jsp --%>
+<head>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style rel="stylesheet">
@@ -196,24 +196,27 @@ table tr:nth-child(2n+1) {
 </style>
 
 <%@ include file="../header2.jsp"%>
-<%-- 본문시작 template.jsp --%>
 
-<div class="table-users">
-<div class="header">공지사항 목록</div>
+</head>
+
+<!-- <div class="table-users"> -->
+<div class="header">공지사항 </div>
 <table>
 	<tr>
-		<th>공지사항 번호</th>
+		<th>No</th>
 		<th>제목</th>
+		<th>내용</th>
 		<th>작성자</th>
 		<th>작성일</th>
 		<th>공개여부</th>
-		<th>수정버튼</th>
+		
 	</tr>
 	
 	<c:forEach var="dto" items="${list }">
 		<tr class="brandtest">
-			<td>${dto.noticeno }</td>
-			<td><a href="read.do?noticeno=${dto.noticeno }">${dto.title }</a></td>
+			<td><a href="read.do?noticeno=${dto.noticeno }">${dto.noticeno }</a></td>
+			<td ><a href="read.do?noticeno=${dto.noticeno }">${dto.title }</a></td>
+			<td><a href="read.do?noticeno=${dto.noticeno }">${dto.s_e }</a></td>
 			<td>${dto.uid }</td>
 
 			<td>${dto.wdate }</td>
@@ -234,10 +237,7 @@ table tr:nth-child(2n+1) {
 
 			
 				      </td>
-			  <td>
-               <input class="cbp-mc-button" type="button" value="수정" onclick="location.href='update.do?noticeno=${dto.noticeno}'"/>
-               <input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='delete.do?noticeno=${dto.noticeno}'"/>
-             </td>
+			
 		</tr>
 	</c:forEach>
 

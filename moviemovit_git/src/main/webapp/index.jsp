@@ -91,6 +91,15 @@ footer {
       <li><a href="./user/agree.do" title="Link">Join</a></li>
     </ul>
     </div>
+    
+      <%}else if(s_grade.equals("ADMIN")){ %>
+         <div id="loginmenu">
+    <ul>
+      <li><a href="./user/logout.do" title="Link">Logout</a></li>
+      <li><a href="./admin/adminStart.jsp" title="Link">Adminpage</a></li>
+    </ul>
+    </div>  
+      
   <%} else{ //로그인했다면 %>
     <div id="loginmenu">
     <ul>

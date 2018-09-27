@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ include file="../user/auth.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,25 +31,25 @@ a:active  { text-decoration:underline; color:black;}
     <td height=1 bgcolor=#808080></td>
   </tr>
   <tr>
-    <td><a href="notice/list.do" target="sub"><i class="fa fa-hand-o-up fa-2x" aria-hidden="true"></i> 공지사항</a></td>
+    <td><a href="../notice/noticeFra.jsp" target="sub"><i class="fa fa-hand-o-up fa-2x" aria-hidden="true"></i> 공지사항</a></td>
   </tr>
   <tr>
     <td height=1 bgcolor=#808080></td>
   </tr>
   <tr>
-    <td><a href="qna/list.do" target="sub"><i class="fa fa-hand-o-up fa-2x" aria-hidden="true"></i> 문의 게시판</a></td>
+    <td><a href="../qna/qnaFra.jsp" target="sub"><i class="fa fa-hand-o-up fa-2x" aria-hidden="true"></i> 문의</a></td>
   </tr>
   <tr>
     <td height=1 bgcolor=#808080></td>
   </tr>
   <tr>
-    <td><a href="indenx.do" target="sub"><i class="fa fa-hand-o-up fa-2x" aria-hidden="true"></i> 회원</a></td>
+    <td><a href="../user/userFra.jsp" target="sub"><i class="fa fa-hand-o-up fa-2x" aria-hidden="true"></i> 회원</a></td>
   </tr>
   <tr>
     <td height=1 bgcolor=#808080></td>
   </tr>
   <tr>
-    <td><a href="movie/movielist.do" target="_blank"><i class="fa fa-hand-o-up fa-2x" aria-hidden="true"></i> 영화</a></td>
+    <td><a href="../movie/movieFra.jsp" target="_blank"><i class="fa fa-hand-o-up fa-2x" aria-hidden="true"></i> 영화</a></td>
   </tr>
   <tr>
     <td height=1 bgcolor=#808080></td>

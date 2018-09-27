@@ -1,7 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../header1.jsp"%>
 
-<%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
+
+<head>
+
 <!-- <script type="text/javascript" src="../js/me.js" charset="utf-8"></script> -->
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 <style>
@@ -13,7 +15,7 @@
 .abc{
  font-style: italic;
 }
-h2{
+h1{
   font-family: 'Lato', Calibri, Arial, sans-serif;
   line-height: 1.5;
  
@@ -30,9 +32,8 @@ margin:auto;
 }
 
 </style>
-
 <%@ include file="../header2.jsp"%>
-<%-- 본문시작 template.jsp --%>
+</head>
 
 <!-- <script type="text/javascript">
     $(function(){
@@ -57,12 +58,12 @@ margin:auto;
     }); 
 </script>-->
 <!-- 인풋타입 가져와서 create디자인이랑 통일1 -->
-<form class="cbp-mc-form" name="frm" method="GET" action="./read.do" enctype="multipart/form-data">
-	<h2>공지사항</h2>
+<form class="cbp-mc-form" name="frm" method="GET" action="./read.do">
+	<h1>QnA</h1>
 
 	<table class="cbp-mc-column">
 	<tr>
-	<th>공지사항번호</th>
+	<th>No</th>
 	<td><input type="text" id="qCode"name="qCode" size="50"   value="${dto.qCode }" readonly></td>
 	</tr>
 		<tr>

@@ -49,7 +49,7 @@ public class QnaCont {
     }//if end
     
     // ip 가져오기
-    String ip = ip = request.getRemoteAddr();
+    String ip  = request.getRemoteAddr();
     
     if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
         ip = request.getHeader("Proxy-Client-IP");
@@ -208,6 +208,28 @@ public class QnaCont {
     
     System.out.println("---------QnaCont 4 : dto.toString() : " + dto.toString());
     
+    
+    String ip  = request.getRemoteAddr();
+    
+    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        ip = request.getHeader("Proxy-Client-IP");
+    }
+    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        ip = request.getHeader("WL-Proxy-Client-IP");
+    }
+    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        ip = request.getHeader("HTTP_CLIENT_IP");
+    }
+    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+    }
+    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        ip = request.getRemoteAddr();
+    }
+    if("0:0:0:0:0:0:0:1".equals(ip)){
+    ip="127.0.0.1";
+    }
+    dto.setIp(ip);
     int cnt = dao.create(dto); // DB에 insert
     
     // 성공여부메세지 띄워야 함 !!!
