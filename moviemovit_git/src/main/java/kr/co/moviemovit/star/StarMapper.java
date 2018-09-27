@@ -18,7 +18,7 @@ public interface StarMapper {
 	
 	public ArrayList<HashMap<MovieDTO, StarDTO>> starlist(StarDTO sdto);
 	
-	public int avgstar(int avgstar);
+	public int avgstar(StarDTO sdto);
 	
 
 }//interface end

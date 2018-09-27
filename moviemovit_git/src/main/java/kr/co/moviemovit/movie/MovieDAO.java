@@ -31,8 +31,13 @@ public class MovieDAO {
 	public ArrayList<MovieDTO> list() {
 	    MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
 	    ArrayList<MovieDTO> list = mapper.list();
-	    
 	    return list;
+	}//list() end
+	
+	public ArrayList<StarDTO> list2() {
+	    MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
+	    ArrayList<StarDTO> list2 = mapper.list2();
+	    return list2;
 	}//list() end
 	
 	public MovieDTO read(MovieDTO dto) {
@@ -65,13 +70,12 @@ public class MovieDAO {
         return peoplelist2;
     }//peopleNameList() end
 	
-	public ArrayList<HashMap<MovieDTO, StarDTO>> star(StarDTO sdto) {
+	/*public int avgstar(StarDTO sdto) {
 		MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
-		ArrayList<HashMap<MovieDTO, StarDTO>> star = mapper.star(sdto);
-		return star;
+		int avgstar = mapper.avgstar(sdto);
+		return avgstar;
 	}//star() end
-	
-	
+*/	
 	
 
 }//class end

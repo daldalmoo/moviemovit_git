@@ -43,30 +43,16 @@ public class StarDAO {
 	    return count;
 	}//create() end
 	
-	/*public ArrayList<StarDTO> list() {
-		StarMapper mapper = sqlSession.getMapper(StarMapper.class);
-		ArrayList<StarDTO> list=mapper.list();
-		return list;
-	}//list() end
-    */	
-	
-	/*public HashMap<MovieDTO, StarDTO> starlist(StarDTO sdto) {
-		StarMapper mapper = sqlSession.getMapper(StarMapper.class);
-		HashMap<MovieDTO, StarDTO> starlist=mapper.starlist(sdto);
-		return starlist;
-	}//starlist() end
-    */	
-	
 	public ArrayList<HashMap<MovieDTO, StarDTO>> starlist(StarDTO sdto) {
 		StarMapper mapper = sqlSession.getMapper(StarMapper.class);
 		ArrayList<HashMap<MovieDTO, StarDTO>> starlist = mapper.starlist(sdto);
 		return starlist;
 	}//starlist() end
 	
-	public int avgstar(int avgstar) {
+	public int avgstar(StarDTO sdto) {
 		StarMapper mapper = sqlSession.getMapper(StarMapper.class);
-		int count=mapper.avgstar(avgstar);
-		return count;
+		int avgstar = mapper.avgstar(sdto);
+		return avgstar;
 	}//avgstar() end
 
 }//class end

@@ -51,7 +51,6 @@ public class StarCont {
 		  mav.addObject("img", "<img src='../img/success.jpg'>");
 		  mav.addObject("link1", "<input type='button' value='목록으로' onclick='location.href=\"./List.do?mCode=" + sdto.getmCode() + "\"'>");      
 		}//if end
-	   
 	   return mav;
 	 }//createProc() end
 	 
@@ -75,15 +74,15 @@ public class StarCont {
      */	 
 	 
 	 @RequestMapping("/star/List.do")
-	 public ModelAndView starlist(MovieDTO dto, StarDTO sdto, int avgstar) {
+	 public ModelAndView starlist(MovieDTO dto, StarDTO sdto) {
 		 ModelAndView mav = new ModelAndView();
 		 mav.setViewName("/star/List");
 		 ArrayList<HashMap<MovieDTO, StarDTO>> starlist=dao.starlist(sdto);
 		 dto=dao.movieList(dto);
-		 int count=dao.avgstar(avgstar);
+		 int avgstar = dao.avgstar(sdto);
 		 mav.addObject("starlist", starlist);
 		 mav.addObject("dto", dto);
-		 mav.addObject("avgstar", count);
+		 mav.addObject("avgstar", avgstar);
 		 return mav;
 	 }//starlist() end
 	

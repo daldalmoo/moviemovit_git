@@ -194,7 +194,7 @@ table tr:nth-child(2n+1) {
  <div class="table-users">
    <div class="header">MOVIE LIST</div>
  </div>
-   
+   ${avgstar } 
    <c:forEach var="dto" items="${list }">
    
    <div class="main">
@@ -209,10 +209,8 @@ table tr:nth-child(2n+1) {
      <span>
        <strong>
        ${dto.s_date } 개봉<br> 
-       <span>${dto.screen }</span><br>
+       ${dto.screen } <br>
        </strong>
-       
-      
      </span><br>
      
      <input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />    

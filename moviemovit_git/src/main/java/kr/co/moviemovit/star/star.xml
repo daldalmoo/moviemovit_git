@@ -47,8 +47,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="avgstar" resultType="int">
 	    <![CDATA[
-	        SELECT (select avg(star) from starTable WHERE mCode=#{mCode }) AS avgstar
+	        SELECT (select avg(star) from starTable) AS avgstar
 	        FROM starTable
+	        WHERE mCode=#{mCode}
+	        GROUP BY mCode
 	    ]]>
 	</select>
 	

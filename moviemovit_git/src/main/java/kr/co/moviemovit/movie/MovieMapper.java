@@ -12,6 +12,8 @@ public interface MovieMapper {
 	
 	public ArrayList<MovieDTO> list();
 	
+	public ArrayList<StarDTO> list2();
+	
 	public MovieDTO read(MovieDTO dto);
 	
 	public int delete(MovieDTO dto);
@@ -22,5 +24,5 @@ public interface MovieMapper {
 	
 	public ArrayList<PeopleDTO> peopleNameList2(String peoName);
 	
-	public ArrayList<HashMap<MovieDTO, StarDTO>> star(StarDTO sdto);
+	//public int avgstar(StarDTO sdto);
 }//interface end

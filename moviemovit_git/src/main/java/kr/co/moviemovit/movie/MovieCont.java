@@ -108,9 +108,14 @@ public class MovieCont {
 	     ModelAndView mav = new ModelAndView();
 	     mav.setViewName("movie/movieList");
 	     ArrayList<MovieDTO> list = dao.list();
-	     ArrayList<HashMap<MovieDTO, StarDTO>> star = dao.star(sdto);
+	     ArrayList<StarDTO> list2 = dao.list2();
+	    
+	     //int cnt=dao.create(dto);
+	     //int avgstar = dao.avgstar(sdto);
 	     mav.addObject("list", list);
-	     mav.addObject("star", star);
+	     mav.addObject("list2", list2);
+	     System.out.println("»Æ¿Œ:" + sdto.getStar());
+	     //mav.addObject("avgstar", avgstar);
 	     return mav;
 	 }//list() end
 	 
