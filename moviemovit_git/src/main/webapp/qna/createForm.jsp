@@ -1,14 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../header1.jsp"%>
-
-
-<head>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-latest.js"></script>
- <script type="text/javascript" src="../js/me.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/me.js" charset="utf-8"></script>
 <script type="text/javascript" src="../resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <style>
-
 h1{
   font-family: 'Lato', Calibri, Arial, sans-serif;
   line-height: 1.5;
@@ -27,8 +23,6 @@ text-align:center;
 margin:auto;
 }
 
-
-
 select .abc{
 width:auto;
 }
@@ -36,10 +30,10 @@ width:auto;
 .cbp-mc-column input:nth-child(1){
 float:left;
 
-} */
+}
 </style>
 <%@ include file="../header2.jsp"%>
-</head>
+
 
 	<form class="cbp-mc-form" method="POST" id="editor" action="./create.do">
 			<h1>QnA</h1>

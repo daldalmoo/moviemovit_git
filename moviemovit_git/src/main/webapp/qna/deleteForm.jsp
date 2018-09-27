@@ -1,10 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../header1.jsp"%>
-<!DOCTYPE html> 
-<html> 
-<head> 
-<meta charset="UTF-8"> 
-<title>Qna삭제</title> 
 <link href="../css/style.css" rel="stylesheet" type="text/css">
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <style type="text/css"> 
@@ -15,8 +10,6 @@
 </style> 
 <%@ include file="../header2.jsp"%>
 
-</head> 
-<body>
 <div class="title">QnA 삭제</div>
 <form method="post" action="./delete.do">
 	<input type="hidden" name="qCode" value="${dto.qCode }">
@@ -29,7 +22,5 @@
 	</div>
 </form>
 
-</body> 
-</html> 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

@@ -34,29 +34,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			SELECT ifnull(max(noticeno),0)+1 AS noticeno FROM noticeTable 
 			]]> 
 		</selectKey>
- <![CDATA[
-		INSERT INTO noticeTable(noticeno,title,s_e ,uid,wdate,open)
-		VALUES (#{noticeno},#{title},#{s_e},#{uid},now(),#{open})
-	 ]]>
+    <![CDATA[
+		  INSERT INTO noticeTable(noticeno,title,s_e ,uid,wdate,open)
+		  VALUES (#{noticeno},#{title},#{s_e},#{uid},now(),#{open})
+	  ]]>
 	</insert>
 	
-	 <select id="list" parameterType="NoticePage" resultType="NoticeDTO">
+	<select id="list" parameterType="NoticePage" resultType="NoticeDTO">
 		<![CDATA[
-		SELECT *
-		FROM (
+		  SELECT *
+		  FROM (
 					SELECT @NO := @NO + 1 AS ROWNUM, A.*
 					FROM (
     							SELECT *
     							FROM noticeTable
   				 			 ) A,
   				 			 ( SELECT @NO := 0 ) B 
-				 ) C
-		WHERE C.ROWNUM BETWEEN #{startIndex}+1 AND #{startIndex}+#{pageSize};
-
+				  ) C
+		  WHERE C.ROWNUM BETWEEN #{startIndex}+1 AND #{startIndex}+#{pageSize};
 		]]>
 	</select>
 	
-	 <select id="listCnt" resultType="int">
+	<select id="listCnt" resultType="int">
 		<![CDATA[
 			SELECT count(noticeno) as cnt
 			FROM noticeTable
@@ -71,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
-	 <delete id="delete" parameterType="NoticeDTO">
+	<delete id="delete" parameterType="NoticeDTO">
 		<![CDATA[
 			DELETE FROM noticeTable
 			WHERE noticeno = #{noticeno}
@@ -84,9 +83,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			UPDATE noticeTable
 			SET title = #{title}
 			    ,uid = #{uid}
-				,s_e = #{s_e}
-				,wdate = now()
-				,open = #{open}
+				  ,s_e = #{s_e}
+				  ,wdate = now()
+				  ,open = #{open}
 			WHERE noticeno = #{noticeno}
 		]]>
 	</update>

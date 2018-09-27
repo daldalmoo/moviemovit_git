@@ -1,9 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../header1.jsp"%>
-
-
-<head>
-
 <!-- <script type="text/javascript" src="../js/me.js" charset="utf-8"></script> -->
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 <style>
@@ -33,7 +29,6 @@ margin:auto;
 
 </style>
 <%@ include file="../header2.jsp"%>
-</head>
 
 <!-- <script type="text/javascript">
     $(function(){

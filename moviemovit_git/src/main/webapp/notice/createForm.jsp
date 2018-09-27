@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../header1.jsp"%>
 
-
-<head>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="../resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
@@ -32,8 +30,6 @@ margin:auto;
 }
 </style>
 <%@ include file="../header2.jsp"%>
-
-</head>
 
 
 	<form class="cbp-mc-form"  method="POST" id="editor" action="./create.do" >

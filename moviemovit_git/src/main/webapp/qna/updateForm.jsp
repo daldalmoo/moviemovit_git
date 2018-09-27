@@ -1,15 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../header1.jsp"%>
-
-
-<head>
-
 <script type="text/javascript" src="../resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css"/>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
- <script type="text/javascript" src="../js/me.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/me.js" charset="utf-8"></script>
 <style>
-
 .cbp-mc-column td{
 	padding:10px;
 }
@@ -27,15 +22,11 @@ h1{
 th{
 font-size:1.4em;
 }
-
 .cbp-mc-column input{
 margin:auto;
 }
-
 </style>
 <%@ include file="../header2.jsp"%>
-</head>
-
 
 <!-- 인풋타입 가져와서 create디자인이랑 통일1 -->
 <form class="cbp-mc-form" name="editor" method="POST" action="./update.do">
@@ -97,8 +88,8 @@ margin:auto;
             $("#editor").submit();
         });
     });
- </script> -->
-    <%-- 본문끝 --%>
+</script> -->
+<%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>    
         
         
