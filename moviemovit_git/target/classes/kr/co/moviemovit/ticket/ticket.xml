@@ -170,6 +170,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ]]>
   </delete> -->
   
+  <!-- 영화선택 -> 영화정보 포스터 가져오기 -->
+  <select id="movieData" parameterType="MovieDTO" resultType="MovieDTO">
+    <![CDATA[
+      SELECT mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date
+      FROM movieTable
+      WHERE mCode = #{mCode}
+    ]]> 
+  </select>
+  
 </mapper>
 
 

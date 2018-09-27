@@ -71,5 +71,12 @@ public class TicketDAO {
   
   /* ------------------ 예매 : 극장선택 부분 END ------------------ */
   
+  /* -------------------- 영화선택 -> 영화정보 포스터 부분 -------------------- */
+  public MovieDTO MovieData(MovieDTO dto) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    MovieDTO movieData = mapper.movieData(dto);
+    return movieData;
+  }//MovieData() end
+  /* -------------------- 영화선택 -> 영화정보 포스터 부분 END -------------------- */
   
 }//class end

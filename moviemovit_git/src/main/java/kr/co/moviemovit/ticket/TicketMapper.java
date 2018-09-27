@@ -37,4 +37,7 @@ public interface TicketMapper {
   
 	/* -------------------- 예매 : 극장선택 부분 END -------------------- */
 	
+	//<select id="movieData">
+	public MovieDTO movieData(MovieDTO dto);
+	
 }// interface end

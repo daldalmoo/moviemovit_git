@@ -19,7 +19,7 @@ var Calendar = new Date();
 var day_of_week= ['일','월','화','수','목','금','토'];
 
 //getMonth() 메서드는 (1월:0 ~ 12월:11)을 반환하니 0번째 인덱스부터 1월을 넣는다
-var month_of_year = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+var month_of_year = ['1','2','3','4','5','6','7','8','9','10','11','12'];
 
 var year = Calendar.getFullYear();  //yyyy년도
 var month = Calendar.getMonth();    //0~11 (1~12월 인덱스)
@@ -56,12 +56,6 @@ function nextCalendar() {
   buildCalendar();
 }
 
-/*180919 경민 달력 해야할일
-다음달로 넘어가는데 2019로 바뀌고 다시 전달로 넘어갈때 12월까지는 정상인데
-11월부터 삐꾸남.
-전달로 계속 뒤로가다가 2017바뀌고 다시 다음달인 2018.1은정상임
-*/
-
 //현재달 달력
 function buildCalendar() {
   Calendar.setFullYear(year);
@@ -82,6 +76,10 @@ function buildCalendar() {
   var TD_end = "</td>";                           //테이블 만들기
   
   str = "<table id='cal_area' border=1 cellspacing=0 cellpadding=0 bordercolor=bbbbbb><tr><td style='text-align:center'>";
+  
+  str += "<input type='hidden' id='calYear' value='" + year + "'>";
+  str += "<input type='hidden' id='calMonth' value='" + month_of_year[month] + "'>";
+  
   str += "<strong>" + "<div id='prev' onclick='prevCalendar()'>◀</div>" + year + ". " + month_of_year[month] + "<div id='next' onclick='nextCalendar()'>▶</div>" + "</strong>";
   str += "<table class='calendar' border=0 cellspacing=0 cellpadding=2>";
   
@@ -264,12 +262,10 @@ function buildCalendar() {
           </div>
 
           <div id="thumb_poster" class="thumb_poster">
-            <input type="image" class="movie_poster" src="./img/default.png">
+            <input type="image" class="movie_poster" src="./img/bgr_poster.PNG">
           </div>
 
-          <h3>
-            <span id="select_m_name">영화제목</span>
-          </h3>
+          <h3><span id="select_m_name">영화제목</span></h3>
 
           <!-- 예매 결과 -->
           <dl class="1st_result">
@@ -291,21 +287,20 @@ function buildCalendar() {
               <span class="people">인원</span>
             </dt>
             <dd>
-              <span id="select_people_txt">유형 인원</span>
+              <span id="select_people_txt">-</span>
             </dd>
 
             <dt>
               <span class="price">금액</span>
             </dt>
             <dd>
-              <span class="total">총 금액</span>
+              <span id="total">-</span>
             </dd>
           </dl>
 
           <div id="btn_area">
             <input type="image" class="reserve"
-              src="./img/btn_reserve.PNG" alt="예매하기"
-              onclick="javascript:NextBtn();">
+              src="./img/btn_reserve.PNG" alt="예매하기" onclick="javascript:NextBtn();">
           </div>
           
         </div>
@@ -356,12 +351,12 @@ function buildCalendar() {
               <tr class="ticket_data">
                 <td>
                   <ul>
-                    <li class="dimmed">0</li>
-                    <li class="dimmed">1</li>
-                    <li class="dimmed">2</li>
-                    <li class="dimmed">3</li>
-                    <li class="dimmed">4</li>
-                    <li class="dimmed">5</li>
+                    <li class="adult" id="adult" value="성인">0</li>
+                    <li class="adult" id="adult" value="성인">1</li>
+                    <li class="adult" id="adult" value="성인">2</li>
+                    <li class="adult" id="adult" value="성인">3</li>
+                    <li class="adult" id="adult" value="성인">4</li>
+                    <li class="adult" id="adult" value="성인">5</li>
                   </ul>
                 </td>
               </tr>
@@ -373,46 +368,46 @@ function buildCalendar() {
               <tr class="ticket_data">
                 <td>
                   <ul>
-                    <li class="dimmed">0</li>
-                    <li class="dimmed">1</li>
-                    <li class="dimmed">2</li>
-                    <li class="dimmed">3</li>
-                    <li class="dimmed">4</li>
-                    <li class="dimmed">5</li>
-                  </ul>
+                    <li class="youth" id="youth" value="청소년">0</li>
+                    <li class="youth" id="youth" value="청소년">1</li>
+                    <li class="youth" id="youth" value="청소년">2</li>
+                    <li class="youth" id="youth" value="청소년">3</li>
+                    <li class="youth" id="youth" value="청소년">4</li>
+                    <li class="youth" id="youth" value="청소년">5</li>
+                  </ul>               
                 </td>
               </tr>
 
               <tr class="ticket_title">
-                <th>경로우대<span class="per_price">1매/6,000원</span></th>
+                <th>우대<span class="per_price">1매/6,000원</span></th>
               </tr>
 
               <tr class="ticket_data">
                 <td>
                   <ul>
-                    <li class="dimmed">0</li>
-                    <li class="dimmed">1</li>
-                    <li class="dimmed">2</li>
-                    <li class="dimmed">3</li>
-                    <li class="dimmed">4</li>
-                    <li class="dimmed">5</li>
+                 <li class="senior" id="senior" value="우대">0</li>
+                 <li class="senior" id="senior" value="우대">1</li>
+                 <li class="senior" id="senior" value="우대">2</li>
+                 <li class="senior" id="senior" value="우대">3</li>
+                 <li class="senior" id="senior" value="우대">4</li>
+                 <li class="senior" id="senior" value="우대">5</li>
                   </ul>
                 </td>
               </tr>
 
               <tr class="ticket_title">
-                <th>아이<span class="per_price">1매/5,000원</span></th>
+                <th>어린이<span class="per_price">1매/5,000원</span></th>
               </tr>
 
               <tr class="ticket_data">
                 <td>
-                  <ul>
-                    <li class="dimmed">0</li>
-                    <li class="dimmed">1</li>
-                    <li class="dimmed">2</li>
-                    <li class="dimmed">3</li>
-                    <li class="dimmed">4</li>
-                    <li class="dimmed">5</li>
+                  <ul>         
+                    <li class="kid" id="kid" value="어린이">0</li>
+                    <li class="kid" id="kid" value="어린이">1</li>
+                    <li class="kid" id="kid" value="어린이">2</li>
+                    <li class="kid" id="kid" value="어린이">3</li>
+                    <li class="kid" id="kid" value="어린이">4</li>
+                    <li class="kid" id="kid" value="어린이">5</li>
                   </ul>
                 </td>
               </tr>
@@ -430,7 +425,7 @@ function buildCalendar() {
   <br>
 </form>
 
-<script src="../js/ticket_script.js?ver=7"></script>
+<script src="../js/ticket_script.js?ver=7" charset="utf-8"></script>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>
