@@ -194,7 +194,8 @@ table tr:nth-child(2n+1) {
  <div class="table-users">
    <div class="header">MOVIE LIST</div>
  </div>
-   ${avgstar } 
+   ${avgstar }
+   
    <c:forEach var="dto" items="${list }">
    
    <div class="main">

@@ -70,12 +70,12 @@ public class MovieDAO {
         return peoplelist2;
     }//peopleNameList() end
 	
-	/*public int avgstar(StarDTO sdto) {
+	public int avgstar(StarDTO sdto) {
 		MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
 		int avgstar = mapper.avgstar(sdto);
 		return avgstar;
 	}//star() end
-*/	
+	
 	
 
 }//class end
