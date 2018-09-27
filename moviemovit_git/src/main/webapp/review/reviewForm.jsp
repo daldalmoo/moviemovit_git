@@ -151,7 +151,7 @@ table tr:nth-child(2n+1) {
 
 
    
-   <form name="reviewForm" method="POST" action="./create.do" >
+   <form name="reviewForm" method="POST" action="./reviewUpdate.do" >
      <%-- <input type="hidden"  name="cineName" value="${dto.cineName }"> --%>
      <%-- <div class="box-image" >
 
@@ -226,8 +226,8 @@ table tr:nth-child(2n+1) {
 	  
 	    
 	    
-<!--<input type="text" name="s_e" id="s_e" value="181818181818188"/> -->
-    <input type="number" name="heart" id="heart" value="486"/>
+<!--<input type="text" name="s_e" id="s_e" value="하이하이"/> -->
+<!--<input type="number" name="heart" id="heart" value="486"/>-->
     <!--  지금 페이지에 해당하는 cineCode를 가지고 가려고 -->
     <input type="hidden" name="cineCode" id="cineCode" value="${cineCode }"/>
     <input type="hidden" name="uid" 		 id="uid" 		 value="${uid }"/>      
@@ -237,8 +237,8 @@ table tr:nth-child(2n+1) {
   <input type="text" name="no" id="no" value="${no }"/>
    --%>
      <br>
-         <textarea rows="5" cols="50" name="s_e" id="s_e"></textarea>
-     
+          <!-- <textarea rows="5" cols="50" name="s_e" id="s_e" > 안에 s_e내용가져오려다 포기하고 input</textarea> --> 
+          <input type="text" name="s_e" id="s_e" value="${rs.s_e }" style="width: 500px;">
      <!-- 하단 버튼 -->
      <div class="cbp-mc-submit-wrap">
         <input class="cbp-mc-button" type="submit" value="평점등록" />
@@ -264,15 +264,6 @@ table tr:nth-child(2n+1) {
    </form>
   
   
-  <input type="button" id="heart" onclick="heart_click();" value="하트" />
-	<script>
-		var heart = 0;
-		
-		function heart_click() {
-			heart ++;
-			alert(heart);
-	}
-	</script>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

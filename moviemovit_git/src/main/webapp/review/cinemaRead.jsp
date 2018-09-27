@@ -1,151 +1,122 @@
-<%@ page contentType="text/html; charset=UTF-8"%> 
+<%@ page contentType="text/html; charset=UTF-8"%>
+
 <%@ include file="../header1.jsp"%>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<style rel="stylesheet">
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon" href="images/fav-icon.png" />
+<script type="application/x-javascript">
+	
+	
+	
+	
+	
+
+addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 
 
-/* 0912 test 목록에 넣을 css */
-.header {   /* 영화관목록  */
-  background-color: #3366cc;
-  color: white; 
-  font-size: 1.5em;
-  /* padding: 1rem; */
-  text-align: center;
-  text-transform: uppercase;        
+
+
+</script>
+
+<link href="../css/rating.css" rel="stylesheet" type="text/css">
+<style>
+
+/* startotal */
+.starimg {
+font-size: 15px;
+text-align: left;
 }
 
-
-
-/* 지도 */
-/* .map{
-  border: 2px solid #327a81;
-  border-radius: 10px;
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
-  max-width: calc(100% - 2em);
-  margin: 1em auto;
-  overflow: hidden;
-  width: 80%;
+.starimg img {
+	width: 50%;
 }
+
+.starbox {
+	width: 100%;
+	height: 160PX;
+	max-width: calc(100% - 65em);
+	background-color: white;
+	box-sizing: content-box;
+	margin: 1em auto;
+}
+
+.scontainer {
+	width: 100px;
+	background-color: white;
+	margin: auto;
+	float: left;
+}
+
+/* 0912 찬홍 test */
+.star_rating {
+	font-size: 0;
+	letter-spacing: -4px;
+}
+
+.star_rating a {
+	font-size: 22px;
+	letter-spacing: 0;
+	display: inline-block;
+	margin-left: 5px;
+	color: #ccc;
+	text-decoration: none;
+}
+
+.star_rating a:first-child {
+	margin: center;
+}
+
+.star_rating a.on {
+	color: #777;
+}
+
+.box-image {
+	width: 100%;
+	height: 180px;
+	/*   max-width: calc(100% - 85em);
  */
-
-
-/* 영화관에 대한 8개항목 총 별점 */
-.cinemaStar {
-  border: 2px solid #327a81;
-  border-radius: 10px;
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
-  max-width: calc(100% - 2em);
-  margin: 1em auto;
-  overflow: hidden;
-  width: 80%;
-}
-.cinemaStar img {
-    width: 150px;
-}
-.cinemaStar table td:first-child{
-    align: right;
-    text-align: right;
-    padding-right: 50px;
- }
-.cinemaStar table td:nth-child(2n) {
-  align: left;
-  text-align: left;
-  
+	background-color: white;;
+	border: 8px solid #3366cc;
+	box-sizing: content-box;
+	margin: 1em auto;
 }
 
-
-
-/* 리뷰목록 불러온곳 */
-.table-users {
-  border: 2px solid #327a81;
-  border-radius: 10px;
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
-  max-width: calc(100% - 2em);
-  margin: 1em auto;
-  overflow: hidden;
-  width: 80%;
-}
-.table-users img {
-  width: 130px;
-  /* max-width: calc(100% - 50em); */
-}
-
-
-
-
- /* 각 요소별 별점에 적용 */
- .review {
-    text-align: center;
-    color:  black;
- }
- .review img {
-    width: 165px;
-    height: 30px;
-    margin-right: 1rem;
- }
- 
-
-
-table {
-  width: 100%;
-} /*
-table td, table th {
-  color: #2b686e;
-  padding: 10px;
-}
-table td {
-  text-align: center;
-  vertical-align: middle;
-}
- table td:last-child {
-  font-size: 0.95em;
-  line-height: 1.4;
-  text-align: center;
-} 
-
-
- table th:first-child{
-    width: 20%;
- }
- 
- table th:last-child {
-  width: 150px;
-} 
-
- 
- 
-table tr:nth-child(2n) {
-  background-color: white;
-}
-table tr:nth-child(2n+1) {
-  background-color: #bfe1ff;
-}
-*/
-
-
-
-/* 0906버튼 */
+/*공개,수정,삭제 스타일*/
 .cbp-mc-button {
-  background: #40bf80;
-  border: none;
-  color: #fff;
-  width: auto;
-  cursor: pointer;
-  text-transform: uppercase;
-  display: inline-block;
-  padding: 5px 5px;
-  font-size: 0.8em;  
-  border-radius: 2px;
-  letter-spacing: 1px;
+	background: #40bf80;
+	border: none;
+	color: #fff;
+	width: auto;
+	cursor: pointer;
+	text-transform: uppercase;
+	display: inline-block;
+	padding: 5px 5px;
+	font-size: 0.8em;
+	border-radius: 2px;
+	letter-spacing: 1px;
 }
+
 .cbp-mc-button:hover {
-  background: #2b8256;
+	background: #2b8256;
 }
- 
- /* sj0831 */ 
-.main-table {
+
+.starline {
+	height: 0.3px;
+	color: #D8D8D8; /* IE */
+	border-color: #D8D8D8;
+	/*
+	사파리
+	*/
+	background-color: #D8D8D8; /* 크롬, 모질라 등, 기타 브라우저 */
+}
+
+
+
+/* 지도test */
+.map{
   border: 2px solid #327a81;
   border-radius: 10px;
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
@@ -154,443 +125,675 @@ table tr:nth-child(2n+1) {
   overflow: hidden;
   width: 80%;
 }
+</style>
 
-/*
-table {
-  margin-left: 5%;
-  margin-right: 5%;   0903 승지 추가 
-}
-table td, table th {
-  color: #2b686e;
-  padding: 10px;
-}
-table td {
-  text-align: center;
-  vertical-align: middle;
-} 
-table td:last-child {
-  font-size: 0.95em;
-  line-height: 1.4;
-  text-align: center;
-}*/
-}
+<!----webfonts---->
+<link
+	href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800'
+	rel='stylesheet' type='text/css'>
+<!----//webfonts---->
+<!---start-click-drop-down-menu----->
+<script src="js/jquery.min.js"></script>
+<!----start-dropdown--->
+<script type="text/javascript">
+	var $ = jQuery.noConflict();
+	$(function() {
+		$('#activator').click(function() {
+			$('#box').animate({
+				'top' : '0px'
+			}, 500);
+		});
+		$('#boxclose').click(function() {
+			$('#box').animate({
+				'top' : '-700px'
+			}, 500);
+		});
+	});
+	$(document).ready(function() {
+		//Hide (Collapse) the toggle containers on load
+		$(".toggle_container").hide();
+		//Switch the "Open" and "Close" state per click then slide up/down (depending on open/close state)
+		$(".trigger").click(function() {
+			$(this).toggleClass("active").next().slideToggle("slow");
+			return false; //Prevent the browser jump to the link anchor
+		});
+
+	});
+</script>
+
 <%@ include file="../header2.jsp"%>
 
-/* 0919 revieewdelete test */
-<% 
-   String uid=(String)session.getAttribute("s_id");
-   //out.println("세션확인:" + uid);
-   session.setAttribute("uid", uid);
-%> 
+<%
+  String uid = (String) session.getAttribute("s_id");
+			//out.println("세션확인:" + uid);
+			session.setAttribute("uid", uid);
+%>
 
-</style>
-<div class="main-table">
-<c:set var="cineCode" value="${dto.cineCode}"/> 
 
-<table>
-    <tr>                                                                                          <!-- style="float: left; " -->        
-       <td rowspan="10"><img src="img/${dto.logoImg }" width="400" height="270"></td>
-  </tr> 
-       <tr style="font-size: 2em;">
-       <th colspan="2"> ${dto.brandName } &nbsp; ${dto.cineName }</th>
-  </tr>
-  <tr>
-     <td colspan="3">
-        <!-- dto.cineCode(영화관리스트의 cineCode) 와 reviewstar.cineCode(리뷰의 cineCode)가 일치할때 해당되는 별점 출력 -->
-          <c:forEach var="reviewstar" items="${reviewstar }">
-          <c:if test="${cineCode eq reviewstar.cineCode }">
-               <%-- ${reviewstar.startotal } --%>
-               <c:choose>
-                      <c:when test="${reviewstar.startotal < 3 }">
-                            <img src = "./img/star1.png" width="250">
-                      </c:when>
-                      <c:when test="${reviewstar.startotal < 5 }">
-                            <img src = "./img/star2.png" width="250">
-                      </c:when>
-                      <c:when test="${reviewstar.startotal < 7 }">
-                            <img src = "./img/star3.png" width="250">
-                      </c:when>
-                      <c:when test="${reviewstar.startotal < 9 }">
-                            <img src = "./img/star4.png" width="250">
-                      </c:when>
-                      <c:when test="${reviewstar.startotal < 11 }">
-                            <img src = "./img/star5.png" width="250">
-                      </c:when>
-                      <c:otherwise>
-                             else값  
-                      </c:otherwise>
-                    </c:choose>
-                    
-          <%--  </c:if>
-          </c:forEach>   --%>
-         
-        </td>
-  </tr>
-  <tr>
-    <th>극장주소</th>
-    <td>&nbsp;&nbsp;   ${dto.addr2 } ${dto.addr3 }</td>
-  </tr>
-  <tr>
-    <th>문의전화</th>
-    <td>${dto.tel }</td>
-  </tr>
-  <tr>
-    <th>홈페이지</th>
-    <td><a href="${dto.home }">${dto.home }</a></td>
-  </tr>
-  <tr>
-    <th>비고</th>
-    <td>${dto.etc } </td>
-  </tr>
-</table>
+<c:set var="cineCode" value="${dto.cineCode}" />
+<!---start-content---->
+<div class="content">
+	<div class="wrap">
+		<div class="single-page">
+			<div class="single-page-artical">
+				<div class="artical-content">
+					<h3 style="font-size: 30px; text-align: left;">
+						<c:choose>
+                            <c:when test="${dto.brandName == 'CGV'}">
+                             CGV
+                             </c:when>
+                             <c:when test="${dto.brandName == 'LOTTE'}">
+                              롯데시네마
+                              </c:when>
+                              <c:when test="${dto.brandName == 'INDEP'}">
+                              독립영화관
+                              </c:when>
+                               <c:when test="${dto.brandName == 'MEGABOX'}">
+                               메가박스 
+                               </c:when>
+                               </c:choose>
+						 ${dto.cineName }
+						
+						<hr class="starline">
+					</h3>
+					<img src="img/${dto.logoImg }" title="banner1">
+				</div>
+				<!---start-content---->
+				<div class="content">
+					<div class="wrap">
+						<div class="contact-info">
+							<div class="contact-grids">
+								<div class="cinemaStar">
+									<c:forEach var="reviewstar" items="${reviewstar }">
+										<c:if test="${cineCode == reviewstar.cineCode }">
+											<div class="col_1_of_bottom span_1_of_first1">
+												<div class="starimg">
+													화질&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp;
+													<c:choose>
+														<c:when test="${reviewstar.pixel < 3 }">
+															<img src="./img/star1.png">
+														</c:when>
+														<c:when test="${reviewstar.pixel < 5 }">
+															<img src="./img/star2.png">
+														</c:when>
+														<c:when test="${reviewstar.pixel < 7 }">
+															<img src="./img/star3.png">
+														</c:when>
+														<c:when test="${reviewstar.pixel < 9 }">
+															<img src="./img/star4.png">
+														</c:when>
+														<c:when test="${reviewstar.pixel < 11 }">
+															<img src="./img/star5.png">
+														</c:when>
+													</c:choose>
+													<hr class="starline">
+													청결도&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp;
+													<c:choose>
+														<c:when test="${reviewstar.clean < 3 }">
+															<img src="./img/star1.png">
+														</c:when>
+														<c:when test="${reviewstar.clean < 5 }">
+															<img src="./img/star2.png">
+														</c:when>
+														<c:when test="${reviewstar.clean < 7 }">
+															<img src="./img/star3.png">
+														</c:when>
+														<c:when test="${reviewstar.clean < 9 }">
+															<img src="./img/star4.png">
+														</c:when>
+														<c:when test="${reviewstar.clean < 11 }">
+															<img src="./img/star5.png">
+														</c:when>
+													</c:choose>
+													<hr class="starline">
+													음향&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp;
+													<c:choose>
+														<c:when test="${reviewstar.sound < 3 }">
+															<img src="./img/star1.png">
+														</c:when>
+														<c:when test="${reviewstar.sound < 5 }">
+															<img src="./img/star2.png">
+														</c:when>
+														<c:when test="${reviewstar.sound < 7 }">
+															<img src="./img/star3.png">
+														</c:when>
+														<c:when test="${reviewstar.sound < 9 }">
+															<img src="./img/star4.png">
+														</c:when>
+														<c:when test="${reviewstar.sound < 11 }">
+															<img src="./img/star5.png">
+														</c:when>
+													</c:choose>
+													<hr class="starline">
+													서비스&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp;
+													<c:choose>
+														<c:when test="${reviewstar.service < 3 }">
+															<img src="./img/star1.png">
+														</c:when>
+														<c:when test="${reviewstar.service < 5 }">
+															<img src="./img/star2.png">
+														</c:when>
+														<c:when test="${reviewstar.service < 7 }">
+															<img src="./img/star3.png">
+														</c:when>
+														<c:when test="${reviewstar.service < 9 }">
+															<img src="./img/star4.png">
+														</c:when>
+														<c:when test="${reviewstar.service < 11 }">
+															<img src="./img/star5.png">
+														</c:when>
+													</c:choose>
+												</div>
+											</div>
+											<div class="col_1_of_bottom span_1_of_first1">
+												<div class="starimg">
+													좌석&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp;
+													<c:choose>
+														<c:when test="${reviewstar.seat < 3 }">
+															<img src="./img/star1.png">
+														</c:when>
+														<c:when test="${reviewstar.seat < 5 }">
+															<img src="./img/star2.png">
+														</c:when>
+														<c:when test="${reviewstar.seat < 7 }">
+															<img src="./img/star3.png">
+														</c:when>
+														<c:when test="${reviewstar.seat < 9 }">
+															<img src="./img/star4.png">
+														</c:when>
+														<c:when test="${reviewstar.seat < 11 }">
+															<img src="./img/star5.png">
+														</c:when>
+													</c:choose>
+													<hr class="starline">
+													교통 접근성&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													<c:choose>
+														<c:when test="${reviewstar.trans < 3 }">
+															<img src="./img/star1.png">
+														</c:when>
+														<c:when test="${reviewstar.trans < 5 }">
+															<img src="./img/star2.png">
+														</c:when>
+														<c:when test="${reviewstar.trans < 7 }">
+															<img src="./img/star3.png">
+														</c:when>
+														<c:when test="${reviewstar.trans < 9 }">
+															<img src="./img/star4.png">
+														</c:when>
+														<c:when test="${reviewstar.trans < 11 }">
+															<img src="./img/star5.png">
+														</c:when>
+													</c:choose>
+													<hr class="starline">
+													매점&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp;
+													<c:choose>
+														<c:when test="${reviewstar.snack < 3 }">
+															<img src="./img/star1.png">
+														</c:when>
+														<c:when test="${reviewstar.snack < 5 }">
+															<img src="./img/star2.png">
+														</c:when>
+														<c:when test="${reviewstar.snack < 7 }">
+															<img src="./img/star3.png">
+														</c:when>
+														<c:when test="${reviewstar.snack < 9 }">
+															<img src="./img/star4.png">
+														</c:when>
+														<c:when test="${reviewstar.snack < 11 }">
+															<img src="./img/star5.png">
+														</c:when>
+													</c:choose>
+													<hr class="starline">
+													주변 편의시설 &nbsp; &nbsp; &nbsp;
+													<c:choose>
+														<c:when test="${reviewstar.around < 3 }">
+															<img src="./img/star1.png">
+														</c:when>
+														<c:when test="${reviewstar.around < 5 }">
+															<img src="./img/star2.png">
+														</c:when>
+														<c:when test="${reviewstar.around < 7 }">
+															<img src="./img/star3.png">
+														</c:when>
+														<c:when test="${reviewstar.around < 9 }">
+															<img src="./img/star4.png">
+														</c:when>
+														<c:when test="${reviewstar.around < 11 }">
+															<img src="./img/star5.png">
+														</c:when>
+													</c:choose>
+													<hr>
+
+												</div>
+											</div>
+											<div class="col_1_of_bottom span_1_of_first1">
+												<h5>평균별점</h5>
+												<c:choose>
+													<c:when test="${dto.startotal == 0}">
+														<img src="./img/star0.png">
+													</c:when>
+													<c:when test="${dto.startotal < 3 }">
+														<img src="./img/star1.png">
+													</c:when>
+													<c:when test="${dto.startotal < 5}">
+														<img src="./img/star2.png">
+													</c:when>
+													<c:when test="${dto.startotal < 7}">
+														<img src="./img/star3.png">
+													</c:when>
+													<c:when test="${dto.startotal < 9}">
+														<img src="./img/star4.png" width="150">
+													</c:when>
+													<c:when test="${dto.startotal < 11} ">
+														<img src="./img/star5.png" width="150">
+													</c:when>
+													<c:when
+														test="${dto.startotal eq '' || empty dto.startotal }">
+														<img src="./img/star0.png" width="150">
+													</c:when>
+												</c:choose>
+											</div>
+										</c:if>
+									</c:forEach>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="contact-info">
+								<div class="contact-grids">
+									<div class="col_1_of_bottom span_1_of_first1">
+										<h5>Address</h5>
+										<ul class="list3">
+											<li><img src="images/home.png" alt="">
+												<div class="extra-wrap">
+													<p>${dto.addr2 }${dto.addr3 }</p>
+												</div></li>
+										</ul>
+									</div>
+									<div class="col_1_of_bottom span_1_of_first1">
+										<h5>Phones</h5>
+										<ul class="list3">
+											<li><img src="images/phone.png" alt="">
+												<div class="extra-wrap">
+													<p>
+														<span>${dto.tel }</span>
+													</p>
+												</div> </li>
+										</ul>
+									</div>
+									<div class="col_1_of_bottom span_1_of_first1">
+										<h5>HOMEPAGE</h5>
+										<ul class="list3">
+											<li>
+												<div class="extra-wrap">
+													<p>
+														<a href="${dto.home }">${dto.home }</a>
+													</p>
+												</div></li>
+										</ul>
+										<h5>ETC</h5>
+										<ul class="list3">
+											<div class="extra-wrap">
+												<p>
+												${dto.etc }
+												</p>
+											</div>
+										</ul>
+
+										<div class="clear"></div>
+									</div>
+									
+									<div id="map" style="width:100%;height:350px;"></div>
+									<c:set var="addr2" value="${dto.addr2 }"/>
+									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=15e2c1e5f7f38722f30ba8361e106d5d&libraries=services"></script>
+												<script>
+												var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+												    mapOption = {
+												        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+												        level: 3 // 지도의 확대 레벨
+												    };  
+												
+												// 지도를 생성합니다    
+												var map = new daum.maps.Map(mapContainer, mapOption); 
+												
+												// 주소-좌표 변환 객체를 생성합니다
+												var geocoder = new daum.maps.services.Geocoder();
+												
+												//주소 가져오기
+												var addr = '<c:out value="${addr2}"/>'; 
+												
+												// 주소로 좌표를 검색합니다
+												geocoder.addressSearch(addr, function(result, status) {
+												
+												    // 정상적으로 검색이 완료됐으면 
+												     if (status === daum.maps.services.Status.OK) {
+												
+												        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+												
+												        // 결과값으로 받은 위치를 마커로 표시합니다
+												        var marker = new daum.maps.Marker({
+												            map: map,
+												            position: coords
+												        });
+												
+												        // 인포윈도우로 장소에 대한 설명을 표시합니다
+												        var infowindow = new daum.maps.InfoWindow({
+												            content: '<div style="width:150px;text-align:center;padding:6px 0;">"${dto.cineName }"</div>'
+												        });
+												        infowindow.open(map, marker);
+												
+												        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+												        map.setCenter(coords);
+												    } 
+												});    
+												</script>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						
+						<div class="clear"></div>
+					</div>
+					<div class="wrap">
+					<div class="contact-info">
+						<div class="col_1_of_bottom span_1_of_first1">
+							<form name="reviewForm" method="POST" action="./create.do">
+								<h5>Writing HERE</h5>
+								<img src="../img/logo.png" style="width: 70%">
+						</div>
+						<div class="col_1_of_bottom span_1_of_first1">
+							<h5>Content</h5>
+							<div class="text2">
+								<textarea id="s_e" name="s_e">Message..</textarea>
+							</div>
+						</div>
+						<div class="col_1_of_bottom span_1_of_first1">
+							<h5>STARS</h5>
+							<div class="scontainer">
+								화질 <input type="radio" name="pixel" class="rating" value="1" />
+								<input type="radio" name="pixel" class="rating" value="2" /> <input
+									type="radio" name="pixel" class="rating" value="3" /> <input
+									type="radio" name="pixel" class="rating" value="4" /> <input
+									type="radio" name="pixel" class="rating" value="5" />
+							</div>
+							<div class="scontainer">
+								음향 <input type="radio" name="sound" class="rating" value="1" />
+								<input type="radio" name="sound" class="rating" value="2" /> <input
+									type="radio" name="sound" class="rating" value="3" /> <input
+									type="radio" name="sound" class="rating" value="4" /> <input
+									type="radio" name="sound" class="rating" value="5" />
+							</div>
+							<div class="scontainer">
+								좌석 <input type="radio" name="seat" class="rating" value="1" />
+								<input type="radio" name="seat" class="rating" value="2" /> <input
+									type="radio" name="seat" class="rating" value="3" /> <input
+									type="radio" name="seat" class="rating" value="4" /> <input
+									type="radio" name="seat" class="rating" value="5" />
+							</div>
+							<div class="scontainer">
+								매점 <input type="radio" name="snack" class="rating" value="1" />
+								<input type="radio" name="snack" class="rating" value="2" /> <input
+									type="radio" name="snack" class="rating" value="3" /> <input
+									type="radio" name="snack" class="rating" value="4" /> <input
+									type="radio" name="snack" class="rating" value="5" />
+							</div>
+							<div class="scontainer">
+								청결도 <input type="radio" name="clean" class="rating" value="1" />
+								<input type="radio" name="clean" class="rating" value="2" /> <input
+									type="radio" name="clean" class="rating" value="3" /> <input
+									type="radio" name="clean" class="rating" value="4" /> <input
+									type="radio" name="clean" class="rating" value="5" />
+							</div>
+							<div class="scontainer">
+								서비스 <input type="radio" name="service" class="rating" value="1" />
+								<input type="radio" name="service" class="rating" value="2" />
+								<input type="radio" name="service" class="rating" value="3" />
+								<input type="radio" name="service" class="rating" value="4" />
+								<input type="radio" name="service" class="rating" value="5" />
+							</div>
+							<div class="scontainer">
+								편의시설 <input type="radio" name="around" class="rating" value="1" />
+								<input type="radio" name="around" class="rating" value="2" /> <input
+									type="radio" name="around" class="rating" value="3" /> <input
+									type="radio" name="around" class="rating" value="4" /> <input
+									type="radio" name="around" class="rating" value="5" />
+							</div>
+							<div class="scontainer">
+								교통 접근성 <input type="radio" name="trans" class="rating" value="1" />
+								<input type="radio" name="trans" class="rating" value="2" /> <input
+									type="radio" name="trans" class="rating" value="3" /> <input
+									type="radio" name="trans" class="rating" value="4" /> <input
+									type="radio" name="trans" class="rating" value="5" />
+							</div>
+							<hr>
+							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+							&nbsp; &nbsp; &nbsp; <input type="hidden" name="cineCode"
+								id="cineCode" value="${cineCode }" /> <br> <input
+								type="hidden" name="uid" id="uid" value="${uid }" /> <br>
+							<br> <br> <input type="submit" class="cbp-mc-button"
+								value="Submit">
+						</div>
+						<div class="clear"></div>
+					</div>
+					</form>
+					<!---start-comments-section--->
+					<div class="comment-section">
+						<div class="grids_of_2">
+							<h2>Comments</h2>
+							<c:forEach var="sdto" items="${list }">
+								<div class="grid1_of_2">
+									<div class="col_1_of_bottom span_1_of_first1">
+										<div class="grid_img">
+											<!-- 프로필이미지 넣을지 말지 -->
+										</div>
+										<div class="grid_text">
+											<h4 class="style1 list">
+												<a href="#"> ${sdto.uid } </a><br> <br>
+											</h4>
+										</div>
+									</div>
+									<div class="col_1_of_bottom span_1_of_first1">
+										<h3 class="starimg">
+											<br> 화질
+											<c:if test="${sdto.pixel==0 }">
+												<img src="./img/star0.png">
+											</c:if>
+											<c:if test="${sdto.pixel==1 }">
+												<img src="./img/star1.png">
+											</c:if>
+											<c:if test="${sdto.pixel==2 }">
+												<img src="./img/star2.png">
+											</c:if>
+											<c:if test="${sdto.pixel==3 }">
+												<img src="./img/star3.png">
+											</c:if>
+											<c:if test="${sdto.pixel==4 }">
+												<img src="./img/star4.png">
+											</c:if>
+											<c:if test="${sdto.pixel==5 }">
+												<img src="./img/star5.png">
+											</c:if>
+											<br> 청결도
+											<c:if test="${sdto.clean==0 }">
+												<img src="./img/star0.png">
+											</c:if>
+											<c:if test="${sdto.clean==1 }">
+												<img src="./img/star1.png">
+											</c:if>
+											<c:if test="${sdto.clean==2 }">
+												<img src="./img/star2.png">
+											</c:if>
+											<c:if test="${sdto.clean==3 }">
+												<img src="./img/star3.png">
+											</c:if>
+											<c:if test="${sdto.clean==4 }">
+												<img src="./img/star4.png">
+											</c:if>
+											<c:if test="${sdto.clean==5 }">
+												<img src="./img/star5.png">
+											</c:if>
+											<br> 음향
+											<c:if test="${sdto.sound==0 }">
+												<img src="./img/star0.png">
+											</c:if>
+											<c:if test="${sdto.sound==1 }">
+												<img src="./img/star1.png">
+											</c:if>
+											<c:if test="${sdto.sound==2 }">
+												<img src="./img/star2.png">
+											</c:if>
+											<c:if test="${sdto.sound==3 }">
+												<img src="./img/star3.png">
+											</c:if>
+											<c:if test="${sdto.sound==4 }">
+												<img src="./img/star4.png">
+											</c:if>
+											<c:if test="${sdto.sound==5 }">
+												<img src="./img/star5.png">
+											</c:if>
+											<br> 서비스
+											<c:if test="${sdto.service==0 }">
+												<img src="./img/star0.png">
+											</c:if>
+											<c:if test="${sdto.service==1 }">
+												<img src="./img/star1.png">
+											</c:if>
+											<c:if test="${sdto.service==2 }">
+												<img src="./img/star2.png">
+											</c:if>
+											<c:if test="${sdto.service==3 }">
+												<img src="./img/star3.png">
+											</c:if>
+											<c:if test="${sdto.service==4 }">
+												<img src="./img/star4.png">
+											</c:if>
+											<c:if test="${sdto.service==5 }">
+												<img src="./img/star5.png">
+											</c:if>
+											<br> 좌석
+											<c:if test="${sdto.seat==0 }">
+												<img src="./img/star0.png">
+											</c:if>
+											<c:if test="${sdto.seat==1 }">
+												<img src="./img/star1.png">
+											</c:if>
+											<c:if test="${sdto.seat==2 }">
+												<img src="./img/star2.png">
+											</c:if>
+											<c:if test="${sdto.seat==3 }">
+												<img src="./img/star3.png">
+											</c:if>
+											<c:if test="${sdto.seat==4 }">
+												<img src="./img/star4.png">
+											</c:if>
+											<c:if test="${sdto.seat==5 }">
+												<img src="./img/star5.png">
+											</c:if>
+											<br> 주변 편의시설
+											<c:if test="${sdto.around==0 }">
+												<img src="./img/star0.png">
+											</c:if>
+											<c:if test="${sdto.around==1 }">
+												<img src="./img/star1.png">
+											</c:if>
+											<c:if test="${sdto.around==2 }">
+												<img src="./img/star2.png">
+											</c:if>
+											<c:if test="${sdto.around==3 }">
+												<img src="./img/star3.png">
+											</c:if>
+											<c:if test="${sdto.around==4 }">
+												<img src="./img/star4.png">
+											</c:if>
+											<c:if test="${sdto.around==5 }">
+												<img src="./img/star5.png">
+											</c:if>
+											<br> 매점
+											<c:if test="${sdto.snack==0 }">
+												<img src="./img/star0.png">
+											</c:if>
+											<c:if test="${sdto.snack==1 }">
+												<img src="./img/star1.png">
+											</c:if>
+											<c:if test="${sdto.snack==2 }">
+												<img src="./img/star2.png">
+											</c:if>
+											<c:if test="${sdto.snack==3 }">
+												<img src="./img/star3.png">
+											</c:if>
+											<c:if test="${sdto.snack==4 }">
+												<img src="./img/star4.png">
+											</c:if>
+											<c:if test="${sdto.snack==5 }">
+												<img src="./img/star5.png">
+											</c:if>
+											<br> 교통
+											<c:if test="${sdto.trans==0 }">
+												<img src="./img/star0.png">
+											</c:if>
+											<c:if test="${sdto.trans==1 }">
+												<img src="./img/star1.png">
+											</c:if>
+											<c:if test="${sdto.trans==2 }">
+												<img src="./img/star2.png">
+											</c:if>
+											<c:if test="${sdto.trans==3 }">
+												<img src="./img/star3.png">
+											</c:if>
+											<c:if test="${sdto.trans==4 }">
+												<img src="./img/star4.png">
+											</c:if>
+											<c:if test="${sdto.trans==5 }">
+												<img src="./img/star5.png">
+											</c:if>
+											<br>
+										</h3>
+									</div>
+									<div class="col_1_of_bottom span_1_of_first1">
+										<div class="grid_text">${sdto.s_e }</div>
+										<input class="cbp-mc-button" type="button" value="수정"
+                                            onclick="location.href='./reviewUpdate.do?cineCode=${dto.cineCode }&no=${sdto.no }'" />
+										<input class="cbp-mc-button" type="button" value="삭제"
+											onclick="location.href='./delete.do?cineCode=${dto.cineCode }&no=${sdto.no }'" />
+									</div>
+									<div class="clear"></div>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+				<!---//End-comments-section--->
+			</div>
+		</div>
+	</div>
 </div>
 
-<!-- 영화관에 대한 각 별점(8개) -->
-<div class="cinemaStar">
-<table>
-                        <!-- 각 영화관별로 평가점수 가져오기 -->
-                     <%--  <c:forEach var="reviewstar" items="${reviewstar }">
-                      <c:if test="${cineCode == reviewstar.cineCode }"> --%>
-                <br>
-                <tr>
-                   <td>화질 
-                      <c:choose>
-                      <c:when test="${reviewstar.pixel < 3 }">
-                            <img src = "./img/star1.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.pixel < 5 }">
-                            <img src = "./img/star2.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.pixel < 7 }">
-                            <img src = "./img/star3.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.pixel < 9 }">
-                            <img src = "./img/star4.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.pixel < 11 }">
-                            <img src = "./img/star5.png" >
-                      </c:when>
-                      <c:otherwise>
-                             else값  
-                      </c:otherwise>
-                            </c:choose> 
-                            
-                   </td> 
-                   <td>청결도 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <c:choose>
-                      <c:when test="${reviewstar.clean < 3 }">
-                            <img src = "./img/star1.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.clean < 5 }">
-                            <img src = "./img/star2.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.clean < 7 }">
-                            <img src = "./img/star3.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.clean < 9 }">
-                            <img src = "./img/star4.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.clean < 11 }">
-                            <img src = "./img/star5.png" >
-                      </c:when>
-                      <c:otherwise>
-                             else값  
-                      </c:otherwise>
-                    </c:choose>
-                   </td>
-              </tr> 
-              <tr>
-                   <td>음향
-                        <c:choose>
-                      <c:when test="${reviewstar.sound < 3 }">
-                            <img src = "./img/star1.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.sound < 5 }">
-                            <img src = "./img/star2.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.sound < 7 }">
-                            <img src = "./img/star3.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.sound < 9 }">
-                            <img src = "./img/star4.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.sound < 11 }">
-                            <img src = "./img/star5.png" >
-                      </c:when>
-                      <c:otherwise>
-                             else값  
-                      </c:otherwise>
-                            </c:choose>
-                   </td>
-                 <td>서비스 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <c:choose>
-                      <c:when test="${reviewstar.service < 3 }">
-                            <img src = "./img/star1.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.service < 5 }">
-                            <img src = "./img/star2.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.service < 7 }">
-                            <img src = "./img/star3.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.service < 9 }">
-                            <img src = "./img/star4.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.service < 11 }">
-                            <img src = "./img/star5.png" >
-                      </c:when>
-                      <c:otherwise>
-                             else값  
-                      </c:otherwise>
-                            </c:choose>
-                 </td>
-              </tr> 
-              <tr>
-                 <td>좌석 
-                        <c:choose>
-                      <c:when test="${reviewstar.seat < 3 }">
-                            <img src = "./img/star1.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.seat < 5 }">
-                            <img src = "./img/star2.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.seat < 7 }">
-                            <img src = "./img/star3.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.seat < 9 }">
-                            <img src = "./img/star4.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.seat < 11 }">
-                            <img src = "./img/star5.png" >
-                      </c:when>
-                      <c:otherwise>
-                             else값  
-                      </c:otherwise>
-                            </c:choose>
-                 </td> 
-                   <td>교통 접근성 &nbsp;&nbsp;&nbsp;
-                        <c:choose>
-                      <c:when test="${reviewstar.trans < 3 }">
-                            <img src = "./img/star1.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.trans < 5 }">
-                            <img src = "./img/star2.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.trans < 7 }">
-                            <img src = "./img/star3.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.trans < 9 }">
-                            <img src = "./img/star4.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.trans < 11 }">
-                            <img src = "./img/star5.png" >
-                      </c:when>
-                      <c:otherwise>
-                             else값  
-                      </c:otherwise>
-                            </c:choose>
-                   </td>
-              </tr>  
-              <tr>
-                <td>매점
-                        <c:choose>
-                      <c:when test="${reviewstar.snack < 3 }">
-                            <img src = "./img/star1.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.snack < 5 }">
-                            <img src = "./img/star2.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.snack < 7 }">
-                            <img src = "./img/star3.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.snack < 9 }">
-                            <img src = "./img/star4.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.snack < 11 }">
-                            <img src = "./img/star5.png" >
-                      </c:when>
-                      <c:otherwise>
-                             else값  
-                      </c:otherwise>
-                            </c:choose>
-                </td> 
-                <td>주변 편의시설
-                        <c:choose>
-                      <c:when test="${reviewstar.around < 3 }">
-                            <img src = "./img/star1.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.around < 5 }">
-                            <img src = "./img/star2.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.around < 7 }">
-                            <img src = "./img/star3.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.around < 9 }">
-                            <img src = "./img/star4.png" >
-                      </c:when>
-                      <c:when test="${reviewstar.around < 11 }">
-                            <img src = "./img/star5.png" >
-                      </c:when>
-                      <c:otherwise>
-                             else값  
-                      </c:otherwise>
-                            </c:choose>
-                </td>
-              </tr>
-              
-  </c:if>
-  </c:forEach>
-</table>
-<br>
-</div>  <!-- 영화관별 평가보기 끝 -->
-            
-                
-   <a href="./create.do?cineCode=${dto.cineCode }" > ${dto.brandName }  ${dto.cineName }영화관 평가 등록하기 </a>
-   <!-- <input class="cbp-mc-button" type="button" value=" 나도 평가 등록하기!! " onclick="location.href='reviewForm.jsp'" > -->
+<script src="../js/rating.js"></script>
+										<script>
+	$('.scontainer').click(function() {
+		$(this).parent().children('span').removeClass('on');
+		$(this).addClass('on').prevAll('span').addClass('on');
+		return false;
+	});
 
+	$('.scontainer').rating(function(vote, event) {
+		// write your ajax code here
+		// For example;
+		// $.get(document.URL, {vote: vote});
+	});
 
+	var heart = 0;
 
-<!-- 각 영화관에 달린 리뷰 -->
-<div class="table-users">
-   <div class="header">리뷰 목록</div>
-<table>
-      <tr style="background-color: #bfe1ff;">
-         <th>아이디공간</th>
-         <th> 평가 </th>
-         <th> 관리자</th>
-      </tr> 
-      
-       <c:forEach var="sdto" items="${list }"> 
-       
-       <!-- 리뷰에 있는 cineCode와 지금 보여지는 cineRead의 cineCode가 일치하는 리뷰만 출력 -->
-       <c:if test="${sdto.cineCode eq dto.cineCode }">
-       <tr>
-         <td> ${sdto.uid }</td>
-         <td> 
-                     화질 <c:if test="${sdto.pixel==0 }"><img src="./img/star0.png"></c:if>
-                   <c:if test="${sdto.pixel==1 }"><img src="./img/star1.png"></c:if>
-                 <c:if test="${sdto.pixel==2 }"><img src="./img/star2.png"></c:if>
-                 <c:if test="${sdto.pixel==3 }"><img src="./img/star3.png"></c:if>
-                 <c:if test="${sdto.pixel==4 }"><img src="./img/star4.png"></c:if>
-                 <c:if test="${sdto.pixel==5 }"><img src="./img/star5.png"></c:if>    
-                   청결도<c:if test="${sdto.clean==0 }"><img src="./img/star0.png"></c:if>
-               <c:if test="${sdto.clean==1 }"><img src="./img/star1.png"></c:if>
-                 <c:if test="${sdto.clean==2 }"><img src="./img/star2.png"></c:if>
-                 <c:if test="${sdto.clean==3 }"><img src="./img/star3.png"></c:if>
-                 <c:if test="${sdto.clean==4 }"><img src="./img/star4.png"></c:if>
-                 <c:if test="${sdto.clean==5 }"><img src="./img/star5.png"></c:if>
-             <br>
-             
-            음향 <c:if test="${sdto.sound==0 }"><img src="./img/star0.png"></c:if>
-                 <c:if test="${sdto.sound==1 }"><img src="./img/star1.png"></c:if>
-                 <c:if test="${sdto.sound==2 }"><img src="./img/star2.png"></c:if>
-                 <c:if test="${sdto.sound==3 }"><img src="./img/star3.png"></c:if>
-                 <c:if test="${sdto.sound==4 }"><img src="./img/star4.png"></c:if>
-                 <c:if test="${sdto.sound==5 }"><img src="./img/star5.png"></c:if>           
-         서비스<c:if test="${sdto.service==0 }"><img src="./img/star0.png"></c:if>
-                 <c:if test="${sdto.service==1 }"><img src="./img/star1.png"></c:if>
-                 <c:if test="${sdto.service==2 }"><img src="./img/star2.png"></c:if>
-                 <c:if test="${sdto.service==3 }"><img src="./img/star3.png"></c:if>
-                 <c:if test="${sdto.service==4 }"><img src="./img/star4.png"></c:if>
-                 <c:if test="${sdto.service==5 }"><img src="./img/star5.png"></c:if> 
-             <br>
-             
-             
-                      좌석 <c:if test="${sdto.seat==0 }"><img src="./img/star0.png"></c:if>
-             <c:if test="${sdto.seat==1 }"><img src="./img/star1.png"></c:if>
-                 <c:if test="${sdto.seat==2 }"><img src="./img/star2.png"></c:if>
-                 <c:if test="${sdto.seat==3 }"><img src="./img/star3.png"></c:if>
-                 <c:if test="${sdto.seat==4 }"><img src="./img/star4.png"></c:if>
-                 <c:if test="${sdto.seat==5 }"><img src="./img/star5.png"></c:if>    
-         주변 편의시설<c:if test="${sdto.around==0 }"><img src="./img/star0.png"></c:if>
-                     <c:if test="${sdto.around==1 }"><img src="./img/star1.png"></c:if>
-                 <c:if test="${sdto.around==2 }"><img src="./img/star2.png"></c:if>
-                 <c:if test="${sdto.around==3 }"><img src="./img/star3.png"></c:if>
-                 <c:if test="${sdto.around==4 }"><img src="./img/star4.png"></c:if>
-                 <c:if test="${sdto.around==5 }"><img src="./img/star5.png"></c:if> 
-             <br>
-             
-             
-            매점<c:if test="${sdto.snack==0 }"><img src="./img/star0.png"></c:if>
-                 <c:if test="${sdto.snack==1 }"><img src="./img/star1.png"></c:if>
-                 <c:if test="${sdto.snack==2 }"><img src="./img/star2.png"></c:if>
-                 <c:if test="${sdto.snack==3 }"><img src="./img/star3.png"></c:if>
-                 <c:if test="${sdto.snack==4 }"><img src="./img/star4.png"></c:if>
-                 <c:if test="${sdto.snack==5 }"><img src="./img/star5.png"></c:if>  
-             교통<c:if test="${sdto.trans==0 }"><img src="./img/star0.png"></c:if>
-                 <c:if test="${sdto.trans==1 }"><img src="./img/star1.png"></c:if>
-                 <c:if test="${sdto.trans==2 }"><img src="./img/star2.png"></c:if>
-                 <c:if test="${sdto.trans==3 }"><img src="./img/star3.png"></c:if>
-                 <c:if test="${sdto.trans==4 }"><img src="./img/star4.png"></c:if>
-                 <c:if test="${sdto.trans==5 }"><img src="./img/star5.png"></c:if>  
-                 <br>
-                <p style="line-height: 1.4;">${sdto.s_e }  no값: ${sdto.no }</p><hr> </td>
-         <td>
-            <%-- <input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./update.do?cCode=${sdto.cineCode }'"/> --%>
-            <input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./delete.do?cineCode=${dto.cineCode }&no=${sdto.no }'"/>
-         
-         </td> 
-         </tr>
-   </c:if>
-   </c:forEach>
-   </table>
-</div>
-
-
- 
-<!-- 지도 표시 -->
-<div>
-        <!--  지도생성                                                                                      테두리 설정 -->
-        <div id="map" style="width:400px;height:270px; border: 2px solid #327a81; border-radius: 10px; margin-left: 10%"></div>
-         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5c0accc753a3f17e942b62e44cbe2426"></script>
-            <script>
-            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-              mapOption = { 
-                    center: new daum.maps.LatLng(37.5014774, 127.0258279), // 지도의 중심좌표
-                    level: 4 // 지도의 확대 레벨
-                };
-                
-            var map = new daum.maps.Map(mapContainer, mapOption);
-            
-            var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
-                imageSize = new daum.maps.Size(34, 39), // 마커이미지의 크기입니다
-                imageOption = {offset: new daum.maps.Point(20, 62)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-            
-            // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-            var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
-                markerPosition = new daum.maps.LatLng(37.5014774, 127.0258279); // 마커가 표시될 위치입니다
-               
-            // 마커를 생성합니다
-            var marker = new daum.maps.Marker({
-              position: markerPosition,
-              image: markerImag  // 마커이미지 설정 
-            });
-            
-            // 마커가 지도 위에 표시되도록 설정합니다
-            marker.setMap(map);  
-            
-            // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-            var content = '<div class="customoverlay">' +
-                '  <a href="http://map.daum.net/link/map/11394059" target="_blank">' +
-                '    <span class="title">CGV강남</span>' +
-                '  </a>' +
-                '</div>';
-            
-            // 커스텀 오버레이가 표시될 위치입니다 
-            var position = new daum.maps.LatLng(37.5014774, 127.0258279);  
-            
-            // 커스텀 오버레이를 생성합니다
-            var customOverlay = new daum.maps.CustomOverlay({
-                map: map,
-                position: position,
-                content: content,
-                yAnchor: 1 
-            });    
-            
-</script>   
-</div>          
-
-
-
+	function heart_click() {
+		heart++;
+		alert(heart);
+	}
+</script>
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>
