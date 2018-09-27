@@ -1,4 +1,3 @@
-﻿
 // --------------------- 예매하기 AJAX File
 $.ajaxSetup({datatype:"text"});
    
