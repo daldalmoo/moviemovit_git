@@ -122,9 +122,13 @@ function moiveInfo_poster(data) {
 /* ---------영화선택 -> 영화정보 포스터 가져오기 AJAX END -----*/
 
 /* --------------- 날짜선택 AJAX  ------------------------*/
-/*
+
 $(".calendar td").click(function() {
-  var selDate = $(".calendar td");
+  var selYear = $("#calYear").attr('value');
+  var selMonth = $("#calMonth").attr('value');
+  var selDate = $(this).text();
+  alert(selYear);
+  alert(selMonth);
   alert(selDate);
   
   // 선택된 날짜 class="on", 이미 선택된 인원이면 on class 지움
@@ -135,7 +139,7 @@ $(".calendar td").click(function() {
     $(this).addClass("on");
   }//if end
 });//click() end
-*/
+
 /* --------------- 날짜선택 AJAX END ---------------------*/
 
 /* --------------- 상영시간표 AJAX ---------------------*/
@@ -198,20 +202,21 @@ $(".adult").click(function(){
       //값 변경시 임시변수에 현재선택값 할당
       adutemp = aducnt;
       
-      //$(".main_list li[value='"+cineCode[i].trim()+"']").css({'font-weight':'bold','color':'black'})
       //선택된 인원이랑 유형 append하기 ,로 엮기   
       var infotxt = $("#select_people_txt").text();
       if(infotxt.indexOf('-') != -1) {
-        str = adutype + "\u00A0" + aducnt; //\u00A0 띄어쓰기
+        str = youtype + "\u00A0" + youcnt; //\u00A0 띄어쓰기
+        $$("#select_people_txt").empty();
         $("#select_people_txt").text(str);
       }else {
-        str = "," + adutype + "\u00A0" + aducnt;
+        str = "," + youtype + "\u00A0" + youcnt;
         $("#select_people_txt").append(str);
       }
+      
     }//peocnt>5 if end
 
-  }//if end
-
+  }//최초클릭 if end
+  
 });//click() end
 
 $(".youth").click(function(){

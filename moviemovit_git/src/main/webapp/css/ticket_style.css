@@ -219,8 +219,7 @@
   border-spacing: 2px;
   border-color: grey;
 }
-.calendar li .on {
-  font-weight: bold;
+.calendar td.on {
   background-color: #999eca;
 }
 .calendar .week {

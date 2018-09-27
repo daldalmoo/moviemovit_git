@@ -19,7 +19,7 @@ var Calendar = new Date();
 var day_of_week= ['일','월','화','수','목','금','토'];
 
 //getMonth() 메서드는 (1월:0 ~ 12월:11)을 반환하니 0번째 인덱스부터 1월을 넣는다
-var month_of_year = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+var month_of_year = ['1','2','3','4','5','6','7','8','9','10','11','12'];
 
 var year = Calendar.getFullYear();  //yyyy년도
 var month = Calendar.getMonth();    //0~11 (1~12월 인덱스)
@@ -76,6 +76,10 @@ function buildCalendar() {
   var TD_end = "</td>";                           //테이블 만들기
   
   str = "<table id='cal_area' border=1 cellspacing=0 cellpadding=0 bordercolor=bbbbbb><tr><td style='text-align:center'>";
+  
+  str += "<input type='hidden' id='calYear' value='" + year + "'>";
+  str += "<input type='hidden' id='calMonth' value='" + month_of_year[month] + "'>";
+  
   str += "<strong>" + "<div id='prev' onclick='prevCalendar()'>◀</div>" + year + ". " + month_of_year[month] + "<div id='next' onclick='nextCalendar()'>▶</div>" + "</strong>";
   str += "<table class='calendar' border=0 cellspacing=0 cellpadding=2>";
   
@@ -292,7 +296,7 @@ function buildCalendar() {
               <span class="price">금액</span>
             </dt>
             <dd>
-              <span class="total">-</span>
+              <span id="total">-</span>
             </dd>
           </dl>
 
