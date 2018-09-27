@@ -23,7 +23,6 @@ img{max-width:100%;}
 /*end reset*/
 body{
 	font-family: 'Open Sans', sans-serif;
-	background:#F0EFEE;
 }
 /*---start-wrap----*/
 .wrap{
@@ -31,6 +30,8 @@ body{
 	margin:0 auto;
 }
 /*---start-header----*/
+
+
 .header{
 	background:url(../images/border.png) repeat-x 0px 0px #FFF;
 	padding: 1.5em 0 1.2em;
@@ -260,15 +261,21 @@ a.boxclose{
 .post-info-rate-share{
 	border-top: 1px solid rgba(183, 181, 181, 0.36);
 	padding: 4% 0 2%;
+	align-content: center;
 }
-.rateit{
-	float:left;
+.post-info-rate-share img {
+ margin: auto
+}
+/* .rateit{
+	float:none;
 	margin: 0.18em 0 0 1em;
 }
 .post-share{
 	float:right;
 	margin-right:1.5em;
-}
+} */
+
+
 /*--footer--*/
 .footer{
 	position:fixed;
@@ -989,6 +996,9 @@ span.mail a:hover{
 	.artical-content p:nth-child(1){
 		display:none;	
 	}
+	
+	
+	
 	.userinfo {
 		display:none;
 	}
@@ -1194,4 +1204,5 @@ span.mail a:hover{
 		font-size: 1em;
 	}
 }
+
 /*--//End-media Quries for 320px-monitors-*/

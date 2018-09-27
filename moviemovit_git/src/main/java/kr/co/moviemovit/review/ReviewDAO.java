@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -45,8 +46,34 @@ public class ReviewDAO {
     
   }
   
+  // LIST : 카테고리 > 브랜드선택
+  public ArrayList<CinemaDTO> selectBrand(CinemaDTO dto) {    
+    ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
+    ArrayList<CinemaDTO> list = mapper.selectBrand(dto);
+    return list;
+    
+  }
+  
+  // LIST : 카테고리 > 주소선택
+  public ArrayList<CinemaDTO> addrList(String addr1) {    
+    ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
+    ArrayList<CinemaDTO> list = mapper.addrList(addr1);
+    return list;
+    
+  }
+  
+//LIST : 카테고리 > 주소선택 후 List 보여주기
+ public ArrayList<CinemaDTO> selectAddr(String addr1) {    
+   ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
+   ArrayList<CinemaDTO> list = mapper.selectAddr(addr1);
+   return list;
+   
+ }
+  
+  
+  
   //LIST : 페이징
- 
+
   // LIST : 영화관 별점 토탈값
   public ArrayList<ReviewStar> reviewstar(){  
     ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
@@ -155,10 +182,17 @@ public class ReviewDAO {
     return count;
   }// create() end
   
-  //review 목록
-  public ArrayList<ReviewStar> list() {
+  // dupliacate 등록 전 중복 확인
+  public ReviewStar duplicate(ReviewStar sdto) {
     ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
-    ArrayList<ReviewStar> list = mapper.list();
+    ReviewStar dto = mapper.duplicate(sdto);
+    return dto;
+  }// create() end
+  
+  //review 목록
+  public ArrayList<ReviewStar> list(String cineCode) {
+    ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
+    ArrayList<ReviewStar> list = mapper.list(cineCode);
     return list;
   }//list() end
   
@@ -170,7 +204,21 @@ public class ReviewDAO {
     return count;
   }// delete end
    
-   
+  //review 업뎃
+  public ReviewStar updateList(ReviewStar inputStar) {
+    System.out.println(inputStar.getNo() + "/" + inputStar.getCineCode());
+    ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
+    ReviewStar rs = mapper.updateList(inputStar);
+    return rs;
+  }//list() end
+  
+  //reviewUpdate
+  public int reviewUpdate(ReviewStar sdto) {
+    ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
+    int count = mapper.reviewUpdate(sdto);
+    return count;
+  }// update end
+  
    
 
 } //class end
