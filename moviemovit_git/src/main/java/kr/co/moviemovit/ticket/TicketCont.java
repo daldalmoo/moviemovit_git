@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
+import net.utility.Utility;
 
 @Controller
 public class TicketCont {
@@ -118,6 +119,32 @@ public class TicketCont {
     out.close();
 	}//cineList() end
 	/* -------------------- 극장선택 부분 AJAX END -------------------- */
+	
+	/* -------------------- 영화정보 부분 AJAX -------------------- */
+	// 영화선택 -> 영화정보 포스터 가져오기
+  @RequestMapping(value="/ticket/movieposter.do", method = RequestMethod.POST)
+  public void movieposter(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    String msg = "";
+    String root = Utility.getRoot(); // /moviemovit
+    
+    int mCode = Integer.parseInt(req.getParameter("mCode"));
+    MovieDTO dto = new MovieDTO();
+    //dto에 선택한 영화의 mCode를 set해서 movieDAO에 있는 read함수 불러옴
+    dto.setmCode(mCode);
+    dto = dao.MovieData(dto);
+    //<input type="image" class="movie_poster" src="./img/bgr_poster2.PNG">
+    //msg += "<input type='image' class='movie_poster' src='" + root + "movie/img_poster/" + dto.getPoster() + ">";
+    //msg += "<input type='image' class='movie_poster' src='moviemovit/movie/storage/" + dto.getPoster() + ">";
+    
+    // 출력
+    resp.setContentType("text/plain; charset=UTF-8");
+    PrintWriter out = resp.getWriter();
+    out.println(msg);
+    out.flush();
+    out.close();
+    
+  }//movieposter() end
+	/* -------------------- 영화정보 부분 AJAX END -------------------- */
 	
 	
 }//class end

@@ -1,6 +1,7 @@
+﻿
 // --------------------- 예매하기 AJAX File
 $.ajaxSetup({datatype:"text"});
-
+   
 // 전역변수
 var MCODE = "";
 var CCODE = "";
@@ -23,6 +24,9 @@ function ResetMovie() {
 $(".SelMovieList").click(function(){
   //alert("SelMovieList(mCode) 호출. mCode:" + mCode);
   
+  // 선택된 영화이름 영화정보에 띄우기
+  $("#select_m_name").text($(this).text());
+  
   // 선택된 영화목록만 class="on", 이미 선택된 영화라면 on class 지움
   if($(this).hasClass("on")==true) {
     $(this).removeClass("on");
@@ -40,9 +44,14 @@ $(".SelMovieList").click(function(){
       - function : 콜백함수
     */
     $.post("./cinemalist.do","mCode="+MCODE,mainList);  // 영화선택 -> 상영극장 가져오기
+    
+    //$.post("./movieposter.do","mCode="+MCODE,moiveInfo_poster);  // 영화선택 -> 영화정보에 포스터 띄우기
+    
   }//if end
   
 });//SelMovieList() end
+
+//영화선택하면 해당 포스터가져와서 영화정보에 뿌려줌 
 
 /* ----------- 영화선택 부분 AJAX END ------------ */
 
@@ -65,7 +74,7 @@ function cinemaSelect(i) {
   for(var j=1; j<=3; j++) {
     $(".t_tab"+j+" a").removeClass("on");
   }//for end
-  $(".t_tab"+i+" a").addClass('on');
+  $(".t_tab"+i+"t a").addClass('on');
   
   if(i==1) {  // 전체극장
     $("#cinema_area .nocinema").css('display','none');
@@ -103,4 +112,242 @@ function screentimeList(data) {  // Controller에서 msg 값 data로 받아옴
 */
 /* --------- 영화선택 -> 상영극장 가져오기 AJAX END--------- */
 
+/* ---------영화선택 -> 영화정보 포스터 가져오기 AJAX ---------*/
+
+function moiveInfo_poster(data) {
+  //alert(data);
+  //$("#thumb_poster").html(data);
+}//moiveInfo_poster() end
+
+/* ---------영화선택 -> 영화정보 포스터 가져오기 AJAX END -----*/
+
+/* --------------- 날짜선택 AJAX  ------------------------*/
+/*
+$(".calendar td").click(function() {
+  var selDate = $(".calendar td");
+  alert(selDate);
+  
+  // 선택된 날짜 class="on", 이미 선택된 인원이면 on class 지움
+  if($(this).hasClass("on")==true) {
+    $(this).removeClass("on");
+  } else {
+    $(".calendar td").removeClass("on");
+    $(this).addClass("on");
+  }//if end
+});//click() end
+*/
+/* --------------- 날짜선택 AJAX END ---------------------*/
+
+/* --------------- 상영시간표 AJAX ---------------------*/
+//상영시간표 선택하면 인원선택의 li부분 font-weight bold하기!
+//임시로 ex)8관 눌렀을 때 활성화되는걸로 작업중
+$(".cinemainfo .cinema_logo").click(function() {
+  $("#price_lst_area td").css("font-weight","bold");
+  $("#price_lst_area li").css("color","black");
+});//click() end
+/* --------------- 상영시간표 AJAX END ---------------------*/
+
+/* --------------- 인원선택 AJAX ---------------------*/
+//최대 5명으로 제한, 영화정보에 ,로 append해서 띄우게
+//toggleClass
+var peotype = ""; //유형
+var peocnt = 0;   //인원 
+var str = ""      //영화정보 인원선택
+  
+var adutemp = 0;  //같은유형에서 변경할때 임시변수
+var youtemp = 0;
+var sentemp = 0;
+var kidtemp = 0;
+
+/*인원선택할 때 str을 각 유형별로 따로줘야할듯*/
+$(".adult").click(function(){
+  adutype = $(this).attr('value').trim();
+  aducnt = $(this).text();
+  //String to Number
+  aducnt *= 1;
+  
+  //$(".main_list li[value='"+cineCode[i].trim()+"']").css({'font-weight':'bold','color':'black'})
+  
+  // 선택된 인원 class="on", 이미 선택된 인원이면 on class 지움
+  if($(this).hasClass("on") == true) {
+    peocnt -= aducnt;
+    $(this).removeClass("on");
+    
+    /*선택된 adutype을 공백으로 바꾸기-유형별 별도의 변수생성*/
+    //$("#select_people_txt").replace("성인  "," ");
+    
+  } else {
+    //초기화
+    if(aducnt == 0) {
+      aducnt *= 0;
+      /*영화정보 인원선택에 들어가면 안됨*/
+    }
+    
+    //같은유형에서 값변경할 때 기존의값에서 차감
+    peocnt -= adutemp;
+    peocnt += aducnt;
+    
+    if(peocnt > 5) {
+      peocnt -= aducnt;
+      $(this).removeClass("on");
+      alert("인원은 5명까지 선택가능합니다.");
+      aducnt = 0;
+    } else {
+      $(".adult").removeClass("on");
+      $(this).addClass("on");
+      //값 변경시 임시변수에 현재선택값 할당
+      adutemp = aducnt;
+      
+      //$(".main_list li[value='"+cineCode[i].trim()+"']").css({'font-weight':'bold','color':'black'})
+      //선택된 인원이랑 유형 append하기 ,로 엮기   
+      var infotxt = $("#select_people_txt").text();
+      if(infotxt.indexOf('-') != -1) {
+        str = adutype + "\u00A0" + aducnt; //\u00A0 띄어쓰기
+        $("#select_people_txt").text(str);
+      }else {
+        str = "," + adutype + "\u00A0" + aducnt;
+        $("#select_people_txt").append(str);
+      }
+    }//peocnt>5 if end
+
+  }//if end
+
+});//click() end
+
+$(".youth").click(function(){
+  //var tempcnt = 0;
+  youtype = $(this).attr('value').trim();
+  youcnt = $(this).text();
+  youcnt *= 1;
+  
+  // 선택된 인원 class="on", 이미 선택된 인원이면 on class 지움
+  if ($(this).hasClass("on") == true) {
+    peocnt -= youcnt;
+    $(this).removeClass("on");
+  } else {
+    //초기화
+    if(youcnt == 0) {
+      youcnt *= 0;
+    }
+    
+    peocnt -= youtemp;
+    peocnt += youcnt;
+  
+    if(peocnt > 5) {
+      peocnt -= youcnt;
+      $(this).removeClass("on");
+      alert("인원은 5명까지 선택가능합니다.");
+      youcnt = 0;
+    } else {
+      $(".youth").removeClass("on");
+      $(this).addClass("on");
+      
+      youtemp = youcnt;
+      
+      //선택된 인원이랑 유형 append하기 ,로 엮기   
+      var infotxt = $("#select_people_txt").text();
+      if(infotxt.indexOf('-') != -1) {
+        str = youtype + "\u00A0" + youcnt; //\u00A0 띄어쓰기
+        $("#select_people_txt").text(str);
+      }else {
+        str = "," + youtype + "\u00A0" + youcnt;
+        $("#select_people_txt").append(str);
+      }
+    }//if end
+    
+  }//if end
+
+});//click() end
+
+$(".senior").click(function(){
+  //var tempcnt = 0;
+  sentype = $(this).attr('value').trim();
+  sencnt = $(this).text();
+  sencnt *= 1;
+  
+  // 선택된 인원 class="on", 이미 선택된 인원이면 on class 지움
+  if ($(this).hasClass("on") == true) {
+    peocnt -= sencnt;
+    $(this).removeClass("on");
+  } else {
+    //초기화
+    if(sencnt == 0) {
+      sencnt *= 0;
+    }
+    
+    peocnt -= sentemp;
+    peocnt += sencnt;
+  
+    if(peocnt > 5) {
+      peocnt -= sencnt;
+      $(this).removeClass("on");
+      alert("인원은 5명까지 선택가능합니다.");
+      sencnt = 0;
+    } else {
+      $(".senior").removeClass("on");
+      $(this).addClass("on");
+      
+      sentemp = sencnt;
+      
+      //선택된 인원이랑 유형 append하기 ,로 엮기   
+      var infotxt = $("#select_people_txt").text();
+      if(infotxt.indexOf('-') != -1) {
+        str = sentype + "\u00A0" + sencnt; //\u00A0 띄어쓰기
+        $("#select_people_txt").text(str);
+      }else {
+        str = "," + sentype + "\u00A0" + sencnt;
+        $("#select_people_txt").append(str);
+      }
+    }//if end
+    
+  }//if end
+
+});//click() end
+
+$(".kid").click(function(){
+  //var tempcnt = 0;
+  kidtype = $(this).attr('value').trim();
+  kidcnt = $(this).text();
+  kidcnt *= 1;
+  
+  // 선택된 인원 class="on", 이미 선택된 인원이면 on class 지움
+  if ($(this).hasClass("on") == true) {
+    peocnt -= kidcnt;
+    $(this).removeClass("on");
+  } else {
+    //초기화
+    if(kidcnt == 0) {
+      kidcnt *= 0;
+    }
+    
+    peocnt -= kidtemp;
+    peocnt += kidcnt;
+  
+    if(peocnt > 5) {
+      peocnt -= kidcnt;
+      $(this).removeClass("on");
+      alert("인원은 5명까지 선택가능합니다.");
+      kidcnt = 0;
+    } else {
+      $(".kid").removeClass("on");
+      $(this).addClass("on");
+      
+      kidtemp = kidcnt;
+      
+      //선택된 인원이랑 유형 append하기 ,로 엮기   
+      var infotxt = $("#select_people_txt").text();
+      if(infotxt.indexOf('-') != -1) {
+        str = kidtype + "\u00A0" + kidcnt; //\u00A0 띄어쓰기
+        $("#select_people_txt").text(str);
+      }else {
+        str = "," + kidtype + "\u00A0" + kidcnt;
+        $("#select_people_txt").append(str);
+      }
+    }//if end
+
+  }//if end
+
+});//click() end
+
+/* --------------- 인원선택 AJAX END ---------------------*/
 
