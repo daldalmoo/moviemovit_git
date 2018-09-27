@@ -27,3 +27,9 @@ SELECT (select avg(star) from starTable) AS avgstar
 FROM starTable
 WHERE mCode=4
 GROUP BY mCode
+
+select mt.*, st.star
+            from (SELECT mCode, star
+                  FROM starTable) st join movieTable mt
+            ON mt.mCode = st.mCode
+            WHERE st.mCode=1

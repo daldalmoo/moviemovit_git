@@ -109,13 +109,10 @@ public class MovieCont {
 	     mav.setViewName("movie/movieList");
 	     ArrayList<MovieDTO> list = dao.list();
 	     ArrayList<StarDTO> list2 = dao.list2();
-	     int avgstar = dao.avgstar(sdto);
-	     System.out.println(avgstar);
-	     //int cnt=dao.create(dto);
-	     //int avgstar = dao.avgstar(sdto);
 	     mav.addObject("list", list);
 	     mav.addObject("list2", list2);
-	     System.out.println("»Æ¿Œ:" + sdto.getStar());
+	     
+	     //mav.addObject("sdto", sdto);
 	     //mav.addObject("avgstar", avgstar);
 	     return mav;
 	 }//list() end

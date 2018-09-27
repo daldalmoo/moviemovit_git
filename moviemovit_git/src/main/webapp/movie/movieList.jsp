@@ -194,23 +194,23 @@ table tr:nth-child(2n+1) {
  <div class="table-users">
    <div class="header">MOVIE LIST</div>
  </div>
-   ${avgstar }
    
-   <c:forEach var="dto" items="${list }">
+   <c:forEach var="sdto" items="${list2 }">
    
    <div class="main">
    <div class="box-image" >
      <span class="thumb-image">
-     <a href="./movieRead.do?mCode=${dto.mCode }">
-       <img class="mimg" src="./img_poster/${dto.poster }" width="400" height="800" />
+     <a href="./movieRead.do?mCode=${sdto.mCode }">
+       <img class="mimg" src="./img_poster/${sdto.poster }" width="400" height="800" />
      </a>
      </span>
   <br><br>
-    <strong class="title">${dto.mName }</strong><br>
+    <strong class="title">${sdto.mName }</strong><br>
      <span>
        <strong>
-       ${dto.s_date } 개봉<br> 
-       ${dto.screen } <br>
+       ${sdto.s_date } 개봉<br> 
+       ${sdto.screen } <br>
+       ${sdto.star }
        </strong>
      </span><br>
      

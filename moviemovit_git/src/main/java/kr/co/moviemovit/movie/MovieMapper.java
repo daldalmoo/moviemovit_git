@@ -24,5 +24,5 @@ public interface MovieMapper {
 	
 	public ArrayList<PeopleDTO> peopleNameList2(String peoName);
 	
-	public int avgstar(StarDTO sdto);
+	public StarDTO avgstar(int star);
 }//interface end

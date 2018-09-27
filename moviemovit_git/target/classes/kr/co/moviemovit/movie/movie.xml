@@ -29,13 +29,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="list2" resultType="StarDTO">
 	    <![CDATA[
-	        select mt.*, st.avgstar
-            from (SELECT sCode, mCode, uid, (select avg(star) from starTable) as avgstar, comment, wdate
-                  FROM starTable ) st join movieTable mt
+	        select mt.*, st.star
+            from (SELECT mcode, star
+                  FROM starTable) st join movieTable mt
             ON mt.mCode = st.mCode
             WHERE st.mCode=#{mCode}
-            GROUP BY mCode
-	    ]]>
+        ]]>
 	</select>
 	
 	
@@ -81,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       ]]>
     </select>
     
-    <select id="avgstar" resultType="int">
+    <select id="avgstar" resultType="int" parameterType="StarDTO">
       <![CDATA[
 		SELECT (select avg(star) from starTable) AS avgstar
 	    FROM starTable
