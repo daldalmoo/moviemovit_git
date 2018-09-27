@@ -4,7 +4,7 @@
 <%@ include file="../header1.jsp"%>
 
 <%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
-<link rel="stylesheet" href="../css/ticket_style.css" type="text/css" />
+<link rel="stylesheet" href="../css/ticket_style.css?ver=3" type="text/css" />
 
 
 <%@ include file="../header2.jsp"%>
@@ -167,14 +167,13 @@ function buildCalendar() {
 
     <tr style="height: 60%;">
       <!-- -------------------------- movie_area : 영화선택  ----------------------------- -->
-      <td class="movie_area">
+      <td id="movie_area">
         <div class="scrollBlind">
-          <ul id="movie_list">
+          <ul class="movie_list">
             <c:forEach var="movie" items="${movieList }">
               <!-- 활성화시 class 'on' -->
               <li class="SelMovieList" value="${movie.mCode }">
                 ${movie.mName }
-                <%-- <a href="javascript:SelMovieList(${movie.mCode});">${movie.mName }</a> --%>
               </li>
             </c:forEach>
           </ul>
@@ -212,36 +211,35 @@ function buildCalendar() {
             <br>영화 또는 날짜를 선택해 주세요.
           </div>
           <div class="cinema_addr1">
-            <a href="javascript:addr1Select();" class="addr1Selected">서울(<strong>5</strong>)
-              <img src="./img/listbtn.gif" class="addr1Selectedbtn">
+            <a href="#" class="addr1selected">
+              <span>전국(<strong>${cinemacntmap.all}</strong>)</span>
+              <img src="./img/listbtn.gif" class="addr1selectedbtn">
             </a>
             <div class="addr1list">
               <ul>
-                <li value="SEO">서울</li>
-                <li value="GGD">경기도</li>
-                <li value="ICH">인천</li>
-                <li value="KWD">강원도</li>
-                <li value="CCD">충청도</li>
-                <li value="KSD">경상도</li>
-                <li value="JLD">전라도</li>
-                <li value="JJD">제주도</li>
+                <li value="all" style='border-bottom: 1px dotted gray;'>전국(<strong>${cinemacntmap.all}</strong>)</li>
+                <li value="SEO">서울(<strong>${cinemacntmap.SEO}</strong>)</li>
+                <li value="GGD">경기도(<strong>${cinemacntmap.GGD}</strong>)</li>
+                <li value="ICH">인천(<strong>${cinemacntmap.ICH}</strong>)</li>
+                <li value="GWD">강원도(<strong>${cinemacntmap.GWD}</strong>)</li>
+                <li value="CCD">충청도(<strong>${cinemacntmap.CCD}</strong>)</li>
+                <li value="GSD">경상도(<strong>${cinemacntmap.GSD}</strong>)</li>
+                <li value="JLD">전라도(<strong>${cinemacntmap.JLD}</strong>)</li>
+                <li value="JJD">제주도(<strong>${cinemacntmap.JJD}</strong>)</li>
               </ul>
             </div>
           </div>
           <div class="main_list">
             <ul>
               <c:forEach var="cinema" items="${cinemalist }">
-                <li>
-                  <a href="#">
-                    <input type="hidden" name="cineCode" value="${cinema.cineCode }">
-                    <c:choose>
-                      <c:when test="${cinema.brandName == 'CGV' }">CGV</c:when>
-                      <c:when test="${cinema.brandName == 'LOTTE' }">롯데시네마</c:when>
-                      <c:when test="${cinema.brandName == 'MEGABOX' }">메가박스</c:when>
-                      <c:when test="${cinema.brandName == 'INDEP' }">독립영화관</c:when>
-                    </c:choose>
-                    - ${cinema.cineName}
-                  </a>
+                <li value="${cinema.cineCode }">
+                  <c:choose>
+                    <c:when test="${cinema.brandName == 'CGV' }">CGV</c:when>
+                    <c:when test="${cinema.brandName == 'LOTTE' }">롯데시네마</c:when>
+                    <c:when test="${cinema.brandName == 'MEGABOX' }">메가박스</c:when>
+                    <c:when test="${cinema.brandName == 'INDEP' }">독립영화관</c:when>
+                  </c:choose>
+                  - ${cinema.cineName}
                 </li>
               </c:forEach>
             </ul>
@@ -335,11 +333,6 @@ function buildCalendar() {
           <hr>
 
           <div class="screentime">
-            <dl id="st_time_lst1" class="num_time"></dl>
-            <dt>ex)8관</dt>
-            <dd>
-              <ul></ul>
-            </dd>
           </div>
         </div>
       </td>
@@ -432,7 +425,7 @@ function buildCalendar() {
   <br>
 </form>
 
-<script src="../js/ticket_script.js" charset="utf-8"></script>
+<script src="../js/ticket_script.js?ver=7" charset="utf-8"></script>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

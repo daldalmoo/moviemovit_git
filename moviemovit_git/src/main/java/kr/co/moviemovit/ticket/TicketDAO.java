@@ -28,33 +28,48 @@ public class TicketDAO {
   }//list() end
   
 
-/************************************ 등록 *************************************************/
-  //예매 중 영화목록
+/************************************ 예매 *************************************************/
+  /* -------------------- 예매 : 영화선택 부분 -------------------- */
+  // 예매 중 영화목록
   public ArrayList<MovieDTO> movieList() {
-	TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
-	ArrayList<MovieDTO> movieList = mapper.movieList();
-	return movieList;
+  TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+  ArrayList<MovieDTO> movieList = mapper.movieList();
+  return movieList;
   }//movieList() end
+  /* ------------------ 예매 : 영화선택 부분 END ------------------ */
   
-  /* -------------------- 극장선택 부분 -------------------- */
-  public ArrayList<CinemaDTO> cineAddr1List() {
-    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
-    ArrayList<CinemaDTO> cineaddr1list = mapper.cineAddr1List();
-    return cineaddr1list;
-  }//cineAddr1List() end
-  
+  /* ------------------ 예매 : 극장선택 부분 ------------------ */
   public ArrayList<CinemaDTO> cinemaList() {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     ArrayList<CinemaDTO> cinemalist = mapper.cinemaList();
     return cinemalist;
   }//cineList() end
   
-  public ArrayList<CinemaDTO> cinemaSelListFromMovie(int mCode) {
+  public int cinemacntFromAddr1(String addr1) {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
-    ArrayList<CinemaDTO> cinelist = mapper.cinemaSelListFromMovie(mCode);
+    int cinemacnt = mapper.cinemacntFromAddr1(addr1);
+    return cinemacnt;
+  }//cinemacntFromAddr1() end
+
+  public ArrayList<CinemaDTO> cinemaListFromAddr1(String addr1) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<CinemaDTO> cinemalist = mapper.cinemaListFromAddr1(addr1);
+    return cinemalist;
+  }//cinemaListFromAddr1() end
+
+  public ArrayList<CinemaDTO> cinemaListFromMovieAddr1(MovieDTO dto) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<CinemaDTO> cinelist = mapper.cinemaListFromMovieAddr1(dto);
     return cinelist;
-  }//screenlistFromMovie() end
-  /* -------------------- 극장선택 부분 END -------------------- */
+  }//cinemaListFromMovieAddr1() end
+  
+  public ArrayList<CinemaDTO> grayCinemaList(int mCode) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<CinemaDTO> cinelist = mapper.grayCinemaList(mCode);
+    return cinelist;
+  }//grayCinemaList() end
+  
+  /* ------------------ 예매 : 극장선택 부분 END ------------------ */
   
   /* -------------------- 영화선택 -> 영화정보 포스터 부분 -------------------- */
   public MovieDTO MovieData(MovieDTO dto) {

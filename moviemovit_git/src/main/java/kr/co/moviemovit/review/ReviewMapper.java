@@ -44,6 +44,15 @@ public interface ReviewMapper {
   // LIST : paging
   public ArrayList<CinemaDTO> listCriteria(Criteria cri);
   
+  // LIST : select addr1
+  public ArrayList<CinemaDTO> addrList(String addr1);
+  
+  // LIST : select brandName
+  public ArrayList<CinemaDTO> selectBrand(CinemaDTO dto);
+  
+  // LIST : select addr1
+  public ArrayList<CinemaDTO> selectAddr(String addr1);
+  
   //////////////////////////////////////// ROOM ///////////////////////////////////////
   // Create
   public int roomForm(RoomDTO dto);
@@ -68,11 +77,19 @@ public interface ReviewMapper {
   // Create
   public int create(ReviewStar sdto);
   
+  // 이전 글과 중복 확인
+  public ReviewStar duplicate(ReviewStar sdto);
+  
   // list
-  public ArrayList<ReviewStar> list();
+  public ArrayList<ReviewStar> list(String cineCode);
   
   // Delete
   public int delete(String no);
   
+  //listupdate
+   public ReviewStar updateList(ReviewStar inputStar);
+   
+  // Update
+  public int reviewUpdate(ReviewStar sdto);
   
 } // class end

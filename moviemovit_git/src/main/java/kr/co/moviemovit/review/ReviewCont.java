@@ -1,13 +1,14 @@
 package kr.co.moviemovit.review;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import com.google.code.geocoder.model.GeocoderResult;
 import com.google.code.geocoder.model.GeocoderStatus;
 import com.google.code.geocoder.model.LatLng;
 
+import kr.co.moviemovit.notice.NoticeDTO;
 import net.utility.UploadSaveManager;
 import net.utility.Utility;
 
@@ -40,21 +42,119 @@ public class ReviewCont {
   
   //////////////////////////////// CINEMA  ////////////////////////////////
 
-  @RequestMapping(value="/review/List2.do", method=RequestMethod.GET)
-  public ModelAndView roomList() {
+  // NEW LIST
+  @RequestMapping(value="/review/cinemaList.do", method=RequestMethod.GET)
+  public ModelAndView cinemaList() {
     
     ModelAndView mav= new ModelAndView();
-    mav.setViewName("review/cinemaList2");
+    mav.setViewName("review/cinemaList");
     
     ArrayList<CinemaDTO> list = dao.cinemaList();
     mav.addObject("list", list); 
     return mav;
   } 
 
+  @RequestMapping(value="/review/addrList.do", method = RequestMethod.POST)
+  public void addrList(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    String msg = "";
+    
+    String addr1 = req.getParameter("addr1");
+    System.out.println("addr1 : "+addr1);
+    
+    //카테고리에 보여줄 주소 리스트
+    ArrayList<CinemaDTO> addrList = dao.addrList(addr1);
+    
+    msg += " <a class='brandList active' id='0'>전체</a>";
+    for(int j=0; j<addrList.size(); j++) {
+      CinemaDTO cinema = addrList.get(j);
+      msg += "  <a class='brandList' id='"+cinema.getBrandName()+"'>";
+      if(cinema.getBrandName().equals("CGV")) { msg += "CGV"; }
+      else if(cinema.getBrandName().equals("LOTTE")) { msg += "롯데시네마"; }
+      else if(cinema.getBrandName().equals("MEGABOX")) { msg += "메가박스"; }
+      else if(cinema.getBrandName().equals("INDEP")) { msg += "독립영화관"; }//if end
+      msg += "  </a>";
+    }//for end
+    
+    // 출력
+    resp.setContentType("text/plain; charset=UTF-8");
+    PrintWriter out = resp.getWriter();
+    out.println(msg);
+    out.flush();
+    out.close();
+  }//addrList() end
   
+  @RequestMapping(value="/review/selectAddr.do", method = RequestMethod.POST) 
+  public ModelAndView selectAddr(@RequestParam("addr1") String addr1) throws Exception{ 
   
+    System.out.println(addr1);
+    ArrayList<CinemaDTO> list = dao.selectAddr(addr1);
+    
+    // list size가 0이면 전체 List 출력
+    if(list.size()==0) {
+      
+      list = dao.cinemaList();
+      
+    }
+    
+    //값 잘 넘어오는 것 확인
+    //MOELANDVIEW로 값 받아서 REFRESH하기
+    ModelAndView mav= new ModelAndView();
+    
+    mav.addObject("list", list); 
+    mav.setViewName("review/cinemaListSelect");
+    
+    return mav;
+   
+  } // category end
+  
+ @RequestMapping(value="/review/selectBrand.do", method = RequestMethod.POST) 
+  public ModelAndView selectBrand(@RequestParam("addr1") String addr1, @RequestParam("brandName") String brandName) throws Exception{ 
+  
+   
+   CinemaDTO dto = new CinemaDTO();
+   
+   dto.setAddr1(addr1);
+   dto.setBrandName(brandName);
+   
+   System.out.println("주소 :" + addr1);
+   System.out.println("브랜드 :"+ brandName);
 
+    ArrayList<CinemaDTO> list = dao.selectBrand(dto);
+    
+    // list size가 0이면 주소만 선택한 List 출력
+    
+    if(list.size()==0) {
+      
+      list = dao.selectAddr(addr1);
+    }
+    
+    //값 잘 넘어오는 것 확인
+    //MOELANDVIEW로 값 받아서 REFRESH하기
+    ModelAndView mav= new ModelAndView();
+    
+    mav.addObject("list", list); 
+    mav.setViewName("review/cinemaListSelect");
+    
+    return mav;
+   
+  } // category end
+ 
+ 
+ // LIST : search
+ @RequestMapping(value="/review/search.do", method=RequestMethod.GET) 
+ public ModelAndView search(@Param("sch_type")String sch_type, @Param("sch_value")String sch_value) { 
+ 
+   ModelAndView mav= new ModelAndView();
+   mav.setViewName("review/cinemaList");
+
+   ArrayList<CinemaDTO> list = dao.search(sch_type, sch_value);
+
+   mav.addObject("list", list); 
   
+   return mav; 
+   
+ }
+
   // CINEMA INSERT
   @RequestMapping(value="/review/cinemaForm.do", method=RequestMethod.GET)
   public ModelAndView cinemaForm() {
@@ -147,21 +247,6 @@ public class ReviewCont {
   } // 
   
   
-  /////////////////////////////////////// READ
-
-/*  @RequestMapping(value="/review/cinemaRead.do", method=RequestMethod.GET)
-  public ModelAndView cinemaRead(CinemaDTO dto) {
-    ModelAndView mav = new ModelAndView();
-    mav.setViewName("review/cinemaRead");
-    dto = dao.cinemaRead(dto);
-    ArrayList<ReviewStar> reviewstar = dao.reviewstar();
-    mav.addObject("reviewstar", reviewstar);
-    mav.addObject("dto", dto);
-    return mav;
-    
-  }*/
-  
-
   
   //////////////////////////////////////// UPDATE
   
@@ -297,115 +382,6 @@ public class ReviewCont {
    return mav;
    
   }
-  
-  ////////////////////////////////////// LIST + 페이징 0912
-  @RequestMapping(value="/review/cinemaList.do")
-  public ModelAndView cinemaList(HttpServletRequest request) {
-    
-    ModelAndView mav= new ModelAndView();
-    Criteria cri = new Criteria();
-
-    //첫페이지일 경우 page를 1로 설정
-    //1페이지인지 판단 여부 = request page 값이 null 여부를 판단
-    String pagetemp = request.getParameter("page");
-    int page = 1;
-
-    //null이 아니라면 page를 int형으로 변화시키고 page에 set
-    if (pagetemp!=null) {
-    page = Integer.parseInt(pagetemp);
-    cri.setPage(page);
-    }
-    
-    //0이랑 10
-    //System.out.println(cri.getPageStart());
-   //System.out.println(cri.getPage());
-    
-    ArrayList<CinemaDTO> list = dao.listCriteria(cri);
-    
-    mav.addObject("list", list);  // 게시판의 글 리스트
-    PageMaker pageMaker = new PageMaker();
-    pageMaker.setCri(cri);
-    
-    //total은 xml 별도 추가 없이 컨트롤러에서 count
-    //list를 불러와서
-    ArrayList<CinemaDTO> alllist = dao.cinemaList();
-    // size 재기
-    int totalcount = alllist.size();
-    pageMaker.setTotalCount(totalcount);
-    mav.addObject("pageMaker", pageMaker);
-
-    ArrayList<ReviewStar> reviewstar = dao.reviewstar();
-    
-    mav.addObject("list", list);
-    mav.addObject("reviewstar", reviewstar);
-    return mav;
-  } 
-
-  // LIST : search
-  @RequestMapping(value="/review/search.do", method=RequestMethod.GET) 
-  public ModelAndView search(HttpServletRequest request) { 
-  
-    ModelAndView mav= new ModelAndView();
-    mav.setViewName("review/cinemaList");
-    
-    System.out.println(request.getParameter("sch_type"));
-    
-    String sch_type = request.getParameter("sch_type"); 
-    String sch_value = request.getParameter("sch_value"); 
-    
-    ArrayList<CinemaDTO> list = dao.search(sch_type, sch_value);
-    ArrayList<ReviewStar> reviewstar = dao.reviewstar();
-
-    mav.addObject("list", list); 
-    mav.addObject("reviewstar", reviewstar); 
-   
-   
-    return mav; 
-    
-  }
-
-  
-  //LIST : 카테고리
-  @RequestMapping(value="/review/category.do") 
-  public ModelAndView cate(@RequestParam(value="checkArr[]", defaultValue="nth")List<String> list, 
-      @RequestParam(value="checkArr2[]", defaultValue="nth")List<String> addrlist) throws Exception{ 
-    
-    System.out.println(list);
-    System.out.println(addrlist);
-    
-    //when brandName is null
-    if(list.get(0).equals("nth")) {
-      list.clear();
-      String [] brandNames = {"CGV", "LOTTE", "INDEP", "MEGABOX"};
-      list.addAll(Arrays.asList(brandNames));}
-    //when addr1 is null
-    if(addrlist.get(0).equals("nth")) {
-      addrlist.clear();
-      String [] addrs = {"SEO", "GGD", "ICH", "CCD", "KSD", "KSD", "JLD", "JJD"};
-      addrlist.addAll(Arrays.asList(addrs));}
-
-    System.out.println(list);
-    System.out.println(addrlist);
-    
-    ArrayList<CinemaDTO> category = dao.cate(list, addrlist);
-    System.out.println(category);
-    System.out.println(category.size());
-    
-    //값 잘 넘어오는 것 확인
-    //MOELANDVIEW로 값 받아서 REFRESH하기
-    ModelAndView mav= new ModelAndView();
-    
-    ArrayList<ReviewStar> reviewstar = dao.reviewstar();
-
-    mav.addObject("list", category); 
-    mav.addObject("reviewstar", reviewstar); 
-
-    mav.setViewName("review/cinemaList_");
-    
-    return mav;
-   
-  } // category end
-  
   
   
   ////////////////////////////// ROOM /////////////////////////////////////
@@ -674,7 +650,7 @@ public class ReviewCont {
   
  }
  
-  ////////////////////////////// REVIEW  ////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////// REVIEW  ////////////////////////////////////////////////////////////////////////////
   //reviewCreate-----------------------------
   @RequestMapping(value="/review/create.do", method=RequestMethod.GET)
   public ModelAndView create() {
@@ -690,12 +666,49 @@ public class ReviewCont {
     InetAddress local = InetAddress.getLocalHost();
     String ip = local.getHostAddress();
     sdto.setIp(ip);
+    System.out.println(ip);
     
-    /*값이 제대로 넘어오는지 확인
-    System.out.println(sdto.getPixel());*/ 
+    //값이 제대로 넘어오는지 확인
+    System.out.println(sdto.getPixel());
+    System.out.println(sdto.getUid());
+    System.out.println(sdto.getS_e());
     
-    int count = dao.create(sdto);  
     String msg = "";
+
+    //해당 ID가 이전에 글을 쓴 적이 있는지 확인
+    ReviewStar dupdto = dao.duplicate(sdto);
+    
+    //해당 ID가 글을 쓴적이 있으면 이전 글 삭제 후 글쓰게 하기
+    if(dupdto!=null) {
+      
+      System.out.println(dupdto.getNo());
+      msg += "<!DOCTYPE html>";
+      msg += "<html><body>";
+      msg += "<script>";
+      msg += "  var bResult = confirm('이전에 삭제한 글이 있습니다. 해당 글을 지우고 새 리뷰를 등록하겠습니까?');";
+      msg += "  if (bResult == true) {";  // 예를 누른 경우
+      
+      // 등록 
+      int count = dao.create(sdto);  
+      if (count == 0) {
+        msg += "  alert('등록 실패');";
+        msg += "  history.go(-1);";
+      } else {
+        msg += "  alert('별점 등록 성공');";
+      } // 등록 if end
+        
+      //삭제 진행
+      msg += "    window.location='./deleteProc.do?no="+dupdto.getNo()+"';";
+      msg += "  } else {";  // 아니오를 누른 경우
+      msg += "    history.go(-1);";
+      msg += "  }";
+      msg += "</script>";
+      msg += "</html></body>";
+      mav.addObject("msg", msg);
+      mav.setViewName("msgView");
+    } else {
+    //해당 ID가 글을 쓴적이 없으면 바로 별점등록으로
+    int count = dao.create(sdto);  
     
     if (count == 0) {
       msg += "<!DOCTYPE html>";
@@ -718,25 +731,28 @@ public class ReviewCont {
       mav.addObject("msg", msg);
       mav.setViewName("msgView");
     } // if end
+    }// 게시글 중복확인 끝
     return mav;
   } // POST (실제 실행되는애) 
-  
-  
   
   //cinemaRead ( 영화관 상세정보 ,리뷰보기, 리뷰매기기 ) --------------------
   @RequestMapping(value="/review/cinemaRead.do", method=RequestMethod.GET)
   public ModelAndView cinemaRead(CinemaDTO dto) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("review/cinemaRead");
+    
+    System.out.println(dto.getCineCode());
+    
     dto = dao.cinemaRead(dto);
     ArrayList<ReviewStar> reviewstar = dao.reviewstar();
-    ArrayList<ReviewStar> list = dao.list();
+    ArrayList<ReviewStar> list = dao.list(dto.getCineCode());
     // 페이지 이동 및 값 올리기
     
     //사이즈값으로 제대로 찍히나 확인
     System.out.println(list.size());
     
     mav.setViewName("review/cinemaRead"); //reviewList
+    
     mav.addObject("list", list);
     mav.addObject("reviewstar", reviewstar);
     mav.addObject("dto", dto);
@@ -798,8 +814,47 @@ public class ReviewCont {
     } // if end
    return mav;
   }
-
-
   
   
+  //GET
+  @RequestMapping(value="/review/reviewUpdate.do", method = RequestMethod.GET)
+  public ModelAndView reviewUpdate(int no, String cineCode) {
+    System.out.println("no값 :" + no + "/ cineCode값 :"+cineCode);
+    ReviewStar inputStar = new ReviewStar();
+    inputStar.setNo(no);
+    inputStar.setCineCode(cineCode);
+    ModelAndView mav = new ModelAndView();
+    ReviewStar rs = dao.updateList(inputStar);
+    mav.addObject("rs", rs);
+    System.out.println(rs.getS_e()+" <---내용입니당");
+    mav.setViewName("review/reviewForm");
+    return mav;
+  }//reviewUpdate GET
+  
+  @RequestMapping(value = "/review/reviewUpdate.do", method = RequestMethod.POST)
+  public ModelAndView updateProc(ReviewStar sdto) {
+    ModelAndView mav = new ModelAndView();
+    
+    int cnt = dao.reviewUpdate(sdto);
+    
+    String msg = "";
+    if(cnt == 0) {
+      msg += "<!DOCTYPE html>";
+      msg += "<html><body>";
+      msg += "<script>";
+      msg += "  alert('수정 실패했습니다');";
+      msg += "  history.go(-1);";
+      msg += "</script>";
+      msg += "</html></body>";
+      mav.addObject("msg", msg);
+      mav.setViewName("msgView");
+    }else {
+      mav.addObject("cnt", cnt);
+      mav.setViewName("redirect:/read.do");
+    }//if end
+    return mav;
+  }// updateProc() end
+  
+
+ 
 } // class end
