@@ -14,34 +14,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <!-- *********************** 예매 *********************** -->
-  <!-- 예매 중 영화목록 -->
+  <!-- ********* 예매 : 영화선택 부분 ******** -->
+  <!-- 영화목록 -->
   <select id="movieList" resultType="MovieDTO">
- 	<![CDATA[
-		SELECT mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date
-		FROM movieTable
-		ORDER BY mName ASC;	
-	]]>
+  <![CDATA[
+    SELECT mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date
+    FROM movieTable
+    ORDER BY mName ASC; 
+  ]]>
   </select>
+  <!-- ********* 예매 : 영화선택 부분 END ******** -->
   
   <!-- ********* 예매 : 극장선택 부분 ********* -->
-  <!-- 예매 중 주소1의 개수 -->
-  <select id="cinemacnt" resultType="int">
-  <![CDATA[
-    SELECT COUNT(cineCode)
-    FROM cinemaTable;
-  ]]>
-  </select>
-  
-  <!-- 예매 중 주소1의 개수 -->
-  <select id="addr1cnt" parameterType="String" resultType="int">
-  <![CDATA[
-    SELECT COUNT(cineCode)
-    FROM cinemaTable
-    WHERE addr1=#{addr1};
-  ]]>
-  </select>
-  
-  <!-- 예매 중 극장목록 -->
+  <!-- 극장목록 전체 -->
   <select id="cinemaList" resultType="CinemaDTO">
   <![CDATA[
     SELECT cineCode, brandName, cineName
@@ -50,8 +35,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   ]]>
   </select>
   
-  <!-- 영화선택 -> 상영극장 가져오기 -->
-  <select id="cinemaSelListFromMovie" parameterType="int" resultType="CinemaDTO">
+  <!-- gray 처리할 상영극장 가져오기 -->
+  <select id="grayCinemaList" parameterType="int" resultType="CinemaDTO">
     <![CDATA[
       SELECT CT.cineCode,brandName,cineName
       FROM cinemaTable CT
@@ -64,6 +49,70 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       ORDER BY brandName ASC, cineName ASC
     ]]>
   </select>
+  
+  <!-- mCode, addr1 에 맞는 상영극장 목록 가져오기 -->
+  <!-- mMame 에 addr1 담아옴 -->
+  <!-- <select id="cinemaSelListFromMovieAddr1" parameterType="MovieDTO" resultType="CinemaDTO">
+    <![CDATA[
+      SELECT CT.cineCode,brandName,cineName
+      FROM cinemaTable CT
+      INNER JOIN roomTable RT
+      ON CT.cineCode=RT.cineCode
+      INNER JOIN screenTable ST
+      ON RT.roomCode=ST.roomCode
+      WHERE mCode=#{mCode} AND addr1 LIKE concat(#{mName},'%')
+      GROUP BY CT.cineCode
+      ORDER BY brandName ASC, cineName ASC
+    ]]>
+  </select> -->
+  <!-- mMame 에 addr1 담아옴 -->
+  <select id="cinemaSelListFromMovieAddr1" parameterType="MovieDTO" resultType="CinemaDTO">
+    <![CDATA[
+      SELECT CT.cineCode,brandName,cineName
+      FROM cinemaTable CT
+      INNER JOIN roomTable RT
+      ON CT.cineCode=RT.cineCode
+      INNER JOIN screenTable ST
+      ON RT.roomCode=ST.roomCode
+      WHERE mCode=#{mCode}
+    ]]>
+      <if test="mName != 'all' ">
+        AND addr1=#{mName}
+      </if>
+    <![CDATA[
+      GROUP BY CT.cineCode
+      ORDER BY brandName ASC, cineName ASC
+    ]]>
+  </select>
+  
+  <!-- 주소1의 개수 -->
+  <select id="cinemacnt" resultType="int">
+  <![CDATA[
+    SELECT COUNT(cineCode)
+    FROM cinemaTable;
+  ]]>
+  </select>
+  
+  <!-- 주소1의 개수 -->
+  <select id="addr1cnt" parameterType="String" resultType="int">
+  <![CDATA[
+    SELECT COUNT(cineCode)
+    FROM cinemaTable
+    WHERE addr1=#{addr1};
+  ]]>
+  </select>
+  
+  <!-- 각 주소의 극장목록 -->
+  <select id="cinemaListaddr1" parameterType="String" resultType="CinemaDTO">
+  <![CDATA[
+    SELECT cineCode, brandName, cineName
+    FROM cinemaTable
+    WHERE addr1=#{addr1}
+    ORDER BY brandName ASC, cineName ASC;
+  ]]>
+  </select>
+  
+  
   <!-- ********* 예매 : 극장선택 부분 END ******** -->
   
   
