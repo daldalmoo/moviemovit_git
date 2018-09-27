@@ -16,7 +16,6 @@
 </footer>
 
 <!-- 20180830 남효 -->
-<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script> 
 <script src="../js/script.js"></script>
 
 </body>
