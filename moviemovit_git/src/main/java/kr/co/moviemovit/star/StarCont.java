@@ -51,7 +51,6 @@ public class StarCont {
 		  mav.addObject("img", "<img src='../img/success.jpg'>");
 		  mav.addObject("link1", "<input type='button' value='목록으로' onclick='location.href=\"./List.do?mCode=" + sdto.getmCode() + "\"'>");      
 		}//if end
-	   
 	   return mav;
 	 }//createProc() end
 	 
@@ -80,9 +79,10 @@ public class StarCont {
 		 mav.setViewName("/star/List");
 		 ArrayList<HashMap<MovieDTO, StarDTO>> starlist=dao.starlist(sdto);
 		 dto=dao.movieList(dto);
-		 System.out.println("확인2: " + sdto.getmCode() + sdto.getStar() + sdto.getComment());
+		 int avgstar = dao.avgstar(sdto);
 		 mav.addObject("starlist", starlist);
 		 mav.addObject("dto", dto);
+		 mav.addObject("avgstar", avgstar);
 		 return mav;
 	 }//starlist() end
 	

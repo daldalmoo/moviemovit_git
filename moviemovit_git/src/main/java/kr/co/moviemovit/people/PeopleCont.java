@@ -49,7 +49,7 @@ public class PeopleCont {
 	   
 	//------------------------------------------------------------    
 	//  전송된 파일이 저장되는 실제 경로
-	    String basePath = req.getRealPath("/people/storage");
+	    String basePath = req.getRealPath("/people/img_people");
 	    MultipartFile posterMF = dto.getPosterMF();
 	    String peoPic = UploadSaveManager.saveFileSpring30(posterMF, basePath);
 	    dto.setPeoPic(peoPic);

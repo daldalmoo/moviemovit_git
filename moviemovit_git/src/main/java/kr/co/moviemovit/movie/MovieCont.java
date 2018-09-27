@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.moviemovit.people.PeopleDTO;
 import kr.co.moviemovit.review.CinemaDTO;
+import kr.co.moviemovit.star.StarDTO;
 import net.utility.UploadSaveManager;
 import net.utility.Utility;
 
@@ -29,7 +30,7 @@ public class MovieCont {
 
 	public MovieCont() {
 		System.out.println("-----MovieCont() 객체 생성");
-	}
+	}//기본생성자
 	//결과확인
 	//http://localhost:9090/moviemovit/movie/create.do
 	
@@ -41,7 +42,7 @@ public class MovieCont {
 	    mav.addObject("root", Utility.getRoot());
 	    mav.addObject("mCode", dto.getmCode());    
 	    return mav;
-	  }//createForm() end 
+	}//createForm() end 
 		
 	@RequestMapping(value="/movie/create.do", method=RequestMethod.POST)
 	  public ModelAndView createProc(MovieDTO dto, HttpServletRequest req) {
@@ -50,7 +51,7 @@ public class MovieCont {
 	    mav.addObject("root", Utility.getRoot());
 	//------------------------------------------------------------    
 	//  전송된 파일이 저장되는 실제 경로
-	    String basePath = req.getRealPath("/movie/storage");
+	    String basePath = req.getRealPath("/movie/img_poster");
 	    MultipartFile posterMF = dto.getPosterMF();
 	    String poster = UploadSaveManager.saveFileSpring30(posterMF, basePath);
 	    dto.setPoster(poster);
@@ -87,7 +88,6 @@ public class MovieCont {
 	    	dto.setScreen("상영종료");
 	    }//if end
 
-	    
 	    int cnt=dao.create(dto);
 	    if(cnt==0) {
 	      mav.addObject("msg1", "<p>영화 등록 실패</p>");
@@ -104,12 +104,16 @@ public class MovieCont {
 	 }//createProc() end
 	
 	 @RequestMapping("/movie/movieList.do")
-	 public ModelAndView list(MovieDTO dto) {
+	 public ModelAndView list(MovieDTO dto, StarDTO sdto) {
 	     ModelAndView mav = new ModelAndView();
 	     mav.setViewName("movie/movieList");
 	     ArrayList<MovieDTO> list = dao.list();
-	     
+	     ArrayList<StarDTO> list2 = dao.list2();
 	     mav.addObject("list", list);
+	     mav.addObject("list2", list2);
+	     
+	     //mav.addObject("sdto", sdto);
+	     //mav.addObject("avgstar", avgstar);
 	     return mav;
 	 }//list() end
 	 

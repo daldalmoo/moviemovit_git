@@ -5,13 +5,6 @@
 
 
 <style rel="stylesheet">
-.startable {
-  width:500px
-  
-
-}
-
-
 .header {   /* 영화관목록  */
   background-color: #3366cc;
   color: white; 
@@ -228,15 +221,15 @@ table tr:nth-child(2n+1) {
        <strong>${dto.mName }</strong>
      </span>
    </div>
- 
+   <span>
+        
 
    
    <c:forEach var="sdto" items="${starlist }">
-   <table calss="startable">
-   
-    <tr>
-        별점: ${sdto.star}
-     
+   <table>
+     <tr>
+     <td>별점: ${sdto.star}</td>
+     <td>
      <c:if test="${sdto.star==0 }">
            <img class="simg" src="./img_star/star0.png"> 
        </c:if>
@@ -255,13 +248,53 @@ table tr:nth-child(2n+1) {
        <c:if test="${sdto.star==5 }">
            <img class="simg" src="./img_star/star5.png">
        </c:if>
-     
-     한줄평: ${sdto.comment } 
-     작성일: ${sdto.wdate } 
+     </td>
+     </tr>
+     <tr>
+     <td>한줄평: ${sdto.comment } </td>
+     <td>작성일: ${sdto.wdate } </td>
      </tr>
    </table>
+   <div class="box">
+      <span>
+       
+       <strong>별점: ${sdto.star} &nbsp;
+       <c:if test="${sdto.star==0 }">
+           <img class="simg" src="./img_star/star0.png"> 
+       </c:if>
+       <c:if test="${sdto.star==1 }">
+           <img class="simg" src="./img_star/star1.png"> 
+       </c:if>
+       <c:if test="${sdto.star==2 }">
+           <img class="simg" src="./img_star/star2.png"> 
+       </c:if>
+       <c:if test="${sdto.star==3 }">
+           <img class="simg" src="./img_star/star3.png"> 
+       </c:if>
+       <c:if test="${sdto.star==4 }">
+           <img class="simg" src="./img_star/star4.png"> 
+       </c:if>
+       <c:if test="${sdto.star==5 }">
+           <img class="simg" src="./img_star/star5.png">
+       </c:if>
+       </strong>
+      </span><br>
+      
+      <span>
+        <strong>  
+          한줄평: ${sdto.comment } 
+        </strong>
+      </span><br>
+      <span>
+        <strong>  
+     작성일: ${sdto.wdate } 
+        </strong>
+      </span><br>
+    </div>
    </c:forEach>
+     
    <!-- 하단 버튼 -->
+   <br>
    <div class="cbp-mc-submit-wrap">
      <input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='../movie/movieList.do'"/>
      <input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />

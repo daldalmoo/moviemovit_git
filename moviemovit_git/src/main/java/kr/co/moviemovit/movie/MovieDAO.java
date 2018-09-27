@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import kr.co.moviemovit.people.PeopleDTO;
 import kr.co.moviemovit.people.PeopleMapper;
 import kr.co.moviemovit.screen.ScreenMapper;
+import kr.co.moviemovit.star.StarDTO;
 
 @Component
 public class MovieDAO {
@@ -30,8 +31,13 @@ public class MovieDAO {
 	public ArrayList<MovieDTO> list() {
 	    MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
 	    ArrayList<MovieDTO> list = mapper.list();
-	    
 	    return list;
+	}//list() end
+	
+	public ArrayList<StarDTO> list2() {
+	    MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
+	    ArrayList<StarDTO> list2 = mapper.list2();
+	    return list2;
 	}//list() end
 	
 	public MovieDTO read(MovieDTO dto) {
@@ -64,13 +70,10 @@ public class MovieDAO {
         return peoplelist2;
     }//peopleNameList() end
 	
-	public int star(int star) {
+	public StarDTO avgstar(int star) {
 		MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
-		int count = mapper.star(star);
-		return count;
-	}//update() end
+		StarDTO sdto = mapper.avgstar(star);
+		return sdto;
+	}//star() end
 	
-	
-	
-
 }//class end

@@ -23,9 +23,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[
 			SELECT mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date
 			FROM movieTable
-			ORDER BY mCode DESC	
+			ORDER BY s_date DESC	
 		]]>
 	</select>
+	
+	<select id="list2" resultType="StarDTO">
+	    <![CDATA[
+	        select mt.*, st.star
+            from (SELECT mcode, star
+                  FROM starTable) st join movieTable mt
+            ON mt.mCode = st.mCode
+            WHERE st.mCode=#{mCode}
+        ]]>
+	</select>
+	
 	
 	<select id="read" parameterType="MovieDTO" resultType="MovieDTO">
 		<![CDATA[
@@ -34,7 +45,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE mCode = #{mCode}
 		]]>	
 	</select>
-
+	
+	
     <delete id="delete" parameterType="MovieDTO">
 		<![CDATA[
 			DELETE FROM movieTable
@@ -68,17 +80,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       ]]>
     </select>
     
-    <select id="star" parameterType="int" resultType="int">
+    <select id="avgstar" resultType="int" parameterType="StarDTO">
       <![CDATA[
-		SELECT star
-		FROM starTable
-	  ]]>    
+		SELECT (select avg(star) from starTable) AS avgstar
+	    FROM starTable
+	    WHERE mCode=#{mCode}
+	    GROUP BY mCode
+      ]]>    
     </select>
-	
-	
-	
-	
-	
+    
+    
 	
 	
 </mapper>
