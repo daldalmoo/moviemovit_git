@@ -53,18 +53,18 @@ public class TicketCont {
 	  ArrayList<CinemaDTO> cinemalist = dao.cinemaList();
     mav.addObject("cinemalist", cinemalist);
     
-    // 주소1목록
-    HashMap<String,Integer> addr1map = new HashMap<String, Integer>();
-    addr1map.put("all",dao.cinemacnt());  // 전국
-    addr1map.put("SEO",dao.addr1cnt("SEO"));  // 서울
-    addr1map.put("GGD",dao.addr1cnt("GGD"));  // 경기도
-    addr1map.put("ICH",dao.addr1cnt("ICH"));  // 인천
-    addr1map.put("GWD",dao.addr1cnt("GWD"));  // 강원도
-    addr1map.put("CCD",dao.addr1cnt("CCD"));  // 충청도
-    addr1map.put("GSD",dao.addr1cnt("GSD"));  // 경상도
-    addr1map.put("JLD",dao.addr1cnt("JLD"));  // 전라도
-    addr1map.put("JJD",dao.addr1cnt("JJD"));  // 제주도
-    mav.addObject("addr1map", addr1map);
+    // 주소1의 극장개수
+    HashMap<String,Integer> cinemacntmap = new HashMap<String, Integer>();
+    cinemacntmap.put("all",dao.cinemacntFromAddr1("all"));  // 전국
+    cinemacntmap.put("SEO",dao.cinemacntFromAddr1("SEO"));  // 서울
+    cinemacntmap.put("GGD",dao.cinemacntFromAddr1("GGD"));  // 경기도
+    cinemacntmap.put("ICH",dao.cinemacntFromAddr1("ICH"));  // 인천
+    cinemacntmap.put("GWD",dao.cinemacntFromAddr1("GWD"));  // 강원도
+    cinemacntmap.put("CCD",dao.cinemacntFromAddr1("CCD"));  // 충청도
+    cinemacntmap.put("GSD",dao.cinemacntFromAddr1("GSD"));  // 경상도
+    cinemacntmap.put("JLD",dao.cinemacntFromAddr1("JLD"));  // 전라도
+    cinemacntmap.put("JJD",dao.cinemacntFromAddr1("JJD"));  // 제주도
+    mav.addObject("cinemacntmap", cinemacntmap);
     
 		mav.setViewName("ticket/ticketForm");
 		return mav;
@@ -75,20 +75,59 @@ public class TicketCont {
   /* -------------------- 영화선택 부분 AJAX END -------------------- */
 	
   /* -------------------- 극장선택 부분 AJAX END -------------------- */
-	 //cinetab1mainlist
+	//cinetab1mainlist
 	
-	// 상영극장 목록 가져와서 <ul> 목록으로 보내기
-	@RequestMapping(value="/ticket/cinemaSelList.do", method = RequestMethod.POST)
-  public void cinemaSelList(HttpServletRequest req, HttpServletResponse resp, int mCode, String addr1) throws IOException {
+	// 주소1 -> 극장 <ul> 목록
+	// 주소1에 맞는 극장 목록 가져와서 M
+  @RequestMapping(value = "/ticket/cinemaListFromAddr1.do", method = RequestMethod.POST)
+  public void cinemaListFromAddr1(HttpServletRequest req, HttpServletResponse resp, String addr1) throws IOException {
     String msg = "";
-    ArrayList<CinemaDTO> cinemaSellist = new ArrayList<CinemaDTO>();
+    //System.out.println("TicketCont : addr1 : "+addr1);
+
+    ArrayList<CinemaDTO> cinemalist = new ArrayList<CinemaDTO>();
+    if (addr1.equals("all")) {
+      cinemalist = dao.cinemaList();
+    } else {
+      cinemalist = dao.cinemaListFromAddr1(addr1);
+    }//if end
+
+    for (int j = 0; j < cinemalist.size(); j++) {
+      CinemaDTO cinema = cinemalist.get(j);
+      msg += "<ul>";
+      msg += "<li value='" + cinema.getCineCode() + "'>";
+      if (cinema.getBrandName().equals("CGV")) {
+        msg += "CGV";
+      } else if (cinema.getBrandName().equals("LOTTE")) {
+        msg += "롯데시네마";
+      } else if (cinema.getBrandName().equals("MEGABOX")) {
+        msg += "메가박스";
+      } else if (cinema.getBrandName().equals("INDEP")) {
+        msg += "독립영화관";
+      }//if end
+      msg += " - " + cinema.getCineName();
+      msg += "</li>";
+      msg += "</ul>";
+    }//for end
+
+    // 출력
+    resp.setContentType("text/plain; charset=UTF-8");
+    PrintWriter out = resp.getWriter();
+    out.println(msg);
+    out.flush();
+    out.close();
+  }//cinemaListFromAddr1() end
+	
+	// 영화코드, 주소1 -> 극장 <ul> 목록
+	@RequestMapping(value="/ticket/cinemaListFromMovieAddr1.do", method = RequestMethod.POST)
+  public void cinemaListFromMovieAddr1(HttpServletRequest req, HttpServletResponse resp, int mCode, String addr1) throws IOException {
+    String msg = "";
     MovieDTO dto = new MovieDTO();
     dto.setmCode(mCode);
-    dto.setmName(addr1);  // mMame 에 addr1 담아옴
-    cinemaSellist = dao.cinemaSelListFromMovieAddr1(dto);
+    dto.setmName(addr1);  // mName 에 addr1 담아옴
+    ArrayList<CinemaDTO> cinemalist = dao.cinemaListFromMovieAddr1(dto);
     
-    for(int j=0; j<cinemaSellist.size(); j++) {
-      CinemaDTO cinema = cinemaSellist.get(j);
+    for(int j=0; j<cinemalist.size(); j++) {
+      CinemaDTO cinema = cinemalist.get(j);
       msg += "<ul>";
       msg += "<li value='"+cinema.getCineCode()+"'>";
       if(cinema.getBrandName().equals("CGV")) { msg += "CGV"; }
@@ -100,15 +139,24 @@ public class TicketCont {
       msg += "</ul>";
     }//for end
     
+    // TODO 상영극장 개수로 주소1목록 다시 세팅
+    
+    if(cinemalist.size()==0) {  // 상영극장이 없을때 상영극장 없음 메세지 띄움
+      msg += "<div style='margin-top:5px; margin-left:15px; font-size:11pt;'>";
+      msg += "  <strong>상영극장이 없습니다.";
+      msg += "  <br>다른 지역을 선택해 주세요.</strong>";
+      msg += "</div>";
+    }//if end
+    
     // 출력
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
     out.flush();
     out.close();
-  }//cinemaSelList() end
+  }//cinemaListFromMovieAddr1() end
 	
-	// gray 처리할 상영극장 목록 가져와서 cineCode만 |로 정렬
+	// 영화코드, 주소1 -> 극장 목록 cineCode만 | 구분 정렬
   @RequestMapping(value="/ticket/graycinemalist.do", method = RequestMethod.POST)
   public void grayCinemaList(HttpServletRequest req, HttpServletResponse resp, int mCode) throws IOException {
     String msg = "";
@@ -133,39 +181,7 @@ public class TicketCont {
     out.close();
   }//grayCinemaList() end
 	
-	// 주소1이 변경되면 호출
-	@RequestMapping(value="/ticket/addr1change.do", method = RequestMethod.POST)
-  public void addr1change(HttpServletRequest req, HttpServletResponse resp, String addr1) throws IOException {
-    String msg = "";
-    //System.out.println("TicketCont : addr1 : "+addr1);
-    
-    ArrayList<CinemaDTO> cinemalist = new ArrayList<CinemaDTO>();
-    if(addr1.equals("all")) {
-      cinemalist = dao.cinemaList();
-    } else {
-      cinemalist = dao.cinemaListaddr1(addr1);
-    }//if end
-    
-    for(int j=0; j<cinemalist.size(); j++) {
-      CinemaDTO cinema = cinemalist.get(j);
-      msg += "<ul>";
-      msg += "<li value='"+cinema.getCineCode()+"'>";
-      if(cinema.getBrandName().equals("CGV")) { msg += "CGV"; }
-      else if(cinema.getBrandName().equals("LOTTE")) { msg += "롯데시네마"; }
-      else if(cinema.getBrandName().equals("MEGABOX")) { msg += "메가박스"; }
-      else if(cinema.getBrandName().equals("INDEP")) { msg += "독립영화관"; }//if end
-      msg += " - "+cinema.getCineName();
-      msg += "</li>";
-      msg += "</ul>";
-    }//for end
-    
-    // 출력
-    resp.setContentType("text/plain; charset=UTF-8");
-    PrintWriter out = resp.getWriter();
-    out.println(msg);
-    out.flush();
-    out.close();
-  }//addr1change() end
+	
 	
 	/* -------------------- 극장선택 부분 AJAX END -------------------- */
 	

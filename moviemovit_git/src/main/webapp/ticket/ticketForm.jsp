@@ -214,20 +214,20 @@ function buildCalendar() {
           </div>
           <div class="cinema_addr1">
             <a href="#" class="addr1selected">
-              <span>전국(<strong>${addr1map.all}</strong>)</span>
+              <span>전국(<strong>${cinemacntmap.all}</strong>)</span>
               <img src="./img/listbtn.gif" class="addr1selectedbtn">
             </a>
             <div class="addr1list">
               <ul>
-                <li value="all" style='border-bottom: 1px dotted gray;'>전국(<strong>${addr1map.all}</strong>)</li>
-                <li value="SEO">서울(<strong>${addr1map.SEO}</strong>)</li>
-                <li value="GGD">경기도(<strong>${addr1map.GGD}</strong>)</li>
-                <li value="ICH">인천(<strong>${addr1map.ICH}</strong>)</li>
-                <li value="GWD">강원도(<strong>${addr1map.GWD}</strong>)</li>
-                <li value="CCD">충청도(<strong>${addr1map.CCD}</strong>)</li>
-                <li value="GSD">경상도(<strong>${addr1map.GSD}</strong>)</li>
-                <li value="JLD">전라도(<strong>${addr1map.JLD}</strong>)</li>
-                <li value="JJD">제주도(<strong>${addr1map.JJD}</strong>)</li>
+                <li value="all" style='border-bottom: 1px dotted gray;'>전국(<strong>${cinemacntmap.all}</strong>)</li>
+                <li value="SEO">서울(<strong>${cinemacntmap.SEO}</strong>)</li>
+                <li value="GGD">경기도(<strong>${cinemacntmap.GGD}</strong>)</li>
+                <li value="ICH">인천(<strong>${cinemacntmap.ICH}</strong>)</li>
+                <li value="GWD">강원도(<strong>${cinemacntmap.GWD}</strong>)</li>
+                <li value="CCD">충청도(<strong>${cinemacntmap.CCD}</strong>)</li>
+                <li value="GSD">경상도(<strong>${cinemacntmap.GSD}</strong>)</li>
+                <li value="JLD">전라도(<strong>${cinemacntmap.JLD}</strong>)</li>
+                <li value="JJD">제주도(<strong>${cinemacntmap.JJD}</strong>)</li>
               </ul>
             </div>
           </div>
@@ -430,7 +430,7 @@ function buildCalendar() {
   <br>
 </form>
 
-<script src="../js/ticket_script.js?ver=4"></script>
+<script src="../js/ticket_script.js?ver=7"></script>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

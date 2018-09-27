@@ -45,35 +45,30 @@ public class TicketDAO {
     return cinemalist;
   }//cineList() end
   
+  public int cinemacntFromAddr1(String addr1) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    int cinemacnt = mapper.cinemacntFromAddr1(addr1);
+    return cinemacnt;
+  }//cinemacntFromAddr1() end
+
+  public ArrayList<CinemaDTO> cinemaListFromAddr1(String addr1) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<CinemaDTO> cinemalist = mapper.cinemaListFromAddr1(addr1);
+    return cinemalist;
+  }//cinemaListFromAddr1() end
+
+  public ArrayList<CinemaDTO> cinemaListFromMovieAddr1(MovieDTO dto) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<CinemaDTO> cinelist = mapper.cinemaListFromMovieAddr1(dto);
+    return cinelist;
+  }//cinemaListFromMovieAddr1() end
+  
   public ArrayList<CinemaDTO> grayCinemaList(int mCode) {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     ArrayList<CinemaDTO> cinelist = mapper.grayCinemaList(mCode);
     return cinelist;
   }//grayCinemaList() end
   
-  public ArrayList<CinemaDTO> cinemaSelListFromMovieAddr1(MovieDTO dto) {
-    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
-    ArrayList<CinemaDTO> cinelist = mapper.cinemaSelListFromMovieAddr1(dto);
-    return cinelist;
-  }//cinemaSelListFromMovieAddr1() end
-  
-  public int cinemacnt() {
-    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
-    int cinemacnt = mapper.cinemacnt();
-    return cinemacnt;
-  }//cinemacnt() end
-  
-  public int addr1cnt(String addr1) {
-    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
-    int addr1cnt = mapper.addr1cnt(addr1);
-    return addr1cnt;
-  }//addr1cnt() end
-  
-  public ArrayList<CinemaDTO> cinemaListaddr1(String addr1) {
-    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
-    ArrayList<CinemaDTO> cinemalist = mapper.cinemaListaddr1(addr1);
-    return cinemalist;
-  }//cinemaListaddr1() end
   /* ------------------ 예매 : 극장선택 부분 END ------------------ */
   
   
