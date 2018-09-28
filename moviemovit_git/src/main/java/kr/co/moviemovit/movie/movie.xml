@@ -30,13 +30,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list2" resultType="StarDTO">
 	    <![CDATA[
 	        select mt.*, st.star
-            from (SELECT mcode, star
+            from (SELECT mCode, (select avg(star) from starTable) star
                   FROM starTable) st join movieTable mt
             ON mt.mCode = st.mCode
             WHERE st.mCode=#{mCode}
         ]]>
 	</select>
 	
+	<resultMap type="StarDTO" id="StarDTO">
+	    <result column="mCode" property="mCode"/>
+	    <result column="star"  property="star"/>
+    </resultMap>
+
+    <resultMap type="MovieDTO" id="MovieDTO">
+    	<result column="mCode"        property="mCode"/>
+        <result column="poster"       property="poster"/>
+        <result column="mName"        property="mName"/>
+        <result column="genre"        property="genre"/>
+        <result column="screen"       property="screen"/>
+        <result column="age"          property="age"/>
+        <result column="s_e"          property="s_e"/>
+        <result column="country"      property="country"/>
+        <result column="director"     property="director"/>
+        <result column="actor"        property="actor"/>
+        <result column="DD"           property="DD"/>
+        <result column="runningTime"  property="runningTime"/>
+        <result column="s_date"       property="s_date"/>
+        <result column="e_date"       property="e_date"/>
+    	<collection property="mCode" resultMap="StarDTO"/>
+    </resultMap>
+
+    <select id="starlist" parameterType="MovieDTO" resultType="MovieDTO">
+       <![CDATA[
+       	  select mt.mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, s_date, e_date, avg(star) as runningTime 
+          from movieTable mt join starTable st
+          ON mt.mCode = st.mCode
+          GROUP BY mt.mCode
+       ]]>
+    </select>
+
 	
 	<select id="read" parameterType="MovieDTO" resultType="MovieDTO">
 		<![CDATA[
@@ -80,11 +112,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       ]]>
     </select>
     
-    <select id="avgstar" resultType="int" parameterType="StarDTO">
+    <select id="avgstar" resultType="int">
       <![CDATA[
 		SELECT (select avg(star) from starTable) AS avgstar
 	    FROM starTable
-	    WHERE mCode=#{mCode}
+	    
 	    GROUP BY mCode
       ]]>    
     </select>

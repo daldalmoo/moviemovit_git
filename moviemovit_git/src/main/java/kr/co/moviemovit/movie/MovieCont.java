@@ -107,13 +107,9 @@ public class MovieCont {
 	 public ModelAndView list(MovieDTO dto, StarDTO sdto) {
 	     ModelAndView mav = new ModelAndView();
 	     mav.setViewName("movie/movieList");
-	     ArrayList<MovieDTO> list = dao.list();
-	     ArrayList<StarDTO> list2 = dao.list2();
-	     mav.addObject("list", list);
-	     mav.addObject("list2", list2);
-	     
-	     //mav.addObject("sdto", sdto);
-	     //mav.addObject("avgstar", avgstar);
+	     ArrayList<MovieDTO> starlist = dao.starlist(dto);
+	     mav.addObject("starlist", starlist);
+	     System.out.println(dto.getRunningTime());
 	     return mav;
 	 }//list() end
 	 

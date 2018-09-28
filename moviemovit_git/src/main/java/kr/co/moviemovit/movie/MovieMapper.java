@@ -12,7 +12,7 @@ public interface MovieMapper {
 	
 	public ArrayList<MovieDTO> list();
 	
-	public ArrayList<StarDTO> list2();
+	//public ArrayList<StarDTO> list2();
 	
 	public MovieDTO read(MovieDTO dto);
 	
@@ -24,5 +24,7 @@ public interface MovieMapper {
 	
 	public ArrayList<PeopleDTO> peopleNameList2(String peoName);
 	
-	public StarDTO avgstar(int star);
+	public int avgstar();
+	
+	public ArrayList<MovieDTO> starlist(MovieDTO dto);
 }//interface end

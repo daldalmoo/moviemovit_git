@@ -226,7 +226,7 @@ table tr:nth-child(2n+1) {
    <div>
      <div class="box-image" >
        <span class="thumb-image">
-         <img class="mimg" src="../movie/storage/${dto.poster }" width="400" height="800"/>
+         <img class="mimg" src="../movie/img_poster/${dto.poster }" width="400" height="800"/>
        </span>
      </div>
    

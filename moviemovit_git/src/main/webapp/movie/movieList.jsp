@@ -10,10 +10,18 @@
   text-align: center;
 }
 
+.simg {
+  font-size: 0;
+  text-align: center;
+  width: 100px;
+  
+  
+}
+
 .box-image {
   display: inline-block;
   width:250px;
-  height: 300px;
+  height: 350px;
   background-color: white;
   border: 8px solid #3366cc; 
   box-sizing: content-box;
@@ -195,40 +203,58 @@ table tr:nth-child(2n+1) {
    <div class="header">MOVIE LIST</div>
  </div>
    
-   <c:forEach var="sdto" items="${list2 }">
+   <c:forEach var="dto" items="${starlist }">
    
    <div class="main">
    <div class="box-image" >
      <span class="thumb-image">
-     <a href="./movieRead.do?mCode=${sdto.mCode }">
-       <img class="mimg" src="./img_poster/${sdto.poster }" width="400" height="800" />
+     <a href="./movieRead.do?mCode=${dto.mCode }">
+       <img class="mimg" src="./img_poster/${dto.poster }" width="400" height="800" />
      </a>
      </span>
-  <br><br>
-    <strong class="title">${sdto.mName }</strong><br>
+      <br><br>
+    <strong class="title">${dto.mName }</strong><br>
      <span>
        <strong>
-       ${sdto.s_date } 개봉<br> 
-       ${sdto.screen } <br>
-       ${sdto.star }
+       ${dto.s_date } 개봉<br> 
+       ${dto.screen } <br>
+       관람등급 ${dto.age} <br>
+       별점: ${dto.runningTime }
+       <c:if test="${dto.runningTime==0 }">
+           <img class="simg" src="../star/img_star/star0.png"> 
+       </c:if>
+       <c:if test="${dto.runningTime==1 }">
+           <img class="simg" src="../star/img_star/star1.png"> 
+       </c:if>
+       <c:if test="${dto.runningTime==2 }">
+           <img class="simg" src="../star/img_star/star2.png"> 
+       </c:if>
+       <c:if test="${dto.runningTime==3 }">
+           <img class="simg" src="../star/img_star/star3.png"> 
+       </c:if>
+       <c:if test="${dto.runningTime==4 }">
+           <img class="simg" src="../star/img_star/star4.png"> 
+       </c:if>
+       <c:if test="${dto.runningTime==5 }">
+           <img class="simg" src="../star/img_star/star5.png">
+       </c:if>
+       <br>
        </strong>
-     </span><br>
-     
+     </span>
      <input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />    
     </div>
     
    </div>
-  
-  
-   </c:forEach>  
+   </c:forEach>
    
+ <%--   <c:forEach var="sdto" items="${list2 }">
+     ${sdto.star }
+   </c:forEach> --%>
    
-   <br><br><br>
-   <input class="cbp-mc-button" type="button" value="영화등록" onclick="location.href='./create.do'"/>  
-   
-   
-    
-	
+   <!-- 하단버튼 -->
+   <div class="cbp-mc-submit-wrap">
+     <input class="cbp-mc-button" type="button" value="영화등록" onclick="location.href='./create.do'"/>  
+   </div>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

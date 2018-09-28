@@ -34,12 +34,12 @@ public class MovieDAO {
 	    return list;
 	}//list() end
 	
-	public ArrayList<StarDTO> list2() {
+	/*public ArrayList<StarDTO> list2() {
 	    MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
 	    ArrayList<StarDTO> list2 = mapper.list2();
 	    return list2;
 	}//list() end
-	
+*/	
 	public MovieDTO read(MovieDTO dto) {
 		MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
 	    dto = mapper.read(dto);
@@ -70,10 +70,16 @@ public class MovieDAO {
         return peoplelist2;
     }//peopleNameList() end
 	
-	public StarDTO avgstar(int star) {
+	public int avgstar() {
 		MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
-		StarDTO sdto = mapper.avgstar(star);
-		return sdto;
+		int avgstar = mapper.avgstar();
+		return avgstar;
 	}//star() end
+	
+	public ArrayList<MovieDTO> starlist(MovieDTO dto) {
+		MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
+		ArrayList<MovieDTO> starlist = mapper.starlist(dto);
+		return starlist;
+	}//starlist() end
 	
 }//class end
