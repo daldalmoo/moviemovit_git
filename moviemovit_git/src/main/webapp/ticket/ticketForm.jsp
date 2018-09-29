@@ -4,7 +4,7 @@
 <%@ include file="../header1.jsp"%>
 
 <%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
-<link rel="stylesheet" href="../css/ticket_style.css?ver=3" type="text/css" />
+<link rel="stylesheet" href="../css/ticket_style.css?ver=5" type="text/css" />
 
 
 <%@ include file="../header2.jsp"%>
@@ -425,7 +425,7 @@ function buildCalendar() {
   <br>
 </form>
 
-<script src="../js/ticket_script.js?ver=7" charset="utf-8"></script>
+<script src="../js/ticket_script.js?ver=9" charset="utf-8"></script>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+/*********** 예매 view 페이지 css ***********/
+/********* 좌석선택 테이블 형태로 *********************/
+#seatArea {
+  border-collapse: collapse;
+  border: 1px solid #000;
+  width: 90%;
+  height: 700px;
+  margin: auto;
+}
+/*상단 타이틀*/
+#seatArea th {
+  vertical-align: text-top;
+  text-align: center;
+  background: linear-gradient(to top, #3b3d58 0%, #5d607d 100%);
+  font-size: 12pt;
+  font-weight: bold;
+  color: white;
+  height: 3%;
+  width: 25%;
+  border: 1px solid #000;
+}
+
+#seatArea>tbody>tr>td {
+  border: 1px solid #000;
+}
+/*********** 좌석선택 **************/
+#seatArea .seat_title {
+  text-align: left;
+  padding-left: 10px;
+}
+.front_screen {
+  margin-left: 100px;
+  vertical-align:middle;
+}
+.seatmap {
+  margin-left:40px;
+  padding-top: 50px;
+}
+.seatNum {
+  display: inline-block;
+  width: 30px;
+  height: 27px;
+  text-align: center;
+  padding-top: 3px;
+  color: black;
+}
+.seatline {
+  display: inline-block;
+  width: 30px;
+  height: 27px;
+  color: #d0d0d8;
+  text-align: center;
+  padding-top: 3px;
+  cursor: pointer;
+  background: url('../ticket/img/selectAfter_people.PNG');
+}
+.seatline.on {
+  cursor: pointer;
+  background: url('../ticket/img/selectSeat.PNG');
+  font-weight: bold;
+  color:black;
+}
+.seat_info_img {
+  margin-top: 20px;
+  margin-left:430px;
+  width:100px;
+  height: 50px;
+}
+/*********** 영화정보 **************/
+.section_result {
+  display: inline-block;
+  position: relative;
+}
+.section_result #btn_reset {;
+  margin:0 0 20px 0;
+}
+.thumb_poster .movie_poster { /*영화 포스터*/
+  width: 85%;
+  height: 80%;
+  margin: auto;
+}
+.section_result h3 { /*영화 제목*/
+  color: white;
+  font-size: 18px;
+  /* line-height: 21px; */
+  margin: 20px 0 20px 0;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+.section_result dt {
+  margin-left: 50px;
+  float: left;
+  line-height: 2;
+}
+.section_result dd {
+  line-height: 2;
+}
+.section_result .btn_area a {
+  display: block;
+  background: url("../ticket/img/btn_reserve.PNG");
+}
