@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			]]>	
 	</insert>
 	
-	<select id="list" resultType="MovieDTO">
+	<select id="list" parameterType="MovieDTO" resultType="MovieDTO">
 		<![CDATA[
 			SELECT mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date
 			FROM movieTable
@@ -37,29 +37,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ]]>
 	</select>
 	
-	<resultMap type="StarDTO" id="StarDTO">
-	    <result column="mCode" property="mCode"/>
-	    <result column="star"  property="star"/>
-    </resultMap>
-
-    <resultMap type="MovieDTO" id="MovieDTO">
-    	<result column="mCode"        property="mCode"/>
-        <result column="poster"       property="poster"/>
-        <result column="mName"        property="mName"/>
-        <result column="genre"        property="genre"/>
-        <result column="screen"       property="screen"/>
-        <result column="age"          property="age"/>
-        <result column="s_e"          property="s_e"/>
-        <result column="country"      property="country"/>
-        <result column="director"     property="director"/>
-        <result column="actor"        property="actor"/>
-        <result column="DD"           property="DD"/>
-        <result column="runningTime"  property="runningTime"/>
-        <result column="s_date"       property="s_date"/>
-        <result column="e_date"       property="e_date"/>
-    	<collection property="mCode" resultMap="StarDTO"/>
-    </resultMap>
-
     <select id="starlist" parameterType="MovieDTO" resultType="MovieDTO">
        <![CDATA[
        	  select mt.mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, s_date, e_date, avg(star) as runningTime 

@@ -26,18 +26,19 @@ SELECT mCode, (select avg(star) from starTable where mCode=3) as avgstar
 FROM starTable
 where 
 
-
 SELECT (select avg(star) from starTable) AS avgstar
 FROM starTable
 WHERE mCode=4
 GROUP BY mCode
             
-    
-          
 select mt.mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, s_date, e_date, avg(star) as runningTime 
-          from movieTable mt join starTable st
-          ON mt.mCode = st.mCode
-          GROUP BY mt.mCode
+from movieTable mt join starTable st
+ON mt.mCode = st.mCode
+GROUP BY mt.mCode
+
+          
+          
+          
           
           
           

@@ -64,11 +64,6 @@ div#toplist {
 }
 </style>
 
-<%
-  String cineCode = request.getParameter("cineCode");
-			request.setAttribute("cineCode", cineCode);
-%>
-
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon" href="images/fav-icon.png" />
@@ -121,125 +116,51 @@ div#toplist {
 </script>
 <!----//End-dropdown--->
 <!---//End-click-drop-down-menu----->
-
-
-	<!-- 카테고리 시작 -->
-	<div class="container-fluid">
-
-		<div class="row" id="toplist">
-			<div class="col-xs-6 col-md-4">지역</div>
-			<div class="col-md-4">브랜드</div>
-			<div class="col-xs-6 col-md-4">검색</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-6 col-md-4">
-				<div class="ex2">
-					<div class="list-group">
-						<a class="list-group-item active" id="0">전국</a> <a
-							class="list-group-item" id="SEO">서울</a> <a
-							class="list-group-item" id="GGD">경기</a> <a
-							class="list-group-item" id="ICH">인천</a> <a
-							class="list-group-item" id="GWD">강원</a> <a
-							class="list-group-item" id="CCD">충청</a> <a
-							class="list-group-item" id="GSD">경상</a> <a
-							class="list-group-item" id="JLD">전라</a> <a
-							class="list-group-item" id="JJD">제주</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="brand_list">
-					<!-- 영화관 목록 출력 -->
-					지역을 선택해 주세요
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-4">
-			<br><br>
-				<div class="searchbar">
-                <br><br>
-					<form id="form_search" method="get"
-						action="/moviemovit/review/search.do">
-						<select id="sch_type" name="sch_type">
-							<option value="cineName">영화관이름</option>
-							<input type="text" id="sch_value" name="sch_value"
-							value="${mapSearch.sch_value}" />
-							<button class="cbp-mc-button"  type="button" onclick="search();">검색</button>
-							</select>
-					</form>
-
-					<!-- 영화관 등록 버튼 -->
-					<br>
-					<br>
-					<input class="cbp-mc-button" type="button" value="영화관 등록"
-						onclick="location.href='cinemaForm.do'" /> <br>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
 	<!---start-content---->
 	<div class="wholeList">
 		<div class="content">
 			<div class="wrap">
 				<div id="main" role="main">
-					<ul id="tiles">
+					<ul id="titles">
 						<!-- These are our grid blocks -->
-						<c:forEach var="dto" items="${list }">
-							<li><a href="./cinemaRead.do?cineCode=${dto.cineCode }">
-									<img src="img/${dto.logoImg}">
+						<c:forEach var="dto" items="${starlist }">
+							<li><a href="./movieRead.do?mCode=${dto.mCode }">
+									<img class="mimg" src="./img_poster/${dto.poster }" width="400" height="800" />
 							</a>
 								<div class="post-info">
 									<div class="post-basic-info">
-										<h3>${dto.cineName }</h3>
-										<span> <c:choose>
-												<c:when test="${dto.brandName == 'CGV'}">
-					               CGV
-					               </c:when>
-												<c:when test="${dto.brandName == 'LOTTE'}">
-					               롯데시네마
-					               </c:when>
-												<c:when test="${dto.brandName == 'INDEP'}">
-					               독립영화관
-					               </c:when>
-												<c:when test="${dto.brandName == 'MEGABOX'}">
-					               메가박스
-					               </c:when>
-											</c:choose></span>
-										<p>${dto.addr2}
-											${dto.addr3} <br> ${dto.tel}
+										
+										<p>
+										${dto.mName } <br>
+										${dto.s_date}개봉 <br>
+										${dto.screen} <br>
+                                        ${dto.age}세 <br>
 										</p>
 									</div>
 									<div class="post-info-rate-share">
 										<c:choose>
-											<c:when test="${dto.startotal == 0}">
-												<img src="./img/star0.png" width="150">
+											<c:when test="${dto.runningTime == 0}">
+												<img src="./img_star/star0.png" width="150">
 											</c:when>
-											<c:when test="${dto.startotal < 3 }">
-												<img src="./img/star1.png" width="150">
+											<c:when test="${dto.runningTime == 1}">
+												<img src="./img_star/star1.png" width="150">
 											</c:when>
-											<c:when test="${dto.startotal < 5}">
-												<img src="./img/star2.png" width="150">
+											<c:when test="${dto.runningTime == 2}">
+												<img src="./img_star/star2.png" width="150">
 											</c:when>
-											<c:when test="${dto.startotal < 7}">
-												<img src="./img/star3.png" width="150">
+											<c:when test="${dto.runningTime == 3}">
+												<img src="./img_star/star3.png" width="150">
 											</c:when>
-											<c:when test="${dto.startotal < 9}">
-												<img src="./img/star4.png" width="150">
+											<c:when test="${dto.runningTime == 4}">
+												<img src="./img_star/star4.png" width="150">
 											</c:when>
-											<c:when test="${dto.startotal < 11} ">
-												<img src="./img/star5.png" width="150">
-											</c:when>
-											<c:when test="${dto.startotal eq '' || empty dto.startotal }">
-												<img src="./img/star0.png" width="150">
+											<c:when test="${dto.runningTime == 5} ">
+												<img src="./img_star/star5.png" width="150">
 											</c:when>
 										</c:choose>
 										<div class="post-share">
-											<input class="cbp-mc-button" type="button" value="상영관"
-												onclick="location.href='./roomList.do?cineCode=${dto.cineCode }'" />
-											<input class="cbp-mc-button" type="button" value="수정"
-												onclick="location.href='./cinemaUpdate.do?cineCode=${dto.cineCode }'" />
-											<input class="cbp-mc-button" type="button" value="삭제"
-												onclick="location.href='./cinemaDelete.do?cineCode=${dto.cineCode }'" />
+											<input class="cbp-mc-button" type="button" value="예매하기"
+												onclick="#" />
 										</div>
 										<div class="clear"></div>
 									</div>

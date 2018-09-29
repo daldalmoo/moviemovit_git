@@ -10,7 +10,7 @@ public interface MovieMapper {
 	
 	public int create(MovieDTO dto);
 	
-	public ArrayList<MovieDTO> list();
+	public ArrayList<MovieDTO> list(MovieDTO dto);
 	
 	//public ArrayList<StarDTO> list2();
 	
