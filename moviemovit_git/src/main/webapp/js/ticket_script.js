@@ -221,16 +221,18 @@ $(".cinemainfo .cinema_logo").click(function() {
 
 /* --------------- 인원선택 AJAX --------------------- */
 var peocnt = 0; // 인원
-var str = "" // 영화정보 인원선택
 
 var adutemp = 0; // 같은유형에서 변경할때 임시변수
 var youtemp = 0;
 var sentemp = 0;
 var kidtemp = 0;
 
+var adustr = "";
+var youstr = "";
+var senstr = "";
+var kidstr = "";
 /* 인원선택할 때 str을 각 유형별로 따로줘야할듯 */
 $(".adult").click(function() {
-  var adustr = "";
   adutype = $(this).attr('value').trim();
   aducnt = $(this).text();
   // String to Number
@@ -253,49 +255,40 @@ $(".adult").click(function() {
 
       // 선택된 인원이랑 유형 append하기 ,로 엮기
       var infotxt = $("#select_people_txt").text();
-      alert(infotxt);
       if (aducnt != 0) {
     	  if ((infotxt.indexOf('-') != -1)) { /*최초클릭*/
     		  adustr = adutype + "\u00A0" + aducnt; // \u00A0 띄어쓰기
-	          str += adustr;
 	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(str);
+	          $("#select_people_txt").text(adustr);
           } else if(infotxt.indexOf('성인') == -1){ /*다른 유형 추가*/
     		  alert("다른형");
-			  adustr = "," + adutype + "\u00A0" + aducnt;
-			  alert("adustr , : " + str)
-			  str += adustr;
-			  alert("str += adustr : " + str);
+			  adustr = "\u00A0" + adutype + "\u00A0" + aducnt;
+			  infotxt += adustr;
 			  $("#select_people_txt").empty();
-			  $("#select_people_txt").text(adustr);
-    	  } else if((adutemp != aducnt) && (infotxt.indexOf('성인') != -1) && (infotxt.indexOf(',') != -1)) { /*유형 변경*/
+			  $("#select_people_txt").text(infotxt);
+    	  } else if((adutemp != aducnt) && (infotxt.indexOf('성인') != -1)) { /*유형 변경*/
     		  alert("유형 변경");
-			  adustr = "," + adutype + "\u00A0" + aducnt;
-			  alert("adustr , : " + str)
-			  str += adustr;
-			  alert("str += adustr : " + str);
+    		  adustr = "";
+			  adustr = "\u00A0" + adutype + "\u00A0" + aducnt;
 			  $("#select_people_txt").empty();
-			  $("#select_people_txt").text(str);  
+			  $("#select_people_txt").append(youstr).append(senstr).append(kidstr).append(adustr);  
     	  } else if((adutemp != aducnt) && (infotxt.indexOf('성인') != -1)) { /*같은유형 변경*/
         	  alert("같은유형");
         	  adustr = adutype + "\u00A0" + aducnt;
-        	  str = adustr;
 	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(str);
+	          $("#select_people_txt").text(adustr);
           }
-          adutemp = aducnt;
       } else {
-	      aducnt *= 0;  
-	      adustr = "0";
-	      str = audstr;
-	      $("#select_people_txt").text(str);
+    	  adustr = "";
+    	  $("#select_people_txt").empty();
+    	  $("#select_people_txt").append(youstr).append(senstr).append(kidstr);
       }
+      adutemp = aducnt;
     }// peocnt>5 if end
   }//hasClass false if end
 });// click() end
 
 $(".youth").click(function() {
-  var youstr = "";
   youtype = $(this).attr('value').trim();
   youcnt = $(this).text();
   // String to Number
@@ -306,7 +299,7 @@ $(".youth").click(function() {
     // 같은유형에서 값변경할 때 기존의값에서 차감
     peocnt -= youtemp;
     peocnt += youcnt;
-
+    
     if (peocnt > 5) {
       peocnt -= youcnt;
       $(this).removeClass("on");
@@ -318,49 +311,37 @@ $(".youth").click(function() {
 
       // 선택된 인원이랑 유형 append하기 ,로 엮기
       var infotxt = $("#select_people_txt").text();
-      alert(infotxt);
       if (youcnt != 0) {
     	  if ((infotxt.indexOf('-') != -1)) { /*최초클릭*/
     		  youstr = youtype + "\u00A0" + youcnt; // \u00A0 띄어쓰기
-	          str += youstr;
 	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(str);
+	          $("#select_people_txt").text(youstr);
           } else if(infotxt.indexOf('청소년') == -1){ /*다른 유형 추가*/
-    		  alert("다른형");
-			  youstr = "," + youtype + "\u00A0" + youcnt;
-			  alert("youstr , : " + youstr)
-			  str += youstr;
-			  alert("str += youstr : " + str);
+			  youstr = "\u00A0" + youtype + "\u00A0" + youcnt;
+			  infotxt += youstr;
 			  $("#select_people_txt").empty();
-			  $("#select_people_txt").text(str);
-    	  } else if((youtemp != youcnt) && (infotxt.indexOf('청소년') != -1) && (infotxt.indexOf(',') != -1)) { /*유형 변경*/
-    		  alert("유형 변경");
-			  youstr = "," + youtype + "\u00A0" + youcnt;
-			  alert("youstr , : " + youstr)
-			  str += youstr;
-			  alert("str += youstr : " + str);
+			  $("#select_people_txt").text(infotxt);
+    	  } else if((youtemp != youcnt) && (infotxt.indexOf('청소년') != -1)) { /*유형 변경*/
+    		  youstr = "";
+			  youstr = "\u00A0" + youtype + "\u00A0" + youcnt;
 			  $("#select_people_txt").empty();
-			  $("#select_people_txt").text(youstr);  
+			  $("#select_people_txt").append(adustr).append(senstr).append(kidstr).append(youstr);
     	  } else if((youtemp != youcnt) && (infotxt.indexOf('청소년') != -1)) { /*같은유형 변경*/
-        	  alert("같은유형");
         	  youstr = youtype + "\u00A0" + youcnt;
-        	  str = youstr;
 	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(str);
+	          $("#select_people_txt").text(youstr);
           }
-          youtemp = youcnt;
       } else {
-    	  youcnt *= 0;
-    	  youstr = "0";
-    	  str = youstr;
-    	  $("#select_people_txt").text(str);
+    	  youstr = "";
+    	  $("#select_people_txt").empty();
+    	  $("#select_people_txt").append(adustr).append(senstr).append(kidstr);
       }
+      youtemp = youcnt;
     }// peocnt>5 if end
   }//hasClass false if end
 });// click() end
 
 $(".senior").click(function() {
-  var senstr = "";
   sentype = $(this).attr('value').trim();
   sencnt = $(this).text();
   // String to Number
@@ -383,49 +364,37 @@ $(".senior").click(function() {
 
       // 선택된 인원이랑 유형 append하기 ,로 엮기
       var infotxt = $("#select_people_txt").text();
-      alert(infotxt);
       if (sencnt != 0) {
     	  if ((infotxt.indexOf('-') != -1)) { /*최초클릭*/
     		  senstr = sentype + "\u00A0" + sencnt; // \u00A0 띄어쓰기
-	          str += senstr;
 	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(str);
+	          $("#select_people_txt").text(senstr);
           } else if(infotxt.indexOf('우대') == -1){ /*다른 유형 추가*/
-    		  alert("다른형");
-			  senstr = sentype + "\u00A0" + sencnt + ",";
-			  alert("senstr , : " + senstr)
-			  str += senstr;
-			  alert("str += senstr : " + str);
+			  senstr = "\u00A0" + sentype + "\u00A0" + sencnt;
+			  infotxt += senstr;
 			  $("#select_people_txt").empty();
-			  $("#select_people_txt").text(str);
-    	  } else if((sentemp != sencnt) && (infotxt.indexOf('우대') != -1) && (infotxt.indexOf(',') != -1)) { /*유형 변경*/
-    		  alert("유형 변경");
-			  senstr = sentype + "\u00A0" + sencnt + ",";
-			  alert("senstr , : " + senstr)
-			  str += senstr;
-			  alert("str += senstr : " + str);
+			  $("#select_people_txt").text(infotxt);
+    	  } else if((sentemp != sencnt) && (infotxt.indexOf('우대') != -1) ) { /*유형 변경*/
+    		  senstr = "";
+			  senstr = "\u00A0" + sentype + "\u00A0" + sencnt;
 			  $("#select_people_txt").empty();
-			  $("#select_people_txt").text(senstr);  
+			  $("#select_people_txt").append(adustr).append(youstr).append(kidstr).append(senstr); 
     	  } else if((sentemp != sencnt) && (infotxt.indexOf('우대') != -1)) { /*같은유형 변경*/
-        	  alert("같은유형");
-        	  senstr = sentype + "\u00A0" + sentcnt;
-        	  str = senstr;
+        	  senstr = sentype + "\u00A0" + sencnt;
 	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(str);
+	          $("#select_people_txt").text(senstr);
           }
-    	  sentemp = sentcnt;
       } else {
-    	  sencnt *= 0;
-    	  senstr = "0";
-    	  str = senstr;
-    	  $("#select_people_txt").text(str);
+    	  senstr = "";
+    	  $("#select_people_txt").empty();
+    	  $("#select_people_txt").append(adustr).append(youstr).append(kidstr);
       }
+	  sentemp = sencnt;
     }// peocnt>5 if end
   }//hasClass false if end
 });// click() end
 
 $(".kid").click(function() {
-  var kidstr = "";
   kidtype = $(this).attr('value').trim();
   kidcnt = $(this).text();
   // String to Number
@@ -448,43 +417,32 @@ $(".kid").click(function() {
 
       // 선택된 인원이랑 유형 append하기 ,로 엮기
       var infotxt = $("#select_people_txt").text();
-      alert(infotxt);
       if (kidcnt != 0) {
     	  if ((infotxt.indexOf('-') != -1)) { /*최초클릭*/
     		  kidstr = kidtype + "\u00A0" + kidcnt; // \u00A0 띄어쓰기
-	          str += kidstr;
 	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(str);
+	          $("#select_people_txt").text(kidstr);
           } else if(infotxt.indexOf('어린이') == -1){ /*다른 유형 추가*/
-    		  alert("다른형");
-    		  kidstr = "," + youtype + "\u00A0" + kidcnt;
-			  alert("kidstr , : " + kidstr)
-			  str += kidstr;
-			  alert("str += kidstr : " + str);
+    		  kidstr = "\u00A0" + kidtype + "\u00A0" + kidcnt;
+			  infotxt += kidstr
 			  $("#select_people_txt").empty();
-			  $("#select_people_txt").text(str);
-    	  } else if((kidtemp != kidcnt) && (infotxt.indexOf('어린이') != -1) && (infotxt.indexOf(',') != -1)) { /*유형 변경*/
-    		  alert("유형 변경");
-    		  kidstr = "," + youtype + "\u00A0" + kidcnt;
-			  alert("kidstr , : " + kidstr)
-			  str += kidstr;
-			  alert("str += kidstr : " + str);
+			  $("#select_people_txt").text(infotxt);
+    	  } else if((kidtemp != kidcnt) && (infotxt.indexOf('어린이') != -1)) { /*유형 변경*/
+    		  kidstr = "";
+    		  kidstr = "\u00A0" + kidtype + "\u00A0" + kidcnt;
 			  $("#select_people_txt").empty();
-			  $("#select_people_txt").text(kidstr);  
+			  $("#select_people_txt").append(adustr).append(youstr).append(senstr).append(kidstr);  
     	  } else if((kidtemp != kidcnt) && (infotxt.indexOf('어린이') != -1)) { /*같은유형 변경*/
-        	  alert("같은유형");
         	  kidstr = kidtype + "\u00A0" + kidcnt;
-        	  str = kidstr;
 	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(str);
+	          $("#select_people_txt").text(kidstr);
           }
-          kidtemp = kidcnt;
       } else {
-    	  kidcnt *= 0;
-    	  kidstr = "0";
-    	  str = kidstr;
-    	  $("#select_people_txt").text(str);
+    	  kidstr = "";
+    	  $("#select_people_txt").empty();
+    	  $("#select_people_txt").append(adustr).append(youstr).append(senstr);
       }
+      kidtemp = kidcnt;
     }// peocnt>5 if end
   }//hasClass false if end
 });//click() end
