@@ -280,14 +280,14 @@ function buildCalendar() {
               <span class="date">날짜</span>
             </dt>
             <dd>
-              <span id="select_date_txt">yyyy.mm.dd(요일) 시:분</span>
+              <span id="wdate">yyyy.mm.dd(요일) 시:분</span>
             </dd>
 
             <dt>
               <span class="people">인원</span>
             </dt>
             <dd>
-              <span id="select_people_txt">-</span>
+              <span id="auditType">-</span>
             </dd>
 
             <dt>
@@ -425,7 +425,7 @@ function buildCalendar() {
   <br>
 </form>
 
-<script src="../js/ticket_script.js?ver=9" charset="utf-8"></script>
+<script src="../js/ticket_script.js?ver=10" charset="utf-8"></script>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

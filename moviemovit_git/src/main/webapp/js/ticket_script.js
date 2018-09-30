@@ -231,7 +231,13 @@ var adustr = "";
 var youstr = "";
 var senstr = "";
 var kidstr = "";
-/* 인원선택할 때 str을 각 유형별로 따로줘야할듯 */
+
+var price = 0;
+var aduprice = 0;
+var youprice = 0;
+var senprice = 0;
+var kidprice = 0;
+
 $(".adult").click(function() {
   adutype = $(this).attr('value').trim();
   aducnt = $(this).text();
@@ -254,38 +260,44 @@ $(".adult").click(function() {
       $(this).addClass("on");
 
       // 선택된 인원이랑 유형 append하기 ,로 엮기
-      var infotxt = $("#select_people_txt").text();
+      var infotxt = $("#auditType").text();
       if (aducnt != 0) {
     	  if ((infotxt.indexOf('-') != -1)) { /*최초클릭*/
     		  adustr = adutype + "\u00A0" + aducnt; // \u00A0 띄어쓰기
-	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(adustr);
+	          $("#auditType").empty();
+	          $("#auditType").text(adustr);
           } else if(infotxt.indexOf('성인') == -1){ /*다른 유형 추가*/
-    		  alert("다른형");
+    		  //alert("다른형");
 			  adustr = "\u00A0" + adutype + "\u00A0" + aducnt;
 			  infotxt += adustr;
-			  $("#select_people_txt").empty();
-			  $("#select_people_txt").text(infotxt);
+			  $("#auditType").empty();
+			  $("#auditType").text(infotxt);
     	  } else if((adutemp != aducnt) && (infotxt.indexOf('성인') != -1)) { /*유형 변경*/
-    		  alert("유형 변경");
+    		  //alert("유형 변경");
     		  adustr = "";
+    		  price -= aduprice;
 			  adustr = "\u00A0" + adutype + "\u00A0" + aducnt;
-			  $("#select_people_txt").empty();
-			  $("#select_people_txt").append(youstr).append(senstr).append(kidstr).append(adustr);  
+			  $("#auditType").empty();
+			  $("#auditType").append(youstr).append(senstr).append(kidstr).append(adustr);  
     	  } else if((adutemp != aducnt) && (infotxt.indexOf('성인') != -1)) { /*같은유형 변경*/
-        	  alert("같은유형");
+        	  //alert("같은유형");
         	  adustr = adutype + "\u00A0" + aducnt;
-	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(adustr);
+	          $("#auditType").empty();
+	          $("#auditType").text(adustr);
           }
       } else {
     	  adustr = "";
-    	  $("#select_people_txt").empty();
-    	  $("#select_people_txt").append(youstr).append(senstr).append(kidstr);
+    	  price -= aduprice;
+    	  $("#auditType").empty();
+    	  $("#auditType").append(youstr).append(senstr).append(kidstr);
       }
       adutemp = aducnt;
     }// peocnt>5 if end
+    aduprice = 10000 * aducnt;
   }//hasClass false if end
+  price += aduprice;
+  $("#total").empty();
+  $("#total").text(price);
 });// click() end
 
 $(".youth").click(function() {
@@ -310,35 +322,41 @@ $(".youth").click(function() {
       $(this).addClass("on");
 
       // 선택된 인원이랑 유형 append하기 ,로 엮기
-      var infotxt = $("#select_people_txt").text();
+      var infotxt = $("#auditType").text();
       if (youcnt != 0) {
     	  if ((infotxt.indexOf('-') != -1)) { /*최초클릭*/
     		  youstr = youtype + "\u00A0" + youcnt; // \u00A0 띄어쓰기
-	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(youstr);
+	          $("#auditType").empty();
+	          $("#auditType").text(youstr);
           } else if(infotxt.indexOf('청소년') == -1){ /*다른 유형 추가*/
 			  youstr = "\u00A0" + youtype + "\u00A0" + youcnt;
 			  infotxt += youstr;
-			  $("#select_people_txt").empty();
-			  $("#select_people_txt").text(infotxt);
+			  $("#auditType").empty();
+			  $("#auditType").text(infotxt);
     	  } else if((youtemp != youcnt) && (infotxt.indexOf('청소년') != -1)) { /*유형 변경*/
     		  youstr = "";
+    		  price -= youprice;
 			  youstr = "\u00A0" + youtype + "\u00A0" + youcnt;
-			  $("#select_people_txt").empty();
-			  $("#select_people_txt").append(adustr).append(senstr).append(kidstr).append(youstr);
+			  $("#auditType").empty();
+			  $("#auditType").append(adustr).append(senstr).append(kidstr).append(youstr);
     	  } else if((youtemp != youcnt) && (infotxt.indexOf('청소년') != -1)) { /*같은유형 변경*/
         	  youstr = youtype + "\u00A0" + youcnt;
-	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(youstr);
+	          $("#auditType").empty();
+	          $("#auditType").text(youstr);
           }
       } else {
     	  youstr = "";
-    	  $("#select_people_txt").empty();
-    	  $("#select_people_txt").append(adustr).append(senstr).append(kidstr);
+    	  price -= youprice;
+    	  $("#auditType").empty();
+    	  $("#auditType").append(adustr).append(senstr).append(kidstr);
       }
       youtemp = youcnt;
     }// peocnt>5 if end
+    youprice = 8000 * youcnt;
   }//hasClass false if end
+  price += youprice;
+  $("#total").empty();
+  $("#total").text(price);
 });// click() end
 
 $(".senior").click(function() {
@@ -363,35 +381,41 @@ $(".senior").click(function() {
       $(this).addClass("on");
 
       // 선택된 인원이랑 유형 append하기 ,로 엮기
-      var infotxt = $("#select_people_txt").text();
+      var infotxt = $("#auditType").text();
       if (sencnt != 0) {
     	  if ((infotxt.indexOf('-') != -1)) { /*최초클릭*/
     		  senstr = sentype + "\u00A0" + sencnt; // \u00A0 띄어쓰기
-	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(senstr);
+	          $("#auditType").empty();
+	          $("#auditType").text(senstr);
           } else if(infotxt.indexOf('우대') == -1){ /*다른 유형 추가*/
 			  senstr = "\u00A0" + sentype + "\u00A0" + sencnt;
 			  infotxt += senstr;
-			  $("#select_people_txt").empty();
-			  $("#select_people_txt").text(infotxt);
+			  $("#auditType").empty();
+			  $("#auditType").text(infotxt);
     	  } else if((sentemp != sencnt) && (infotxt.indexOf('우대') != -1) ) { /*유형 변경*/
     		  senstr = "";
+    		  price -= senprice;
 			  senstr = "\u00A0" + sentype + "\u00A0" + sencnt;
-			  $("#select_people_txt").empty();
-			  $("#select_people_txt").append(adustr).append(youstr).append(kidstr).append(senstr); 
+			  $("#auditType").empty();
+			  $("#auditType").append(adustr).append(youstr).append(kidstr).append(senstr); 
     	  } else if((sentemp != sencnt) && (infotxt.indexOf('우대') != -1)) { /*같은유형 변경*/
         	  senstr = sentype + "\u00A0" + sencnt;
-	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(senstr);
+	          $("#auditType").empty();
+	          $("#auditType").text(senstr);
           }
       } else {
     	  senstr = "";
-    	  $("#select_people_txt").empty();
-    	  $("#select_people_txt").append(adustr).append(youstr).append(kidstr);
+    	  price -= senprice;
+    	  $("#auditType").empty();
+    	  $("#auditType").append(adustr).append(youstr).append(kidstr);
       }
 	  sentemp = sencnt;
     }// peocnt>5 if end
+    senprice = 6000 * sencnt;
   }//hasClass false if end
+  price += senprice;
+  $("#total").empty();
+  $("#total").text(price);
 });// click() end
 
 $(".kid").click(function() {
@@ -416,35 +440,42 @@ $(".kid").click(function() {
       $(this).addClass("on");
 
       // 선택된 인원이랑 유형 append하기 ,로 엮기
-      var infotxt = $("#select_people_txt").text();
+      var infotxt = $("#auditType").text();
       if (kidcnt != 0) {
     	  if ((infotxt.indexOf('-') != -1)) { /*최초클릭*/
     		  kidstr = kidtype + "\u00A0" + kidcnt; // \u00A0 띄어쓰기
-	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(kidstr);
+	          $("#auditType").empty();
+	          $("#auditType").text(kidstr);
           } else if(infotxt.indexOf('어린이') == -1){ /*다른 유형 추가*/
     		  kidstr = "\u00A0" + kidtype + "\u00A0" + kidcnt;
 			  infotxt += kidstr
-			  $("#select_people_txt").empty();
-			  $("#select_people_txt").text(infotxt);
+			  $("#auditType").empty();
+			  $("#auditType").text(infotxt);
     	  } else if((kidtemp != kidcnt) && (infotxt.indexOf('어린이') != -1)) { /*유형 변경*/
     		  kidstr = "";
+    		  price -= kidprice;
     		  kidstr = "\u00A0" + kidtype + "\u00A0" + kidcnt;
-			  $("#select_people_txt").empty();
-			  $("#select_people_txt").append(adustr).append(youstr).append(senstr).append(kidstr);  
+			  $("#auditType").empty();
+			  $("#auditType").append(adustr).append(youstr).append(senstr).append(kidstr);  
     	  } else if((kidtemp != kidcnt) && (infotxt.indexOf('어린이') != -1)) { /*같은유형 변경*/
         	  kidstr = kidtype + "\u00A0" + kidcnt;
-	          $("#select_people_txt").empty();
-	          $("#select_people_txt").text(kidstr);
+	          $("#auditType").empty();
+	          $("#auditType").text(kidstr);
           }
       } else {
     	  kidstr = "";
-    	  $("#select_people_txt").empty();
-    	  $("#select_people_txt").append(adustr).append(youstr).append(senstr);
+		  price -= kidprice;
+    	  $("#auditType").empty();
+    	  $("#auditType").append(adustr).append(youstr).append(senstr);
       }
       kidtemp = kidcnt;
     }// peocnt>5 if end
+    kidprice = 5000 * kidcnt;
   }//hasClass false if end
+  price += kidprice;
+  $("#total").empty();
+  $("#total").text(price);
 });//click() end
-/* --------------- 인원선택 AJAX END ---------------------*/
+
+/* --------------- 금액 AJAX ---------------------*/
 
