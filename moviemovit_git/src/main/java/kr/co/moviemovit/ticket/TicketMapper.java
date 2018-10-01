@@ -4,28 +4,30 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import kr.co.moviemovit.coupon.CouponDTO;
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
+import kr.co.moviemovit.user.UserDTO;
 import kr.co.moviemovit.screen.ScreenDTO;
 
 public interface TicketMapper {
-/*********************************** ¿¹¸Å ¸ñ·Ï *********************************************/
+/*********************************** ì˜ˆë§¤ ëª©ë¡ *********************************************/
 	//<select id="list" resultType="TicketDTO">
   public ArrayList<TicketDTO> list();
 	
-/*********************************** ¿¹¸Å *********************************************/
-  /* -------------------- ¿¹¸Å : ¿µÈ­¼±ÅÃ ºÎºĞ -------------------- */
+/*********************************** ì˜ˆë§¤ *********************************************/
+  /* -------------------- ì˜ˆë§¤ : ì˜í™”ì„ íƒ ë¶€ë¶„ -------------------- */
 	//<select id="movieList">
 	public ArrayList<MovieDTO> movieList();
 	
-  /* -------------------- ¿¹¸Å : ¿µÈ­¼±ÅÃ ºÎºĞ END -------------------- */
+  /* -------------------- ì˜ˆë§¤ : ì˜í™”ì„ íƒ ë¶€ë¶„ END -------------------- */
 	
-	/* -------------------- ¿¹¸Å : ±ØÀå¼±ÅÃ ºÎºĞ -------------------- */
+	/* -------------------- ì˜ˆë§¤ : ê·¹ì¥ì„ íƒ ë¶€ë¶„ -------------------- */
   //<select id="cineList" resultType="CinemaDTO">
   public ArrayList<CinemaDTO> cinemaList();
 
   //<select id="cinemacntFromAddr1" parameterType="String" resultType="int">
-  public int cinemacntFromAddr1(@Param("addr1")String addr1);  // @Param ¾ÈÇØÁÖ¸é xml¿¡¼­ if¹® ¸øÅ½
+  public int cinemacntFromAddr1(@Param("addr1")String addr1);  // @Param ì•ˆí•´ì£¼ë©´ xmlì—ì„œ ifë¬¸ ëª»íƒ
   
   //<select id="cinemacntFromAddr1Movie" parameterType="MovieDTO" resultType="int">
   public ArrayList<Integer> cinemacntFromAddr1Movie(MovieDTO dto);
@@ -48,9 +50,9 @@ public interface TicketMapper {
   //<select id="cinemaSearch" parameterType="String" resultType="CinemaDTO">
   public ArrayList<CinemaDTO> cinemaSearch(String key);
   
-	/* -------------------- ¿¹¸Å : ±ØÀå¼±ÅÃ ºÎºĞ END -------------------- */
+	/* -------------------- ì˜ˆë§¤ : ê·¹ì¥ì„ íƒ ë¶€ë¶„ END -------------------- */
 
-  /* ------------------ ¿¹¸Å : ³¯Â¥¼±ÅÃ ºÎºĞ ------------------ */
+  /* ------------------ ì˜ˆë§¤ : ë‚ ì§œì„ íƒ ë¶€ë¶„ ------------------ */
   //<select id="sdateAllList" resultType="String">
   public ArrayList<String> sdateAllList();
 
@@ -63,18 +65,25 @@ public interface TicketMapper {
   //<select id="sdateListFromMovieCinema" parameterType="MovieDTO" resultType="String">
   public ArrayList<String> sdateListFromMovieCinema(MovieDTO dto);
 
-  /* ------------------ ¿¹¸Å : ³¯Â¥¼±ÅÃ ºÎºĞ END ------------------ */
+  /* ------------------ ì˜ˆë§¤ : ë‚ ì§œì„ íƒ ë¶€ë¶„ END ------------------ */
   
-  /* ------------------ ¿¹¸Å : »ó¿µ½Ã°£Ç¥ ºÎºĞ END ------------------ */
+  /* ------------------ ì˜ˆë§¤ : ìƒì˜ì‹œê°„í‘œ ë¶€ë¶„ END ------------------ */
   //<select id="screentimeRoom" parameterType="MovieDTO" resultType="ScreenDTO">
   public ArrayList<ScreenDTO> screentimeRoom(MovieDTO dto);
   
-  /* ------------------ ¿¹¸Å : »ó¿µ½Ã°£Ç¥ ºÎºĞ END ------------------ */
+  /* ------------------ ì˜ˆë§¤ : ìƒì˜ì‹œê°„í‘œ ë¶€ë¶„ END ------------------ */
   
 
-  /* -------------------- ¿µÈ­¼±ÅÃ -> ¿µÈ­Á¤º¸ Æ÷½ºÅÍ ºÎºĞ END -------------------- */
+  /* -------------------- ì˜í™”ì„ íƒ -> ì˜í™”ì •ë³´ í¬ìŠ¤í„° ë¶€ë¶„ END -------------------- */
   //<select id="movieData">
   public MovieDTO movieData(MovieDTO dto);
-  /* -------------------- ¿µÈ­¼±ÅÃ -> ¿µÈ­Á¤º¸ Æ÷½ºÅÍ ºÎºĞ END -------------------- */
+  /* -------------------- ì˜í™”ì„ íƒ -> ì˜í™”ì •ë³´ í¬ìŠ¤í„° ë¶€ë¶„ END -------------------- */
 	
+	//ì¿ í°ëª©ë¡
+  public ArrayList<CouponDTO> couponList(CouponDTO dto);
+	
+  /*íšŒì›ì •ë³´*/
+  //<select id="getMemberInfo">
+  public UserDTO getMemberInfo(UserDTO dto);
+  
 }// interface end

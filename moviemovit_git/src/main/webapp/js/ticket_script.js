@@ -1,4 +1,3 @@
-
 // --------------------- 예매하기 AJAX File
 $.ajaxSetup({datatype:"text"});
    
@@ -525,6 +524,8 @@ $(".adult").click(function() {
   price += aduprice;
   $("#total").empty();
   $("#total").text(price);
+  //alert("a" + peocnt);
+  $("#peocnt").val(peocnt);
 });// click() end
 
 $(".youth").click(function() {
@@ -584,6 +585,8 @@ $(".youth").click(function() {
   price += youprice;
   $("#total").empty();
   $("#total").text(price);
+  //alert("y" + peocnt);
+  $("#peocnt").val(peocnt);
 });// click() end
 
 $(".senior").click(function() {
@@ -643,6 +646,8 @@ $(".senior").click(function() {
   price += senprice;
   $("#total").empty();
   $("#total").text(price);
+  //alert("s" + peocnt);
+  $("#peocnt").val(peocnt);
 });// click() end
 
 $(".kid").click(function() {
@@ -702,10 +707,11 @@ $(".kid").click(function() {
   price += kidprice;
   $("#total").empty();
   $("#total").text(price);
+  //alert("k" + peocnt);
+  $("#peocnt").val(peocnt);
+  //alert($("#peocnt").val());
 });//click() end
-
 /******************* 인원선택 AJAX END *******************/
 
-/******************* 금액 AJAX *******************/
 
-/******************* 금액 AJAX END *******************/
+
