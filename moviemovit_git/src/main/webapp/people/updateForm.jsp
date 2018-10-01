@@ -195,8 +195,14 @@ table tr:nth-child(2n+1) {
     width:200px;
     heigth:200px;
 }
+
+.home-section{
+padding-top:0px;}
 </style>
-<%@ include file="../header2.jsp"%>
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<div class="home-section text-center ">
 <%-- 본문시작 updateForm.jsp --%>
 <div class="table-users">
    <div class="header">People Update</div>
@@ -255,9 +261,8 @@ table tr:nth-child(2n+1) {
 	</form>
 </div>
 
-
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+</div>
+</body>
 
 
 

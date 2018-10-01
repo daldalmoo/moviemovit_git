@@ -3,16 +3,15 @@ package kr.co.moviemovit.qna;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.moviemovit.qna.QnaDAO;
@@ -96,10 +95,40 @@ public class QnaCont {
     return mav;
   }// list() end
 
+  
+  @RequestMapping(value = "/qna/adminlist.do")
+  public ModelAndView adminlist(QnaDTO dto, @RequestParam(defaultValue = "1") int curPage, HttpServletRequest request) throws Exception {
+    /* HttpSession session = request.getSession(); */
+
+    ModelAndView mav = new ModelAndView();
+
+    int listCnt = dao.listCnt();
+    // System.out.println("listCnt = "+listCnt);
+    // System.out.println("curPage = "+curPage);
+
+    QnaPage qnapage = new QnaPage(listCnt, curPage);
+
+    ArrayList<QnaDTO> list = dao.list(qnapage);
+    // System.out.println("list.toString()" + list.toString());
+
+    mav.setViewName("qna/adminlist");
+    mav.addObject("list", list);
+    mav.addObject("qnapage", qnapage);
+    return mav;
+  }// list() end
   @RequestMapping(value = "/qna/read.do", method = RequestMethod.GET)
   public ModelAndView read(QnaDTO dto) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("qna/read");
+    dto = dao.read(dto);
+    mav.addObject("dto", dto);
+    return mav;
+  }// read() end
+  
+  @RequestMapping(value = "/qna/adminread.do", method = RequestMethod.GET)
+  public ModelAndView adminread(QnaDTO dto) {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("qna/adminread");
     dto = dao.read(dto);
     mav.addObject("dto", dto);
     return mav;
@@ -119,19 +148,61 @@ public class QnaCont {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("redirect:list.do");
 
+    String msg="";
     int cnt = dao.delete(dto);
     if (cnt == 0) {
-      mav.addObject("msg1", "<p>삭제 실패했습니다</p>");
-      mav.addObject("img", "<img src='../img/fail.png'>");
-      mav.addObject("link1", "<input type='button' value='1' onclick='javascript:history.back()'>");
-      mav.addObject("link2", "<input type='button' value='2' onclick='location.href=\"./list.do\"'>");
-    } else {
+      msg += "<!DOCTYPE html>";
+      msg += "<html><body>";
+      msg += "<script>";
+      msg += "  alert('삭제실패했습니다.');";
+      msg += "  history.go(-1);";
+      msg += "</script>";
+      msg += "</html></body>";
+      mav.addObject("msg", msg);
+      mav.setViewName("msgView");
+    } /*else {
       mav.addObject("msg1", "<p>삭제 되었습니다</p>");
       mav.addObject("img", "<img src='../img/sound.png'>");
       mav.addObject("link1", "<input type='button' value='1' onclick='location.href=\"./create.do\"'>");
       mav.addObject("link2", "<input type='button' value='2' onclick='location.href=\"./list.do\"'>");
     } // if end
+*/    return mav;
+  }// deleteProc() end
+  
+  
+  @RequestMapping(value = "/qna/admindelete.do", method = RequestMethod.GET)
+  public ModelAndView admindeleteForm(QnaDTO dto) {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("qna/admindeleteForm");
+    dto = dao.read(dto);
+    mav.addObject("dto", dto);
     return mav;
+  }// deleteForm() end
+
+  @RequestMapping(value = "/qna/admindelete.do", method = RequestMethod.POST)
+  public ModelAndView admindeleteProc(QnaDTO dto) {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("redirect:adminlist.do");
+
+    String msg="";
+    int cnt = dao.delete(dto);
+    if (cnt == 0) {
+        msg += "<!DOCTYPE html>";
+        msg += "<html><body>";
+        msg += "<script>";
+        msg += "  alert('삭제실패했습니다.');";
+        msg += "  history.go(-1);";
+        msg += "</script>";
+        msg += "</html></body>";
+        mav.addObject("msg", msg);
+        mav.setViewName("msgView");
+      } /*else {
+      mav.addObject("msg1", "<p>삭제 되었습니다</p>");
+      mav.addObject("img", "<img src='../img/sound.png'>");
+      mav.addObject("link1", "<input type='button' value='1' onclick='location.href=\"./create.do\"'>");
+      mav.addObject("link2", "<input type='button' value='2' onclick='location.href=\"./list.do\"'>");
+    } // if end
+*/    return mav;
   }// deleteProc() end
 
   @RequestMapping(value = "/qna/update.do", method = RequestMethod.GET)
@@ -148,7 +219,20 @@ public class QnaCont {
     ModelAndView mav = new ModelAndView();
 
     int cnt = dao.update(dto);
-    if (cnt == 0) {
+     String msg="";
+    	 if (cnt == 0) {
+    	      msg += "<!DOCTYPE html>";
+    	      msg += "<html><body>";
+    	      msg += "<script>";
+    	      msg += "  alert('수정실패했습니다.');";
+    	      msg += "  history.go(-1);";
+    	      msg += "</script>";
+    	      msg += "</html></body>";
+    	      mav.addObject("msg", msg);
+    	      mav.setViewName("msgView");
+    	    }
+    	 mav.setViewName("redirect:list.do");
+    	 /*else {
       String msg = "수정 실패했습니다";
       mav.addObject("msg", msg);
       mav.setViewName("./qna/updateForm");
@@ -156,20 +240,62 @@ public class QnaCont {
       String msg = "수정 성공했습니다.";
       mav.addObject("msg", msg);
       mav.setViewName("redirect:list.do");
-    }
+    }*/
     return mav;
   }// updateProc() end
 
-  @RequestMapping(value = "/qna/reply.do", method = RequestMethod.GET)
+  
+  @RequestMapping(value = "/qna/adminupdate.do", method = RequestMethod.GET)
+  public ModelAndView adminupdateForm(QnaDTO dto) {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("qna/adminupdateForm");
+    dto = dao.read(dto);
+    mav.addObject("dto", dto);
+    return mav;
+  }// deleteForm() end
+
+  @RequestMapping(value = "/qna/adminupdate.do", method = RequestMethod.POST)
+  public ModelAndView adminupdateProc(QnaDTO dto) {
+    ModelAndView mav = new ModelAndView();
+
+    int cnt = dao.update(dto);
+     String msg="";
+    	 if (cnt == 0) {
+    	      msg += "<!DOCTYPE html>";
+    	      msg += "<html><body>";
+    	      msg += "<script>";
+    	      msg += "  alert('수정실패했습니다.');";
+    	      msg += "  history.go(-1);";
+    	      msg += "</script>";
+    	      msg += "</html></body>";
+    	      mav.addObject("msg", msg);
+    	      mav.setViewName("msgView");
+    	    } 
+    	 mav.setViewName("redirect:adminlist.do");
+    	 
+    	 /*else {
+    	
+      String msg = "수정 실패했습니다";
+      mav.addObject("msg", msg);
+      mav.setViewName("./qna/updateForm");
+    } else {
+      String msg = "수정 성공했습니다.";
+      mav.addObject("msg", msg);
+      mav.setViewName("redirect:list.do");
+    }*/
+    return mav;
+  }// updateProc() end
+  
+  @RequestMapping(value = "/qna/adminreply.do", method = RequestMethod.GET)
   public ModelAndView reply(QnaDTO dto) {
     ModelAndView mav = new ModelAndView();
-    mav.setViewName("qna/reply");
+    mav.setViewName("qna/adminreply");
     dto = dao.read(dto);
     mav.addObject("dto", dto);
     return mav;
   }// create() end
 
-  @RequestMapping(value = "/qna/reply.do", method = RequestMethod.POST)
+  @RequestMapping(value = "/qna/adminreply.do", method = RequestMethod.POST)
   public ModelAndView replyProc(QnaDTO dto, HttpServletRequest request) {
     ModelAndView mav = new ModelAndView();
     System.out.println("---------QnaCont 1 : dto.toString() : " + dto.toString());
@@ -234,7 +360,7 @@ public class QnaCont {
     // 성공여부메세지 띄워야 함 !!!
 
     mav.addObject("cnt", cnt);
-    mav.setViewName("redirect:./list.do");
+    mav.setViewName("redirect:./adminlist.do");
     return mav;
   }// updateProc() end
 

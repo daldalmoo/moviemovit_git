@@ -2,14 +2,13 @@ package kr.co.moviemovit.user;
 
 import java.util.ArrayList;
 
-import javax.jws.soap.SOAPBinding.Use;
+
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import kr.co.moviemovit.notice.NoticeDTO;
-import kr.co.moviemovit.notice.NoticeMapper;
+
 import kr.co.moviemovit.notice.NoticePage;
 
 @Component
@@ -99,9 +98,9 @@ public class UserDAO {
 		return pw_result;
 	}//setRandomPw() end
 	
-	public ArrayList<UserDTO> list(UserPage userpage) {
+	public ArrayList<UserDTO> list(NoticePage noticepage) {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-		ArrayList<UserDTO> list = mapper.list(userpage);
+		ArrayList<UserDTO> list = mapper.list(noticepage);
 		return list;
 	}//list () end
 	

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../header1.jsp"%>
-
+<%@ include file="../user/auth.jsp"%>
 <%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 <style>
@@ -38,9 +38,14 @@
   font-size: 18px;
   font-style: normal;
 }
+.home-section{
+padding-top:0px;
+}
 </style>
+</head>
 
-<%@ include file="../header2.jsp"%>
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<div class="home-section text-center ">
 <%-- 본문시작 couponForm.jsp : 쿠폰 등록 폼 --%>
 
 <form class="cbp-mc-form" name="regForm" method='POST' action='./create.do' onsubmit="return couponCheck(this)">
@@ -111,7 +116,5 @@ function couponCheck(f) {
   return true;  // 유효성 검사 모두 통과
 }//couponCheck
 </script>
-
-
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+</div>
+</body>

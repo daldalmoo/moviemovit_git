@@ -20,6 +20,8 @@ public class MovieDTO {
 	private String e_date;
 	private long filesize;
 	
+	
+	
 	//스프링 파일 객체-----------------------------------------  
 	//<input type='file' name='posterMF'>
 	  private MultipartFile posterMF;
@@ -27,8 +29,20 @@ public class MovieDTO {
 	//<input type='file' name='filenameMF'>
 	  private MultipartFile filenameMF;
 	//---------------------------------------------------------  
+	  
+	// 과제용 하나 추가
+	  private double aver;
+	    
 
-	public MovieDTO() {} //기본생성자
+	public double getAver() {
+      return aver;
+    }
+
+    public void setAver(double aver) {
+      this.aver = aver;
+    }
+
+  public MovieDTO() {} //기본생성자
 
 	public int getmCode() {
 		return mCode;

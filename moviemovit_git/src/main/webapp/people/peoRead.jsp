@@ -175,10 +175,14 @@ table tr:nth-child(2n+1) {
     overflow: visible;
   }
 }
-
+.home-section{
+padding-top:0px;}
 </style>
-<%@ include file="../header2.jsp"%>
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 <%-- 본문시작 peoList.jsp --%>
+<div class="home-section text-center ">
 <div class="table-users">
    <div class="header">People</div>
    <table style="text-align:center; margin:center;">
@@ -213,7 +217,5 @@ table tr:nth-child(2n+1) {
 	</div>
 	
 </div>
-
-
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+</div>
+</body>

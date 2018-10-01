@@ -193,10 +193,14 @@ table tr:nth-child(2n+1) {
     width:200px;
     heigth:200px;
 }
+.home-section{
+padding-top:0px;}
 </style>
-<%@ include file="../header2.jsp"%>
-<%-- 본문시작 updateForm.jsp --%>
+</head>
 
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<%-- 본문시작 updateForm.jsp --%>
+<div class="home-section text-center ">
 <div class="table-users">
    <div class="header">Movie Update</div>
    <form class="cbp-mc-form" name='regForm' method='POST' action='./update.do' enctype="multipart/form-data" onsubmit="return confirm('수정하시겠습니까?')">
@@ -313,7 +317,5 @@ table tr:nth-child(2n+1) {
 	</div>
 	</form>
 </div>
-
-
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+</div>
+</body>

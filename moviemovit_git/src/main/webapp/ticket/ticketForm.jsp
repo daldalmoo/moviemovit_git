@@ -4,8 +4,7 @@
 <%@ include file="../header1.jsp"%>
 
 <%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
-<link rel="stylesheet" href="../css/ticket_style.css?ver=5" type="text/css" />
-
+<link rel="stylesheet" href="../css/ticket_style.css?ver=9" type="text/css" />
 
 <%@ include file="../header2.jsp"%>
 <%-- 본문시작 ticketForm.jsp : 회원들이 예매하는 폼 --%>
@@ -165,6 +164,10 @@ function buildCalendar() {
 <!-- -------------------- 달력 script end ------------------------ -->
 
 <form class="cbp-mc-form" name="regForm" method='POST' action='./create.do'>
+  <!-- POST 방식으로 보낼 데이터 -->
+  <input type='hidden' id='mCode'     name='sCode'     value=''>
+  <input type='hidden' id='auditType' name='auditType' value=''>
+  
   <table id="ticketArea">
     <!-------------------------------- 1행 타이틀  --------------------------------------->
     <tr>
@@ -362,9 +365,20 @@ function buildCalendar() {
             <img src="./img/default.png" class="cinema_logo">
             <span class="cinemainfo_name">영화관-지점</span>
           </div>
-          <hr>
-
           <div class="screentime">
+            
+            <dl id="1">
+              <dt>1 관</dt>
+              <dd>
+                <ul>
+                  <li onclick="timeclick('1030');">10:30</li>
+                  <li>17:40</li>
+                  <li>17:40</li>
+                  <li>17:40</li>
+                </ul>
+              </dd>
+            </dl>
+            
           </div>
         </div>
       </td>
@@ -457,7 +471,7 @@ function buildCalendar() {
   <br>
 </form>
 
-<script src="../js/ticket_script.js?ver=10" charset="utf-8"></script>
+<script src="../js/ticket_script.js?ver=2" charset="utf-8"></script>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

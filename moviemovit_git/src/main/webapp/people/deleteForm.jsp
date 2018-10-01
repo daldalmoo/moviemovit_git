@@ -163,9 +163,14 @@ table tr:nth-child(2n+1) {
     overflow: visible;
   }
 }
+.home-section{
+padding-top:0px;}
 </style>
-<%@ include file="../header2.jsp"%>
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 <%-- 본문시작 deleteForm.jsp --%>
+<div class="home-section text-center ">
  <div class="table-users">
    <div class="header">PEOPLE DELETE</div>
    <form name='regForm' method='POST' action='./delete.do' onsubmit="return confirm('삭제하시겠습니까?')">
@@ -182,10 +187,9 @@ table tr:nth-child(2n+1) {
    </div>
  </form>
  </div>    
+ </div>
+ </body>
  
- 
 
 
 
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>

@@ -4,7 +4,7 @@
 <%@ include file="../header1.jsp"%>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<style rel="stylesheet">
+<style>
 
 .container-fluid{
 margin:-50px
@@ -234,16 +234,16 @@ table tr:nth-child(2n+1) {
 						<!--     <i class="fa fa-caret-right" aria-hidden="true"></i> -->
 					</c:if> <a href="read.do?qCode=${dto.qCode}"> <c:choose>
 							<c:when test="${dto.qType == 'q1'}">
-               예매 :
+               <strong>예매 :</strong>
                </c:when>
 							<c:when test="${dto.qType =='q2'}">
-               회원이용 :
+               <strong>회원이용 :</strong>
                </c:when>
 							<c:when test="${dto.qType == 'q3'}">
-               극장이용 :
+               <strong>극장이용 :</strong>
                </c:when>
 							<c:when test="${dto.qType == 'q4'}">
-             기타 :
+             <strong>기타 :</strong>
                </c:when>
 						</c:choose> 
 						                  ${dto.title }</a></td>

@@ -10,7 +10,7 @@
 	<frame name="head" src="../header.jsp" scrolling="no" >
 	<frameset cols="200,*">
 	<frame name="left" src="adminLmenu.jsp" noresize="noresize">
-	<frame name="right" src="../user/list.do">
+	<frame name="right" src="../user/adminlist.do">
 </frameset>
 </frameset>
 </html>

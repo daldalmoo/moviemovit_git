@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %> 
-<%@ include file="../header1.jsp"%>
+<%@ include file="../../header1.jsp"%>
 <%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
-<%@ include file="../header2.jsp"%>
+
 
 <div class="title">수정</div>
 <div class="content">
@@ -16,4 +16,4 @@
 </div>
 
 <%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+<%@ include file="../../footer.jsp"%>

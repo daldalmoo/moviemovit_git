@@ -216,7 +216,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <![CDATA[    
          SELECT cineCode, pixel/cnt as pixel, sound/cnt as sound, clean/cnt as clean, service/cnt as service, 
         			 seat/cnt as seat, around/cnt as around, snack/cnt as snack, trans/cnt as trans,
-        			 startotal/cnt AS startotal
+        			 startotal/cnt as startotal
 		 		 FROM (SELECT cineCode, uid, sum(pixel) as pixel, sum(sound) as sound, 
 		 				   sum(clean) as clean, sum(service) as service, sum(seat) as seat, sum(around) as around, sum(snack) as snack, 
 		 				   sum(trans) as trans, count(uid) as cnt, sum(pixel+sound+clean+service+seat+around+snack+trans)/8 AS startotal

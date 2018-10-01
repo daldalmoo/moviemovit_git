@@ -4,10 +4,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%-- 본문시작 template.jsp --%>
 <head>
+
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<style rel="stylesheet">
+<style>
 .container-fluid {
 	margin: -50px
 }
@@ -276,13 +277,18 @@ tr {
 	overflow: visible;
 }
 }
-</style>
 
-<%@ include file="../header2.jsp"%>
+
+
+.home-section{
+padding-top:0px;}
+</style>
 
 </head>
 
-<!-- <div class="table-users"> -->
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<div class="home-section text-center ">
+ <div class="table-users"> 
 <div class="header">회원목록</div>
 <table>
 	<tr>
@@ -314,18 +320,17 @@ tr {
 	</c:forEach>
 
 </table>
+</div>
 
-<input class="cbp-mc-button" type="button" value="공지사항 등록"
-	onclick="location.href='createForm.jsp'" />
 	
 	
-<%-- <div>
+ <div class="page">
 	<c:if test="${noticepage.curPage ne 1 }">
-		<a href="list.do?curpage=${noticepage.startPage }"><i
+		<a href="adminlist.do?curpage=${noticepage.startPage }"><i
 			class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i></a>
 	</c:if>
 	<c:if test="${noticepage.curPage ne 1}">
-		<a href="list.do?curpage=${noticepage.prevPage }"><i
+		<a href="adminlist.do?curpage=${noticepage.prevPage }"><i
 			class="fa fa-angle-left fa-2x" aria-hidden="true"></i></a>
 	</c:if>
 	<c:forEach var="pageNum" begin="${noticepage.startPage }"
@@ -333,26 +338,25 @@ tr {
 		<c:choose>
 			<c:when test="${pageNum eq  noticepage.curPage}">
 				<span style="font-weight: bold;"><a
-					href="list.do?curPage=${pageNum }">${pageNum }</a></span>
+					href="adminlist.do?curPage=${pageNum }">${pageNum }</a></span>
 			</c:when>
 			<c:otherwise>
-				<a href="list.do?curPage=${pageNum }">${pageNum }</a>
+				<a href="adminlist.do?curPage=${pageNum }">${pageNum }</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 	<c:if
 		test="${noticepage.curPage ne noticepage.pageCnt && noticepage.pageCnt > 0}">
-		<a href="list.do?curPage=${noticepage.nextPage}"><i
+		<a href="adminlist.do?curPage=${noticepage.nextPage}"><i
 			class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
 	</c:if>
 	<c:if test="${noticepage.curRange ne endPage}">
-		<a href="list.do?curPage=${noticepage.endPage}"><i
+		<a href="adminlist.do?curPage=${noticepage.endPage}"><i
 			class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a>
 	</c:if>
 </div>
 
-<div>총 게시글 수 : ${noticepage.listCnt }</div> --%>
+<div class="page">총 게시글 수 : ${noticepage.listCnt }</div> 
+</div>
+</body>
 
-
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>

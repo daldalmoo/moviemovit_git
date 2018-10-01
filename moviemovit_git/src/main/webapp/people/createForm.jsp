@@ -16,11 +16,14 @@
     text-align:center;
     font-size:20px;
 }
-
+.home-section{
+padding-top:0px;}
 </style>
-<%@ include file="../header2.jsp"%>
-<%-- 본문시작 people/createForm.jsp --%>
+</head>
 
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<%-- 본문시작 people/createForm.jsp --%>
+<div class="home-section text-center ">
 <div class="header2">인물 등록</div>
 <form class="cbp-mc-form" name="regForm" method="POST" action="./create.do"
       enctype="multipart/form-data" onsubmit="return peopleCheck(this)" >
@@ -257,6 +260,5 @@
 	
 	
 </form>
-
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+</div>
+</body>

@@ -14,7 +14,7 @@
 <form method="post" action="./delete.do">
 	<input type="hidden" name="qCode" value="${dto.qCode }">
 	<div class="content">
-		<p>QnA 글을 삭제하시겠습니까?</p>
+		<p> 삭제하시겠습니까?</p>
 	</div>
 	<div class="bottom">
 		<input class="cbp-mc-submit" type="submit" value="삭제">
