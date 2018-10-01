@@ -68,3 +68,9 @@ select mName, genre, avg(star) as star, uid
             ON mt.mCode = st.mCode
             WHERE st.uid='member2'
             group by genre
+            
+select genre, avg(star) as star, uid
+            from movieTable mt join starTable st
+            ON mt.mCode = st.mCode
+            WHERE uid='member2'
+            group by genre            

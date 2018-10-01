@@ -55,10 +55,10 @@ public class StarDAO {
 		return avgstar;
 	}//avgstar() end
 	
-	public ArrayList<MovieDTO> genrestar(MovieDTO dto) {
+	public ArrayList<StarDTO> genrestar(StarDTO sdto) {
 		StarMapper mapper = sqlSession.getMapper(StarMapper.class);
-		ArrayList<MovieDTO> genrestar = mapper.genrestar(dto);
+		ArrayList<StarDTO> genrestar = mapper.genrestar(sdto);
 		return genrestar;
-	}//avgstar() end
+	}//genrestar() end
 
 }//class end

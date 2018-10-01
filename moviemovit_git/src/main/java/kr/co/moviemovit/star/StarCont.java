@@ -93,11 +93,11 @@ public class StarCont {
 	 
      
 	 @RequestMapping(value="/star/avgList.do", method=RequestMethod.GET)
-	 public ModelAndView genrestar(MovieDTO dto, StarDTO sdto, Model model, @RequestParam("name") String name) {
+	 public ModelAndView genrestar(MovieDTO dto, StarDTO sdto) {
 		 ModelAndView mav = new ModelAndView();
 		 mav.setViewName("/star/avgList");
-		 model.addAttribute("s_id", name);
-		 ArrayList<MovieDTO> list = dao.genrestar(dto);
+		 ArrayList<StarDTO> list = dao.genrestar(sdto);
+		 System.out.println(sdto.getStar());
 		 mav.addObject("list", list);
 		 return mav;
 	 }//avglist() end
