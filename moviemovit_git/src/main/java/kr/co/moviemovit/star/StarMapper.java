@@ -20,5 +20,6 @@ public interface StarMapper {
 	
 	public int avgstar(StarDTO sdto);
 	
+	public ArrayList<MovieDTO> genrestar(MovieDTO dto);
 
 }//interface end

@@ -3,6 +3,32 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<% 
+   String uid=(String)session.getAttribute("s_id");
+   //out.println("세션확인:" + uid);
+   session.setAttribute("uid", uid);
+%> 
+<style type="text/css">
+.guide {
+    position: relative;   
+    width: 90%;
+    height: 100%;
+    background: #fff;
+    margin: 20px auto;
+}
+.center-box {
+    position: absolute;   
+    width: 100px;
+    height: 100px;
+    background: red;
+    top: 0;               
+    bottom: 0;            
+    left: 0;              
+    right: 0;             
+    margin: auto;     /* 추가 */
+}
+</style>
+
 <style rel="stylesheet">
 .main{
   width:1200px;

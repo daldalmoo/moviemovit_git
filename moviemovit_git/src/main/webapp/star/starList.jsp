@@ -1,17 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
 <%@ include file="../header1.jsp"%>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-
 <style rel="stylesheet">
-.startable {
-  width:500px
-  
-
-}
-
-
 .header {   /* 영화관목록  */
   background-color: #3366cc;
   color: white; 
@@ -20,7 +9,10 @@
   text-align: center;
   text-transform: uppercase;        
 }
-
+.mimg2 {        /* 영화 포스터 */
+  height: 250px;
+  width: 250px;
+}
 .table-users {
   border: 1px solid #327a81;
   border-radius: 10px;
@@ -59,32 +51,7 @@ table tr:nth-child(2n+1) {
   background-color: #bfe1ff;
 }
 
-.box-image {
-  width:100%;
-  height:180px;
-  max-width: calc(100% - 85em);
-  background-color: white;;
-  border: 8px solid #3366cc; 
-  box-sizing: content-box;
-  margin: 1em auto;
-}
 
-.simg {
-  font-size: 0;
-  text-align: center;
-  width: 100px;
-  
-  
-}
-
-.mimg {        /* 영화관 목록안의 영화관이미지 */
-  font-size: 0;
-  text-align: center;
-  width: 100px;
-  max-width: calc(100% - 50em);
-  height: 180px;
-  
-}
 
 /*공개,수정,삭제 스타일*/
 .cbp-mc-button {
@@ -132,7 +99,29 @@ table tr:nth-child(2n+1) {
     position: absolute;
   }
   
- 
+  /* 사이즈 줄일때 나타나는 아이*/
+  td:nth-child(2):before {
+    content: '브랜드:';
+  }
+  td:nth-child(3):before {
+    content: '지점:';
+  }
+  td:nth-child(4):before {
+    content: '별점:';
+  }
+  td:nth-child(5):before {
+    content: '주소:';
+  }
+  td:nth-child(6):before {
+    content: '문의전화:';
+  }
+  tr {
+    padding: 10px 0;
+    position: relative;
+  }
+  tr:first-child {
+    display: none;
+  }
 }
 @media screen and (max-width: 500px) {
   .header {
@@ -191,85 +180,79 @@ table tr:nth-child(2n+1) {
 </style>
 <%@ include file="../header2.jsp"%>
 <%-- 본문시작 movieList.jsp --%>
-<% 
-   String uid=(String)session.getAttribute("s_id");
-   //out.println("세션확인:" + uid);
-   session.setAttribute("uid", uid);
-%> 
- <div class="table-users">
-   <div class="header">MOVIE LIST</div>
- </div>
-   
-   <div>
-   <div class="box-image" >
-     <span class="thumb-image">
-       <img class="mimg" src="../movie/img_poster/${dto.poster }"/>
-     </span>  
-   </div>
-   <strong>  
-              평균별점: ${avgstar} 
-              <c:if test="${avgstar==0 }">
-       <img class="simg" src="./img_star/star0.png"> 
-       </c:if>
-       <c:if test="${avgstar==1 }">
-           <img class="simg" src="./img_star/star1.png"> 
-       </c:if>
-       <c:if test="${avgstar==2 }">
-           <img class="simg" src="./img_star/star2.png"> 
-       </c:if>
-       <c:if test="${avgstar==3 }">
-           <img class="simg" src="./img_star/star3.png"> 
-       </c:if>
-       <c:if test="${avgstar==4 }">
-           <img class="simg" src="./img_star/star4.png"> 
-       </c:if>
-       <c:if test="${avgstar==5 }">
-           <img class="simg" src="./img_star/star5.png">
-       </c:if>
-        </strong>
-     <br>
-     <span class="thumb-image">
-       <strong>${dto.mName }</strong>
-     </span>
-   </div>
- 
 
-   
-   <c:forEach var="sdto" items="${starlist }">
-   <table calss="startable">
-   
-    <tr>
-        별점: ${sdto.star}
-     
-     <c:if test="${sdto.star==0 }">
-           <img class="simg" src="./img_star/star0.png"> 
-       </c:if>
-       <c:if test="${sdto.star==1 }">
-           <img class="simg" src="./img_star/star1.png"> 
-       </c:if>
-       <c:if test="${sdto.star==2 }">
-           <img class="simg" src="./img_star/star2.png"> 
-       </c:if>
-       <c:if test="${sdto.star==3 }">
-           <img class="simg" src="./img_star/star3.png"> 
-       </c:if>
-       <c:if test="${sdto.star==4 }">
-           <img class="simg" src="./img_star/star4.png"> 
-       </c:if>
-       <c:if test="${sdto.star==5 }">
-           <img class="simg" src="./img_star/star5.png">
-       </c:if>
-     
-     한줄평: ${sdto.comment } 
-     작성일: ${sdto.wdate } 
-     </tr>
+<div class="table-users">
+   <div class="header">Movie List</div>
+   <input type='hidden' name='mCode' value='${mCode }'>
+   <table style="text-align:center; margin:center;">
+      <tr>
+        <th>영화명</th>
+        <td>${dto.mName}</td>
+      </tr>
+      <tr>
+        <th>포스터</th>
+        <td><img class="mimg2" src="./img_poster/${dto.poster }"></td>
+      </tr>
+      <tr>
+        <th>장르</th>
+        <td>
+        ${dto.genre}
+        </td>
+      </tr>
+      <tr>
+        <th>상영분류</th>
+        <td>${dto.screen}</td>
+      </tr>
+      <tr>
+        <th>관람등급</th>
+        <td>${dto.age}</td>
+      </tr>
+      <tr>
+        <th>줄거리</th>
+        <td>${dto.s_e}</td>
+      </tr>
+      <tr>
+        <th>나라</th>
+        <td>${dto.country}</td>
+      </tr>
+      <tr>
+        <th>감독</th>
+        <td>${dto.director}</td>
+      </tr>
+      <tr>
+        <th>주연배우</th>
+        <td>${dto.actor}</td>
+      </tr>
+      <tr>
+        <th>영화타입</th>
+        <td>${dto.DD}</td>
+      </tr>
+      <tr>
+        <th>상영시간</th>
+        <td>${dto.runningTime} 분</td>
+      </tr>
+      <tr>
+        <th>개봉일</th>
+        <td>${dto.s_date}</td>
+      </tr>
+      <tr>
+        <th>마감일</th>
+        <td>${dto.e_date}</td>
+      </tr>
+           
    </table>
-   </c:forEach>
+   
    <!-- 하단 버튼 -->
-   <div class="cbp-mc-submit-wrap">
-     <input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='../movie/movieList.do'"/>
-     <input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />
-   </div>
+	<div class="cbp-mc-submit-wrap">
+		<input class="cbp-mc-button" type="button" value="영화등록" onclick="location.href='./create.do'"/>
+		<input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='./movieList.do'"/>
+		<input class="cbp-mc-button" type="button" value="평가하기" onclick="location.href='../star/create.do?mCode=${dto.mCode }'"/>
+		<input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />
+		<input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./delete.do?mCode=${dto.mCode }'"/>
+		<input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./update.do?mCode=${dto.mCode }'"/>
+	</div>
+</div>
+
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>
