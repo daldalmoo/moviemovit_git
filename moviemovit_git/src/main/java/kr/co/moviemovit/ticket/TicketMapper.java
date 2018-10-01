@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
+import kr.co.moviemovit.screen.ScreenDTO;
 
 public interface TicketMapper {
 /*********************************** 예매 목록 *********************************************/
@@ -47,7 +48,6 @@ public interface TicketMapper {
   //<select id="cinemaSearch" parameterType="String" resultType="CinemaDTO">
   public ArrayList<CinemaDTO> cinemaSearch(String key);
   
-  
 	/* -------------------- 예매 : 극장선택 부분 END -------------------- */
 
   /* ------------------ 예매 : 날짜선택 부분 ------------------ */
@@ -57,10 +57,24 @@ public interface TicketMapper {
   //<select id="sdateListFromMovie" parameterType="int" resultType="String">
   public ArrayList<String> sdateListFromMovie(int mCode);
 
+  //<select id="sdateListFromCinema" parameterType="String" resultType="String">
+  public ArrayList<String> sdateListFromCinema(String cineCode);
+
+  //<select id="sdateListFromMovieCinema" parameterType="MovieDTO" resultType="String">
+  public ArrayList<String> sdateListFromMovieCinema(MovieDTO dto);
+
   /* ------------------ 예매 : 날짜선택 부분 END ------------------ */
   
-	
-	//<select id="movieData">
-	public MovieDTO movieData(MovieDTO dto);
+  /* ------------------ 예매 : 상영시간표 부분 END ------------------ */
+  //<select id="screentimeRoom" parameterType="MovieDTO" resultType="ScreenDTO">
+  public ArrayList<ScreenDTO> screentimeRoom(MovieDTO dto);
+  
+  /* ------------------ 예매 : 상영시간표 부분 END ------------------ */
+  
+
+  /* -------------------- 영화선택 -> 영화정보 포스터 부분 END -------------------- */
+  //<select id="movieData">
+  public MovieDTO movieData(MovieDTO dto);
+  /* -------------------- 영화선택 -> 영화정보 포스터 부분 END -------------------- */
 	
 }// interface end

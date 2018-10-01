@@ -151,12 +151,43 @@ WHERE cineName LIKE '%타%'
     INNER JOIN screenTable ST
     ON RT.roomCode=ST.roomCode
     WHERE mCode=5
-    AND addr1="SEO"
     GROUP BY ST.sdate
     ORDER BY sdate
     
+-- 극장코드 -> 상영날짜
+    SELECT sdate
+    FROM cinemaTable CT
+    INNER JOIN roomTable RT
+    ON CT.cineCode=RT.cineCode
+    INNER JOIN screenTable ST
+    ON RT.roomCode=ST.roomCode
+    WHERE CT.cineCode='D001'
+    GROUP BY ST.sdate
+    ORDER BY sdate
 
-
+-- 영화코드,극장코드 -> 상영날짜
+    SELECT sdate
+    FROM cinemaTable CT
+    INNER JOIN roomTable RT
+    ON CT.cineCode=RT.cineCode
+    INNER JOIN screenTable ST
+    ON RT.roomCode=ST.roomCode
+    WHERE mCode=5 AND CT.cineCode='D001'
+    GROUP BY ST.sdate
+    ORDER BY sdate
+    
+-- 영화,극장,날짜 -> 관별 시간 띄움
+    SELECT *
+    FROM screenTable
+    WHERE mCode = 5
+          AND roomCode LIKE 'D001%' 
+          AND sdate = '2018-09-17'
+    
+    
+    
+    
+    
+    
 
 -- *********************** 지영 크롤링
 --캐릭터셋 확인

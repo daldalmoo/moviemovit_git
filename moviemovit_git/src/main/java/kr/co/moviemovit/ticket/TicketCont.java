@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
+import kr.co.moviemovit.screen.ScreenDTO;
 import net.utility.Utility;
 
 @Controller
@@ -132,8 +133,6 @@ public class TicketCont {
     else if(addr1.equals("JLD")) { msg += "전라도"; }
     else if(addr1.equals("JJD")) { msg += "제주도"; }
     msg += "(<strong>"+dao.cinemacntFromAddr1Movie(dto)+"</strong>)";
-
-    System.out.println(msg);
     
     msg += "|";
     
@@ -158,8 +157,6 @@ public class TicketCont {
     msg += "  <li value='JJD'>제주도(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
     msg += "</ul>";
     
-    System.out.println(msg);
-
     // 출력
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
@@ -309,12 +306,16 @@ public class TicketCont {
     dto.setCineCode(clmd);
     dto.setAddr1(addr1);  // mName 에 addr1 담아옴
     ArrayList<CinemaDTO> cinemalist = dao.cinemaListFromCLMDAddr1(dto);
-
+    
     msg += "<ul>";
     for(int j=0; j<cinemalist.size(); j++) {
       CinemaDTO cinema = cinemalist.get(j);
       msg += "<li value='"+cinema.getCineCode()+"'>";
-      msg += cinema.getCineName();
+      if(cinema.getBrandName().equals("CGV")) { msg += "CGV"; }
+      else if(cinema.getBrandName().equals("LOTTE")) { msg += "롯데시네마"; }
+      else if(cinema.getBrandName().equals("MEGABOX")) { msg += "메가박스"; }
+      else if(cinema.getBrandName().equals("INDEP")) { msg += "독립영화관"; }//if end
+      msg += " - "+cinema.getCineName();
       msg += "</li>";
     }//for end
     msg += "</ul>";
@@ -391,7 +392,6 @@ public class TicketCont {
     out.flush();
     out.close();
   }//cinemaListFromMovieAddr1() end
-	
 	/* -------------------- 극장선택 부분 AJAX END -------------------- */
 
   /* ------------------ 예매 : 날짜선택 부분 ------------------ */
@@ -416,7 +416,7 @@ public class TicketCont {
     out.close();
   }//sdateAllList() end
   
-  // 영화코드 -> 상영날짜 가져와서 | 구분 정렬 TODO
+  // 영화코드 -> 상영날짜 가져와서 | 구분 정렬
   @RequestMapping(value = "/ticket/sdateListFromMovie.do", method = RequestMethod.POST)
   public void sdateListFromMovie(HttpServletRequest req, HttpServletResponse resp, int mCode) throws IOException {
     String msg = "";
@@ -437,11 +437,11 @@ public class TicketCont {
     out.close();
   }//sdateListFromMovie() end
 
-  // 극장코드 -> 상영날짜 가져와서 | 구분 정렬 TODO
+  // 극장코드 -> 상영날짜 가져와서 | 구분 정렬
   @RequestMapping(value = "/ticket/sdateListFromCinema.do", method = RequestMethod.POST)
   public void sdateListFromCinema(HttpServletRequest req, HttpServletResponse resp, String cineCode) throws IOException {
     String msg = "";
-    ArrayList<String> sdatelist = dao.sdateAllList();
+    ArrayList<String> sdatelist = dao.sdateListFromCinema(cineCode);
     
     for (int j = 0; j < sdatelist.size(); j++) {
       msg += sdatelist.get(j);
@@ -458,11 +458,14 @@ public class TicketCont {
     out.close();
   }//sdateListFromCinema() end
 
-  // 영화코드,극장코드 -> 상영날짜 가져와서 | 구분 정렬 TODO
+  // 영화코드,극장코드 -> 상영날짜 가져와서 | 구분 정렬
   @RequestMapping(value = "/ticket/sdateListFromMovieCinema.do", method = RequestMethod.POST)
   public void sdateListFromMovieCinema(HttpServletRequest req, HttpServletResponse resp, int mCode, String cineCode) throws IOException {
     String msg = "";
-    ArrayList<String> sdatelist = dao.sdateAllList();
+    MovieDTO dto = new MovieDTO();
+    dto.setmCode(mCode);
+    dto.setScreen(cineCode);
+    ArrayList<String> sdatelist = dao.sdateListFromMovieCinema(dto);
     
     for (int j = 0; j < sdatelist.size(); j++) {
       msg += sdatelist.get(j);
@@ -478,12 +481,46 @@ public class TicketCont {
     out.flush();
     out.close();
   }//sdateListFromMovieCinema() end
-  
-  
   /* ------------------ 예매 : 날짜선택 부분 END ------------------ */
   
-	/* -------------------- 영화정보 부분 AJAX -------------------- */
-	// 영화선택 -> 영화정보 포스터 가져오기
+  /* ------------------ 예매 : 상영시간표 부분 ------------------ */
+  // 영화,극장,날짜 -> 관별 상영시작시간 <ul> 목록
+  @RequestMapping(value = "/ticket/screentimeRoom.do", method = RequestMethod.POST)
+  public void screentimeRoom(HttpServletRequest req, HttpServletResponse resp, int mCode, String cineCode, String sdate) throws IOException {
+    String msg = "";
+    MovieDTO dto = new MovieDTO();
+    dto.setmCode(mCode);
+    dto.setScreen(cineCode); // 변수 빌림
+    dto.setS_date(sdate);    // 변수 빌림
+    ArrayList<ScreenDTO> stimelist = dao.screentimeRoom(dto);
+    
+    for (int j = 0; j < stimelist.size(); j++) {
+      msg += stimelist.get(j);
+      if (j != stimelist.size() - 1) {
+        msg += "|";
+      }//if end
+    }//for end
+
+    // 출력
+    resp.setContentType("text/plain; charset=UTF-8");
+    PrintWriter out = resp.getWriter();
+    out.println(msg);
+    out.flush();
+    out.close();
+  }//screentimeRoom() end
+  /* ------------------ 예매 : 상영시간표 부분 END ------------------ */
+  
+  
+  /* -------------------- 좌석선택 --------------------------------- */
+  @RequestMapping(value="/ticket/select.do", method = RequestMethod.GET)
+  public String selectSeat(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    return "ticket/ticketSeat";
+  }//selectSeat() end
+  /* -------------------- 좌석선택 END -------------------- */
+  
+
+  /* -------------------- 영화정보 부분 AJAX -------------------- */
+  // 영화선택 -> 영화정보 포스터 가져오기
   @RequestMapping(value="/ticket/movieposter.do", method = RequestMethod.POST)
   public void movieposter(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     String msg = "";
@@ -506,13 +543,6 @@ public class TicketCont {
     out.close();
     
   }//movieposter() end
-	/* -------------------- 영화정보 부분 AJAX END -------------------- */
-  
-  /* -------------------- 좌석선택 --------------------------------- */
-  @RequestMapping(value="/ticket/select.do", method = RequestMethod.GET)
-  public String selectSeat(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    return "ticket/ticketSeat";
-  }//selectSeat() end
-  /* -------------------- 좌석선택 END -------------------- */
+  /* -------------------- 영화정보 부분 AJAX END -------------------- */
 	
 }//class end
