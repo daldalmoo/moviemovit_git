@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ include file="../header1.jsp"%>
+<%@ include file="../../header1.jsp"%>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -192,100 +192,82 @@ table tr:nth-child(2n+1) {
 	}
 }
 </style>
-<%@ include file="../header2.jsp"%>
 
 
-<div class="table-users">
-<div class="header">QnA</div>
+
+</head>
+
+ <div class="table-users"> 
+<div class="header">회원목록</div>
 <table>
 	<tr>
-		<th>No</th>
-		<th style="width:407px;">제목</th>
-		<th>내용</th>
-		<th>작성자</th>
-		<th>작성일</th>
-		
+		<th>아이디</th>
+		<th>이름</th>
+		<th>성별</th>
+		<th>생일</th>
+		<th>이메일</th>
+		<th>전화번호</th>
+		<th>주소</th>
+		<th>등급</th>
+         <th>가입일</th>
 	</tr>
-	
+
 	<c:forEach var="dto" items="${list }">
 		<tr class="brandtest">
-			<td> <a href="read.do?qCode=${dto.qCode}">${dto.qCode}</a></td>
-		<%-- 	<td>   <c:choose>
-               <c:when test="${dto.qType == 'q1'}">
-               예매 :
-               </c:when>
-               <c:when test="${dto.qType =='q2'}">
-               회원이용 :
-               </c:when>
-               <c:when test="${dto.qType == 'q3'}">
-               극장이용 :
-               </c:when>
-               <c:when test="${dto.qType == 'q4'}">
-             기타 :
-               </c:when>
-           </c:choose></td> --%>
-
-				<td style="text-align: left"><c:if test="${dto.indent > 0}">
-						<c:forEach begin="1" end="${dto.indent}">
-							<i class="fa fa-comment fa-2x" aria-hidden="true"></i>
-							<!-- 답변글일경우 글 제목 앞에 공백을 준다. -->
-
-						</c:forEach>
-						<!--     <i class="fa fa-caret-right" aria-hidden="true"></i> -->
-					</c:if> <a href="read.do?qCode=${dto.qCode}"> <c:choose>
-							<c:when test="${dto.qType == 'q1'}">
-               <strong>예매 :</strong>
-               </c:when>
-							<c:when test="${dto.qType =='q2'}">
-               <strong>회원이용 :</strong>
-               </c:when>
-							<c:when test="${dto.qType == 'q3'}">
-               <strong>극장이용 :</strong>
-               </c:when>
-							<c:when test="${dto.qType == 'q4'}">
-             <strong>기타 :</strong>
-               </c:when>
-						</c:choose> 
-						                  ${dto.title }</a></td>
-				<td> <a href="read.do?qCode=${dto.qCode}">${dto.content }</a></td>
 			<td>${dto.uid }</td>
+			<td>${dto.uname }</td>
+			<td>${dto.gender }</td>
+			<td>${dto.birth }</td>
+			<td>${dto.email }</td>
+			<td>${dto.phone }</td>
+			<td>${dto.addr1 } </td>
+			<td>${dto.grade }</td>
 			<td>${dto.wdate }</td>
-		  
-	
+			
+
 		</tr>
 	</c:forEach>
+
 </table>
 </div>
-<input class="cbp-mc-button" type="button" value="qna 등록" onclick="location.href='createForm.jsp'"/>
- <div>
-                    <c:if test="${qnapage.curPage ne 1 }">
-                        <a href="list.do?curpage=${noticepage.startPage }" ><i class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i></a> 
-                    </c:if>
-                    <c:if test="${qnapage.curPage ne 1}">
-                        <a href="list.do?curpage=${noticepage.prevPage }" ><i class="fa fa-angle-left fa-2x" aria-hidden="true"></i></a> 
-                    </c:if>
-                    <c:forEach var="pageNum" begin="${qnapage.startPage }" end="${qnapage.endPage }">
-                        <c:choose>
-                            <c:when test="${pageNum eq  qnapage.curPage}">
-                                <span style="font-weight: bold;"><a href="list.do?curPage=${pageNum }" >${pageNum }</a></span> 
-                            </c:when>
-                            <c:otherwise>
-                                <a href="list.do?curPage=${pageNum }">${pageNum }</a> 
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                    <c:if test="${qnapage.curPage ne qnapage.pageCnt && qnapage.pageCnt > 0}">
-                        <a href="list.do?curPage=${qnapage.nextPage}"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a> 
-                    </c:if>
-                    <c:if test="${qnapage.curRange ne qnapage.rangeCnt && qnapage.rangeCnt > 0}">
-                        <a href="list.do?curPage=${qnapage.curPage}"><i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a> 
-                    </c:if>
-                </div>
-                
-                <div>
-                    총 게시글 수 : ${qnapage.listCnt }
-                </div>
+<input class="cbp-mc-button" type="button" value="공지사항 등록"
+	onclick="location.href='createForm.jsp'" />
+	
+	
+<%-- <div>
+	<c:if test="${noticepage.curPage ne 1 }">
+		<a href="list.do?curpage=${noticepage.startPage }"><i
+			class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i></a>
+	</c:if>
+	<c:if test="${noticepage.curPage ne 1}">
+		<a href="list.do?curpage=${noticepage.prevPage }"><i
+			class="fa fa-angle-left fa-2x" aria-hidden="true"></i></a>
+	</c:if>
+	<c:forEach var="pageNum" begin="${noticepage.startPage }"
+		end="${noticepage.endPage }">
+		<c:choose>
+			<c:when test="${pageNum eq  noticepage.curPage}">
+				<span style="font-weight: bold;"><a
+					href="list.do?curPage=${pageNum }">${pageNum }</a></span>
+			</c:when>
+			<c:otherwise>
+				<a href="list.do?curPage=${pageNum }">${pageNum }</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+	<c:if
+		test="${noticepage.curPage ne noticepage.pageCnt && noticepage.pageCnt > 0}">
+		<a href="list.do?curPage=${noticepage.nextPage}"><i
+			class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+	</c:if>
+	<c:if test="${noticepage.curRange ne endPage}">
+		<a href="list.do?curPage=${noticepage.endPage}"><i
+			class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a>
+	</c:if>
+</div>
+
+<div>총 게시글 수 : ${noticepage.listCnt }</div> --%>
 
 
 <%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+<%@ include file="../../footer.jsp"%>

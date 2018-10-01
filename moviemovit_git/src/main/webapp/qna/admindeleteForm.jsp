@@ -8,17 +8,17 @@
   font-size: 24px; 
 } 
 </style> 
-<%@ include file="../header2.jsp"%>
 
-<div class="title">공지사항 삭제</div>
-<form method="post" action="./delete.do">
-	<input type="hidden" name="noticeno" value="${dto.noticeno }">
+
+<div class="title">QnA</div>
+<form method="post" action="./admindelete.do">
+	<input type="hidden" name="qCode" value="${dto.qCode }">
 	<div class="content">
-		<p>공지사항 글을 삭제하시겠습니까?</p>
+		<p>QnA 글을 삭제하시겠습니까?</p>
 	</div>
 	<div class="bottom">
 		<input class="cbp-mc-submit" type="submit" value="삭제">
-		<input class="cbp-mc-submit"type="button" value="목록" onclick="location.href='./list.do'">
+		<input class="cbp-mc-submit"type="button" value="목록" onclick="location.href='./adminlist.do'">
 	</div>
 </form>
 

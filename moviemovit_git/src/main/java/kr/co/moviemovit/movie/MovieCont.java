@@ -93,11 +93,11 @@ public class MovieCont {
 	      mav.addObject("msg1", "<p>영화 등록 실패</p>");
 	      mav.addObject("img", "<img src='../img/fail.png'>");
 	      mav.addObject("link1", "<input type='button' value='다시시도' onclick='javascript:history.back()'>");
-	      mav.addObject("link2", "<input type='button' value='목록으로' onclick='location.href=\"./movieList.do?mCode=" + dto.getmCode() + "\"'>");
+	      mav.addObject("link2", "<input type='button' value='목록으로' onclick='location.href=\"./adminmovieList.do?mCode=" + dto.getmCode() + "\"'>");
 	    }else {
 	      mav.addObject("msg1", "<p>영화 등록 성공</p>");
 	      mav.addObject("img", "<img src='../img/success.jpg'>");
-	      mav.addObject("link1", "<input type='button' value='목록으로' onclick='location.href=\"./movieList.do?mCode=" + dto.getmCode() + "\"'>");      
+	      mav.addObject("link1", "<input type='button' value='목록으로' onclick='location.href=\"./adminmovieList.do?mCode=" + dto.getmCode() + "\"'>");      
 	    }
 	    return mav;
 	       
@@ -116,6 +116,21 @@ public class MovieCont {
 	     //mav.addObject("avgstar", avgstar);
 	     return mav;
 	 }//list() end
+	 @RequestMapping("/movie/adminmovieList.do")
+	 public ModelAndView adminlist(MovieDTO dto, StarDTO sdto) {
+	     ModelAndView mav = new ModelAndView();
+	     mav.setViewName("movie/adminmovieList");
+	     ArrayList<MovieDTO> list = dao.list();
+	     ArrayList<StarDTO> list2 = dao.list2();
+	     mav.addObject("list", list);
+	     mav.addObject("list2", list2);
+	     
+	     //mav.addObject("sdto", sdto);
+	     //mav.addObject("avgstar", avgstar);
+	     return mav;
+	 }//list() end
+	 
+
 	 
 	 @RequestMapping(value="/movie/movieRead.do", method=RequestMethod.GET)
 	 public ModelAndView read(MovieDTO dto) {

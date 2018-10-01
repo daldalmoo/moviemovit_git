@@ -184,7 +184,7 @@ table tr:nth-child(2n+1) {
 
 
 </style>
-<%@ include file="../header2.jsp"%>
+
 <%-- 본문시작 peoList.jsp --%>
 
  <div class="table-users">

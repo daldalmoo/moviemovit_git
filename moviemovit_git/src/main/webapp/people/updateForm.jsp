@@ -196,7 +196,7 @@ table tr:nth-child(2n+1) {
     heigth:200px;
 }
 </style>
-<%@ include file="../header2.jsp"%>
+
 <%-- 본문시작 updateForm.jsp --%>
 <div class="table-users">
    <div class="header">People Update</div>

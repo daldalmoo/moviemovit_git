@@ -28,12 +28,12 @@ margin:auto;
 }
 
 </style>
-<%@ include file="../header2.jsp"%>
+
 
 
 <!-- 인풋타입 가져와서 create디자인이랑 통일1 -->
-<form class="cbp-mc-form" name="editor" method="POST" action="./reply.do" >
-	<h1>QnA 답변</h1>
+<form class="cbp-mc-form" name="editor" method="POST" action="./adminreply.do" >
+	<h1>QnA</h1>
 	
   <input type="hidden" name="groupNum" value="${dto.groupNum}"/>
   <input type="hidden"  name="indent" value="${dto.indent}"/>
@@ -61,9 +61,9 @@ margin:auto;
 	
 
 	<div class="bottom">
-		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='list.do'">
+		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='adminlist.do'">
 		<input type="submit" id="noticebutton" class="cbp-mc-submit" value="답변등록">
-		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='delete.do?qCode=${dto.qCode}'">
+		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='admindelete.do?qCode=${dto.qCode}'">
 	
         
                

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../header1.jsp"%>
-
+<%@ include file="../user/auth.jsp"%>
 <%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 <style>
@@ -40,7 +40,6 @@
 }
 </style>
 
-<%@ include file="../header2.jsp"%>
 <%-- 본문시작 couponUpdate.jsp : 쿠폰 수정 폼 --%>
 
 <form class="cbp-mc-form" name="regForm" method="POST" action="./update.do" onsubmit="return couponCheck(this)">

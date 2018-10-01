@@ -18,7 +18,7 @@
 }
 
 </style>
-<%@ include file="../header2.jsp"%>
+
 <%-- 본문시작 people/createForm.jsp --%>
 
 <div class="header2">인물 등록</div>

@@ -13,6 +13,12 @@ VALUES('member5', 's1234!', '¿ì½ÅÇý', 'W', '19911020', 'sh@naver.com', '01012345
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
 VALUES('member6', 's1234!', '¿ì½ÅÇý', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'F');
 
+INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
+VALUES('member7', 's1234!', '¿ì½ÅÇý', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'F');
+
+INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
+VALUES('member11', 's1234!', '¿ì½ÅÇý', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'F');
+
 -- movieTable ·¹ÄÚµå »ðÀÔ
 INSERT INTO movieTable(mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date)
 VALUES ((SELECT ifnull(MAX(mCode),0)+1 FROM movieTable as movie), 'moving/images/poster02.jpg', '½Å°úÇÔ²²', 'comedy', 'ing', '0', 'Àú½Â¿¡ °¡´Â ¿µÈ­', 'Korea', '7,8', '1,2,3', '3D', '140', '2018-06-15', '2018-06-30');

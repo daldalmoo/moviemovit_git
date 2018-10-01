@@ -54,6 +54,9 @@ public class ReviewCont {
     return mav;
   } 
 
+  
+
+  
   @RequestMapping(value="/review/addrList.do", method = RequestMethod.POST)
   public void addrList(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     String msg = "";
@@ -509,6 +512,20 @@ public class ReviewCont {
    
    ModelAndView mav= new ModelAndView();
    mav.setViewName("review/roomList");
+   
+   System.out.println(cineCode);
+   
+   ArrayList<RoomDTO> list = dao.roomList(cineCode);
+   mav.addObject("list", list); 
+   return mav;
+ } 
+ 
+ 
+ @RequestMapping(value="/review/roomlist.do", method=RequestMethod.GET)
+ public ModelAndView adminlist(String cineCode) {
+   
+   ModelAndView mav= new ModelAndView();
+   mav.setViewName("admin/list/roomList");
    
    System.out.println(cineCode);
    

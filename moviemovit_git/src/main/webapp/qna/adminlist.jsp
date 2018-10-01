@@ -192,7 +192,7 @@ table tr:nth-child(2n+1) {
 	}
 }
 </style>
-<%@ include file="../header2.jsp"%>
+
 
 
 <div class="table-users">
@@ -209,7 +209,7 @@ table tr:nth-child(2n+1) {
 	
 	<c:forEach var="dto" items="${list }">
 		<tr class="brandtest">
-			<td> <a href="read.do?qCode=${dto.qCode}">${dto.qCode}</a></td>
+			<td> <a href="adminread.do?qCode=${dto.qCode}">${dto.qCode}</a></td>
 		<%-- 	<td>   <c:choose>
                <c:when test="${dto.qType == 'q1'}">
                예매 :
@@ -232,7 +232,7 @@ table tr:nth-child(2n+1) {
 
 						</c:forEach>
 						<!--     <i class="fa fa-caret-right" aria-hidden="true"></i> -->
-					</c:if> <a href="read.do?qCode=${dto.qCode}"> <c:choose>
+					</c:if> <a href="adminread.do?qCode=${dto.qCode}"> <c:choose>
 							<c:when test="${dto.qType == 'q1'}">
                <strong>예매 :</strong>
                </c:when>
@@ -247,7 +247,7 @@ table tr:nth-child(2n+1) {
                </c:when>
 						</c:choose> 
 						                  ${dto.title }</a></td>
-				<td> <a href="read.do?qCode=${dto.qCode}">${dto.content }</a></td>
+				<td> <a href="adminread.do?qCode=${dto.qCode}">${dto.content }</a></td>
 			<td>${dto.uid }</td>
 			<td>${dto.wdate }</td>
 		  
@@ -256,29 +256,29 @@ table tr:nth-child(2n+1) {
 	</c:forEach>
 </table>
 </div>
-<input class="cbp-mc-button" type="button" value="qna 등록" onclick="location.href='createForm.jsp'"/>
+<input class="cbp-mc-button" type="button" value="qna 등록" onclick="location.href='admincreateForm.jsp'"/>
  <div>
                     <c:if test="${qnapage.curPage ne 1 }">
-                        <a href="list.do?curpage=${noticepage.startPage }" ><i class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i></a> 
+                        <a href="adminlist.do?curpage=${noticepage.startPage }" ><i class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                     <c:if test="${qnapage.curPage ne 1}">
-                        <a href="list.do?curpage=${noticepage.prevPage }" ><i class="fa fa-angle-left fa-2x" aria-hidden="true"></i></a> 
+                        <a href="adminlist.do?curpage=${noticepage.prevPage }" ><i class="fa fa-angle-left fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                     <c:forEach var="pageNum" begin="${qnapage.startPage }" end="${qnapage.endPage }">
                         <c:choose>
                             <c:when test="${pageNum eq  qnapage.curPage}">
-                                <span style="font-weight: bold;"><a href="list.do?curPage=${pageNum }" >${pageNum }</a></span> 
+                                <span style="font-weight: bold;"><a href="adminlist.do?curPage=${pageNum }" >${pageNum }</a></span> 
                             </c:when>
                             <c:otherwise>
-                                <a href="list.do?curPage=${pageNum }">${pageNum }</a> 
+                                <a href="adminlist.do?curPage=${pageNum }">${pageNum }</a> 
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
                     <c:if test="${qnapage.curPage ne qnapage.pageCnt && qnapage.pageCnt > 0}">
-                        <a href="list.do?curPage=${qnapage.nextPage}"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a> 
+                        <a href="adminlist.do?curPage=${qnapage.nextPage}"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                     <c:if test="${qnapage.curRange ne qnapage.rangeCnt && qnapage.rangeCnt > 0}">
-                        <a href="list.do?curPage=${qnapage.curPage}"><i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a> 
+                        <a href="adminlist.do?curPage=${qnapage.curPage}"><i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                 </div>
                 

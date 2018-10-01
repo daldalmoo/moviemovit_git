@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header1.jsp"%>
+<%@ include file="../../header1.jsp"%>
 <!-- <script type="text/javascript" src="../js/me.js" charset="utf-8"></script> -->
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 <style>
@@ -28,7 +28,7 @@ margin:auto;
 }
 
 </style>
-<%@ include file="../header2.jsp"%>
+
 
 <!-- <script type="text/javascript">
     $(function(){
@@ -53,7 +53,7 @@ margin:auto;
     }); 
 </script>-->
 <!-- 인풋타입 가져와서 create디자인이랑 통일1 -->
-<form class="cbp-mc-form" name="frm" method="GET" action="./read.do" enctype="multipart/form-data">
+<form class="cbp-mc-form" name="frm" method="GET" action="./adminread.do" enctype="multipart/form-data">
 	<h1>공지사항</h1>
 
 	<table class="cbp-mc-column">
@@ -82,10 +82,11 @@ margin:auto;
 
 	<div class="bottom">
 		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='list.do'">
-		
+		<input type="button" class="cbp-mc-submit" value="수정" onclick="location.href='update.do?noticeno=${dto.noticeno}'">
+		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='delete.do?noticeno=${dto.noticeno}'">
 	</div>
 
 </form>
 
 <%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+<%@ include file="../../footer.jsp"%>

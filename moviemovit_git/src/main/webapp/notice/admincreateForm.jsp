@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header1.jsp"%>
+<%@ include file="../../header1.jsp"%>
 
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -29,7 +29,7 @@ font-size:1.4em;
 margin:auto;
 }
 </style>
-<%@ include file="../header2.jsp"%>
+
 
 
 	<form class="cbp-mc-form"  method="POST" id="editor" action="./create.do" >
@@ -98,4 +98,4 @@ margin:auto;
 </script> 
 
 <%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+<%@ include file="../../footer.jsp"%>

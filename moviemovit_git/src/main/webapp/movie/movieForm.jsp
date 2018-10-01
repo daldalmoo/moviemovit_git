@@ -16,7 +16,7 @@
 
 
 </style>
-<%@ include file="../header2.jsp"%>
+
 <%-- 본문시작 movieForm.jsp --%>
 
 <div class="header2">영화 등록</div>
@@ -301,7 +301,7 @@
 	<div class="cbp-mc-submit-wrap">
 		<input class="cbp-mc-button" type="submit" value="등록" />
 		<input class="cbp-mc-button" type="reset" value="다시입력" />
-		<input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='./movieList.do'"/>
+		<input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='./adminmovieList.do'"/>
 	</div>
 	
 	

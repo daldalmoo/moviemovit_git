@@ -188,37 +188,14 @@ table tr:nth-child(2n+1) {
   }
 }
 
-
-.container {
-
-    position:absolute;
-
-    bottom:0;
-
-    width:100%;
-
-    height:70px;   
-
-    background:#fed513;
-   
-    }
-    
-    .container p{
-    color: black;
-    font-size: 20px;
-    text-align:center;
-    padding-top:20px;
-    }
-  
-}
 </style>
-<%@ include file="../header2.jsp"%>
+
 <%-- 본문시작 movieForm.jsp --%>
  <div class="table-users">
    <div class="header">MOVIE LIST</div>
  </div>
    
-   <c:forEach var="sdto" items="${list }">
+   <c:forEach var="sdto" items="${list2 }">
    
    <div class="main">
    <div class="box-image" >
@@ -247,7 +224,7 @@ table tr:nth-child(2n+1) {
    
    
    <br><br><br>
-  
+   <input class="cbp-mc-button" type="button" value="영화등록" onclick="location.href='./create.do'"/>  
    
    
     

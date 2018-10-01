@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header1.jsp"%>
+<%@ include file="../../header1.jsp"%>
 <link href="../css/style.css" rel="stylesheet" type="text/css">
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <style type="text/css"> 
@@ -8,13 +8,13 @@
   font-size: 24px; 
 } 
 </style> 
-<%@ include file="../header2.jsp"%>
 
-<div class="title">QnA 삭제</div>
+
+<div class="title">공지사항 삭제</div>
 <form method="post" action="./delete.do">
-	<input type="hidden" name="qCode" value="${dto.qCode }">
+	<input type="hidden" name="noticeno" value="${dto.noticeno }">
 	<div class="content">
-		<p> 삭제하시겠습니까?</p>
+		<p>공지사항 글을 삭제하시겠습니까?</p>
 	</div>
 	<div class="bottom">
 		<input class="cbp-mc-submit" type="submit" value="삭제">
@@ -23,4 +23,4 @@
 </form>
 
 <%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+<%@ include file="../../footer.jsp"%>
