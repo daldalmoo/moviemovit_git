@@ -25,8 +25,8 @@
     </div>  
 
 
-		<%} else{ //로그인했다면 %>
-
+    <%} else{ //로그인했다면 %>
+		
 		<div id="loginmenu">
 			<ul>
 				<li><a href="../user/logout.do" title="Link">Logout</a></li>
