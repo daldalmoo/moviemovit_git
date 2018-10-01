@@ -122,14 +122,7 @@ public class ReviewDAO {
 
 
   
-  //LIST : select+ limit를 이용한 페이징 영역 구분
-  
-  public ArrayList<CinemaDTO> listCriteria(Criteria cri){
-    ReviewMapper mapper= sqlSession.getMapper(ReviewMapper.class);
-    ArrayList<CinemaDTO> list = mapper.listCriteria(cri);
-    return list;
-  }
-  
+
   ////////////////////////////////////////// ROOM //////////////////////////////////////////////////////////
   
   //CREATE
@@ -221,9 +214,9 @@ public class ReviewDAO {
   
   // dupliacate 등록 전 중복 확인
   
-  public ArrayList<ReviewStar> starRead(ReviewStar sdto) {
+  public ReviewStar starRead(ReviewStar sdto) {
     ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
-    ArrayList<ReviewStar> dto = mapper.starRead(sdto);
+    ReviewStar dto = mapper.starRead(sdto);
     return dto;
   }// create() end
   

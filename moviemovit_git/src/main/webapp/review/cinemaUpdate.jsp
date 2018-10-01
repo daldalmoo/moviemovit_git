@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="../header1.jsp"%>
 
 
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
@@ -13,6 +12,9 @@
 	margin: auto;
 }
 </style>
+
+<body>
+
 
 <body onload="selectboxes()">
 <FORM class="cbp-mc-form" name='regForm' method='POST' action='./cinemaUpdate.do'
@@ -252,3 +254,4 @@ function selectboxes(){
 </form>
 
 <%-- 본문끝 --%>
+<%@ include file="../footer.jsp"%>
