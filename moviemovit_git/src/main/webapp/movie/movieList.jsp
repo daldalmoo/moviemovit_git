@@ -9,7 +9,6 @@
   margin-left: 5em;
   text-align: center;
 }
-
 .box-image {
   display: inline-block;
   width:250px;
@@ -21,20 +20,14 @@
   margin-top: 20px;
   padding: 1px 1px 1px 1px;
   float:left;
-  
 }
-
 .mimg {        /* 영화관 목록안의 영화관이미지 */
   font-size: 0;
   text-align: center;
   width: 150px;
   max-width: calc(100% - 50em);
   height: 180px;
-  
 }
-
-
-
 .header {   /* 영화관목록  */
   background-color: #3366cc;
   color: white; 
@@ -43,7 +36,6 @@
   text-align: center;
   text-transform: uppercase;        
 }
-
 .table-users {
   border: 1px solid #327a81;
   border-radius: 10px;
@@ -82,10 +74,6 @@ table tr:nth-child(2n+1) {
   background-color: #bfe1ff;
 }
 
-
-
-
-
 /*공개,수정,삭제 스타일*/
 .cbp-mc-button {
   background: #40bf80;
@@ -103,8 +91,6 @@ table tr:nth-child(2n+1) {
 .cbp-mc-button:hover {
   background: #2b8256;
 }
-
-
 
 @media screen and (max-width: 700px) {
   table, tr, td {
@@ -131,8 +117,6 @@ table tr:nth-child(2n+1) {
     left: 0;
     position: absolute;
   }
-  
- 
 }
 @media screen and (max-width: 500px) {
   .header {
@@ -190,26 +174,18 @@ table tr:nth-child(2n+1) {
 
 
 .container {
-
     position:absolute;
-
     bottom:0;
-
     width:100%;
-
     height:70px;   
-
     background:#fed513;
-   
-    }
-    
-    .container p{
+}
+.container p{
     color: black;
     font-size: 20px;
     text-align:center;
     padding-top:20px;
     }
-  
 }
 </style>
 <%@ include file="../header2.jsp"%>
@@ -249,9 +225,6 @@ table tr:nth-child(2n+1) {
    <br><br><br>
   
    
-   
-    
-	
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>
