@@ -64,13 +64,14 @@ CREATE TABLE cinemaTable (
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;  -- 이클립스에서 한글 깨짐 처리
 
 -- roomTable 생성
+-- 변경
 CREATE TABLE roomTable (
   roomCode  VARCHAR(20)   NOT NULL  PRIMARY KEY
  ,cineCode  CHAR(4)       NOT NULL
  ,roomName  INT           NOT NULL
  ,seatCnt   INT           NOT NULL
  ,DD        VARCHAR(30)   NOT NULL
- ,seatImg   VARCHAR(255)  NOT NULL
+ ,seatImg   VARCHAR(255)  NULL
  ,etc       VARCHAR(255)
  ,FOREIGN KEY(cineCode) 
   REFERENCES cinemaTable(cineCode) 

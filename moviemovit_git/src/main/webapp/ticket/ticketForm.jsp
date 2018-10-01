@@ -4,7 +4,7 @@
 <%@ include file="../header1.jsp"%>
 
 <%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
-<link rel="stylesheet" href="../css/ticket_style.css?ver=3" type="text/css" />
+<link rel="stylesheet" href="../css/ticket_style.css?ver=4" type="text/css" />
 
 
 <%@ include file="../header2.jsp"%>
@@ -15,12 +15,18 @@
 //Calendar date 객체 생성하기
 var Calendar = new Date();
 
+// 오늘날짜
+var t_year = Calendar.getFullYear();  //yyyy년도
+var t_month = Calendar.getMonth();    //0~11 (1~12월 인덱스)
+var t_today = Calendar.getDate();     //1~31 (1~31일)
+
 //getDay() 메서드는 (일:0 ~ 토:6)을 반환하니 0번째 인덱스부터 일요일을 넣는다
 var day_of_week= ['일','월','화','수','목','금','토'];
 
 //getMonth() 메서드는 (1월:0 ~ 12월:11)을 반환하니 0번째 인덱스부터 1월을 넣는다
 var month_of_year = ['1','2','3','4','5','6','7','8','9','10','11','12'];
 
+// 달마다 바뀔 날짜
 var year = Calendar.getFullYear();  //yyyy년도
 var month = Calendar.getMonth();    //0~11 (1~12월 인덱스)
 var today = Calendar.getDate();     //1~31 (1~31일)
@@ -69,10 +75,6 @@ function buildCalendar() {
   //td css클래스를 이용하여 요일마다 색을 다르게 준다
   var TD_week_start = "<td class='week'>";        //일~토 나타낼 td
   var TD_blank_start = "<td class='blank'>";      //blank(1일 이전의 날짜)
-  var TD_today_start = "<td class='today'>";      //오늘 날짜
-  var TD_day_start = "<td class='day'>";          //평일
-  var TD_saturday_start = "<td class='saturday'>";//토
-  var TD_sunday_start = "<td class='sunday'>";    //일
   var TD_end = "</td>";                           //테이블 만들기
   
   str = "<table id='cal_area' border=1 cellspacing=0 cellpadding=0 bordercolor=bbbbbb><tr><td style='text-align:center'>";
@@ -80,7 +82,10 @@ function buildCalendar() {
   str += "<input type='hidden' id='calYear' value='" + year + "'>";
   str += "<input type='hidden' id='calMonth' value='" + month_of_year[month] + "'>";
   
-  str += "<strong>" + "<div id='prev' onclick='prevCalendar()'>◀</div>" + year + ". " + month_of_year[month] + "<div id='next' onclick='nextCalendar()'>▶</div>" + "</strong>";
+  str += "<div id='YM'><strong>" + "<div id='prev' onclick='prevCalendar()'>◀</div>";
+  str += "<span>" + year + ". " + month_of_year[month] + "</span>";
+  str += "<div id='next' onclick='nextCalendar()'>▶</div>" + "</strong></div>";
+  
   str += "<table class='calendar' border=0 cellspacing=0 cellpadding=2>";
   
   //본격적인 tr시작. 맨첫줄은 요일
@@ -106,28 +111,42 @@ function buildCalendar() {
       var day = Calendar.getDate(); //날짜
       var week_day = Calendar.getDay(); //요일
 
-      //만약 일요일이면 다음행
+      // 일요일이면 <tr> 시작
       if(week_day == 0) {
         str += TR_start;
       }
       
-      //오늘 날짜라면
-      if(day == today) {
-        str += TD_today_start + day + TD_end;
-      }else {
-        switch(week_day) {
+      // 일,토,평일 색상클래스 추가
+      switch(week_day) {
         case 0: // 일요일
-          str += TD_sunday_start + day + TD_end;
+          str += "<td class='sunday";
           break;
         case 6: // 토요일
-          str += TD_saturday_start + day + TD_end;
-          str += TR_end; // 토요일이면 </tr>
+          str += "<td class='saturday";
           break;
         default: // 평일
-          str += TD_day_start + day + TD_end;
+          str += "<td class='day";
           break;
-        }
-      }
+      }//switch end
+      
+      // 오늘 날짜라면 class에 today 추가
+      if(year==t_year && month==t_month && day==t_today) {
+        str += " today";
+      }//if end
+      
+      // onclick 함수 추가. 이때 월일이 한자리면 앞에 0 추가
+      if(month+1<10) {
+        if(day<10) str += "' onclick='javascript:SelDate(\""+year+"-0"+(month+1)+"-0"+day+"\")'>" + day + TD_end;
+        else str += "' onclick='javascript:SelDate(\""+year+"-0"+(month+1)+"-"+day+"\")'>" + day + TD_end;
+      } else {
+        if(day<10) str += "' onclick='javascript:SelDate(\""+year+"-"+(month+1)+"-0"+day+"\")'>" + day + TD_end;
+        else str += "' onclick='javascript:SelDate(\""+year+"-"+(month+1)+"-"+day+"\")'>" + day + TD_end;
+      }//if end
+    }//if end
+    
+    // 토요일이면 </tr> 끝
+    if(week_day == 6) {
+      str += TR_end;
     }//if end
     
     //다음 날짜로 넘어간다
@@ -135,6 +154,9 @@ function buildCalendar() {
     
   }//for end  
   str += "</table></td></tr></table>";
+  
+  str += "<img src='./img/calender_info.PNG' class='calenderinfo'>";
+  
   document.getElementById("date_area").innerHTML = str;
   //document.write(str);
   
@@ -156,7 +178,7 @@ function buildCalendar() {
         <img class="refreshbtn" src="./img/refreshbtn.jpg" onmouseover="this.src='./img/refreshbtn_hover.png'" onmouseout="this.src='./img/refreshbtn.jpg'" onclick="ResetCinema();">
         &nbsp;
         <input type="text" class="searchtxt" placeholder=" 극장검색">
-        <img class="searchbtn" src="./img/searchbtn.gif" onmouseover="this.src='./img/searchbtn_hover.png'" onmouseout="this.src='./img/searchbtn.gif'" onclick="SearchCinema();">
+        <img class="closebtn" src="./img/closebtn.jpg" onmouseover="this.src='./img/closebtn_hover.jpg'" onmouseout="this.src='./img/closebtn.jpg'" onclick="closeSearch();">
         <!-- 검색하면 전체극장에서 목록 나옴 -->
       </th>
 
@@ -199,16 +221,23 @@ function buildCalendar() {
             </li>
             <li class="t_tab3">
               <a href="javascript:cinemaSelect(3);" class="">
-                <span>체인별</span>
+                <span>체인별&nbsp;</span>
               </a>
             </li>
           </ul>
         </div>
-        
         <div class="cinema_list">
           <div class="nocinema">
             <strong>상영극장이 없습니다.</strong>
             <br>영화 또는 날짜를 선택해 주세요.
+          </div>
+          <div class="cinema_chain">
+            <ul>
+              <li class="cgvbtn on" value="C"><a title="CGV"></a></li>
+              <li class="lottebtn" value="L"><a title="롯데시네마"></a></li>
+              <li class="megabtn" value="M"><a title="메가박스"></a></li>
+              <li class="indebtn" value="D"><a title="독립영화관"></a></li>
+            </ul>
           </div>
           <div class="cinema_addr1">
             <a href="#" class="addr1selected">
@@ -250,7 +279,9 @@ function buildCalendar() {
     
     
       <!-- -------------------------- date_area : 날짜 선택 ----------------------------------- -->
-      <td id="date_area"><script type="text/javascript">buildCalendar();</script></td>
+      <td id="date_area">
+        <script type="text/javascript">buildCalendar();</script>
+      </td>
       <!-- -------------------------- date_area : 날짜 선택  end ------------------------------- -->
       
 
@@ -425,7 +456,7 @@ function buildCalendar() {
   <br>
 </form>
 
-<script src="../js/ticket_script.js?ver=7" charset="utf-8"></script>
+<script src="../js/ticket_script.js?ver=4" charset="utf-8"></script>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

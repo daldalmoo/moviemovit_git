@@ -50,6 +50,18 @@ public class TicketDAO {
     int cinemacnt = mapper.cinemacntFromAddr1(addr1);
     return cinemacnt;
   }//cinemacntFromAddr1() end
+  
+  public int cinemacntFromAddr1Movie(MovieDTO dto) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    int cinemacnt = mapper.cinemacntFromAddr1Movie(dto);
+    return cinemacnt;
+  }//cinemacntFromAddr1Movie() end
+  
+  public int cinemacntFromAddr1CLMD(CinemaDTO dto) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    int cinemacnt = mapper.cinemacntFromAddr1CLMD(dto);
+    return cinemacnt;
+  }//cinemacntFromAddr1CLMD() end
 
   public ArrayList<CinemaDTO> cinemaListFromAddr1(String addr1) {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
@@ -63,13 +75,34 @@ public class TicketDAO {
     return cinelist;
   }//cinemaListFromMovieAddr1() end
   
+  public ArrayList<CinemaDTO> cinemaListFromCLMDAddr1(CinemaDTO dto) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<CinemaDTO> cinelist = mapper.cinemaListFromCLMDAddr1(dto);
+    return cinelist;
+  }//cinemaListFromCLMDAddr1() end
+  
   public ArrayList<CinemaDTO> grayCinemaList(int mCode) {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     ArrayList<CinemaDTO> cinelist = mapper.grayCinemaList(mCode);
     return cinelist;
   }//grayCinemaList() end
+
+  public ArrayList<CinemaDTO> cinemaSearch(String key) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<CinemaDTO> cinelist = mapper.cinemaSearch(key);
+    return cinelist;
+  }//cinemaSearch() end
   
   /* ------------------ 예매 : 극장선택 부분 END ------------------ */
+
+  /* ------------------ 예매 : 날짜선택 부분 ------------------ */
+  public ArrayList<String> sdateAllList() {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<String> cinelist = mapper.sdateAllList();
+    return cinelist;
+  }//sdateAllList() end
+
+  /* ------------------ 예매 : 날짜선택 부분 END ------------------ */
   
   /* -------------------- 영화선택 -> 영화정보 포스터 부분 -------------------- */
   public MovieDTO MovieData(MovieDTO dto) {
