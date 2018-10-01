@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			]]>	
 	</insert>
 	
-	<select id="list" resultType="MovieDTO">
+	<select id="list" parameterType="MovieDTO" resultType="MovieDTO">
 		<![CDATA[
 			SELECT mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date
 			FROM movieTable
@@ -30,13 +30,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list2" resultType="StarDTO">
 	    <![CDATA[
 	        select mt.*, st.star
-            from (SELECT mcode, star
+            from (SELECT mCode, (select avg(star) from starTable) star
                   FROM starTable) st join movieTable mt
             ON mt.mCode = st.mCode
             WHERE st.mCode=#{mCode}
         ]]>
 	</select>
 	
+    <select id="starlist" parameterType="MovieDTO" resultType="MovieDTO">
+       <![CDATA[
+       	  select mt.mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, s_date, e_date, avg(star) as runningTime 
+          from movieTable mt join starTable st
+          ON mt.mCode = st.mCode
+          GROUP BY mt.mCode
+       ]]>
+    </select>
+
 	
 	<select id="read" parameterType="MovieDTO" resultType="MovieDTO">
 		<![CDATA[
@@ -80,11 +89,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       ]]>
     </select>
     
-    <select id="avgstar" resultType="int" parameterType="StarDTO">
+    <select id="avgstar" resultType="int">
       <![CDATA[
-		SELECT (select avg(star) from starTable) AS avgstar
+		SELECT mCode, (select avg(star) from starTable where mCode=#{mCode}) AS avgstar
 	    FROM starTable
-	    WHERE mCode=#{mCode}
 	    GROUP BY mCode
       ]]>    
     </select>

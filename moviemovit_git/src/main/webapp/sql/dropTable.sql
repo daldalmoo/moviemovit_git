@@ -1,4 +1,4 @@
--- ------------------------- drop table
+--------------------------- drop table
 drop table ticketTable;
 drop table screenTable;
 drop table couponTable;
