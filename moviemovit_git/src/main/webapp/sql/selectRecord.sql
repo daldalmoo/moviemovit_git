@@ -12,7 +12,7 @@ select * from roomTable;
 
 select * from reviewStarTable;
 
-select * from noticeTable 
+select * from noticeTable;
 
 select * from QnATable;
 
