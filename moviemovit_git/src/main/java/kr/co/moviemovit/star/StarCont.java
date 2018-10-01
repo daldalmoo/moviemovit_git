@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.ReviewStar;
+import kr.co.moviemovit.user.UserDTO;
 
-@SessionAttributes("s_id")
+
 @Controller
 public class StarCont {
     
@@ -93,14 +97,22 @@ public class StarCont {
 	 
      
 	 @RequestMapping(value="/star/avgList.do", method=RequestMethod.GET)
-	 public ModelAndView genrestar(MovieDTO dto, StarDTO sdto) {
+	 public ModelAndView genrestar(HttpServletRequest req) {
 		 ModelAndView mav = new ModelAndView();
+		 HttpSession session = req.getSession();
+		 
+	     //로그인되어서 session에 올라간 값 가져오기
+	     String uid = (String)session.getAttribute("s_id");
+
+	     StarDTO sdto = new StarDTO();
+	     sdto.setUid(uid);
+
+	     ArrayList<StarDTO> list = dao.genrestar(sdto);
 		 mav.setViewName("/star/avgList");
-		 ArrayList<StarDTO> list = dao.genrestar(sdto);
-		 System.out.println(sdto.getStar());
 		 mav.addObject("list", list);
+		 
 		 return mav;
+		 
 	 }//avglist() end
 	
-
 }//class end
