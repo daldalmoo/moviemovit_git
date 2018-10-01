@@ -507,6 +507,12 @@ public class TicketCont {
     
   }//movieposter() end
 	/* -------------------- 영화정보 부분 AJAX END -------------------- */
-	
+  
+  /* -------------------- 좌석선택 --------------------------------- */
+  @RequestMapping(value="/ticket/select.do", method = RequestMethod.GET)
+  public String selectSeat(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    return "ticket/ticketSeat";
+  }//selectSeat() end
+  /* -------------------- 좌석선택 END -------------------- */
 	
 }//class end

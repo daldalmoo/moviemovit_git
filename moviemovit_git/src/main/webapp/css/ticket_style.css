@@ -513,14 +513,6 @@
   font-weight: bold;
 }
 .ticket_data li {
-  cursor: pointer;
-  background: url('../ticket/img/selectBefore_people.PNG');
-}
-.ticket_data li.on {
-  cursor: pointer;
-  background: url('../ticket/img/selectAfter_people.PNG');
-}
-.ticket_data li {
   display: inline-block;
   width: 30px;
   height: 27px;
@@ -528,7 +520,15 @@
   float: left;
   text-align: center;
   padding-top: 3px;
-  
+  cursor: pointer;
+  background: url('../ticket/img/selectBefore_people.PNG');
+}
+.ticket_data li.on {
+  cursor: pointer;
+  background: url('../ticket/img/selectAfter_people.PNG');
+}
+.ticket_data li.on:hover {
+  cursor: auto;
 }
 #price_lst_area .ticket_data td{
   vertical-align: bottom;
