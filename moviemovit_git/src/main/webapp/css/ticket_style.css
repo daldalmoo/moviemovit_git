@@ -463,33 +463,59 @@
   border: none;
 }*/
 /*********** 5) 상영시간선택 ***********/
-.time_area {
+#screentime_area .time_area {
   position: relative;
   top: 0;
 }
-
-.cinemainfo, .screentime {
+#screentime_area .cinemainfo {
+  height: 90px;
   padding: 0 0 20px 20px;
   text-align: left;
-  color: #6670bc;
+  border-bottom: 2px #c0c0c0 solid;
 }
-
-.cinemainfo .cinema_logo {
-  width: 15%;
-  height: 15%;
+#screentime_area .cinemainfo .cinema_logo {
+  width: 80px;
+  height: 60px;
   position: relative;
   top: 15px;
   margin: auto;
   /*상영시간표 끝나면 지우기*/
   cursor: pointer;
 }
-
-.cinemainfo .cinemainfo_name {
+#screentime_area .cinemainfo .cinemainfo_name {
   vertical-align: bottom;
   color: black;
   font-weight: bold;
+  margin-left: 10px;
 }
-
+#screentime_area .screentime {
+  width: 100%;
+  height: 112px;
+  overflow: auto;
+  padding: 0 0 20px 20px;
+  text-align: left;
+  color: #6670bc;
+}
+#screentime_area .screentime dt {  /* x관 */
+  font-weight: bold;
+  color: #6670bc;
+  margin: 10px 0 0 0;
+}
+#screentime_area .screentime dd {
+  font-weight: normal;
+  color: black;
+}
+#screentime_area .screentime ul {
+  list-style: none;
+}
+#screentime_area .screentime li {
+  float: left;
+  font-weight: normal;
+  color: black;
+  margin-right: 6px;
+  padding: 0 1px 0 1px;
+  border: 1px #c2c2c5 solid;
+}
 /*********** 6) 인원선택 ***********/
 #price_lst_area {
   margin: 0 0 0 10px;

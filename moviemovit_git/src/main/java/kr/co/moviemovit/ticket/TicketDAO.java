@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
+import kr.co.moviemovit.screen.ScreenDTO;
 
 @Component
 public class TicketDAO {
@@ -97,7 +98,6 @@ public class TicketDAO {
     ArrayList<CinemaDTO> cinelist = mapper.cinemaSearch(key);
     return cinelist;
   }//cinemaSearch() end
-  
   /* ------------------ 예매 : 극장선택 부분 END ------------------ */
 
   /* ------------------ 예매 : 날짜선택 부분 ------------------ */
@@ -113,7 +113,28 @@ public class TicketDAO {
     return sdatelist;
   }//sdateListFromMovie() end
 
+  public ArrayList<String> sdateListFromCinema(String cineCode) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<String> sdatelist = mapper.sdateListFromCinema(cineCode);
+    return sdatelist;
+  }//sdateListFromCinema() end
+
+  public ArrayList<String> sdateListFromMovieCinema(MovieDTO dto) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<String> sdatelist = mapper.sdateListFromMovieCinema(dto);
+    return sdatelist;
+  }//sdateListFromMovieCinema() end
   /* ------------------ 예매 : 날짜선택 부분 END ------------------ */
+  
+  /* ------------------ 예매 : 상영시간표 부분 END ------------------ */
+  //<select id="screentimeRoom" parameterType="MovieDTO" resultType="ScreenDTO">
+  public ArrayList<ScreenDTO> screentimeRoom(MovieDTO dto) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<ScreenDTO> screenlist = mapper.screentimeRoom(dto);
+    return screenlist;
+  }//screentimeRoom() end
+  /* ------------------ 예매 : 상영시간표 부분 END ------------------ */
+  
   
   /* -------------------- 영화선택 -> 영화정보 포스터 부분 -------------------- */
   public MovieDTO MovieData(MovieDTO dto) {

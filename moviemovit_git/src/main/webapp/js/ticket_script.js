@@ -8,6 +8,7 @@ var CINETAB = 1;  // 선택된 극장종류 : 1 전체극장, 2 상영극장, 3 
 var CINEADDR1 = "all";// 선택된 극장주소1 : 전국
 var CLMD = "C";   // 선택된 극장체인
 var CINECODE = "";// 선택된 극장코드
+var CINEINFONAME = "";
 var SDATE = "";   // 선택된 날짜
 
 // 페이지 로드가 끝난 후 실행
@@ -34,6 +35,9 @@ function ResetMovie() {
 
   // 날짜목록 호출
   calendarClassReady();
+
+  // 상영시간표 호출
+  screentimeView();
   
 }//ResetMovie() end
 
@@ -58,11 +62,14 @@ $("#movie_area .SelMovieList").click(function(){
     } else if(CINETAB==3) {  // 체인별
       cinetab3mainlist();
     }//if end
-
-    // 날짜목록 호출
-    calendarClassReady();
-    
   }//if end
+
+  // 날짜목록 호출
+  calendarClassReady();
+  
+  // 상영시간표 호출
+  screentimeView();
+  
 });//SelMovieList click() end
 
 //영화선택하면 해당 포스터가져와서 영화정보에 뿌려줌 
@@ -84,6 +91,8 @@ function ResetCinema() {
   // 날짜목록 호출
   calendarClassReady();
   
+  CINEINFONAME = "";
+  screentimeView();  // 상영시간표 호출
 }//ResetCinema() end
 
 // 극장종류 선택시 호출
@@ -285,21 +294,24 @@ function closeSearch() {
 // 주의! 위처럼 쓰면 ajax에서 쓴 html의 엘리먼트는 이벤트 작동 안함
 $(document).on('click', '#cinema_area .main_list li', function(){
   //alert("main_list li 클릭됨. $(this).attr('value'):" + $(this).attr('value'));
-  if ($(this).hasClass("on") == true) { // 이미 선택된 영화라면 on class 지움
+  if ($(this).hasClass("on") == true) { // 이미 선택된 영화라면 on class 지우고 전역변수 초기화
     $(this).removeClass("on");
+    CINECODE = "";
+    CINEINFONAME = "";
+    screentimeView();  // 상영시간표 호출
   } else { // 영화를 선택했을 때
     $("#cinema_area .main_list li").removeClass("on");
     $(this).addClass("on");
     
-    CINECODE = $(this).attr('value'); // 전역변수 할당
-    alert(CINECODE);
-
-    // 영화목록 호출 TODO
-
-    // 날짜목록 호출
-    calendarClassReady();
-
+    CINECODE = $(this).attr('value').trim(); // 전역변수 할당
+    CINEINFONAME = $(this).text();
+    screentimeView();  // 상영시간표 호출
   }//if end
+  
+  // 영화목록 호출 TODO
+
+  // 날짜목록 호출
+  calendarClassReady();
 });//SelMovieList click() end
 
 /******************* 극장선택 부분 AJAX END *******************/
@@ -379,12 +391,53 @@ $(".calendar td").click(function() {
   }//if end
   
   SDATE = $(this).attr("onclick").substr(20,10);
-  alert(SDATE);
+  //alert(SDATE);
+
+  // 상영시간표 호출
+  screentimeView();
 });//click() end
 
 /******************* 날짜선택 AJAX END *******************/
 
 /******************* 상영시간표 AJAX *******************/
+// 영화, 극장, 날짜 정보로 뷰 띄워주기
+function screentimeView() {
+  if(CINECODE=="") { // 극장없음
+    $("#screentime_area .cinemainfo .cinema_logo").css("content","url('../ticket/img/default.png')");
+    $("#screentime_area .cinemainfo .cinemainfo_name").text("영화관-지점");
+  } else if(CINECODE.substr(0,1)=='C') { // cgv 선택
+    $("#screentime_area .cinemainfo .cinema_logo").css("content","url('../ticket/img/screentime_CGV.png')");
+    $("#screentime_area .cinemainfo .cinemainfo_name").text(CINEINFONAME);
+  } else if(CINECODE.substr(0,1)=='L') {  // 롯데시네마 선택
+    $("#screentime_area .cinemainfo .cinema_logo").css("content","url('../ticket/img/screentime_LOTTE.png')");
+    $("#screentime_area .cinemainfo .cinemainfo_name").text(CINEINFONAME);
+  } else if(CINECODE.substr(0,1)=='M') {  // 메가박스 선택
+    $("#screentime_area .cinemainfo .cinema_logo").css("content","url('../ticket/img/screentime_MEGA.png')");
+    $("#screentime_area .cinemainfo .cinemainfo_name").text(CINEINFONAME);
+  } else if(CINECODE.substr(0,1)=='D') {  // 독립영화관 선택
+    $("#screentime_area .cinemainfo .cinema_logo").css("content","url('../ticket/img/screentime_INDE.png')");
+    $("#screentime_area .cinemainfo .cinemainfo_name").text(CINEINFONAME);
+  }//if end
+  
+  // 영화,극장,날짜 모두 선택되면 관별 상영시작시간 띄움
+  if(MCODE!=0 && CINECODE!="" && SDATE!="") {
+    $.post("./screentimeRoom.do", "mCode="+MCODE+"&cineCode="+CINECODE+"&sdate="+SDATE, function(data) { // 선택가능날짜 모두표시
+      alert(data);
+      /*var data = datastr.split("|");
+      for(var i=0; i<data.length; i++) {
+        $(".calendar td[onclick='javascript:SelDate(\""+data[i].trim()+"\")']").addClass("ready");
+      }//for end */
+    });//post end
+  }//if end
+}//screentimeView() end
+
+// 상영시간 클릭하면 호출
+function timeclick(time) {
+  alert(time);
+}//timeclick() end
+
+
+
 //상영시간표 선택하면 인원선택의 li부분 font-weight bold하기!
 //임시로 ex)8관 눌렀을 때 활성화되는걸로 작업중
 $(".cinemainfo .cinema_logo").click(function() {
