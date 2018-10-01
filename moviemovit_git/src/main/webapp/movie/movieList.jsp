@@ -7,7 +7,7 @@
 .guide {
     position: relative;   
     width: 90%;
-    height: 200000px;
+    height: 100%;
     background: #fff;
     margin: 20px auto;
 }
@@ -195,6 +195,9 @@ table tr:nth-child(2n+1) {
        <strong>
        ${dto.s_date }개봉<br> 
        ${dto.screen } <br>
+       <c:if test="${dto.age==0 }">
+       ${dto.age }=="전체 관람가"
+       </c:if>
        ${dto.age}세 <br>
        <c:if test="${dto.runningTime==0 }">
            <img class="simg" src="./img_star/star0.png"> 
@@ -217,6 +220,7 @@ table tr:nth-child(2n+1) {
        <br>
        </strong>
      </span>
+     <input class="cbp-mc-button" type="button" value="평가하기" onclick="location.href='../star/create.do?mCode=${dto.mCode }'"/>
      <input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />    
    
     </div>
