@@ -85,11 +85,6 @@ function logoutCheck(){
 						</ul></li>
 				</ul>
 			</nav>
-			<form class="search_box" id="search_box" action="/search/">
-				<input name="search_criteria" placeholder="Search here" value=""
-					type="text"> <input class="search_icon" value="Search"
-					type="submit">
-			</form>
 		</div>
 		<!--   Navigation end -->
 
