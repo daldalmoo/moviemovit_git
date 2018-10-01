@@ -48,25 +48,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </where>
   </select>
   
-  <!-- 영화코드,주소1 -> 상영극장 개수 (mMame 에 addr1 담아옴) TODO GROUP 확인 -->
-  <select id="cinemacntFromAddr1Movie" parameterType="MovieDTO" resultType="int">
-    <![CDATA[
-      SELECT COUNT(CT.cineCode) cnt
+  <!-- 영화코드,주소1 -> 상영극장 개수 (mMame 에 addr1 담아옴) -->
+  <select id="cinemacntFromAddr1Movie" parameterType="MovieDTO" resultType="Integer">
+    SELECT COUNT(cineCode)
+    FROM (  
+      SELECT CT.cineCode
       FROM cinemaTable CT
       INNER JOIN roomTable RT
       ON CT.cineCode=RT.cineCode
       INNER JOIN screenTable ST
       ON RT.roomCode=ST.roomCode
       WHERE mCode=#{mCode}
-    ]]>
-    <if test="mName != 'all'">
-      AND addr1=#{mName}
-    </if>
-    
+      <if test="mName != 'all'">
+        AND addr1=#{mName}
+      </if>
+      GROUP BY cineCode ) a
   </select>
-  <!-- <![CDATA[
-      GROUP BY CT.cineCode
-    ]]> TODO 이거 안넣으면 roomCode 여러개인거 중복될텐데 넣으면 오류나는거 아직 원인 못찾음 -->
   
   <!-- 체인,주소1 -> 극장개수 (CineCode에 CLMD 한글자만 들어있음) -->
   <select id="cinemacntFromAddr1CLMD" parameterType="CinemaDTO" resultType="int">
@@ -162,6 +159,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ORDER BY sdate
   ]]>
   </select>
+  
+  <!-- 영화코드 -> 상영날짜 -->
+  <select id="sdateListFromMovie" parameterType="int" resultType="String">
+    SELECT sdate
+    FROM cinemaTable CT
+    INNER JOIN roomTable RT
+    ON CT.cineCode=RT.cineCode
+    INNER JOIN screenTable ST
+    ON RT.roomCode=ST.roomCode
+    WHERE mCode=#{mCode}
+    GROUP BY ST.sdate
+    ORDER BY sdate
+  </select>
+  
   
   <!-- ********* 예매 : 날짜선택 부분 END ******** -->
   

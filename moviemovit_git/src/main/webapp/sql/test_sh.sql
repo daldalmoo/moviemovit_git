@@ -121,15 +121,16 @@ ON RT.roomCode=ST.roomCode
 WHERE mCode=3 AND addr1='SEO';
 
 -- 영화코드,주소1 -> 상영극장 개수 (mMame 에 addr1 담아옴)
-    SELECT COUNT(CT.cineCode) cnt
-    FROM cinemaTable CT
-    INNER JOIN roomTable RT
-    ON CT.cineCode=RT.cineCode
-    INNER JOIN screenTable ST
-    ON RT.roomCode=ST.roomCode
-    WHERE mCode=4
-    AND addr1="SEO"
-    GROUP BY CT.cineCode
+    SELECT COUNT(cineCode) cnt
+    FROM ( SELECT CT.cineCode
+      FROM cinemaTable CT
+      INNER JOIN roomTable RT
+      ON CT.cineCode=RT.cineCode
+      INNER JOIN screenTable ST
+      ON RT.roomCode=ST.roomCode
+      WHERE mCode=5
+      AND addr1="ICH"
+      GROUP BY cineCode ) a
 
 -- 체인별, 주소1 -> 극장 목록 <ul> 전체
 SELECT *

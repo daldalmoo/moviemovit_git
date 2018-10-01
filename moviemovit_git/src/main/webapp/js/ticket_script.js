@@ -2,11 +2,12 @@
 $.ajaxSetup({datatype:"text"});
    
 // 전역변수
-var MCODE = 0;   // 선택된 영화코드. DB에서 int mCode는 1부터 입력됨. 0일 경우 선택영화 없음
+var MCODE = 0;    // 선택된 영화코드. DB에서 int mCode는 1부터 입력됨. 0일 경우 선택영화 없음
 var CINETAB = 1;  // 선택된 극장종류 : 1 전체극장, 2 상영극장, 3 체인별
-var CINEADDR1 = "all";// 선택된 극장주소1
+var CINEADDR1 = "all";// 선택된 극장주소1 : 전국
 var CLMD = "C";   // 선택된 극장체인
 var CINECODE = "";// 선택된 극장코드
+var SDATE = "";   // 선택된 날짜
 
 // 페이지 로드가 끝난 후 실행
 $(document).ready(function() {
@@ -29,6 +30,9 @@ function ResetMovie() {
     $("#cinema_area .cinema_chain").css('display','none');
     $("#cinema_area .main_list").css('display','none');
   }//if end
+
+  // 날짜목록 호출
+  calendarClassReady();
   
 }//ResetMovie() end
 
@@ -53,8 +57,9 @@ $("#movie_area .SelMovieList").click(function(){
     } else if(CINETAB==3) {  // 체인별
       cinetab3mainlist();
     }//if end
-    
-    // 날짜 설정
+
+    // 날짜목록 호출
+    calendarClassReady();
     
   }//if end
 });//SelMovieList click() end
@@ -67,13 +72,16 @@ $("#movie_area .SelMovieList").click(function(){
 // 극장목록 새로고침
 function ResetCinema() {
   //alert("ResetCinema() 클릭");
-  // 극장주소1 : 전국
-  CINEADDR1="all";
-  $("#cinema_area .addr1selected span").html($(".addr1list li:first-child").html());
+  CINETAB = 1;  // 선택된 극장종류 : 1 전체극장, 2 상영극장, 3 체인별
+  CINEADDR1 = "all";// 선택된 극장주소1 : 전국
+  CLMD = "C";   // 선택된 극장체인
+  CINECODE = "";// 선택된 극장코드
   
-  // 극장종류 : 전체극장
-  CINETAB = 1;
+  // 전체극장 선택하여 극장목록 호출
   cinemaSelect(1);
+  
+  // 날짜목록 호출
+  calendarClassReady();
   
 }//ResetCinema() end
 
@@ -285,9 +293,10 @@ $(document).on('click', '#cinema_area .main_list li', function(){
     CINECODE = $(this).attr('value'); // 전역변수 할당
     alert(CINECODE);
 
-    // 영화목록 설정
+    // 영화목록 호출 TODO
 
-    // 날짜 설정
+    // 날짜목록 호출
+    calendarClassReady();
 
   }//if end
 });//SelMovieList click() end
@@ -316,35 +325,43 @@ $(document).on('click', '#cal_area #next', function(){
 
 // 선택가능날짜 class="ready" 처리
 function calendarClassReady() {
-  if(MCODE==0 && CINECODE=="") {  // 영화, 극장 선택 안됐을때
-    $.post("./sdateAllList.do", "", function(datastr) { // 선택가능날짜 모두표시
-      var data = datastr.split("|");
-      for(var i=0; i<data.length; i++) {
-        $(".calendar td[onclick='javascript:SelDate(\""+data[i].trim()+"\")']").addClass("ready");
-      }//for end
-    });//post end
-  } else if(CINECODE=="") {  // 영화만 선택됐을때
-    $.post("./sdateListFromMovie.do", "mCode="+MCODE, function(datastr) { // 선택가능날짜 모두표시
-      var data = datastr.split("|");
-      for(var i=0; i<data.length; i++) {
-        $(".calendar td[onclick='javascript:SelDate(\""+data[i].trim()+"\")']").addClass("ready");
-      }//for end
-    });//post end
-  } else if(MCODE==0) {  // 극장만 선택됐을때
-    $.post("./sdateListFromCinema.do", "cineCode="+CINECODE, function(datastr) { // 선택가능날짜 모두표시
-      var data = datastr.split("|");
-      for(var i=0; i<data.length; i++) {
-        $(".calendar td[onclick='javascript:SelDate(\""+data[i].trim()+"\")']").addClass("ready");
-      }//for end
-    });//post end
-  } else {  // 영화, 극장 모두 선택됐을때
-    $.post("./sdateListFromMovieCinema.do", "mCode="+MCODE+"&cineCode="+CINECODE, function(datastr) { // 선택가능날짜 모두표시
-      var data = datastr.split("|");
-      for(var i=0; i<data.length; i++) {
-        $(".calendar td[onclick='javascript:SelDate(\""+data[i].trim()+"\")']").addClass("ready");
-      }//for end
-    });//post end
-  }//if end
+  //0.01초 시간지연. 이전 코드에서 html이 모두 로딩되길 기다린 후 실행
+  setTimeout(execute, 10); 
+  function execute(){
+    if(MCODE==0 && CINECODE=="") {  // 영화, 극장 선택 안됐을때
+      $(".calendar td").removeClass("ready");
+      $.post("./sdateAllList.do", "", function(datastr) { // 선택가능날짜 모두표시
+        var data = datastr.split("|");
+        for(var i=0; i<data.length; i++) {
+          $(".calendar td[onclick='javascript:SelDate(\""+data[i].trim()+"\")']").addClass("ready");
+        }//for end
+      });//post end
+    } else if(CINECODE=="") {  // 영화만 선택됐을때
+      $(".calendar td").removeClass("ready");
+      $.post("./sdateListFromMovie.do", "mCode="+MCODE, function(datastr) { // 선택가능날짜 모두표시
+        var data = datastr.split("|");
+        for(var i=0; i<data.length; i++) {
+          $(".calendar td[onclick='javascript:SelDate(\""+data[i].trim()+"\")']").addClass("ready");
+        }//for end
+      });//post end
+    } else if(MCODE==0) {  // 극장만 선택됐을때
+      $(".calendar td").removeClass("ready");
+      $.post("./sdateListFromCinema.do", "cineCode="+CINECODE, function(datastr) { // 선택가능날짜 모두표시
+        var data = datastr.split("|");
+        for(var i=0; i<data.length; i++) {
+          $(".calendar td[onclick='javascript:SelDate(\""+data[i].trim()+"\")']").addClass("ready");
+        }//for end
+      });//post end
+    } else {  // 영화, 극장 모두 선택됐을때
+      $(".calendar td").removeClass("ready");
+      $.post("./sdateListFromMovieCinema.do", "mCode="+MCODE+"&cineCode="+CINECODE, function(datastr) { // 선택가능날짜 모두표시
+        var data = datastr.split("|");
+        for(var i=0; i<data.length; i++) {
+          $(".calendar td[onclick='javascript:SelDate(\""+data[i].trim()+"\")']").addClass("ready");
+        }//for end
+      });//post end
+    }//if end
+  }//execute() end
 }//calendarCalssReady() end
 
 // 날짜선택 시 호출
@@ -352,13 +369,6 @@ function SelDate(data) {
   //alert(data);
 }//SelDate() end
 $(".calendar td").click(function() {
-  var selYear = $("#calYear").attr('value');
-  var selMonth = $("#calMonth").attr('value');
-  var selDate = $(this).text();
-  //alert(selYear);
-  //alert(selMonth);
-  //alert(selDate);
-  
   // 선택된 날짜 class="on", 이미 선택된 인원이면 on class 지움
   if($(this).hasClass("on")==true) {
     $(this).removeClass("on");
@@ -366,6 +376,9 @@ $(".calendar td").click(function() {
     $(".calendar td").removeClass("on");
     $(this).addClass("on");
   }//if end
+  
+  SDATE = $(this).attr("onclick").substr(20,10);
+  alert(SDATE);
 });//click() end
 
 /******************* 날짜선택 AJAX END *******************/

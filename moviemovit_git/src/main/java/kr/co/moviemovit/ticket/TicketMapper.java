@@ -27,7 +27,7 @@ public interface TicketMapper {
   public int cinemacntFromAddr1(@Param("addr1")String addr1);  // @Param 안해주면 xml에서 if문 못탐
   
   //<select id="cinemacntFromAddr1Movie" parameterType="MovieDTO" resultType="int">
-  public int cinemacntFromAddr1Movie(MovieDTO dto);
+  public ArrayList<Integer> cinemacntFromAddr1Movie(MovieDTO dto);
 
   //<select id="cinemacntFromAddr1CLMD" parameterType="CinemaDTO" resultType="int">
   public int cinemacntFromAddr1CLMD(CinemaDTO dto);
@@ -53,7 +53,9 @@ public interface TicketMapper {
   /* ------------------ 예매 : 날짜선택 부분 ------------------ */
   //<select id="sdateAllList" resultType="String">
   public ArrayList<String> sdateAllList();
-  
+
+  //<select id="sdateListFromMovie" parameterType="int" resultType="String">
+  public ArrayList<String> sdateListFromMovie(int mCode);
 
   /* ------------------ 예매 : 날짜선택 부분 END ------------------ */
   

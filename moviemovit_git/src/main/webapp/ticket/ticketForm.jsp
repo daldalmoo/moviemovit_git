@@ -456,7 +456,7 @@ function buildCalendar() {
   <br>
 </form>
 
-<script src="../js/ticket_script.js?ver=4" charset="utf-8"></script>
+<script src="../js/ticket_script.js?ver=6" charset="utf-8"></script>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

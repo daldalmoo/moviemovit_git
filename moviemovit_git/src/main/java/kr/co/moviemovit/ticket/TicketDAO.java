@@ -53,8 +53,13 @@ public class TicketDAO {
   
   public int cinemacntFromAddr1Movie(MovieDTO dto) {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
-    int cinemacnt = mapper.cinemacntFromAddr1Movie(dto);
-    return cinemacnt;
+    ArrayList<Integer> cinemacntlist = mapper.cinemacntFromAddr1Movie(dto);
+    System.out.println(cinemacntlist.size());
+    if(cinemacntlist.size()==0) {
+      return 0;
+    } else {
+      return cinemacntlist.get(0);
+    }//if end
   }//cinemacntFromAddr1Movie() end
   
   public int cinemacntFromAddr1CLMD(CinemaDTO dto) {
@@ -98,9 +103,15 @@ public class TicketDAO {
   /* ------------------ 예매 : 날짜선택 부분 ------------------ */
   public ArrayList<String> sdateAllList() {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
-    ArrayList<String> cinelist = mapper.sdateAllList();
-    return cinelist;
+    ArrayList<String> sdatelist = mapper.sdateAllList();
+    return sdatelist;
   }//sdateAllList() end
+  
+  public ArrayList<String> sdateListFromMovie(int mCode) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<String> sdatelist = mapper.sdateListFromMovie(mCode);
+    return sdatelist;
+  }//sdateListFromMovie() end
 
   /* ------------------ 예매 : 날짜선택 부분 END ------------------ */
   

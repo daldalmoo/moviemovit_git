@@ -122,9 +122,6 @@ public class TicketCont {
     dto.setmCode(mCode);
     dto.setmName(addr1);  // addr1을 mName에 담아서 보냄
     
-    // TODO .xml에서 GROUP BY CT.cineCode 이거 안넣으면 roomCode 여러개인거 중복될텐데 넣으면 오류나는거 아직 원인 못찾음
-    // 전체극장, 체인별 일때도 주소1이 영화선택에 따라 바뀜. 아직 처리 못함.
-    
     if(addr1.equals("all")) { msg += "전국"; }
     else if(addr1.equals("SEO")) { msg += "서울"; }
     else if(addr1.equals("GGD")) { msg += "경기도"; }
@@ -423,7 +420,7 @@ public class TicketCont {
   @RequestMapping(value = "/ticket/sdateListFromMovie.do", method = RequestMethod.POST)
   public void sdateListFromMovie(HttpServletRequest req, HttpServletResponse resp, int mCode) throws IOException {
     String msg = "";
-    ArrayList<String> sdatelist = dao.sdateAllList();
+    ArrayList<String> sdatelist = dao.sdateListFromMovie(mCode);
     
     for (int j = 0; j < sdatelist.size(); j++) {
       msg += sdatelist.get(j);
