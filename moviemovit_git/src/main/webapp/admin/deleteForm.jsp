@@ -167,7 +167,6 @@ table tr:nth-child(2n+1) {
 </style>
 
 
-
  <div class="table-users">
    <div class="header"> Review </div>
    <form name='regForm' method='POST' action='./delete.do' onsubmit="return confirm('삭제하시겠습니까?')">
@@ -185,8 +184,3 @@ table tr:nth-child(2n+1) {
  </form>
  </div>    
  
- 
-
-
-
-<%-- 본문끝 --%>

@@ -182,7 +182,7 @@ public class ReviewDAO {
     return count;
   }// create() end
   
-  // dupliacate 등록 전 중복 확인
+  //dupliacate 등록 전 중복 확인
   public ReviewStar duplicate(ReviewStar sdto) {
     ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
     ReviewStar dto = mapper.duplicate(sdto);
@@ -219,6 +219,13 @@ public class ReviewDAO {
     return count;
   }// update end
   
-   
+  // dupliacate 등록 전 중복 확인
+  
+  public ArrayList<ReviewStar> starRead(ReviewStar sdto) {
+    ReviewMapper mapper = sqlSession.getMapper(ReviewMapper.class);
+    ArrayList<ReviewStar> dto = mapper.starRead(sdto);
+    return dto;
+  }// create() end
+  
 
 } //class end

@@ -1,7 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
 
+<title>Movie Movit</title>
 
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 
@@ -13,6 +21,7 @@
 	margin: auto;
 }
 </style>
+
 
 <body onload="selectboxes()">
 <FORM class="cbp-mc-form" name='regForm' method='POST' action='./cinemaUpdate.do'
@@ -250,5 +259,3 @@ function selectboxes(){
 	</script>
 	<!-- ----- DAUM 우편번호 API 종료----- -->
 </form>
-
-<%-- 본문끝 --%>

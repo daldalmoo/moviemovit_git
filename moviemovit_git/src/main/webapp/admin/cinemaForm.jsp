@@ -1,12 +1,45 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
 
+<title>Movie Movit</title>
 
-<link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
+<!-- CSS -->
+<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="../css/nivo-lightbox.css" rel="stylesheet" />
+<link href="../css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+<link href="../css/owl.carousel.css" rel="stylesheet" media="screen" />
+<link href="../css/owl.theme.css" rel="stylesheet" media="screen" />
+<link href="../css/animate.css" rel="stylesheet" />
+<link href="../css/style.css" rel="stylesheet">
+<link href="../color/default.css" rel="stylesheet">
+
+<!-- Core JavaScript Files -->
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.easing.min.js"></script>
+<script src="../js/jquery.sticky.js"></script>
+<script src="../js/jquery.scrollTo.js"></script>
+<script src="../js/stellar.js"></script>
+<script src="../js/wow.min.js"></script>
+<script src="../js/owl.carousel.min.js"></script>
+<script src="../js/nivo-lightbox.min.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="../js/custom.js"></script>
+<script src="../contactform/contactform.js"></script>
 
 <style>
 /*180827 경민 list 클래스 추가*/
+
 .list {
 	text-align: left;
 	padding: 10px;
@@ -14,23 +47,22 @@
 }
 </style>
 
-<body onload="selectboxes()">
-<FORM class="cbp-mc-form" name='regForm' method='POST' action='./cinemaUpdate.do'
+<FORM class="cbp-mc-form" name='regForm' method='POST' action='./cinemaForm.do'
       enctype="multipart/form-data">
 	<span style="color: red; font-weight: bold">* 필수입력</span><br>
-    <input type="hidden" id="cineCode" name="cineCode" value="${dto.cineCode}">
+
 	<!-- 영화관 등록 폼 -->
 	<table class="cbp-mc-column">
 		<tr>
 			<th>*영화관 이름</th>
 			<td class="list"><input type="text" id="cineName"
-				name="cineName" value="${dto.cineName}" required></td>
+				name="cineName" required>&nbsp;</td>
 		</tr>
 		<tr>
 			<th>*영화브랜드</th>
 			<td class="list"><select name="brandName" id="brandName" required>
-					<option value="LOTTE" >롯데시네마</option>
-					<option value="CGV">CGV</option>
+					<option value="LOTTE">롯데시네마</option>
+					<option value="CGV" selected>CGV</option>
 					<option value="MEGABOX">메가박스</option>
 					<option value="INDEP">독립영화관</option>
 			</select></td>
@@ -38,7 +70,7 @@
 		<tr>
 			<th>전화번호</th>
 			<td class="list"><input type="text" name="tel" id="tel"
-				value="${dto.tel}"></td>
+				placeholder="-제외하고 숫자만 입력" required></td>
 		</tr>
 		<tr>
 			<th>*지역</th>
@@ -61,40 +93,39 @@
 		</tr>
 		<tr>
 			<th>영화관 주소</th>
-			<td class="list"><input type="text" name="addr2" id="addr2" value="${dto.addr2}"
+			<td class="list"><input type="text" name="addr2" id="addr2"
 				readonly></td>
 		</tr>
 		<tr>
 			<th>상세주소</th>
-			<td class="list"><input type="text" name="addr3" id="addr3" value="${dto.addr3}" required>
+			<td class="list"><input type="text" name="addr3" id="addr3" required>
 			</td>
 		</tr>
 		<tr>
             <th>위도</th>
-            <td class="list"><input type="text" name="wido" id="wido" value="${dto.wido}" required readonly> 
-              &nbsp; <input class="cbp-mc-button" type="button" name="widokyeongdo" id="widokyeongdo" value="찾기"></td>
+            <td class="list"><input type="text" name="wido" id="wido" placeholder="주소 입력 후 찾기를 눌러주세요" required readonly> 
+              &nbsp; <input class="cbp-mc-button" type="button" name="widokyeongdo" id="widokyeongdo" value="찾기">></td>
+            </td>
         </tr>
         <tr>
             <th>경도</th>
-            <td class="list"><input type="text" name="kyengdo" id="kyengdo" value="${dto.kyengdo}" required readonly>
+            <td class="list"><input type="text" name="kyengdo" id="kyengdo" required readonly>
             </td>
         </tr>
 		<tr>
 			<th>홈페이지</th>
-			<td class="list"><input type="text" name="home" id="home" value="${dto.home}" required>
+			<td class="list"><input type="text" name="home" id="home" required>
 			</td>
 		</tr>
 		<tr>
             <th>기타 정보</th>
-            <td class="list"><input type="text" name="etc" id="etc" value="${dto.etc}" required>
+            <td class="list"><input type="text" name="etc" id="etc" required>
             </td> 
         </tr>
 		<tr>
 			<th>영화관 이미지</th>
-			
 			<td class="list">
-			등록된 이미지: ${dto.logoImg}
-			<input type="file" name="logoImgMF" id="logoImgMF"></td>
+			<input type="file" name="logoImgMF" id="logoImgMF" ></td>
 		</tr>
 	</table>
 
@@ -118,7 +149,7 @@
 <script src="js/jquery.js"></script>
 <script>
 
-// 위도 경도 삽입을 위한 geoCoding
+
 $("#widokyeongdo").click (function geoCoding(addr) {
 	
 	var addr = $("#addr2").val();
@@ -140,47 +171,6 @@ $("#widokyeongdo").click (function geoCoding(addr) {
         }
     });
 });
-
-// 셀렉트 옵션 자동 선택 (영화관브랜드, 주소1)
-function selectboxes(){
-   
-	// 영화관 브랜드 선택 
-    var selectbrand = '${dto.brandName}';
-    // alert(selectbrand);
-
-    if(selectbrand=="CGV"){
-        $("#brandName").val("CGV").attr("selected", "selected");
-    } else if(selectbrand=="LOTTE") {
-        $("#brandName").val("LOTTE").attr("selected", "selected");
-    } else if(selectbrand=="INDEP") {
-        $("#brandName").val("INDEP").attr("selected", "selected");
-    } else if(selectbrand=="MEGABOX") {
-        $("#brandName").val("MEGABOX").attr("selected", "selected"); } 
-    
-
-    // 지역 선택
-    
-    var selectaddr1='${dto.addr1}';
-    //alert(selectaddr1);
-    
-    if(selectaddr1=="SEO"){
-        $("#addr1").val("SEO").attr("selected", "selected");
-    } else if(selectaddr1=="GGD") {
-        $("#addr1").val("GGD").attr("selected", "selected");
-    } else if(selectaddr1=="ICH") {
-       $("#addr1").val("ICH").attr("selected", "selected");
-    } else if(selectaddr1=="KWD") {
-       $("#addr1").val("KWD").attr("selected", "selected");
-    }  else if(selectaddr1=="CCD") {
-         $("#addr1").val("CCD").attr("selected", "selected");
-    } else if(selectaddr1=="KSD") {
-         $("#addr1").val("KSD").attr("selected", "selected");
-    } else if(selectaddr1=="JLD") {
-       $("#addr1").val("JLD").attr("selected", "selected"); 
-     } else if(selectaddr1=="JJD") {
-       $("#addr1").val("JJD").attr("selected", "selected"); } 
-
-}
 
 </script>
 
@@ -250,5 +240,3 @@ function selectboxes(){
 	</script>
 	<!-- ----- DAUM 우편번호 API 종료----- -->
 </form>
-
-<%-- 본문끝 --%>

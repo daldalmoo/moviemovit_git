@@ -53,6 +53,18 @@ public class ReviewCont {
     mav.addObject("list", list); 
     return mav;
   } 
+  
+  // 회원용 LIST
+  @RequestMapping(value="/review/list.do", method=RequestMethod.GET)
+  public ModelAndView memberList() {
+    
+    ModelAndView mav= new ModelAndView();
+    mav.setViewName("review/list");
+    
+    ArrayList<CinemaDTO> list = dao.cinemaList();
+    mav.addObject("list", list); 
+    return mav;
+  } 
 
   @RequestMapping(value="/review/addrList.do", method = RequestMethod.POST)
   public void addrList(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -674,7 +686,7 @@ public class ReviewCont {
     System.out.println(sdto.getS_e());
     
     String msg = "";
-
+    
     //해당 ID가 이전에 글을 쓴 적이 있는지 확인
     ReviewStar dupdto = dao.duplicate(sdto);
     
@@ -685,7 +697,7 @@ public class ReviewCont {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  var bResult = confirm('이전에 삭제한 글이 있습니다. 해당 글을 지우고 새 리뷰를 등록하겠습니까?');";
+      msg += "  var bResult = confirm('이전에 작성한 글이 있습니다. 해당 글을 지우고 새 리뷰를 등록하겠습니까?');";
       msg += "  if (bResult == true) {";  // 예를 누른 경우
       
       // 등록 
@@ -725,7 +737,7 @@ public class ReviewCont {
       msg += "<html><body>";
       msg += "<script>";
       msg += "  alert('별점 등록 성공');";
-      msg += "  window.location='./cinemaList.do';";
+      msg += "  window.location='./cinemaRead.do?cineCode="+ sdto.getCineCode() +"';";
       msg += "</script>";
       msg += "</html></body>";
       mav.addObject("msg", msg);
@@ -735,16 +747,17 @@ public class ReviewCont {
     return mav;
   } // POST (실제 실행되는애) 
   
-  //cinemaRead ( 영화관 상세정보 ,리뷰보기, 리뷰매기기 ) --------------------
+  //cinemaRead ( 영화관 상세정보 ,리뷰보기, 리뷰매기기 ) -----------
   @RequestMapping(value="/review/cinemaRead.do", method=RequestMethod.GET)
   public ModelAndView cinemaRead(CinemaDTO dto) {
     ModelAndView mav = new ModelAndView();
-    mav.setViewName("review/cinemaRead");
-    
-    System.out.println(dto.getCineCode());
-    
+        
     dto = dao.cinemaRead(dto);
-    ArrayList<ReviewStar> reviewstar = dao.reviewstar();
+    
+    ReviewStar sdto = new ReviewStar();
+    sdto.setCineCode(dto.getCineCode());
+    
+    ArrayList<ReviewStar> reviewstar = dao.starRead(sdto);
     ArrayList<ReviewStar> list = dao.list(dto.getCineCode());
     // 페이지 이동 및 값 올리기
     
@@ -752,6 +765,28 @@ public class ReviewCont {
     System.out.println(list.size());
     
     mav.setViewName("review/cinemaRead"); //reviewList
+    
+      
+    mav.addObject("list", list);
+    mav.addObject("reviewstar", reviewstar);
+    mav.addObject("dto", dto);
+    return mav;
+  }
+  //reviewDelete
+  
+  //cinemaRead 회원용
+  @RequestMapping(value="/review/read.do", method=RequestMethod.GET)
+  public ModelAndView memberRead(CinemaDTO dto) {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("review/read");
+        
+    dto = dao.cinemaRead(dto);
+    ArrayList<ReviewStar> reviewstar = dao.reviewstar();
+    ArrayList<ReviewStar> list = dao.list(dto.getCineCode());
+    // 페이지 이동 및 값 올리기
+    
+    //사이즈값으로 제대로 찍히나 확인
+    System.out.println(list.size());
     
     mav.addObject("list", list);
     mav.addObject("reviewstar", reviewstar);
@@ -762,7 +797,7 @@ public class ReviewCont {
   
   
   
-  //reviewDelete -------------------------------------
+  //reviewDelete -------------
   @RequestMapping(value="/review/delete.do", method = RequestMethod.GET)
   public ModelAndView delete(String no) {
     ModelAndView mav = new ModelAndView();
@@ -816,7 +851,7 @@ public class ReviewCont {
   }
   
   
-  //GET
+  
   @RequestMapping(value="/review/reviewUpdate.do", method = RequestMethod.GET)
   public ModelAndView reviewUpdate(int no, String cineCode) {
     System.out.println("no값 :" + no + "/ cineCode값 :"+cineCode);
@@ -831,30 +866,41 @@ public class ReviewCont {
     return mav;
   }//reviewUpdate GET
   
-  @RequestMapping(value = "/review/reviewUpdate.do", method = RequestMethod.POST)
+  @RequestMapping(value = "/review/reviewUpdatePro.do", method = RequestMethod.POST)
   public ModelAndView updateProc(ReviewStar sdto) {
     ModelAndView mav = new ModelAndView();
+    
+    System.out.println(sdto.getPixel() +"<--화질/  내용-->"+ sdto.getS_e());
+    System.out.println(sdto.getNo()+"넘버/아이디"+sdto.getUid());
     
     int cnt = dao.reviewUpdate(sdto);
     
     String msg = "";
-    if(cnt == 0) {
+    if (cnt == 0) {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('수정 실패했습니다');";
+      msg += "  alert('수정 실패');";
       msg += "  history.go(-1);";
       msg += "</script>";
       msg += "</html></body>";
       mav.addObject("msg", msg);
       mav.setViewName("msgView");
-    }else {
-      mav.addObject("cnt", cnt);
-      mav.setViewName("redirect:/read.do");
-    }//if end
+    } else {
+      msg += "<!DOCTYPE html>";
+      msg += "<html><body>";
+      msg += "<script>";
+      msg += "  alert('수정 성공');";
+      msg += "  window.location='./cinemaRead.do?cineCode="+ sdto.getCineCode() +"';";
+      msg += "</script>";
+      msg += "</html></body>";
+      mav.addObject("msg", msg);
+      mav.setViewName("msgView");
+    } // if end
     return mav;
   }// updateProc() end
-  
+ 
+
 
  
 } // class end

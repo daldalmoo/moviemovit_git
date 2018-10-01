@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <style rel="stylesheet"><style>
 .header {
   background-color: #fed513; /* 테이블 이름 배경 색상 (COUPON LIST) */
@@ -132,25 +133,40 @@ td:nth-child(4) {
   background: #2b8256; /* 공개 수정 삭제 버튼 마우스 오버시 색상 */
 }
 </style>
+
+
+<%
+String cineCode = request.getParameter("cineCode");
+request.setAttribute("cineCode", cineCode);
+%>
+
 <div class="cbp-mc-submit-wrap">
+<input class="cbp-mc-submit" type="button" value="상영관 등록" onclick="location.href='./roomForm.do?cineCode=${cineCode }'"/>
 </div>
-    <div class="table-users">
-        <table>
-            <tr>
-                <th>영화명</th>
-                <th>장르</th>
-                <th>평균평점</th>
-            </tr>
-            <c:forEach var="dto" items="${list }">
-            <tr>
-                <td>${dto.mName}</td>
-                <td>${dto.genre}관</td>
-                <td>${dto.aver}</td>
+	<div class="table-users">
+		<table>
+			<tr>
+				<th>상영관코드</th>
+				<th>상영관번호</th>
+				<th>상영관별칭</th>
+				<th>총좌석수</th>
+				<th>상영관정보</th>
+				<th>수정/삭제</th>
+			</tr>
+			<c:forEach var="dto" items="${list }">
+			<tr>
+				<td>${dto.roomCode}</td>
+				<td>${dto.roomName}관</td>
+				<td>${dto.etc}</td>
+				<td>${dto.seatCnt}</td>
+				<td>${dto.DD}</td>
+				<td>
+                <input class="listbutton" type="button" value="수정" onclick="location.href='./roomUpdate.do?roomCode=${dto.roomCode }'"/>
+                <input class="listbutton" type="button" value="삭제" onclick="location.href='./roomDelete.do?roomCode=${dto.roomCode }'"/>
+             </td>
              </tr>
-            </c:forEach>
-        </table>
-    </div>
+			</c:forEach>
+		</table>
+	</div>
 </body>
 
-
-<%-- 본문끝 --%>

@@ -2,6 +2,42 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Movie Movit</title>
+
+<!-- CSS -->
+<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="../css/nivo-lightbox.css" rel="stylesheet" />
+<link href="../css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+<link href="../css/owl.carousel.css" rel="stylesheet" media="screen" />
+<link href="../css/owl.theme.css" rel="stylesheet" media="screen" />
+<link href="../css/animate.css" rel="stylesheet" />
+<link href="../css/style.css" rel="stylesheet">
+<link href="../color/default.css" rel="stylesheet">
+
+<!-- Core JavaScript Files -->
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.easing.min.js"></script>
+<script src="../js/jquery.sticky.js"></script>
+<script src="../js/jquery.scrollTo.js"></script>
+<script src="../js/stellar.js"></script>
+<script src="../js/wow.min.js"></script>
+<script src="../js/owl.carousel.min.js"></script>
+<script src="../js/nivo-lightbox.min.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="../js/custom.js"></script>
+<script src="../contactform/contactform.js"></script>
+
+
 
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -111,19 +147,6 @@ text-align: left;
 	*/
 	background-color: #D8D8D8; /* 크롬, 모질라 등, 기타 브라우저 */
 }
-
-
-
-/* 지도test */
-.map{
-  border: 2px solid #327a81;
-  border-radius: 10px;
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
-  max-width: calc(100% - 2em);
-  margin: 1em auto;
-  overflow: hidden;
-  width: 80%;
-}
 </style>
 
 <!----webfonts---->
@@ -161,6 +184,7 @@ text-align: left;
 </script>
 
 
+
 <%
   String uid = (String) session.getAttribute("s_id");
 			//out.println("세션확인:" + uid);
@@ -189,12 +213,12 @@ text-align: left;
                                <c:when test="${dto.brandName == 'MEGABOX'}">
                                메가박스 
                                </c:when>
-              </c:choose>
+                               </c:choose>
 						 ${dto.cineName }
 						
 						<hr class="starline">
 					</h3>
-					<img style="width:1166px; height:520px;" src="img/${dto.logoImg }" title="banner1">
+					<img src="img/${dto.logoImg }" title="banner1">
 				</div>
 				<!---start-content---->
 				<div class="content">
@@ -206,38 +230,22 @@ text-align: left;
 										<c:if test="${cineCode == reviewstar.cineCode }">
 											<div class="col_1_of_bottom span_1_of_first1">
 												<div class="starimg">
-												
-												<!-- 별점점수가 잘 들어가는지 test -->
-												${reviewstar.pixel } 화질/
-												${reviewstar.seat }  좌석/
-												${reviewstar.clean } 청결도/
-												${reviewstar.trans } 교통 접근성/
-												${reviewstar.sound } 음향/
-												${reviewstar.snack } 매점/
-												${reviewstar.service } 서비스/
-												${reviewstar.around } 주변/
-												${reviewstar.startotal } 총점
-												
-												
-												
-												
-												
 													화질&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 													&nbsp; &nbsp;
 													<c:choose>
-														<c:when test="${reviewstar.pixel < 2 }">
+														<c:when test="${reviewstar.pixel < 3 }">
 															<img src="./img/star1.png">
 														</c:when>
-														<c:when test="${reviewstar.pixel < 3 }">
+														<c:when test="${reviewstar.pixel < 5 }">
 															<img src="./img/star2.png">
 														</c:when>
-														<c:when test="${reviewstar.pixel < 4 }">
+														<c:when test="${reviewstar.pixel < 7 }">
 															<img src="./img/star3.png">
 														</c:when>
-														<c:when test="${reviewstar.pixel < 5 }">
+														<c:when test="${reviewstar.pixel < 9 }">
 															<img src="./img/star4.png">
 														</c:when>
-														<c:when test="${reviewstar.pixel < 6 }">
+														<c:when test="${reviewstar.pixel < 11 }">
 															<img src="./img/star5.png">
 														</c:when>
 													</c:choose>
@@ -245,19 +253,19 @@ text-align: left;
 													청결도&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 													&nbsp;
 													<c:choose>
-														<c:when test="${reviewstar.clean < 2 }">
+														<c:when test="${reviewstar.clean < 3 }">
 															<img src="./img/star1.png">
 														</c:when>
-														<c:when test="${reviewstar.clean < 3 }">
+														<c:when test="${reviewstar.clean < 5 }">
 															<img src="./img/star2.png">
 														</c:when>
-														<c:when test="${reviewstar.clean < 4 }">
+														<c:when test="${reviewstar.clean < 7 }">
 															<img src="./img/star3.png">
 														</c:when>
-														<c:when test="${reviewstar.clean < 5 }">
+														<c:when test="${reviewstar.clean < 9 }">
 															<img src="./img/star4.png">
 														</c:when>
-														<c:when test="${reviewstar.clean < 6 }">
+														<c:when test="${reviewstar.clean < 11 }">
 															<img src="./img/star5.png">
 														</c:when>
 													</c:choose>
@@ -265,19 +273,19 @@ text-align: left;
 													음향&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 													&nbsp; &nbsp;
 													<c:choose>
-														<c:when test="${reviewstar.sound < 2 }">
+														<c:when test="${reviewstar.sound < 3 }">
 															<img src="./img/star1.png">
 														</c:when>
-														<c:when test="${reviewstar.sound < 3 }">
+														<c:when test="${reviewstar.sound < 5 }">
 															<img src="./img/star2.png">
 														</c:when>
-														<c:when test="${reviewstar.sound < 4 }">
+														<c:when test="${reviewstar.sound < 7 }">
 															<img src="./img/star3.png">
 														</c:when>
-														<c:when test="${reviewstar.sound < 5 }">
+														<c:when test="${reviewstar.sound < 9 }">
 															<img src="./img/star4.png">
 														</c:when>
-														<c:when test="${reviewstar.sound < 6 }">
+														<c:when test="${reviewstar.sound < 11 }">
 															<img src="./img/star5.png">
 														</c:when>
 													</c:choose>
@@ -285,19 +293,19 @@ text-align: left;
 													서비스&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 													&nbsp;
 													<c:choose>
-														<c:when test="${reviewstar.service < 2 }">
+														<c:when test="${reviewstar.service < 3 }">
 															<img src="./img/star1.png">
 														</c:when>
-														<c:when test="${reviewstar.service < 3 }">
+														<c:when test="${reviewstar.service < 5 }">
 															<img src="./img/star2.png">
 														</c:when>
-														<c:when test="${reviewstar.service < 4 }">
+														<c:when test="${reviewstar.service < 7 }">
 															<img src="./img/star3.png">
 														</c:when>
-														<c:when test="${reviewstar.service < 5 }">
+														<c:when test="${reviewstar.service < 9 }">
 															<img src="./img/star4.png">
 														</c:when>
-														<c:when test="${reviewstar.service < 6 }">
+														<c:when test="${reviewstar.service < 11 }">
 															<img src="./img/star5.png">
 														</c:when>
 													</c:choose>
@@ -308,38 +316,38 @@ text-align: left;
 													좌석&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 													&nbsp; &nbsp;
 													<c:choose>
-														<c:when test="${reviewstar.seat < 2 }">
+														<c:when test="${reviewstar.seat < 3 }">
 															<img src="./img/star1.png">
 														</c:when>
-														<c:when test="${reviewstar.seat < 3 }">
+														<c:when test="${reviewstar.seat < 5 }">
 															<img src="./img/star2.png">
 														</c:when>
-														<c:when test="${reviewstar.seat < 4 }">
+														<c:when test="${reviewstar.seat < 7 }">
 															<img src="./img/star3.png">
 														</c:when>
-														<c:when test="${reviewstar.seat < 5 }">
+														<c:when test="${reviewstar.seat < 9 }">
 															<img src="./img/star4.png">
 														</c:when>
-														<c:when test="${reviewstar.seat < 6 }">
+														<c:when test="${reviewstar.seat < 11 }">
 															<img src="./img/star5.png">
 														</c:when>
 													</c:choose>
 													<hr class="starline">
 													교통 접근성&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 													<c:choose>
-														<c:when test="${reviewstar.trans < 2 }">
+														<c:when test="${reviewstar.trans < 3 }">
 															<img src="./img/star1.png">
 														</c:when>
-														<c:when test="${reviewstar.trans < 3 }">
+														<c:when test="${reviewstar.trans < 5 }">
 															<img src="./img/star2.png">
 														</c:when>
-														<c:when test="${reviewstar.trans < 4 }">
+														<c:when test="${reviewstar.trans < 7 }">
 															<img src="./img/star3.png">
 														</c:when>
-														<c:when test="${reviewstar.trans < 5 }">
+														<c:when test="${reviewstar.trans < 9 }">
 															<img src="./img/star4.png">
 														</c:when>
-														<c:when test="${reviewstar.trans < 6 }">
+														<c:when test="${reviewstar.trans < 11 }">
 															<img src="./img/star5.png">
 														</c:when>
 													</c:choose>
@@ -347,38 +355,38 @@ text-align: left;
 													매점&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 													&nbsp; &nbsp;
 													<c:choose>
-														<c:when test="${reviewstar.snack < 2 }">
+														<c:when test="${reviewstar.snack < 3 }">
 															<img src="./img/star1.png">
 														</c:when>
-														<c:when test="${reviewstar.snack < 3 }">
+														<c:when test="${reviewstar.snack < 5 }">
 															<img src="./img/star2.png">
 														</c:when>
-														<c:when test="${reviewstar.snack < 4 }">
+														<c:when test="${reviewstar.snack < 7 }">
 															<img src="./img/star3.png">
 														</c:when>
-														<c:when test="${reviewstar.snack < 5 }">
+														<c:when test="${reviewstar.snack < 9 }">
 															<img src="./img/star4.png">
 														</c:when>
-														<c:when test="${reviewstar.snack < 6 }">
+														<c:when test="${reviewstar.snack < 11 }">
 															<img src="./img/star5.png">
 														</c:when>
 													</c:choose>
 													<hr class="starline">
 													주변 편의시설 &nbsp; &nbsp; &nbsp;
 													<c:choose>
-														<c:when test="${reviewstar.around < 2 }">
+														<c:when test="${reviewstar.around < 3 }">
 															<img src="./img/star1.png">
 														</c:when>
-														<c:when test="${reviewstar.around < 3 }">
+														<c:when test="${reviewstar.around < 5 }">
 															<img src="./img/star2.png">
 														</c:when>
-														<c:when test="${reviewstar.around < 4 }">
+														<c:when test="${reviewstar.around < 7 }">
 															<img src="./img/star3.png">
 														</c:when>
-														<c:when test="${reviewstar.around < 5 }">
+														<c:when test="${reviewstar.around < 9 }">
 															<img src="./img/star4.png">
 														</c:when>
-														<c:when test="${reviewstar.around < 6 }">
+														<c:when test="${reviewstar.around < 11 }">
 															<img src="./img/star5.png">
 														</c:when>
 													</c:choose>
@@ -387,29 +395,24 @@ text-align: left;
 												</div>
 											</div>
 											<div class="col_1_of_bottom span_1_of_first1">
-											
-
-												</div>
-											</div>
-											<div class="col_1_of_bottom span_1_of_first1">
 												<h5>평균별점</h5>
 												<c:choose>
-													<c:when test="${reviewstar.startotal < 1}">
+													<c:when test="${dto.startotal == 0}">
 														<img src="./img/star0.png">
 													</c:when>
-													<c:when test="${reviewstar.startotal < 2 }">
+													<c:when test="${dto.startotal < 3 }">
 														<img src="./img/star1.png">
 													</c:when>
-													<c:when test="${reviewstar.startotal < 3}">
+													<c:when test="${dto.startotal < 5}">
 														<img src="./img/star2.png">
 													</c:when>
-													<c:when test="${reviewstar.startotal < 4}">
+													<c:when test="${dto.startotal < 7}">
 														<img src="./img/star3.png">
 													</c:when>
-													<c:when test="${reviewstar.startotal < 5}">
+													<c:when test="${dto.startotal < 9}">
 														<img src="./img/star4.png" width="150">
 													</c:when>
-													<c:when test="${reviewstar.startotal < 6} ">
+													<c:when test="${dto.startotal < 11} ">
 														<img src="./img/star5.png" width="150">
 													</c:when>
 													<c:when
@@ -466,8 +469,7 @@ text-align: left;
 
 										<div class="clear"></div>
 									</div>
-									
-									<div id="map" style="width:100%;height:350px;"></div>
+									<div class="map" id="map">
 									<c:set var="addr2" value="${dto.addr2 }"/>
 									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=15e2c1e5f7f38722f30ba8361e106d5d&libraries=services"></script>
 												<script>
@@ -529,11 +531,9 @@ text-align: left;
 						<div class="col_1_of_bottom span_1_of_first1">
 							<h5>Content</h5>
 							<div class="text2">
-								<textarea id="s_e" name="s_e" placeholder="이용후기 남기기.."></textarea>
+								<textarea id="s_e" name="s_e">Message..</textarea>
 							</div>
 						</div>
-						
-						<!-- 별점 매기기 -->
 						<div class="col_1_of_bottom span_1_of_first1">
 							<h5>STARS</h5>
 							<div class="scontainer">
@@ -596,9 +596,9 @@ text-align: left;
 							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 							&nbsp; &nbsp; &nbsp; <input type="hidden" name="cineCode"
 								id="cineCode" value="${cineCode }" /> <br> <input
-								type="hidden" name="uid" id="uid" value="${uid }" /> <hr>
-								<input type="submit" class="cbp-mc-button"
-								value="등록">
+								type="hidden" name="uid" id="uid" value="${uid }" /> <br>
+							<br> <br> <input type="submit" class="cbp-mc-button"
+								value="Submit">
 						</div>
 						<div class="clear"></div>
 					</div>
@@ -613,11 +613,7 @@ text-align: left;
 										<div class="grid_img">
 											<!-- 프로필이미지 넣을지 말지 -->
 										</div>
-										
-										
 										<div class="grid_text">
-											
-											
 											<h4 class="style1 list">
 												<a href="#"> ${sdto.uid } </a><br> <br>
 											</h4>
@@ -783,7 +779,7 @@ text-align: left;
 									<div class="col_1_of_bottom span_1_of_first1">
 										<div class="grid_text">${sdto.s_e }</div>
 										<input class="cbp-mc-button" type="button" value="수정"
-                                            onclick="location.href='./reviewUpdate.do?cineCode=${dto.cineCode }&no=${sdto.no }'" />
+                                            onclick="location.href='./update.do?cineCode=${dto.cineCode }&no=${sdto.no }'" />
 										<input class="cbp-mc-button" type="button" value="삭제"
 											onclick="location.href='./delete.do?cineCode=${dto.cineCode }&no=${sdto.no }'" />
 									</div>
