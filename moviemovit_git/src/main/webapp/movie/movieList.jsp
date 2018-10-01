@@ -2,7 +2,11 @@
 <%@ include file="../header1.jsp"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<% 
+   String uid=(String)session.getAttribute("s_id");
+   //out.println("세션확인:" + uid);
+   session.setAttribute("uid", uid);
+%> 
 <style type="text/css">
 .guide {
     position: relative;   

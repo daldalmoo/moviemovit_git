@@ -54,5 +54,11 @@ public class StarDAO {
 		int avgstar = mapper.avgstar(sdto);
 		return avgstar;
 	}//avgstar() end
+	
+	public ArrayList<MovieDTO> genrestar(MovieDTO dto) {
+		StarMapper mapper = sqlSession.getMapper(StarMapper.class);
+		ArrayList<MovieDTO> genrestar = mapper.genrestar(dto);
+		return genrestar;
+	}//avgstar() end
 
 }//class end

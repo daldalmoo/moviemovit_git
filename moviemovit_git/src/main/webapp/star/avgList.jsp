@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
 <%@ include file="../header1.jsp"%>
-
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <style rel="stylesheet">
 .header {   /* 영화관목록  */
   background-color: #3366cc;
@@ -181,74 +182,46 @@ table tr:nth-child(2n+1) {
 </style>
 <%@ include file="../header2.jsp"%>
 <%-- 본문시작 movieList.jsp --%>
+<% 
+   String uid=(String)session.getAttribute("s_id");
+   //out.println("세션확인:" + uid);
+   session.setAttribute("uid", uid);
+%> 
 
 <div class="table-users">
-   <div class="header">Movie List</div>
-   <table style="text-align:center; margin:center;">
-      <tr>
-        <th>영화명</th>
-        <td>${dto.mName}</td>
-      </tr>
-      <tr>
-        <th>포스터</th>
-        <td><img class="mimg" src="./storage/${dto.poster }"></td>
-      </tr>
-      <tr>
-        <th>장르</th>
-        <td>
-        ${dto.genre}
-        </td>
-      </tr>
-      <tr>
-        <th>상영분류</th>
-        <td>${dto.screen}</td>
-      </tr>
-      <tr>
-        <th>관람등급</th>
-        <td>${dto.age}</td>
-      </tr>
-      <tr>
-        <th>줄거리</th>
-        <td>${dto.s_e}</td>
-      </tr>
-      <tr>
-        <th>나라</th>
-        <td>${dto.country}</td>
-      </tr>
-      <tr>
-        <th>감독</th>
-        <td>${dto.director}</td>
-      </tr>
-      <tr>
-        <th>주연배우</th>
-        <td>${dto.actor}</td>
-      </tr>
-      <tr>
-        <th>영화타입</th>
-        <td>${dto.DD}</td>
-      </tr>
-      <tr>
-        <th>상영시간</th>
-        <td>${dto.runningTime} 분</td>
-      </tr>
-      <tr>
-        <th>개봉일</th>
-        <td>${dto.s_date}</td>
-      </tr>
-      <tr>
-        <th>마감일</th>
-        <td>${dto.e_date}</td>
-      </tr>
-           
-   </table>
+   <div class="header">분석 결과</div>
+   
+    <table>
+        <tr>
+            <th>영화명</th>
+            <th>장르</th>
+            <th>평균평점</th>
+        </tr>
+        <c:forEach var="dto" items="${dto }">
+            <tr>
+                <td>${dto.mName}</td>
+                <td>${dto.genre}
+                    <c:choose>
+                        <c:when test="${dto.genre== 'romance'}">로맨스</c:when>
+                        <c:when test="${dto.genre== 'crime'}">범죄/느와르</c:when>
+                        <c:when test="${dto.genre== 'comedy'}">코미디</c:when>
+                        <c:when test="${dto.genre== 'FanSF'}">판타지/SF</c:when>
+                        <c:when test="${dto.genre== 'action'}">액션/SF</c:when>
+                        <c:when test="${dto.genre== 'thrillhorror'}">스릴러/공포</c:when>
+                        <c:when test="${dto.genre== 'drama'}">드라마</c:when>
+                        <c:when test="${dto.genre== 'docu'}">다큐</c:when>
+                        <c:when test="${dto.genre== 'etc'}">기타</c:when>
+                    </c:choose>
+                </td>
+                
+            </tr>
+        </c:forEach>
+    </table>
    
    <!-- 하단 버튼 -->
 	<div class="cbp-mc-submit-wrap">
-		<input class="cbp-mc-button" type="button" value="영화등록" onclick="location.href='./create.do'"/>
 		<input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='./movieList.do'"/>
 		<input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />
-		<input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./delete.do?mCode=${dto.mCode }'"/>
-		<input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./update.do?mCode=${dto.mCode }'"/>
 	</div>
 </div>
 

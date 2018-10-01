@@ -1,18 +1,23 @@
 package kr.co.moviemovit.star;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.ReviewStar;
 
+@SessionAttributes("s_id")
 @Controller
 public class StarCont {
     
@@ -85,6 +90,17 @@ public class StarCont {
 		 mav.addObject("avgstar", avgstar);
 		 return mav;
 	 }//starlist() end
+	 
+     
+	 @RequestMapping(value="/star/avgList.do", method=RequestMethod.GET)
+	 public ModelAndView genrestar(MovieDTO dto, StarDTO sdto, Model model, @RequestParam("name") String name) {
+		 ModelAndView mav = new ModelAndView();
+		 mav.setViewName("/star/avgList");
+		 model.addAttribute("s_id", name);
+		 ArrayList<MovieDTO> list = dao.genrestar(dto);
+		 mav.addObject("list", list);
+		 return mav;
+	 }//avglist() end
 	
 
 }//class end

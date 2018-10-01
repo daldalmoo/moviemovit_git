@@ -54,57 +54,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    ]]>
 	</select>
 	
-	<!-- <select id="avgstar" resultType="int">
-       <![CDATA[
-       	  select st.mCode, avg(star) as avgstar 
-          from starTable st join movieTable mt
-          ON mt.mCode = st.mCode
-          GROUP BY st.mCode
-       ]]>
-    </select> -->
-	
-	<!-- <select id="list" resultType="StarDTO">
+	<select id="genrestar" resultType="MovieDTO" parameterType="MovieDTO">
 	    <![CDATA[
-			SELECT sCode, mCode, uid, (select avg(star) from starTable) AS star, comment, wdate
-            FROM starTable
-           	ORDER BY sCode DESC
-		]]>
-	</select> -->
-	
-	<!-- <select id="starlist" parameterType="Map" resultType="HashMap">
-	    <![CDATA[
-	        SELECT st.sCode, st.mCode, mt.mName, st.star, mt.poster
-            FROM (SELECT sCode, mCode, uid, (select avg(star) from starTable) as star, comment, wdate
-                  FROM starTable) st join movieTable mt
+			select mName, genre, avg(star) as star, uid as actor
+            from movieTable mt join starTable st
             ON mt.mCode = st.mCode
-            WHERE st.mCode=#{st.mCode}
-	    ]]>
-	</select> -->
+            WHERE st.uid=#{uid}
+            group by genre
+        ]]>
+	</select>
 	
-	<!-- <resultMap type="MovieDTO" id="MovieDTO">
-	    <result column="mCode"  property="mCode"/>
-	    <result column="mName"  property="mName"/> 
-	    <result column="poster" property="poster"/>
-	</resultMap> -->
-	
-	<!-- <resultMap type="movieDTO" id="movieDTO">
-	    <result column="mCode"   property="mCode"/> 
-	    <result column="poster"  property="poster"/>
-	    <result column="mName"   property="mName"/> 
-	    <result column="s_date"  property="s_date"/>
-	    
-	    <association javaType="StarDTO" property="StarDTO">
-	      <id column="mCode" property="mCode"/>
-          <result column="sCode"   property="sCode"/>
-	      <result column="mCode"   property="mCode"/> 
-	      <result column="uid"     property="uid"/> 
-	      <result column="star"    property="star"/> 
-	      <result column="comment" property="comment"/> 
-	      <result column="wdate"   property="wdate"/> 
-	    </association>
-	</resultMap> -->
-	
-	
+	<!-- <select id="genrestar" parameterType="MovieDTO" resultType="MovieDTO">
+            <![CDATA[   
+            SELECT mName, genre, country, aver
+            FROM movieTable B
+            JOIN
+                (select mCode, avg(star) as aver
+                from starTable
+                group by mCode) as A
+            ON A.mCode = B.mCode
+            group by genre
+            ]]>
+    </select> -->
 	
 	
 </mapper>
