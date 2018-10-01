@@ -193,25 +193,27 @@ table tr:nth-child(2n+1) {
    
     <table>
         <tr>
-            <th>영화명</th>
-            <th>장르</th>
             <th>평균평점</th>
+            <th>장르</th>
         </tr>
-        <c:forEach var="dto" items="${dto }">
+        <c:forEach var="sdto" items="${list }">
             <tr>
-                <td>${dto.mName}</td>
-                <td>${dto.genre}
+                <td>${sdto.star}</td>
+                <td>${sdto.wdate}
                     <c:choose>
-                        <c:when test="${dto.genre== 'romance'}">로맨스</c:when>
-                        <c:when test="${dto.genre== 'crime'}">범죄/느와르</c:when>
-                        <c:when test="${dto.genre== 'comedy'}">코미디</c:when>
-                        <c:when test="${dto.genre== 'FanSF'}">판타지/SF</c:when>
-                        <c:when test="${dto.genre== 'action'}">액션/SF</c:when>
-                        <c:when test="${dto.genre== 'thrillhorror'}">스릴러/공포</c:when>
-                        <c:when test="${dto.genre== 'drama'}">드라마</c:when>
-                        <c:when test="${dto.genre== 'docu'}">다큐</c:when>
-                        <c:when test="${dto.genre== 'etc'}">기타</c:when>
+                        <c:when test="${sdto.wdate== 'romance'}">로맨스</c:when>
+                        <c:when test="${sdto.wdate== 'crime'}">범죄/느와르</c:when>
+                        <c:when test="${sdto.wdate== 'comedy'}">코미디</c:when>
+                        <c:when test="${sdto.wdate== 'FanSF'}">판타지/SF</c:when>
+                        <c:when test="${sdto.wdate== 'action'}">액션/SF</c:when>
+                        <c:when test="${sdto.wdate== 'thrillhorror'}">스릴러/공포</c:when>
+                        <c:when test="${sdto.wdate== 'drama'}">드라마</c:when>
+                        <c:when test="${sdto.wdate== 'docu'}">다큐</c:when>
+                        <c:when test="${sdto.wdate== 'etc'}">기타</c:when>
                     </c:choose>
+                </td>
+                <td>
+                ${sdto.uid }
                 </td>
                 
             </tr>
