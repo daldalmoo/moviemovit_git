@@ -180,13 +180,16 @@ table tr:nth-child(2n+1) {
     overflow: visible;
   }
 }
-
+.home-section{
+padding-top:0px;}
 
 
 </style>
-<%@ include file="../header2.jsp"%>
-<%-- 본문시작 peoList.jsp --%>
+</head>
 
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<%-- 본문시작 peoList.jsp --%>
+<div class="home-section text-center ">
  <div class="table-users">
    <div class="header">PEOPLE LIST</div>
  </div>
@@ -212,6 +215,5 @@ table tr:nth-child(2n+1) {
 		<input class="cbp-mc-button" type="button" value="인물등록" onclick="location.href='./create.do'"/>
    </div>
 
-
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+</div>
+</body>

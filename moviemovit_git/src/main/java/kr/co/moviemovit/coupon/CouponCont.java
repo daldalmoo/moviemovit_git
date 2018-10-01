@@ -32,6 +32,8 @@ public class CouponCont {
       ModelAndView mav = new ModelAndView();
       ArrayList<CouponDTO> list = dao.list();
       // 페이지 이동 및 값 올리기
+    
+      System.out.println("list.toString()" + list.toString());
       mav.setViewName("coupon/couponList");
       mav.addObject("list", list);
       return mav; 

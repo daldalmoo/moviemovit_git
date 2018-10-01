@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="../header1.jsp"%>
+
 <style>
 
 /*공개,수정,삭제 스타일 버튼*/
@@ -120,7 +120,8 @@ div#toplist {
 </script>
 <!----//End-dropdown--->
 <!---//End-click-drop-down-menu----->
-
+</head>
+<body>
 
 	<!-- 카테고리 시작 -->
 	<div class="container-fluid">
@@ -387,3 +388,4 @@ div#toplist {
 		
 		 */
 	</script>
+	<%@ include file="../footer.jsp"%>

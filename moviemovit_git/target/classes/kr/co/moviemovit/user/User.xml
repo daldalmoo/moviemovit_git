@@ -99,7 +99,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</update>
 	
-			 <select id="list" parameterType="UserPage" resultType="UserDTO">
+			 <select id="list" parameterType="NoticePage" resultType="UserDTO">
 		<![CDATA[
 		SELECT *
 		FROM (

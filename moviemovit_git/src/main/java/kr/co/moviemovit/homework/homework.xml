@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace="팩키지.인터페이스" -->
+<mapper namespace="kr.co.moviemovit.homework.HomeMapper">
+
+    <select id="homework1" parameterType="kr.co.moviemovit.star.StarDTO" resultType="kr.co.moviemovit.movie.MovieDTO">
+            <![CDATA[   
+            SELECT mName, genre, aver
+            FROM movieTable B
+            JOIN
+                (select mCode, avg(star) as aver
+                from starTable 
+                group by mCode) as A
+            ON A.mCode = B.mCode
+            ORDER BY aver
+            limit 3
+            ]]>
+    </select>
+
+</mapper>

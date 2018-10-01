@@ -47,7 +47,7 @@ margin:auto;
 			</tr>
 		<tr>
 			<th>내용</th>
-			<td><textarea name="content" id="content" readonly>${dto.content}</textarea></td>
+			<td><textarea name="content" id="content" >${dto.content}</textarea></td>
 		</tr>
 	</table>
 	

@@ -11,7 +11,7 @@
 .abc{
  font-style: italic;
 }
-h2{
+h1{
   font-family: 'Lato', Calibri, Arial, sans-serif;
   line-height: 1.5;
  
@@ -54,7 +54,7 @@ margin:auto;
 </script>-->
 <!-- 인풋타입 가져와서 create디자인이랑 통일1 -->
 <form class="cbp-mc-form" name="frm" method="GET" action="./read.do" enctype="multipart/form-data">
-	<h2>공지사항</h2>
+	<h1>공지사항</h1>
 
 	<table class="cbp-mc-column">
 	<tr>
@@ -82,8 +82,10 @@ margin:auto;
 
 	<div class="bottom">
 		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='list.do'">
-		<input type="button" class="cbp-mc-submit" value="수정" onclick="location.href='update.do?noticeno=${dto.noticeno}'">
-		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='delete.do?noticeno=${dto.noticeno}'">
+		
 	</div>
 
 </form>
+
+<%-- 본문끝 --%>
+<%@ include file="../footer.jsp"%>

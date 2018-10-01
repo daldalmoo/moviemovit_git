@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ]]>
   </select>
   
+  
   <!-- *********************** 예매 *********************** -->
   <!-- ********* 예매 : 영화선택 부분 ******** -->
   <!-- 영화목록 -->
@@ -146,7 +147,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ORDER BY brandName ASC, cineName ASC
   ]]>
   </select>
-  
   <!-- ********* 예매 : 극장선택 부분 END ******** -->
   
   <!-- ********* 예매 : 날짜선택 부분 ******** -->
@@ -173,8 +173,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ORDER BY sdate
   </select>
   
+  <!-- 극장코드 -> 상영날짜 -->
+  <select id="sdateListFromCinema" parameterType="String" resultType="String">
+    SELECT sdate
+    FROM cinemaTable CT
+    INNER JOIN roomTable RT
+    ON CT.cineCode=RT.cineCode
+    INNER JOIN screenTable ST
+    ON RT.roomCode=ST.roomCode
+    WHERE CT.cineCode=#{cineCode}
+    GROUP BY ST.sdate
+    ORDER BY sdate
+  </select>
   
+  <!-- 영화코드,극장코드 -> 상영날짜 (cineCode를 screen 변수에 담아옴) -->
+  <select id="sdateListFromMovieCinema" parameterType="MovieDTO" resultType="String">
+    SELECT sdate
+    FROM cinemaTable CT
+    INNER JOIN roomTable RT
+    ON CT.cineCode=RT.cineCode
+    INNER JOIN screenTable ST
+    ON RT.roomCode=ST.roomCode
+    WHERE mCode=#{mCode} AND CT.cineCode=#{screen}
+    GROUP BY ST.sdate
+    ORDER BY sdate
+  </select>
   <!-- ********* 예매 : 날짜선택 부분 END ******** -->
+  
+  <!-- ********* 예매 : 상영시간표 부분 ******** -->
+  <!-- 영화,극장,날짜 -> 관별 시간 띄움 (cineCode를 screen 변수, sdate를 s_date 변수에 담아옴) -->
+  <select id="screentimeRoom" parameterType="MovieDTO" resultType="ScreenDTO">
+    <![CDATA[
+      SELECT *
+      FROM screenTable
+      WHERE mCode = #{mCode}
+           AND roomCode LIKE concat(#{screen},'%') 
+           AND sdate = #{s_date}
+    ]]>
+  </select>
+  <!-- ********* 예매 : 상영시간표 부분 END ******** -->
+  
   
   
   <!-- 영화선택 -> 영화정보 포스터 가져오기 -->
@@ -184,6 +222,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       FROM movieTable
       WHERE mCode = #{mCode}
     ]]> 
+  </select>
+  
+  <!-- 쿠폰 목록 -->
+  <select id="couponList" resultType="CouponDTO">
+    <![CDATA[
+      SELECT cCode, uid, startDate, expDate
+      FROM CouponTable
+      WHERE uid = #{uid}
+      ORDER BY cCode DESC
+    ]]>
+  </select>
+  
+  <!-- 회원정보 read -->
+  <select id="getMemberInfo" parameterType="UserDTO" resultType="UserDTO">
+    <![CDATA[
+      SELECT uid,upw,uname,gender,birth,email,phone,zipcode,addr1,addr2,grade
+      FROM userTable
+      WHERE uid = #{uid}
+    ]]>
   </select>
   
 </mapper>

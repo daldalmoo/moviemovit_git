@@ -4,7 +4,7 @@
 <%@ include file="../header1.jsp"%>
 
 <%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
-<link rel="stylesheet" href="../css/seat_style.css?ver=1" type="text/css" />
+<link rel="stylesheet" href="../css/seat_style.css?ver=2" type="text/css" />
 
 
 <%@ include file="../header2.jsp"%>
@@ -12,22 +12,23 @@
 
 <form class="cbp-mc-form" name="regForm" method='POST' action='./create.do'>
   <table id="seatArea">
+  <input type="hidden" id="peocnt" value="${peocnt }">
     <!-------------------------------- 1행 타이틀  --------------------------------------->
     <tr>
-      <th class="seat_title" colspan="3" style="width:80%;">좌석선택</th>
+      <th class="seat_title" colspan="2" style="width:80%;">좌석선택</th>
       <th style="width:20%;">영화정보</th>
     </tr>
 
     <tr style="width:80%;">
       <!-- -------------------------- seat_area : 좌석선택  ----------------------------- -->
-      <td id="seat_area" colspan="3">
+      <td id="seat_area" colspan="2">
           <div class="screen_section">
             <img src="./img/front_screen.PNG" class="front_screen">
           </div>
           
           <div class="seatmap">
             <ul>
-              <li class="seatNum">A</li>
+              <span class="seatNum">A</span>
               <c:forEach var="seat" begin="1" end="18" step="1">
                 <li class="seatline">${seat }</li>
               </c:forEach>
@@ -115,11 +116,10 @@
             <img src="./img/seatInfo.PNG" class="seat_img">
           </div>
 
-      </td>
-      <!-- -------------------------- seat_area : 좌석선택 end -------------------------- -->      
+      </td>      
 
-	  <!-- -------------------------- movieinfo_area : 영화정보 ----------------------------------- -->
-	  <td id="movieinfo_area" style="background: linear-gradient(to top, #3b3d58 0%, #5d607d 100%); color: white;">
+    <!-- -------------------------- movieinfo_area : 영화정보 ----------------------------------- -->
+    <td id="movieinfo_area" style="background: linear-gradient(to top, #3b3d58 0%, #5d607d 100%); color: white;">
         <div class="section_result">
           <div id="btn_reset">
             <input type="image" class="initReserve" src="./img/btn_initReserve.PNG" alt="예매다시하기" onclick="javascript:InitReserveMovie('0')">
@@ -177,7 +177,7 @@
 
 </form>
 
-<script src="../js/seat_script.js" charset="utf-8"></script>
+<script src="../js/seat_script.js?ver=1" charset="utf-8"></script>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>
