@@ -26,10 +26,13 @@ font-size:1.4em;
 .cbp-mc-column input{
 margin:auto;
 }
-
+.home-section{
+padding-top:0px;}
 </style>
-<%@ include file="../header2.jsp"%>
+</head>
 
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<div class="home-section text-center ">
 <!-- <script type="text/javascript">
     $(function(){
         //전역변수
@@ -53,7 +56,7 @@ margin:auto;
     }); 
 </script>-->
 <!-- 인풋타입 가져와서 create디자인이랑 통일1 -->
-<form class="cbp-mc-form" name="frm" method="GET" action="./read.do" enctype="multipart/form-data">
+<form class="cbp-mc-form" name="frm" method="GET" action="./adminread.do" enctype="multipart/form-data">
 	<h1>공지사항</h1>
 
 	<table class="cbp-mc-column">
@@ -81,11 +84,12 @@ margin:auto;
 	</table>
 
 	<div class="bottom">
-		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='list.do'">
-		
+		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='adminlist.do'">
+		<input type="button" class="cbp-mc-submit" value="수정" onclick="location.href='update.do?noticeno=${dto.noticeno}'">
+		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='delete.do?noticeno=${dto.noticeno}'">
 	</div>
 
 </form>
+</div>
+</body>
 
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>

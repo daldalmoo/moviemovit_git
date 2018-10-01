@@ -1,18 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header1.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%-- 본문시작 template.jsp --%>
-<head>
-
+<%@ include file="../../header1.jsp"%>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-.container-fluid {
-	margin: -50px
-}
 
+.container-fluid{
+margin:-50px
+}
 .header { /* 영화관목록  */
 	background-color: #3366cc;
 	color: white;
@@ -102,101 +98,46 @@ table tr:nth-child(2n+1) {
 		transform: translateY(-50%);
 		width: 100px;
 	}
-	td
-	:not
-	 
-	(
-	:first-child
-	 
-	)
-	{
-	clear
-	:
-	 
-	both
-	;
-	
-		
-	margin-left
-	:
-	 
-	100
-	px
-	;
-	
-		
-	padding
-	:
-	 
-	4
-	px
-	 
-	20
-	px
-	 
-	4
-	px
-	 
-	90
-	px
-	;
-	
-		
-	position
-	:
-	 
-	relative
-	;
-	
-		
-	text-align
-	:
-	 
-	left
-	;
-	
-	
+	td:not (:first-child ) {
+		clear: both;
+		margin-left: 100px;
+		padding: 4px 20px 4px 90px;
+		position: relative;
+		text-align: left;
+	}
+	td:not (:first-child ):before {
+		color: #91ced4;
+		content: '';
+		display: block;
+		left: 0;
+		position: absolute;
+	}
+
+	/* 사이즈 줄일때 나타나는 아이*/
+	td:nth-child(2):before {
+		content: '브랜드:';
+	}
+	td:nth-child(3):before {
+		content: '지점:';
+	}
+	td:nth-child(4):before {
+		content: '별점:';
+	}
+	td:nth-child(5):before {
+		content: '주소:';
+	}
+	td:nth-child(6):before {
+		content: '문의전화:';
+	}
+	tr {
+		padding: 10px 0;
+		position: relative;
+	}
+	tr:first-child {
+		display: none;
+	}
 }
 
-td:not (:first-child ):before {
-	color: #91ced4;
-	content: '';
-	display: block;
-	left: 0;
-	position: absolute;
-}
-
-/* 사이즈 줄일때 나타나는 아이*/
-td:nth-child(2):before {
-	content: '브랜드:';
-}
-
-td:nth-child(3):before {
-	content: '지점:';
-}
-
-td:nth-child(4):before {
-	content: '별점:';
-}
-
-td:nth-child(5):before {
-	content: '주소:';
-}
-
-td:nth-child(6):before {
-	content: '문의전화:';
-}
-
-tr {
-	padding: 10px 0;
-	position: relative;
-}
-
-tr:first-child {
-	display: none;
-}
-
-}
 @media screen and (max-width: 500px) {
 	.header {
 		background-color: transparent;
@@ -206,7 +147,7 @@ tr:first-child {
 		padding: 0;
 		text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
 	}
-	/* 	img {
+/* 	img {
 		border: 3px solid;
 		border-color: #daeff1;
 		height: 100px;
@@ -223,71 +164,39 @@ tr:first-child {
 		transform: translateY(0);
 		width: 100%;
 	}
-	td
-	:not
-	 
-	(
-	:first-child
-	 
-	)
-	{
-	margin
-	:
-	 
-	0;
-	padding
-	:
-	 
-	5
-	px
-	 
-	1
-	em
-	;
-	
-		
-	width
-	:
-	 
-	100%;
+	td:not (:first-child ) {
+		margin: 0;
+		padding: 5px 1em;
+		width: 100%;
+	}
+	td:not (:first-child ):before {
+		font-size: .8em;
+		padding-top: 0.3em;
+		position: relative;
+	}
+	td:last-child {
+		padding-bottom: 1rem !important;
+	}
+	tr {
+		background-color: white !important;
+		border: 1px solid #6cbec6;
+		border-radius: 10px;
+		box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+		margin: 0.5rem 0;
+		padding: 0;
+	}
+	.table-users {
+		border: none;
+		box-shadow: none;
+		overflow: visible;
+	}
 }
-
-td:not (:first-child ):before {
-	font-size: .8em;
-	padding-top: 0.3em;
-	position: relative;
-}
-
-td:last-child {
-	padding-bottom: 1rem !important;
-}
-
-tr {
-	background-color: white !important;
-	border: 1px solid #6cbec6;
-	border-radius: 10px;
-	box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-	margin: 0.5rem 0;
-	padding: 0;
-}
-
-.table-users {
-	border: none;
-	box-shadow: none;
-	overflow: visible;
-}
-}
-
-
-
-.home-section{
-padding-top:0px;}
 </style>
+
+
 
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-<div class="home-section text-center ">
  <div class="table-users"> 
 <div class="header">회원목록</div>
 <table>
@@ -321,16 +230,17 @@ padding-top:0px;}
 
 </table>
 </div>
-
+<input class="cbp-mc-button" type="button" value="공지사항 등록"
+	onclick="location.href='createForm.jsp'" />
 	
 	
- <div class="page">
+<%-- <div>
 	<c:if test="${noticepage.curPage ne 1 }">
-		<a href="adminlist.do?curpage=${noticepage.startPage }"><i
+		<a href="list.do?curpage=${noticepage.startPage }"><i
 			class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i></a>
 	</c:if>
 	<c:if test="${noticepage.curPage ne 1}">
-		<a href="adminlist.do?curpage=${noticepage.prevPage }"><i
+		<a href="list.do?curpage=${noticepage.prevPage }"><i
 			class="fa fa-angle-left fa-2x" aria-hidden="true"></i></a>
 	</c:if>
 	<c:forEach var="pageNum" begin="${noticepage.startPage }"
@@ -338,25 +248,26 @@ padding-top:0px;}
 		<c:choose>
 			<c:when test="${pageNum eq  noticepage.curPage}">
 				<span style="font-weight: bold;"><a
-					href="adminlist.do?curPage=${pageNum }">${pageNum }</a></span>
+					href="list.do?curPage=${pageNum }">${pageNum }</a></span>
 			</c:when>
 			<c:otherwise>
-				<a href="adminlist.do?curPage=${pageNum }">${pageNum }</a>
+				<a href="list.do?curPage=${pageNum }">${pageNum }</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 	<c:if
 		test="${noticepage.curPage ne noticepage.pageCnt && noticepage.pageCnt > 0}">
-		<a href="adminlist.do?curPage=${noticepage.nextPage}"><i
+		<a href="list.do?curPage=${noticepage.nextPage}"><i
 			class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
 	</c:if>
 	<c:if test="${noticepage.curRange ne endPage}">
-		<a href="adminlist.do?curPage=${noticepage.endPage}"><i
+		<a href="list.do?curPage=${noticepage.endPage}"><i
 			class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a>
 	</c:if>
 </div>
 
-<div class="page">총 게시글 수 : ${noticepage.listCnt }</div> 
-</div>
-</body>
+<div>총 게시글 수 : ${noticepage.listCnt }</div> --%>
 
+
+<%-- 본문끝 --%>
+<%@ include file="../../footer.jsp"%>

@@ -6,9 +6,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 
-.container-fluid{
-margin:-50px
-}
+
 .header { /* 영화관목록  */
 	background-color: #3366cc;
 	color: white;
@@ -16,6 +14,7 @@ margin:-50px
 	padding: 1rem;
 	text-align: center;
 	text-transform: uppercase;
+	
 }
 
 /* img { 
@@ -31,6 +30,7 @@ margin:-50px
 	margin: 1em auto;
 	overflow: hidden;
 	width: 100%;
+	text-aling:center;
 }
 
 table {
@@ -191,10 +191,14 @@ table tr:nth-child(2n+1) {
 		overflow: visible;
 	}
 }
+.home-section{
+padding-top:0px;}
 </style>
-<%@ include file="../header2.jsp"%>
+</head>
 
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 
+<div class="home-section text-center ">
 <div class="table-users">
 <div class="header">QnA</div>
 <table>
@@ -209,7 +213,7 @@ table tr:nth-child(2n+1) {
 	
 	<c:forEach var="dto" items="${list }">
 		<tr class="brandtest">
-			<td> <a href="read.do?qCode=${dto.qCode}">${dto.qCode}</a></td>
+			<td> <a href="adminread.do?qCode=${dto.qCode}">${dto.qCode}</a></td>
 		<%-- 	<td>   <c:choose>
                <c:when test="${dto.qType == 'q1'}">
                예매 :
@@ -232,7 +236,7 @@ table tr:nth-child(2n+1) {
 
 						</c:forEach>
 						<!--     <i class="fa fa-caret-right" aria-hidden="true"></i> -->
-					</c:if> <a href="read.do?qCode=${dto.qCode}"> <c:choose>
+					</c:if> <a href="adminread.do?qCode=${dto.qCode}"> <c:choose>
 							<c:when test="${dto.qType == 'q1'}">
                <strong>예매 :</strong>
                </c:when>
@@ -247,45 +251,43 @@ table tr:nth-child(2n+1) {
                </c:when>
 						</c:choose> 
 						                  ${dto.title }</a></td>
-				<td> <a href="read.do?qCode=${dto.qCode}">${dto.content }</a></td>
+				<td> <a href="adminread.do?qCode=${dto.qCode}">${dto.content }</a></td>
 			<td>${dto.uid }</td>
 			<td>${dto.wdate }</td>
 		  
-	
+
 		</tr>
 	</c:forEach>
 </table>
 </div>
-<input class="cbp-mc-button" type="button" value="qna 등록" onclick="location.href='createForm.jsp'"/>
+<input class="cbp-mc-button" type="button" value="qna 등록" onclick="location.href='admincreateForm.jsp'"/>
  <div>
                     <c:if test="${qnapage.curPage ne 1 }">
-                        <a href="list.do?curpage=${noticepage.startPage }" ><i class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i></a> 
+                        <a href="adminlist.do?curpage=${noticepage.startPage }" ><i class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                     <c:if test="${qnapage.curPage ne 1}">
-                        <a href="list.do?curpage=${noticepage.prevPage }" ><i class="fa fa-angle-left fa-2x" aria-hidden="true"></i></a> 
+                        <a href="adminlist.do?curpage=${noticepage.prevPage }" ><i class="fa fa-angle-left fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                     <c:forEach var="pageNum" begin="${qnapage.startPage }" end="${qnapage.endPage }">
                         <c:choose>
                             <c:when test="${pageNum eq  qnapage.curPage}">
-                                <span style="font-weight: bold;"><a href="list.do?curPage=${pageNum }" >${pageNum }</a></span> 
+                                <span style="font-weight: bold;"><a href="adminlist.do?curPage=${pageNum }" >${pageNum }</a></span> 
                             </c:when>
                             <c:otherwise>
-                                <a href="list.do?curPage=${pageNum }">${pageNum }</a> 
+                                <a href="adminlist.do?curPage=${pageNum }">${pageNum }</a> 
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
                     <c:if test="${qnapage.curPage ne qnapage.pageCnt && qnapage.pageCnt > 0}">
-                        <a href="list.do?curPage=${qnapage.nextPage}"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a> 
+                        <a href="adminlist.do?curPage=${qnapage.nextPage}"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
-                    <c:if test="${qnapage.curRange ne qnapage.rangeCnt && qnapage.rangeCnt > 0}">
-                        <a href="list.do?curPage=${qnapage.curPage}"><i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a> 
+                        <c:if test="${qnapage.curRange ne endPage}">
+                        <a href="adminlist.do?curPage=${qnapage.endPage}"><i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                 </div>
                 
                 <div>
                     총 게시글 수 : ${qnapage.listCnt }
                 </div>
-
-
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+</div>
+</body>

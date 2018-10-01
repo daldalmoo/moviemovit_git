@@ -5,13 +5,14 @@
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="../js/me.js" charset="utf-8"></script>
 <style>
+
 .cbp-mc-column td{
 	padding:10px;
 }
 .abc{
  font-style: italic;
 }
-h1{
+h2{
   font-family: 'Lato', Calibri, Arial, sans-serif;
   line-height: 1.5;
  
@@ -22,20 +23,26 @@ h1{
 th{
 font-size:1.4em;
 }
+
 .cbp-mc-column input{
 margin:auto;
 }
+.home-section{
+padding-top:0px;}
 </style>
-<%@ include file="../header2.jsp"%>
 
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 <!-- 인풋타입 가져와서 create디자인이랑 통일1 -->
-<form class="cbp-mc-form" name="editor" method="POST" action="./update.do">
-	<h1>QnA </h1>
+<div class="home-section text-center ">
+<form class="cbp-mc-form" name="editor" method="POST" action="./update.do" enctype="multipart/form-data">
+	<h2>공지사항</h2>
 
 	<table class="cbp-mc-column">
 	<tr>
 	<th>No</th>
-	<td><input type="text" id="qCode"name="qCode" size="50"   value="${dto.qCode }" ></td>
+	<td><input type="text" id="noticeno"name="noticeno" size="50"   value="${dto.noticeno }" ></td>
 	</tr>
 		<tr>
 			<th>제목</th>
@@ -47,20 +54,23 @@ margin:auto;
 			</tr>
 		<tr>
 			<th>내용</th>
-			<td><textarea name="content" id="content" >${dto.content}</textarea></td>
+			<td><textarea name="s_e" id="s_e" readonly>${dto.s_e}</textarea></td>
+		</tr>
+		<tr>
+			<th>공개여부</th>
+			<td><input type="text" id="open"name="open" size="50" value="${dto.open}" ></td>
 		</tr>
 	</table>
 	
-  <input type="hidden" name="qType" value="${dto.qType}"/>
-  
 	<div class="bottom">
-		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='list.do'">
-		<input type="submit" id="noticebutton" class="cbp-mc-submit" value="수정완료">
-		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='delete.do?qCode=${dto.qCode}'">
+		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='adminlist.do'">
+		<input type="submit" id="noticebutton" class="cbp-mc-submit" value="수정">
+		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='delete.do?noticeno=${dto.noticeno}'">
+		
 	</div>
 
 </form>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
     $(function(){
         //전역변수
         var obj = [];              
@@ -80,16 +90,17 @@ margin:auto;
         });
  $("#noticebutton").click(function(){
             //id가 smarteditor인 textarea에 에디터에서 대입
-            obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+            obj.getById["s_e"].exec("UPDATE_CONTENTS_FIELD", []);
             var el = document.createElement('html');
-          el.innerHTML = editor_object.getById["content"].elPlaceHolder.value; 
+          el.innerHTML = editor_object.getById["s_e"].elPlaceHolder.value; 
 
             //폼 submit
             $("#editor").submit();
         });
     });
-</script> -->
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>    
+ </script>
+ </div>
+</body>
+
         
         

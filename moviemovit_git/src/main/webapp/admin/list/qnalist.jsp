@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ include file="../header1.jsp"%>
+<%@ include file="../../header1.jsp"%>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -192,7 +192,7 @@ table tr:nth-child(2n+1) {
 	}
 }
 </style>
-<%@ include file="../header2.jsp"%>
+
 
 
 <div class="table-users">
@@ -288,4 +288,4 @@ table tr:nth-child(2n+1) {
 
 
 <%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+<%@ include file="../../footer.jsp"%>

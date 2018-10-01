@@ -10,9 +10,9 @@ public interface MovieMapper {
 	
 	public int create(MovieDTO dto);
 	
-	public ArrayList<MovieDTO> list(MovieDTO dto);
+	public ArrayList<MovieDTO> list();
 	
-	//public ArrayList<StarDTO> list2();
+	public ArrayList<StarDTO> list2();
 	
 	public MovieDTO read(MovieDTO dto);
 	
@@ -24,7 +24,5 @@ public interface MovieMapper {
 	
 	public ArrayList<PeopleDTO> peopleNameList2(String peoName);
 	
-	public int avgstar();
-	
-	public ArrayList<MovieDTO> starlist(MovieDTO dto);
+	public StarDTO avgstar(int star);
 }//interface end

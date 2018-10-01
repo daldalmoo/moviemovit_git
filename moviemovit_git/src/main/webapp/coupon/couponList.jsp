@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
 <%@ include file="../header1.jsp"%>
-
+<%@ include file="../user/auth.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
 <style>
 .header {
@@ -132,14 +134,38 @@ td:nth-child(4) {
 .listbutton:hover {
   background: #2b8256; /* 공개 수정 삭제 버튼 마우스 오버시 색상 */
 }
+
+.container {
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+
+    height:70px;   
+
+    background:#fed513;
+   
+    }
+    
+    .container p{
+    color: black;
+    font-size: 20px;
+    text-align:center;
+    padding-top:20px;
+    }
+  
+}
+
 </style>
 
-<%@ include file="../header2.jsp"%>
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 <%-- 본문시작 couponList.jsp --%>
 
-<div class="cbp-mc-submit-wrap">
-  <input class="cbp-mc-submit" type="button" value="쿠폰 등록" onclick="location.href='create.do'"/>
-</div>
+
 <div class="table-users">
    <div class="header">Coupon List</div>
 
@@ -152,7 +178,8 @@ td:nth-child(4) {
          <th>관리자 영역</th>
       </tr>
 
-    <c:forEach var="dto" items="${list }">
+	<c:forEach var="dto" items="${list }">
+   
       <tr>
         <td>${dto.cCode }</td>
         <td>${dto.uid }</td>
@@ -166,8 +193,10 @@ td:nth-child(4) {
     </c:forEach>
 
    </table>
+   
+</div>
+<div class="cbp-mc-submit-wrap">
+  <input class="cbp-mc-submit" type="button" value="쿠폰 등록" onclick="location.href='create.do'"/>
 </div>
 
-
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+</body>

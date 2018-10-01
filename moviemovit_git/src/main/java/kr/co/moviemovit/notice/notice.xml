@@ -47,13 +47,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					SELECT @NO := @NO + 1 AS ROWNUM, A.*
 					FROM (
     							SELECT *
-    							FROM noticeTable
+    							FROM noticeTable ORDER BY noticeno DESC
+  				 			 ) A,
+  				 			 ( SELECT @NO := 0 ) B 
+				  ) C
+		  WHERE C.ROWNUM BETWEEN #{startIndex}+1 AND #{startIndex}+#{pageSize};
+		 
+		]]>
+	</select>
+	
+		<select id="adminlist" parameterType="NoticePage" resultType="NoticeDTO">
+		<![CDATA[
+		  SELECT *
+		  FROM (
+					SELECT @NO := @NO + 1 AS ROWNUM, A.*
+					FROM (
+    							SELECT *
+    							FROM noticeTable ORDER BY noticeno DESC
   				 			 ) A,
   				 			 ( SELECT @NO := 0 ) B 
 				  ) C
 		  WHERE C.ROWNUM BETWEEN #{startIndex}+1 AND #{startIndex}+#{pageSize};
 		]]>
 	</select>
+	
 	
 	<select id="listCnt" resultType="int">
 		<![CDATA[

@@ -16,6 +16,8 @@ public interface NoticeMapper {
 	
 	//<select id="list" resultType="NoticeDTO">
 	public ArrayList<NoticeDTO> list(NoticePage noticepage);
+	
+	public ArrayList<NoticeDTO> adminlist(NoticePage noticepage);
 
 	public int listCnt();
 	

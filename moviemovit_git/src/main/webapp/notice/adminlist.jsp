@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%@ include file="../user/auth.jsp"%>
 <%@ include file="../header1.jsp"%>
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -191,34 +193,38 @@ table tr:nth-child(2n+1) {
       overflow: visible;
    }
 }
+.home-section{
+padding-top:0px;}
 </style>
 
-<%@ include file="../header2.jsp"%>
+</head>
 
-<div class="table-users"> 
-<div class="header">공지사항 </div>
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<div class="home-section text-center ">
+ <div class="table-users">
+<div class="header"  >공지사항 </div>
 <table>
-   <tr>
-      <th>No</th>
-      <th>제목</th>
-      
-      <th>작성자</th>
-      <th>작성일</th>
-      <th>공개여부</th>
-      
-   </tr>
-   
-   <c:forEach var="dto" items="${list }">
-      <tr class="brandtest">
-         <td><a href="read.do?noticeno=${dto.noticeno }">${dto.noticeno }</a></td>
-         <td ><a href="read.do?noticeno=${dto.noticeno }">${dto.title }</a></td>
-         
-         <td>${dto.uid }</td>
+	<tr>
+		<th>No</th>
+		<th>제목</th>
+		<th>내용</th>
+		<th>작성자</th>
+		<th>작성일</th>
+		<th>공개여부</th>
+		
+	</tr>
+	
+	<c:forEach var="dto" items="${list }">
+		<tr class="brandtest">
+			<td><a href="adminread.do?noticeno=${dto.noticeno }">${dto.noticeno }</a></td>
+			<td ><a href="adminread.do?noticeno=${dto.noticeno }">${dto.title }</a></td>
+			<td><a href="adminread.do?noticeno=${dto.noticeno }">${dto.s_e }</a></td>
+			<td>${dto.uid }</td>
 
-         <td>${dto.wdate }</td>
-         <td>
-         <c:choose>
-         
+			<td>${dto.wdate }</td>
+			<td>
+			<c:choose>
+			
     <c:when test="${dto.open=='Y'}">
  <i class="fa fa-unlock" aria-hidden="true"></i>
    </c:when>
@@ -231,44 +237,44 @@ table tr:nth-child(2n+1) {
    
 
 
-         
-                  </td>
-         
-      </tr>
-   </c:forEach>
+			
+				      </td>
+			
+		</tr>
+	</c:forEach>
 
 </table>
 </div>
-<input class="cbp-mc-button" type="button" value="공지사항 등록" onclick="location.href='createForm.jsp'"/>
+<input class="cbp-mc-button" type="button" value="공지사항 등록" onclick="location.href='admincreateForm.jsp'"/>
+
  <div>
                     <c:if test="${noticepage.curPage ne 1 }">
-                        <a href="list.do?curpage=${noticepage.startPage }" ><i class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i></a> 
+                        <a href="adminlist.do?curpage=${noticepage.startPage }" ><i class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                     <c:if test="${noticepage.curPage ne 1}">
-                        <a href="list.do?curpage=${noticepage.prevPage }" ><i class="fa fa-angle-left fa-2x" aria-hidden="true"></i></a> 
+                        <a href="adminlist.do?curpage=${noticepage.prevPage }" ><i class="fa fa-angle-left fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                     <c:forEach var="pageNum" begin="${noticepage.startPage }" end="${noticepage.endPage }">
                         <c:choose>
                             <c:when test="${pageNum eq  noticepage.curPage}">
-                                <span style="font-weight: bold;"><a href="list.do?curPage=${pageNum }" >${pageNum }</a></span> 
+                                <span style="font-weight: bold;"><a href="adminlist.do?curPage=${pageNum }" >${pageNum }</a></span> 
                             </c:when>
                             <c:otherwise>
-                                <a href="list.do?curPage=${pageNum }">${pageNum }</a> 
+                                <a href="adminlist.do?curPage=${pageNum }">${pageNum }</a> 
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
                     <c:if test="${noticepage.curPage ne noticepage.pageCnt && noticepage.pageCnt > 0}">
-                        <a href="list.do?curPage=${noticepage.nextPage}"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a> 
+                        <a href="adminlist.do?curPage=${noticepage.nextPage}"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                     <c:if test="${noticepage.curRange ne endPage}">
-                        <a href="list.do?curPage=${noticepage.endPage}"><i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a> 
+                        <a href="adminlist.do?curPage=${noticepage.endPage}"><i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                 </div>
                 
                 <div>
                     총 게시글 수 : ${noticepage.listCnt }  
                 </div>
+                </div>
+</body>
 
-
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>

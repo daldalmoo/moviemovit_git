@@ -16,7 +16,7 @@
 <title>Movie Movit</title>
 
 <!-- CSS -->
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<!-- <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="../css/nivo-lightbox.css" rel="stylesheet" />
 <link href="../css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
@@ -26,7 +26,7 @@
 <link href="../css/style.css" rel="stylesheet">
 <link href="../color/default.css" rel="stylesheet">
 
-<!-- Core JavaScript Files -->
+Core JavaScript Files
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/jquery.easing.min.js"></script>
@@ -36,13 +36,13 @@
 <script src="../js/wow.min.js"></script>
 <script src="../js/owl.carousel.min.js"></script>
 <script src="../js/nivo-lightbox.min.js"></script>
-<!-- Custom Theme JavaScript -->
+Custom Theme JavaScript
 <script src="../js/custom.js"></script>
-<script src="../contactform/contactform.js"></script>
+<script src="../contactform/contactform.js"></script> -->
 
 
 <style>
-#loginmenu ul {
+/* #loginmenu ul {
   list-style: none;
   font-weight:bold;
   /*좌측 여백 없애기*/
@@ -73,9 +73,11 @@ a, a:hover, a:focus{
 
 footer {
   background-color: #fed513;
-}
+} 
+
+
 .intro .slogan {
-    text-align: center;
+   text-align: center;
 }
 </style>
 
@@ -88,6 +90,7 @@ footer {
     <!---------------------- 수정 : 로고 이미지 + 사이트명 -------------------->
     <div class="slogan">
       <a href="index.do" target="_top" > <img src="img/logo2.jpg" alt="" /></a>
+      
     </div>
   </section>
   

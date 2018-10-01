@@ -6,6 +6,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import kr.co.moviemovit.user.UserDAO;
+import kr.co.moviemovit.user.UserDTO;
+import kr.co.moviemovit.user.UserMapper;
+
 @Component
 public class NoticeDAO {
 
@@ -33,6 +37,12 @@ public class NoticeDAO {
 		return list;
 	}//list () end
 	
+	
+	public ArrayList<NoticeDTO> adminlist(NoticePage noticepage) {
+		NoticeMapper mapper = sqlSession.getMapper(NoticeMapper.class);
+		ArrayList<NoticeDTO> adminlist = mapper.adminlist(noticepage);
+		return adminlist;
+	}//list () end
 	public int listCnt() {
 		NoticeMapper mapper = sqlSession.getMapper(NoticeMapper.class);
 		int  listCnt = mapper.listCnt();
@@ -56,5 +66,7 @@ public class NoticeDAO {
 		int cnt = mapper.update(dto);
 		return cnt;
 	}//update () end
+	
+
 	
 }//class end

@@ -2,7 +2,7 @@ package kr.co.moviemovit.user;
 
 import java.util.ArrayList;
 
-import kr.co.moviemovit.notice.NoticeDTO;
+
 import kr.co.moviemovit.notice.NoticePage;
 
 public interface UserMapper {
@@ -54,7 +54,7 @@ public interface UserMapper {
 	public int setRandomPw(UserDTO dto);
 	
 	
-	public ArrayList<UserDTO> list(UserPage userpage);
+	public ArrayList<UserDTO> list(NoticePage noticepage);
 
 	public int listCnt();
 }//interface end

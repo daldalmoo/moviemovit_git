@@ -26,10 +26,13 @@ font-size:1.4em;
 .cbp-mc-column input{
 margin:auto;
 }
-
+.home-section{
+padding-top:0px;}
 </style>
-<%@ include file="../header2.jsp"%>
+</head>
 
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<div class="home-section text-center ">
 <!-- <script type="text/javascript">
     $(function(){
         //전역변수
@@ -53,17 +56,21 @@ margin:auto;
     }); 
 </script>-->
 <!-- 인풋타입 가져와서 create디자인이랑 통일1 -->
-<form class="cbp-mc-form" name="frm" method="GET" action="./read.do" enctype="multipart/form-data">
-	<h1>공지사항</h1>
+<form class="cbp-mc-form" name="frm" method="GET" action="./adminread.do">
+	<h1>QnA</h1>
 
 	<table class="cbp-mc-column">
 	<tr>
-	<th>공지사항번호</th>
-	<td><input type="text" id="noticeno"name="noticeno" size="50"   value="${dto.noticeno }" readonly></td>
+	<th>No</th>
+	<td><input type="text" id="qCode"name="qCode" size="50"   value="${dto.qCode }" readonly></td>
 	</tr>
 		<tr>
 			<th>제목</th>
 			<td><input type="text" id="title"name="title" size="50"   value="${dto.title }" readonly></td>
+		</tr>
+		<tr>
+		<th>유형</th>
+		<td><input type="text" id="qType" name="qType" value="${dto.qType }" readonly></td>
 		</tr>
 		<tr>
 			<th>작성자</th>
@@ -71,21 +78,26 @@ margin:auto;
 			</tr>
 		<tr>
 			<th>내용</th>
-			<td><textarea name="s_e" id="s_e"  readonly>${dto.s_e}</textarea></td>
+			<td><textarea name="content" id="content"  readonly>${dto.content}</textarea></td>
 		</tr>
-		<tr>
-			<th>공개여부</th>
-			<td><input type="text" id="open"name="open" size="50" value="${dto.open}" readonly></td>
-		</tr>
-		 
+		 <tr>
+		 <th>아이피</th>
+		 <td>${dto.ip }</td>
+		 </tr>
 	</table>
+	
 
 	<div class="bottom">
-		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='list.do'">
-		
+	    <input type="button" class="cbp-mc-submit"  value="답변" onclick="location.href='adminreply.do?qCode=${dto.qCode}'">
+		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='adminlist.do'">
+		<input type="button" class="cbp-mc-submit" value="수정" onclick="location.href='adminupdate.do?qCode=${dto.qCode}'">
+		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='admindelete.do?qCode=${dto.qCode}'">
+	<input type="hidden" name="groupNum" value="${dto.groupNum}"/>
+               <input type="hidden" name="indent" value="${dto.indent}"/>
+               <input type="hidden" name="qType" value="${dto.qType}"/>
+               <input type="hidden" name="groupNo" value="${dto.groupNo }"/>
 	</div>
 
 </form>
-
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+</div>
+</body>

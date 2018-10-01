@@ -25,11 +25,15 @@ font-size:1.4em;
 .cbp-mc-column input{
 margin:auto;
 }
+.home-section{
+padding-top:0px;}
 </style>
-<%@ include file="../header2.jsp"%>
+</head>
 
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<div class="home-section text-center ">
 <!-- 인풋타입 가져와서 create디자인이랑 통일1 -->
-<form class="cbp-mc-form" name="editor" method="POST" action="./update.do">
+<form class="cbp-mc-form" name="editor" method="POST" action="./adminupdate.do">
 	<h1>QnA </h1>
 
 	<table class="cbp-mc-column">
@@ -47,19 +51,22 @@ margin:auto;
 			</tr>
 		<tr>
 			<th>내용</th>
-			<td><textarea name="content" id="content" >${dto.content}</textarea></td>
+			<td><textarea name="content" id="content" readonly>${dto.content}</textarea></td>
 		</tr>
 	</table>
 	
   <input type="hidden" name="qType" value="${dto.qType}"/>
   
 	<div class="bottom">
-		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='list.do'">
+		<input type="button" class="cbp-mc-submit"  value="목록" onclick="location.href='adminlist.do'">
 		<input type="submit" id="noticebutton" class="cbp-mc-submit" value="수정완료">
-		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='delete.do?qCode=${dto.qCode}'">
+		<input type="button" class="cbp-mc-submit" value="삭제" onclick="location.href='admindelete.do?qCode=${dto.qCode}'">
 	</div>
 
 </form>
+</div>
+</body>
+
 <!-- <script type="text/javascript">
     $(function(){
         //전역변수
@@ -89,7 +96,6 @@ margin:auto;
         });
     });
 </script> -->
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>    
+    
         
         

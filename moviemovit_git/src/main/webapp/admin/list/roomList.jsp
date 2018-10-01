@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ include file="../../header1.jsp"%>
 
 <style rel="stylesheet"><style>
 .header {
@@ -135,6 +134,7 @@ td:nth-child(4) {
 </style>
 
 
+
 <%
 String cineCode = request.getParameter("cineCode");
 request.setAttribute("cineCode", cineCode);
@@ -170,3 +170,6 @@ request.setAttribute("cineCode", cineCode);
 	</div>
 </body>
 
+
+<%-- 본문끝 --%>
+<%@ include file="../../footer.jsp"%>

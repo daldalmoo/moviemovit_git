@@ -23,12 +23,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
+import kr.co.moviemovit.notice.NoticePage;
 import net.utility.*;
 
 @Controller
 public class UserCont {
 	@Autowired
 	UserDAO dao;
+	
 	
 	public UserCont() {
 		System.out.println("---UserCont() 객체 생성");
@@ -151,33 +153,8 @@ public class UserCont {
 			msg += "</html></body>";
 			mav.addObject("msg", msg);
 			mav.setViewName("msgView");
-		}else {
-			 if (dto.getGrade().equals("ADMIN")) {
-					
-					HttpSession session = req.getSession();
-					session.setAttribute("s_id", dto.getUid());
-					session.setAttribute("s_passwd", dto.getUpw());
-					//180903 경민 추가
-					session.setAttribute("s_grade", dto.getGrade());
-					
-					//쿠키(아이디 저장)
-					String c_id = req.getParameter("c_id");
-					if(c_id==null) { //체크하지 않은 경우
-						c_id="";
-					}
-					
-					Cookie cookie = null;
-					if(c_id.equals("SAVE")) {
-						cookie = new Cookie("c_id", dto.getUid());
-						cookie.setMaxAge(60*60*24*31); //한달
-					}else {
-						cookie = new Cookie("c_id", "");
-						cookie.setMaxAge(0);
-					}
-					resp.addCookie(cookie);
-					mav.addObject("dto",dto);
-					mav.setViewName("redirect:/admin/adminStart.jsp");
-					
+	
+		
 			 }else if(!(dto.getGrade().equals("F"))) {
 				HttpSession session = req.getSession();
 				session.setAttribute("s_id", dto.getUid());
@@ -213,11 +190,12 @@ public class UserCont {
 				msg += "</html></body>";
 				mav.addObject("msg", msg);
 				mav.setViewName("msgView");
-			}
-		}//if end
-
+			}//if end
 		return mav;
 	}//loginProc() end
+
+		
+	
 	
 	//3) 로그아웃
 	@RequestMapping(value="/user/logout.do", method = RequestMethod.GET)
@@ -227,7 +205,7 @@ public class UserCont {
 		HttpSession session = req.getSession();
 		session.removeAttribute("s_id");
 		session.removeAttribute("s_passwd");		
-		
+
 		mav.setViewName("redirect:/index.do");
 		return mav;
 	}//logout() end
@@ -589,11 +567,11 @@ public class UserCont {
 	  }//randomPasswd() end
 	
 	  
-	  @RequestMapping(value = "/user/list.do")
+	 /* @RequestMapping(value = "/user/list.do")
 		public  ModelAndView list(UserDTO dto, @RequestParam(defaultValue="1") int curPage,
 	            HttpServletRequest request )throws Exception{
 			
-	      /*  HttpSession session = request.getSession();*/
+	        HttpSession session = request.getSession();
 			ModelAndView mav = new ModelAndView();
 			
 			int listCnt = dao.listCnt();
@@ -604,7 +582,7 @@ public class UserCont {
 		    //dto.
 			
 			
-			ArrayList<UserDTO> list = dao.list(userpage);
+			ArrayList<UserDTO> list = ddao.list(userpage);
 			System.out.println("list.toString()" + list.toString());
 			
 			mav.setViewName("user/list");
@@ -612,5 +590,30 @@ public class UserCont {
 			mav.addObject("userpage", userpage);
 			return mav;
 		}// list() end
+*/
+	  
+	  @RequestMapping(value = "/user/adminlist.do")
+			public  ModelAndView userlist(UserDTO dto, @RequestParam(defaultValue="1") int curPage,
+		            HttpServletRequest request )throws Exception{
+				
+		      /*  HttpSession session = request.getSession();*/
+				ModelAndView mav = new ModelAndView();
+				
+				int listCnt = dao.listCnt();
+				System.out.println("listCnt = "+listCnt);
+				System.out.println("curPage = "+curPage);
+				
+				NoticePage noticepage = new NoticePage(listCnt, curPage);
+			    //dto.
+				
+				
+				ArrayList<UserDTO> list = dao.list(noticepage);
+				System.out.println("list.toString()" + list.toString());
+				
+				mav.setViewName("user/adminlist");
+				mav.addObject("list", list);
+				mav.addObject("noticepage", noticepage);
+				return mav;
+			}// list() end
 
 }//class end

@@ -14,11 +14,16 @@
     font-size:20px;
 }
 
-
+.home-section{
+padding-top:0px;
+}
 </style>
-<%@ include file="../header2.jsp"%>
-<%-- 본문시작 movieForm.jsp --%>
 
+<%-- 본문시작 movieForm.jsp --%>
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<div class="home-section text-center ">
 <div class="header2">영화 등록</div>
 <form class="cbp-mc-form" name="regForm" method="POST" action="./create.do"
       enctype="multipart/form-data">
@@ -301,7 +306,7 @@
 	<div class="cbp-mc-submit-wrap">
 		<input class="cbp-mc-button" type="submit" value="등록" />
 		<input class="cbp-mc-button" type="reset" value="다시입력" />
-		<input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='./movieList.do'"/>
+		<input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='./adminmovieList.do'"/>
 	</div>
 	
 	
@@ -395,6 +400,5 @@
 	 </script>
 	
 </form>
-
-<%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
+</div>
+</body>

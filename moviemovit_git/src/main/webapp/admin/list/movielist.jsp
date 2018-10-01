@@ -1,10 +1,40 @@
 <%@ page contentType="text/html; charset=UTF-8"%> 
+<%@ include file="../../header1.jsp"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ include file="../header1.jsp"%>
+
+<style rel="stylesheet">
+.main{
+  width:1200px;
+  margin-left: 5em;
+  text-align: center;
+}
+
+.box-image {
+  display: inline-block;
+  width:250px;
+  height: 300px;
+  background-color: white;
+  border: 8px solid #3366cc; 
+  box-sizing: content-box;
+  margin-left: 3px;
+  margin-top: 20px;
+  padding: 1px 1px 1px 1px;
+  float:left;
+  
+}
+
+.mimg {        /* 영화관 목록안의 영화관이미지 */
+  font-size: 0;
+  text-align: center;
+  width: 150px;
+  max-width: calc(100% - 50em);
+  height: 180px;
+  
+}
 
 
-<!-- <style rel="stylesheet">
+
 .header {   /* 영화관목록  */
   background-color: #3366cc;
   color: white; 
@@ -13,10 +43,7 @@
   text-align: center;
   text-transform: uppercase;        
 }
-img {        /* 영화 포스터 */
-  height: 200px;
-  width: 200px;
-}
+
 .table-users {
   border: 1px solid #327a81;
   border-radius: 10px;
@@ -54,6 +81,8 @@ table tr:nth-child(2n) {
 table tr:nth-child(2n+1) {
   background-color: #bfe1ff;
 }
+
+
 
 
 
@@ -103,29 +132,7 @@ table tr:nth-child(2n+1) {
     position: absolute;
   }
   
-  /* 사이즈 줄일때 나타나는 아이*/
-  td:nth-child(2):before {
-    content: '브랜드:';
-  }
-  td:nth-child(3):before {
-    content: '지점:';
-  }
-  td:nth-child(4):before {
-    content: '별점:';
-  }
-  td:nth-child(5):before {
-    content: '주소:';
-  }
-  td:nth-child(6):before {
-    content: '문의전화:';
-  }
-  tr {
-    padding: 10px 0;
-    position: relative;
-  }
-  tr:first-child {
-    display: none;
-  }
+ 
 }
 @media screen and (max-width: 500px) {
   .header {
@@ -181,95 +188,47 @@ table tr:nth-child(2n+1) {
   }
 }
 
-</style> -->
-<link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
-<style>
-/*180827 경민 list 클래스 추가*/
-.list {
-	text-align:left;
-	padding:10px;
-	margin:auto;
-}
-
-.img2 {
-    width:200px;
-    heigth:200px;
-}
-
-.home-section{
-padding-top:0px;}
 </style>
-</head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-<div class="home-section text-center ">
-<%-- 본문시작 updateForm.jsp --%>
-<div class="table-users">
-   <div class="header">People Update</div>
-   <form class="cbp-mc-form" name='regForm' method='POST' action='./update.do' enctype="multipart/form-data" onsubmit="return confirm('수정하시겠습니까?')">
-   <input type="hidden" name="peoCode" value="${dto.peoCode }">
-   <table class="cbp-mc-column" style="text-align:center; margin:center;">
-      <tr>
-		<th>*이름</th>
-		<td class="list">
-			<input type="text" id="peoName" name="peoName" value="${dto.peoName }" required>&nbsp;
-			<input class="cbp-mc-button"type="button" value="인물 중복확인" id="peopleCheck">
-		</td>
-	</tr>
-	<tr>
-		<th>*국적</th>
-		<td class="list">
-		   <input type="text" id="country" name="country" value="${dto.country }" readonly>
-        </td>
-	</tr>
-	<tr>
-		<th>*출생년도</th>
-		<td class="list">
-		  <input type="date" id="peoBirth" name="peoBirth" value="${dto.peoBirth }" required>
-		</td>
-	</tr>
-	<tr>
-		<th>*성별</th>
-		<td class="list">
-			<select id="gender" name="gender" required>
-			  <option value="M" <c:if test="${dto.gender eq 'M' }"> selected </c:if>  >남성</option>
-              <option value="W" <c:if test="${dto.gender eq 'W' }"> selected </c:if>  >여성</option>
-            </select>
-        </td>
-	</tr>
-	<tr>
-		<th>*사진</th>
-		<td class="list">
-          <img class="img2" src="./storage/${dto.peoPic }">
-        </td>
-	</tr>
-	<tr>
-	   <th></th>
-	   <td>
-	      <input type="file" id="posterMF" name="posterMF" required>
-		</td>
-	</tr>
-	      
-   </table>
+<%-- 본문시작 movieForm.jsp --%>
+ <div class="table-users">
+   <div class="header">MOVIE LIST</div>
+ </div>
    
-   <!-- 하단 버튼 -->
-	<div class="cbp-mc-submit-wrap">
-	  <input class="cbp-mc-button" type='button' value="뒤로가기" onclick='javascript:history.back()'>	 
-	  <input class="cbp-mc-button" type="reset" value="다시입력" />
-	  <input class="cbp-mc-button" type="submit" value="수정"/>
-	</div>
-	</form>
-</div>
+   <c:forEach var="sdto" items="${list2 }">
+   
+   <div class="main">
+   <div class="box-image" >
+     <span class="thumb-image">
+     <a href="./movieRead.do?mCode=${sdto.mCode }">
+       <img class="mimg" src="./img_poster/${sdto.poster }" width="400" height="800" />
+     </a>
+     </span>
+  <br><br>
+    <strong class="title">${sdto.mName }</strong><br>
+     <span>
+       <strong>
+       ${sdto.s_date } 개봉<br> 
+       ${sdto.screen } <br>
+       ${sdto.star }
+       </strong>
+     </span><br>
+     
+     <input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />    
+    </div>
+    
+   </div>
+  
+  
+   </c:forEach>  
+   
+   
+   <br><br><br>
+   <input class="cbp-mc-button" type="button" value="영화등록" onclick="location.href='./create.do'"/>  
+   
+   
+    
+	
 
-</div>
-</body>
-
-
-
-
-
-
-
-
-
-
+<%-- 본문끝 --%>
+<%@ include file="../../footer.jsp"%>
