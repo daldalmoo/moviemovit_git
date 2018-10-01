@@ -29,10 +29,8 @@ public class MovieCont {
 	MovieDAO dao;
 
 	public MovieCont() {
-		System.out.println("------MovieCont() 객체 생성");
+		System.out.println("-----MovieCont() 객체 생성");
 	}//기본생성자
-	//결과확인
-	//http://localhost:9090/moviemovit/movie/create.do
 	
 	@RequestMapping(value="/movie/create.do", method=RequestMethod.GET)
 	  public ModelAndView createForm(MovieDTO dto) {
