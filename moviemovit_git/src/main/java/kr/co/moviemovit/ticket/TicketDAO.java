@@ -21,11 +21,11 @@ public class TicketDAO {
   SqlSession sqlSession;
   
   public TicketDAO() {
-    System.out.println("---------- TicketDAO() ê°ì²´ ìƒì„±");
+    System.out.println("---------- TicketDAO() °´Ã¼ »ı¼º");
   }//default constructor
   
-/*********************************** ì˜ˆë§¤ ëª©ë¡ *********************************************/
-  // ì˜ˆë§¤ ëª©ë¡ select
+/*********************************** ¿¹¸Å ¸ñ·Ï *********************************************/
+  // ¿¹¸Å ¸ñ·Ï select
   public ArrayList<TicketDTO> list() {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     ArrayList<TicketDTO> list = mapper.list();
@@ -33,17 +33,17 @@ public class TicketDAO {
   }//list() end
   
 
-/************************************ ì˜ˆë§¤ *************************************************/
-  /* -------------------- ì˜ˆë§¤ : ì˜í™”ì„ íƒ ë¶€ë¶„ -------------------- */
-  // ì˜ˆë§¤ ì¤‘ ì˜í™”ëª©ë¡
+/************************************ ¿¹¸Å *************************************************/
+  /* -------------------- ¿¹¸Å : ¿µÈ­¼±ÅÃ ºÎºĞ -------------------- */
+  // ¿¹¸Å Áß ¿µÈ­¸ñ·Ï
   public ArrayList<MovieDTO> movieList() {
   TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
   ArrayList<MovieDTO> movieList = mapper.movieList();
   return movieList;
   }//movieList() end
-  /* ------------------ ì˜ˆë§¤ : ì˜í™”ì„ íƒ ë¶€ë¶„ END ------------------ */
+  /* ------------------ ¿¹¸Å : ¿µÈ­¼±ÅÃ ºÎºĞ END ------------------ */
   
-  /* ------------------ ì˜ˆë§¤ : ê·¹ì¥ì„ íƒ ë¶€ë¶„ ------------------ */
+  /* ------------------ ¿¹¸Å : ±ØÀå¼±ÅÃ ºÎºĞ ------------------ */
   public ArrayList<CinemaDTO> cinemaList() {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     ArrayList<CinemaDTO> cinemalist = mapper.cinemaList();
@@ -102,9 +102,9 @@ public class TicketDAO {
     ArrayList<CinemaDTO> cinelist = mapper.cinemaSearch(key);
     return cinelist;
   }//cinemaSearch() end
-  /* ------------------ ì˜ˆë§¤ : ê·¹ì¥ì„ íƒ ë¶€ë¶„ END ------------------ */
+  /* ------------------ ¿¹¸Å : ±ØÀå¼±ÅÃ ºÎºĞ END ------------------ */
 
-  /* ------------------ ì˜ˆë§¤ : ë‚ ì§œì„ íƒ ë¶€ë¶„ ------------------ */
+  /* ------------------ ¿¹¸Å : ³¯Â¥¼±ÅÃ ºÎºĞ ------------------ */
   public ArrayList<String> sdateAllList() {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     ArrayList<String> sdatelist = mapper.sdateAllList();
@@ -128,34 +128,34 @@ public class TicketDAO {
     ArrayList<String> sdatelist = mapper.sdateListFromMovieCinema(dto);
     return sdatelist;
   }//sdateListFromMovieCinema() end
-  /* ------------------ ì˜ˆë§¤ : ë‚ ì§œì„ íƒ ë¶€ë¶„ END ------------------ */
+  /* ------------------ ¿¹¸Å : ³¯Â¥¼±ÅÃ ºÎºĞ END ------------------ */
   
-  /* ------------------ ì˜ˆë§¤ : ìƒì˜ì‹œê°„í‘œ ë¶€ë¶„ END ------------------ */
+  /* ------------------ ¿¹¸Å : »ó¿µ½Ã°£Ç¥ ºÎºĞ END ------------------ */
   //<select id="screentimeRoom" parameterType="MovieDTO" resultType="ScreenDTO">
   public ArrayList<ScreenDTO> screentimeRoom(MovieDTO dto) {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     ArrayList<ScreenDTO> screenlist = mapper.screentimeRoom(dto);
     return screenlist;
   }//screentimeRoom() end
-  /* ------------------ ì˜ˆë§¤ : ìƒì˜ì‹œê°„í‘œ ë¶€ë¶„ END ------------------ */
+  /* ------------------ ¿¹¸Å : »ó¿µ½Ã°£Ç¥ ºÎºĞ END ------------------ */
   
   
-  /* -------------------- ì˜í™”ì„ íƒ -> ì˜í™”ì •ë³´ í¬ìŠ¤í„° ë¶€ë¶„ -------------------- */
+  /* -------------------- ¿µÈ­¼±ÅÃ -> ¿µÈ­Á¤º¸ Æ÷½ºÅÍ ºÎºĞ -------------------- */
   public MovieDTO MovieData(MovieDTO dto) {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     MovieDTO movieData = mapper.movieData(dto);
     return movieData;
   }//MovieData() end
-  /* -------------------- ì˜í™”ì„ íƒ -> ì˜í™”ì •ë³´ í¬ìŠ¤í„° ë¶€ë¶„ END -------------------- */
+  /* -------------------- ¿µÈ­¼±ÅÃ -> ¿µÈ­Á¤º¸ Æ÷½ºÅÍ ºÎºĞ END -------------------- */
   
-  // ì¿ í° ëª©ë¡ select
+  // ÄíÆù ¸ñ·Ï select
   public ArrayList<CouponDTO> couponList(CouponDTO dto) {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     ArrayList<CouponDTO> couponList = mapper.couponList(dto);
     return couponList;
   }//couponList() end
   
-  //íšŒì›ì •ë³´ read
+  //È¸¿øÁ¤º¸ read
   public UserDTO getMemberInfo(UserDTO dto) {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     dto = mapper.getMemberInfo(dto);

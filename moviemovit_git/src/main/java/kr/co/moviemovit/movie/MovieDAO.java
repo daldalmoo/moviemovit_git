@@ -28,9 +28,9 @@ public class MovieDAO {
 	    return count;
 	}//create() end
 	
-	public ArrayList<MovieDTO> list() {
+	public ArrayList<MovieDTO> list(MovieDTO dto) {
 	    MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
-	    ArrayList<MovieDTO> list = mapper.list();
+	    ArrayList<MovieDTO> list = mapper.list(dto);
 	    return list;
 	}//list() end
 	
@@ -75,5 +75,11 @@ public class MovieDAO {
 		StarDTO sdto = mapper.avgstar(star);
 		return sdto;
 	}//star() end
+	
+	public ArrayList<MovieDTO> starlist(MovieDTO dto) {
+		MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
+		ArrayList<MovieDTO> starlist = mapper.starlist(dto);
+		return starlist;
+	}//starlist() end
 	
 }//class end

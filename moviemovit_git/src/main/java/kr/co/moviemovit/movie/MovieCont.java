@@ -38,7 +38,7 @@ public class MovieCont {
 	  public ModelAndView createForm(MovieDTO dto) {
 	    ModelAndView mav = new ModelAndView();
 	    mav.setViewName("movie/movieForm");
-	    mav.addObject("list", dao.list());
+	    mav.addObject("list", dao.list(dto));
 	    mav.addObject("root", Utility.getRoot());
 	    mav.addObject("mCode", dto.getmCode());    
 	    return mav;
@@ -104,29 +104,45 @@ public class MovieCont {
 	 }//createProc() end
 	
 	 @RequestMapping("/movie/movieList.do")
-	 public ModelAndView list(MovieDTO dto, StarDTO sdto) {
+	 public ModelAndView starlist(MovieDTO dto) {
 	     ModelAndView mav = new ModelAndView();
 	     mav.setViewName("movie/movieList");
-	     ArrayList<MovieDTO> list = dao.list();
-	     ArrayList<StarDTO> list2 = dao.list2();
-	     mav.addObject("list", list);
-	     mav.addObject("list2", list2);
+	     ArrayList<MovieDTO> list = dao.list(dto);
+   	     ArrayList<MovieDTO> starlist = dao.starlist(dto);
+	     for (int i=0; i<list.size(); i++) {
+	    	 list.get(i).setRunningTime(0);
+	    	 int mCode = list.get(i).getmCode();
+	    	 for(int j=0; j<starlist.size(); j++) {
+	    	   if(mCode==starlist.get(j).getmCode()) {
+	    		   list.get(i).setRunningTime(starlist.get(j).getRunningTime());
+	    	   }
+	    	 }
+	     }
 	     
-	     //mav.addObject("sdto", sdto);
-	     //mav.addObject("avgstar", avgstar);
+	     mav.addObject("starlist", list);
 	     return mav;
 	 }//list() end
+	
+	
+	
 	 @RequestMapping("/movie/adminmovieList.do")
 	 public ModelAndView adminlist(MovieDTO dto, StarDTO sdto) {
 	     ModelAndView mav = new ModelAndView();
 	     mav.setViewName("movie/adminmovieList");
-	     ArrayList<MovieDTO> list = dao.list();
-	     ArrayList<StarDTO> list2 = dao.list2();
-	     mav.addObject("list", list);
-	     mav.addObject("list2", list2);
 	     
-	     //mav.addObject("sdto", sdto);
-	     //mav.addObject("avgstar", avgstar);
+	     ArrayList<MovieDTO> list = dao.list(dto);
+   	     ArrayList<MovieDTO> starlist = dao.starlist(dto);
+	     for (int i=0; i<list.size(); i++) {
+	    	 list.get(i).setRunningTime(0);
+	    	 int mCode = list.get(i).getmCode();
+	    	 for(int j=0; j<starlist.size(); j++) {
+	    	   if(mCode==starlist.get(j).getmCode()) {
+	    		   list.get(i).setRunningTime(starlist.get(j).getRunningTime());
+	    	   }
+	    	 }
+	     }
+	     
+	     mav.addObject("starlist", list);
 	     return mav;
 	 }//list() end
 	 

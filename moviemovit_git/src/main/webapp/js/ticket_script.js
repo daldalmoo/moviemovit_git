@@ -1,4 +1,4 @@
-// --------------------- 예매하기 AJAX File
+﻿// --------------------- 예매하기 AJAX File
 $.ajaxSetup({datatype:"text"});
    
 // 전역변수
