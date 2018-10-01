@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+/*********** 예매 view 페이지 css ***********/
+/********* 좌석선택 테이블 형태로 *********************/
+#paymentArea {
+  border-collapse: collapse;
+  border: 1px solid #000;
+  width: 90%;
+  height: 700px;
+  margin: auto;
+}
+/*상단 타이틀*/
+#paymentArea>tbody>tr>th {
+  vertical-align: text-top;
+  text-align: center;
+  background: linear-gradient(to top, #3b3d58 0%, #5d607d 100%);
+  font-size: 12pt;
+  font-weight: bold;
+  color: white;
+  height: 3%;
+  width: 25%;
+  border: 1px solid #000;
+}
+#paymentArea>tbody>tr>td {
+  border: 1px solid #000;
+}
+/*********** 좌석선택 **************/
+#paymentArea .pay_title {
+  text-align: left;
+  padding-left: 10px;
+}
+#paygroup #paygroupTable {
+    width: 100%;
+    height: 675px;
+    margin: auto;
+}
+#paygroupTable #groupTitle {
+    font-size: 20px;
+    padding-top: 0px;
+    padding-left: 30px;
+    text-align: left;
+    height: 10%;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+/*********** 영화정보 **************/
+.section_result {
+  display: inline-block;
+  position: relative;
+}
+.section_result #btn_reset {;
+  margin:0 0 20px 0;
+}
+.thumb_poster .movie_poster { /*영화 포스터*/
+  width: 85%;
+  height: 80%;
+  margin: auto;
+}
+.section_result h3 { /*영화 제목*/
+  color: white;
+  font-size: 18px;
+  /* line-height: 21px; */
+  margin: 20px 0 20px 0;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+.section_result dt {
+  margin-left: 50px;
+  float: left;
+  line-height: 2;
+}
+.section_result dd {
+  line-height: 2;
+}
+.section_result .btn_area a {
+  display: block;
+  background: url("../ticket/img/btn_reserve.PNG");
+}

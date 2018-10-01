@@ -6,8 +6,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import kr.co.moviemovit.coupon.CouponDTO;
+import kr.co.moviemovit.coupon.CouponMapper;
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
+import kr.co.moviemovit.user.UserDTO;
+import kr.co.moviemovit.user.UserMapper;
 
 @Component
 public class TicketDAO {
@@ -122,5 +126,19 @@ public class TicketDAO {
     return movieData;
   }//MovieData() end
   /* -------------------- 영화선택 -> 영화정보 포스터 부분 END -------------------- */
+  
+  // 쿠폰 목록 select
+  public ArrayList<CouponDTO> couponList(CouponDTO dto) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    ArrayList<CouponDTO> couponList = mapper.couponList(dto);
+    return couponList;
+  }//couponList() end
+  
+  //회원정보 read
+  public UserDTO getMemberInfo(UserDTO dto) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    dto = mapper.getMemberInfo(dto);
+    return dto;
+  }//getMemberInfo() end
   
 }//class end

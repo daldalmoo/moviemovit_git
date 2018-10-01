@@ -186,6 +186,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ]]> 
   </select>
   
+  <!-- 쿠폰 목록 -->
+  <select id="couponList" resultType="CouponDTO">
+    <![CDATA[
+      SELECT cCode, uid, startDate, expDate
+      FROM CouponTable
+      WHERE uid = #{uid}
+      ORDER BY cCode DESC
+    ]]>
+  </select>
+  
+  <!-- 회원정보 read -->
+  <select id="getMemberInfo" parameterType="UserDTO" resultType="UserDTO">
+    <![CDATA[
+      SELECT uid,upw,uname,gender,birth,email,phone,zipcode,addr1,addr2,grade
+      FROM userTable
+      WHERE uid = #{uid}
+    ]]>
+  </select>
+  
 </mapper>
 
 

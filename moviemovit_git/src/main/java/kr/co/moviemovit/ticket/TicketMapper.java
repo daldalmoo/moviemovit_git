@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import kr.co.moviemovit.coupon.CouponDTO;
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
+import kr.co.moviemovit.user.UserDTO;
 
 public interface TicketMapper {
 /*********************************** 예매 목록 *********************************************/
@@ -63,4 +65,11 @@ public interface TicketMapper {
 	//<select id="movieData">
 	public MovieDTO movieData(MovieDTO dto);
 	
+	//쿠폰목록
+  public ArrayList<CouponDTO> couponList(CouponDTO dto);
+	
+  /*회원정보*/
+  //<select id="getMemberInfo">
+  public UserDTO getMemberInfo(UserDTO dto);
+  
 }// interface end

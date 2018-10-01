@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.moviemovit.coupon.CouponDTO;
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
+import kr.co.moviemovit.user.UserDTO;
 import net.utility.Utility;
 
 @Controller
@@ -519,4 +522,31 @@ public class TicketCont {
   }//selectSeat() end
   /* -------------------- 좌석선택 END -------------------- */  
 	
+  @RequestMapping(value="/ticket/payment.do", method = RequestMethod.GET)
+  public ModelAndView payment(CouponDTO dto, HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    ModelAndView mav = new ModelAndView();
+
+    HttpSession session = req.getSession();
+    
+    //로그인되어서 session에 올라간 값 가져오기
+    String uid = (String)session.getAttribute("s_id");
+    
+    //uid,upw dto에 담기
+    UserDTO udto = new UserDTO();
+    udto.setUid(uid);
+    
+    //DB에서 회원정보 가져오기
+    udto = dao.getMemberInfo(udto);
+    System.out.println("ticketCont userid : " + udto.getUid());
+    
+    dto.setUid(udto.getUid());
+    
+    ArrayList<CouponDTO> couponList = dao.couponList(dto);
+    
+    System.out.println(couponList);
+    // 페이지 이동 및 값 올리기
+    mav.addObject("couponList", couponList);
+    mav.setViewName("ticket/payment");
+    return mav;
+  }//payment() end
 }//class end
