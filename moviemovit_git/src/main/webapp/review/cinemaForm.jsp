@@ -208,4 +208,3 @@ $("#widokyeongdo").click (function geoCoding(addr) {
 </form>
 
 <%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>
