@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ include file="../header1.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
@@ -136,6 +137,14 @@ table tr:nth-child(2n+1) {
 </style>
 
 
+<body>
+
+<!--  
+   reviewStarTable
+   pixel, sound, clean, service, seat, around,  snack,  trans, s_e, 
+   no, uid, cineCode, ip, heart, wdate  -->
+
+
 <%
   String uid = (String) session.getAttribute("s_id");
 			//out.println("세션확인:" + uid);
@@ -270,3 +279,4 @@ table tr:nth-child(2n+1) {
 
 
 <%-- 본문끝 --%>
+<%@ include file="../footer.jsp"%>

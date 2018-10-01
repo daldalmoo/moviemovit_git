@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 
+<%@ include file="../header1.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
@@ -160,6 +161,7 @@ text-align: left;
 	});
 </script>
 
+<body>
 
 <%
   String uid = (String) session.getAttribute("s_id");
@@ -202,13 +204,11 @@ text-align: left;
 						<div class="contact-info">
 							<div class="contact-grids">
 								<div class="cinemaStar">
-									<c:forEach var="reviewstar" items="${reviewstar }">
-										<c:if test="${cineCode == reviewstar.cineCode }">
 											<div class="col_1_of_bottom span_1_of_first1">
 												<div class="starimg">
 												
 												<!-- 별점점수가 잘 들어가는지 test -->
-												${reviewstar.pixel } 화질/
+												<%-- ${reviewstar.pixel } 화질/
 												${reviewstar.seat }  좌석/
 												${reviewstar.clean } 청결도/
 												${reviewstar.trans } 교통 접근성/
@@ -217,14 +217,16 @@ text-align: left;
 												${reviewstar.service } 서비스/
 												${reviewstar.around } 주변/
 												${reviewstar.startotal } 총점
-												
-												
+									 		 --%>
 												
 												
 												
 													화질&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 													&nbsp; &nbsp;
 													<c:choose>
+														<c:when test="${reviewstar.pixel < 1 }">
+															<img src="./img/star0.png">
+														</c:when>
 														<c:when test="${reviewstar.pixel < 2 }">
 															<img src="./img/star1.png">
 														</c:when>
@@ -240,11 +242,18 @@ text-align: left;
 														<c:when test="${reviewstar.pixel < 6 }">
 															<img src="./img/star5.png">
 														</c:when>
+														<c:when
+														test="${reviewstar.pixel eq '' || empty reviewstar.pixel }">
+														<img src="./img/star0.png" width="150">
+														</c:when>
 													</c:choose>
 													<hr class="starline">
 													청결도&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 													&nbsp;
 													<c:choose>
+														<c:when test="${reviewstar.clean < 1 }">
+															<img src="./img/star0.png">
+														</c:when>
 														<c:when test="${reviewstar.clean < 2 }">
 															<img src="./img/star1.png">
 														</c:when>
@@ -260,11 +269,18 @@ text-align: left;
 														<c:when test="${reviewstar.clean < 6 }">
 															<img src="./img/star5.png">
 														</c:when>
+														<c:when
+														test="${reviewstar.clean eq '' || empty reviewstar.clean }">
+														<img src="./img/star0.png" width="150">
+														</c:when>
 													</c:choose>
 													<hr class="starline">
 													음향&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 													&nbsp; &nbsp;
 													<c:choose>
+														<c:when test="${reviewstar.sound < 1 }">
+															<img src="./img/star0.png">
+														</c:when>
 														<c:when test="${reviewstar.sound < 2 }">
 															<img src="./img/star1.png">
 														</c:when>
@@ -280,11 +296,18 @@ text-align: left;
 														<c:when test="${reviewstar.sound < 6 }">
 															<img src="./img/star5.png">
 														</c:when>
+														<c:when
+														test="${reviewstar.sound eq '' || empty reviewstar.sound }">
+														<img src="./img/star0.png" width="150">
+														</c:when>
 													</c:choose>
 													<hr class="starline">
 													서비스&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 													&nbsp;
 													<c:choose>
+														<c:when test="${reviewstar.service < 1 }">
+															<img src="./img/star0.png">
+														</c:when>
 														<c:when test="${reviewstar.service < 2 }">
 															<img src="./img/star1.png">
 														</c:when>
@@ -300,6 +323,10 @@ text-align: left;
 														<c:when test="${reviewstar.service < 6 }">
 															<img src="./img/star5.png">
 														</c:when>
+														<c:when
+														test="${reviewstar.service eq '' || empty reviewstar.service }">
+														<img src="./img/star0.png" width="150">
+														</c:when>
 													</c:choose>
 												</div>
 											</div>
@@ -308,6 +335,9 @@ text-align: left;
 													좌석&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 													&nbsp; &nbsp;
 													<c:choose>
+														<c:when test="${reviewstar.seat < 1 }">
+															<img src="./img/star0.png">
+														</c:when>
 														<c:when test="${reviewstar.seat < 2 }">
 															<img src="./img/star1.png">
 														</c:when>
@@ -323,10 +353,17 @@ text-align: left;
 														<c:when test="${reviewstar.seat < 6 }">
 															<img src="./img/star5.png">
 														</c:when>
+														<c:when
+														test="${reviewstar.seat eq '' || empty reviewstar.seat }">
+														<img src="./img/star0.png" width="150">
+														</c:when>
 													</c:choose>
 													<hr class="starline">
 													교통 접근성&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 													<c:choose>
+														<c:when test="${reviewstar.trans < 1 }">
+															<img src="./img/star0.png">
+														</c:when>
 														<c:when test="${reviewstar.trans < 2 }">
 															<img src="./img/star1.png">
 														</c:when>
@@ -342,11 +379,18 @@ text-align: left;
 														<c:when test="${reviewstar.trans < 6 }">
 															<img src="./img/star5.png">
 														</c:when>
+														<c:when
+														test="${reviewstar.trans eq '' || empty reviewstar.trans }">
+														<img src="./img/star0.png" width="150">
+														</c:when>
 													</c:choose>
 													<hr class="starline">
 													매점&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 													&nbsp; &nbsp;
 													<c:choose>
+														<c:when test="${reviewstar.snack < 1 }">
+															<img src="./img/star0.png">
+														</c:when>
 														<c:when test="${reviewstar.snack < 2 }">
 															<img src="./img/star1.png">
 														</c:when>
@@ -362,10 +406,17 @@ text-align: left;
 														<c:when test="${reviewstar.snack < 6 }">
 															<img src="./img/star5.png">
 														</c:when>
+														<c:when
+														test="${reviewstar.snack eq '' || empty reviewstar.snack}">
+														<img src="./img/star0.png" width="150">
+														</c:when>
 													</c:choose>
 													<hr class="starline">
 													주변 편의시설 &nbsp; &nbsp; &nbsp;
 													<c:choose>
+														<c:when test="${reviewstar.around < 1 }">
+															<img src="./img/star0.png">
+														</c:when>
 														<c:when test="${reviewstar.around < 2 }">
 															<img src="./img/star1.png">
 														</c:when>
@@ -380,6 +431,10 @@ text-align: left;
 														</c:when>
 														<c:when test="${reviewstar.around < 6 }">
 															<img src="./img/star5.png">
+														</c:when>
+														<c:when
+														test="${reviewstar.around eq '' || empty reviewstar.around }">
+														<img src="./img/star0.png" width="150">
 														</c:when>
 													</c:choose>
 													<hr>
@@ -413,13 +468,12 @@ text-align: left;
 														<img src="./img/star5.png" width="150">
 													</c:when>
 													<c:when
-														test="${dto.startotal eq '' || empty dto.startotal }">
+														test="${reviewstar.startotal eq '' || empty reviewstar.startotal }">
 														<img src="./img/star0.png" width="150">
 													</c:when>
 												</c:choose>
 											</div>
-										</c:if>
-									</c:forEach>
+
 								</div>
 								<div class="clear"></div>
 							</div>

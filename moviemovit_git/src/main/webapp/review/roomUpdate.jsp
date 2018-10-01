@@ -1,7 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ include file="../header1.jsp"%>
 <%
   //주소 값에서 cineCode 가져오기
 			String roomCode = request.getParameter("roomCode");
@@ -20,6 +18,7 @@
 }
 </style>
 
+<body>
 
 <!-- 상영관 등록 FORM -->
 <FORM class="cbp-mc-form" name='roomForm' method='POST' action='./roomUpdate.do'
@@ -59,3 +58,4 @@
 </form>
 </body>
 <%-- 본문끝 --%>
+<%@ include file="../footer.jsp"%>

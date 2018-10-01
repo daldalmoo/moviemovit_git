@@ -41,8 +41,6 @@ public interface ReviewMapper {
   // LIST : Paging : FAIL
   //public int selectListCnt(); 
   
-  // LIST : paging
-  public ArrayList<CinemaDTO> listCriteria(Criteria cri);
   
   // LIST : select addr1
   public ArrayList<CinemaDTO> addrList(String addr1);
@@ -93,6 +91,6 @@ public interface ReviewMapper {
   public int reviewUpdate(ReviewStar sdto);
   
   // 이전 글과 중복 확인
-  public ArrayList<ReviewStar> starRead(ReviewStar sdto);
+  public ReviewStar starRead(ReviewStar sdto);
   
 } // class end

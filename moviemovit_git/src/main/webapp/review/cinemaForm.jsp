@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="../header1.jsp"%>
+
 <link href="../css/joinFormStyle.css" rel="stylesheet" type="text/css">
 
 <style>
@@ -12,7 +12,7 @@
 }
 </style>
 
-
+<body>
 <FORM class="cbp-mc-form" name='regForm' method='POST' action='./cinemaForm.do'
       enctype="multipart/form-data">
 	<span style="color: red; font-weight: bold">* 필수입력</span><br>
@@ -208,3 +208,4 @@ $("#widokyeongdo").click (function geoCoding(addr) {
 </form>
 
 <%-- 본문끝 --%>
+<%@ include file="../footer.jsp"%>
