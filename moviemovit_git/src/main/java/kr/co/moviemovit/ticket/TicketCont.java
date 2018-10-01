@@ -25,16 +25,16 @@ import net.utility.Utility;
 @Controller
 public class TicketCont {
   
-  @Autowired  // ì˜ì¡´ ê´€ê³„ë¥¼ ìë™ìœ¼ë¡œ ì—°ê²° ë° ê°ì²´ ìë™ ìƒì„±
+  @Autowired  // ÀÇÁ¸ °ü°è¸¦ ÀÚµ¿À¸·Î ¿¬°á ¹× °´Ã¼ ÀÚµ¿ »ı¼º
   TicketDAO dao;
 
   public TicketCont() {
-    System.out.println("---------- TicketCont() ê°ì²´ ìƒì„±");
+    System.out.println("---------- TicketCont() °´Ã¼ »ı¼º");
   }//default constructor
   
   
-/*********************************** ì˜ˆë§¤ ëª©ë¡ *********************************************/
-  // ê²°ê³¼í™•ì¸ http://localhost:9090/moviemovit/ticket/list.do
+/*********************************** ¿¹¸Å ¸ñ·Ï *********************************************/
+  // °á°úÈ®ÀÎ http://localhost:9090/moviemovit/ticket/list.do
   @RequestMapping(value="/ticket/list.do")
   public ModelAndView list(TicketDTO dto) {
       ModelAndView mav = new ModelAndView();
@@ -45,72 +45,72 @@ public class TicketCont {
   }//list() end
   
   
-/************************************ ë“±ë¡ *************************************************/
-	@RequestMapping(value="/ticket/create.do", method = RequestMethod.GET)
-	public ModelAndView ticketForm() {
-		ModelAndView mav = new ModelAndView();
-		
-		// ì˜í™”ëª©ë¡
-	  ArrayList<MovieDTO> movieList = dao.movieList();
-	  mav.addObject("movieList", movieList);
-	  
-	  // ê·¹ì¥ëª©ë¡
-	  ArrayList<CinemaDTO> cinemalist = dao.cinemaList();
+/************************************ µî·Ï *************************************************/
+  @RequestMapping(value="/ticket/create.do", method = RequestMethod.GET)
+  public ModelAndView ticketForm() {
+    ModelAndView mav = new ModelAndView();
+    
+    // ¿µÈ­¸ñ·Ï
+    ArrayList<MovieDTO> movieList = dao.movieList();
+    mav.addObject("movieList", movieList);
+    
+    // ±ØÀå¸ñ·Ï
+    ArrayList<CinemaDTO> cinemalist = dao.cinemaList();
     mav.addObject("cinemalist", cinemalist);
     
-    // ì£¼ì†Œ1ì˜ ê·¹ì¥ê°œìˆ˜
+    // ÁÖ¼Ò1ÀÇ ±ØÀå°³¼ö
     HashMap<String,Integer> cinemacntmap = new HashMap<String, Integer>();
-    cinemacntmap.put("all",dao.cinemacntFromAddr1("all"));  // ì „êµ­
-    cinemacntmap.put("SEO",dao.cinemacntFromAddr1("SEO"));  // ì„œìš¸
-    cinemacntmap.put("GGD",dao.cinemacntFromAddr1("GGD"));  // ê²½ê¸°ë„
-    cinemacntmap.put("ICH",dao.cinemacntFromAddr1("ICH"));  // ì¸ì²œ
-    cinemacntmap.put("GWD",dao.cinemacntFromAddr1("GWD"));  // ê°•ì›ë„
-    cinemacntmap.put("CCD",dao.cinemacntFromAddr1("CCD"));  // ì¶©ì²­ë„
-    cinemacntmap.put("GSD",dao.cinemacntFromAddr1("GSD"));  // ê²½ìƒë„
-    cinemacntmap.put("JLD",dao.cinemacntFromAddr1("JLD"));  // ì „ë¼ë„
-    cinemacntmap.put("JJD",dao.cinemacntFromAddr1("JJD"));  // ì œì£¼ë„
+    cinemacntmap.put("all",dao.cinemacntFromAddr1("all"));  // Àü±¹
+    cinemacntmap.put("SEO",dao.cinemacntFromAddr1("SEO"));  // ¼­¿ï
+    cinemacntmap.put("GGD",dao.cinemacntFromAddr1("GGD"));  // °æ±âµµ
+    cinemacntmap.put("ICH",dao.cinemacntFromAddr1("ICH"));  // ÀÎÃµ
+    cinemacntmap.put("GWD",dao.cinemacntFromAddr1("GWD"));  // °­¿øµµ
+    cinemacntmap.put("CCD",dao.cinemacntFromAddr1("CCD"));  // ÃæÃ»µµ
+    cinemacntmap.put("GSD",dao.cinemacntFromAddr1("GSD"));  // °æ»óµµ
+    cinemacntmap.put("JLD",dao.cinemacntFromAddr1("JLD"));  // Àü¶óµµ
+    cinemacntmap.put("JJD",dao.cinemacntFromAddr1("JJD"));  // Á¦ÁÖµµ
     mav.addObject("cinemacntmap", cinemacntmap);
     
-		mav.setViewName("ticket/ticketForm");
-		return mav;
-	}//ticketForm() end
+    mav.setViewName("ticket/ticketForm");
+    return mav;
+  }//ticketForm() end
 
-  /* -------------------- ì˜í™”ì„ íƒ ë¶€ë¶„ AJAX -------------------- */
+  /* -------------------- ¿µÈ­¼±ÅÃ ºÎºĞ AJAX -------------------- */
 
-  /* -------------------- ì˜í™”ì„ íƒ ë¶€ë¶„ AJAX END -------------------- */
-	
-  /* -------------------- ê·¹ì¥ì„ íƒ ë¶€ë¶„ AJAX END -------------------- */
-  // ì£¼ì†Œ1 ëª©ë¡ ê°€ì ¸ì˜¤ê¸°
-	@RequestMapping(value = "/ticket/addr1List.do", method = RequestMethod.POST)
-	public void addr1List(HttpServletRequest req, HttpServletResponse resp, String addr1) throws IOException {
+  /* -------------------- ¿µÈ­¼±ÅÃ ºÎºĞ AJAX END -------------------- */
+  
+  /* -------------------- ±ØÀå¼±ÅÃ ºÎºĞ AJAX END -------------------- */
+  // ÁÖ¼Ò1 ¸ñ·Ï °¡Á®¿À±â
+  @RequestMapping(value = "/ticket/addr1List.do", method = RequestMethod.POST)
+  public void addr1List(HttpServletRequest req, HttpServletResponse resp, String addr1) throws IOException {
     String msg = "";
     
-    if(addr1.equals("all")) { msg += "ì „êµ­"; }
-    else if(addr1.equals("SEO")) { msg += "ì„œìš¸"; }
-    else if(addr1.equals("GGD")) { msg += "ê²½ê¸°ë„"; }
-    else if(addr1.equals("ICH")) { msg += "ì¸ì²œ"; }
-    else if(addr1.equals("GWD")) { msg += "ê°•ì›ë„"; }
-    else if(addr1.equals("CCD")) { msg += "ì¶©ì²­ë„"; }
-    else if(addr1.equals("GSD")) { msg += "ê²½ìƒë„"; }
-    else if(addr1.equals("JLD")) { msg += "ì „ë¼ë„"; }
-    else if(addr1.equals("JJD")) { msg += "ì œì£¼ë„"; }
+    if(addr1.equals("all")) { msg += "Àü±¹"; }
+    else if(addr1.equals("SEO")) { msg += "¼­¿ï"; }
+    else if(addr1.equals("GGD")) { msg += "°æ±âµµ"; }
+    else if(addr1.equals("ICH")) { msg += "ÀÎÃµ"; }
+    else if(addr1.equals("GWD")) { msg += "°­¿øµµ"; }
+    else if(addr1.equals("CCD")) { msg += "ÃæÃ»µµ"; }
+    else if(addr1.equals("GSD")) { msg += "°æ»óµµ"; }
+    else if(addr1.equals("JLD")) { msg += "Àü¶óµµ"; }
+    else if(addr1.equals("JJD")) { msg += "Á¦ÁÖµµ"; }
     msg += "(<strong>"+dao.cinemacntFromAddr1(addr1)+"</strong>)";
     
     msg += "|";
     
     msg += "<ul>";
-    msg += "  <li value='all' style='border-bottom: 1px dotted gray;'>ì „êµ­(<strong>"+dao.cinemacntFromAddr1("all")+"</strong>)</li>";
-      msg += "  <li value='SEO'>ì„œìš¸(<strong>"+dao.cinemacntFromAddr1("SEO")+"</strong>)</li>";
-    msg += "  <li value='GGD'>ê²½ê¸°ë„(<strong>"+dao.cinemacntFromAddr1("GGD")+"</strong>)</li>";
-      msg += "  <li value='ICH'>ì¸ì²œ(<strong>"+dao.cinemacntFromAddr1("ICH")+"</strong>)</li>";
-    msg += "  <li value='GWD'>ê°•ì›ë„(<strong>"+dao.cinemacntFromAddr1("GWD")+"</strong>)</li>";
-    msg += "  <li value='CCD'>ì¶©ì²­ë„(<strong>"+dao.cinemacntFromAddr1("CCD")+"</strong>)</li>";
-    msg += "  <li value='GSD'>ê²½ìƒë„(<strong>"+dao.cinemacntFromAddr1("GSD")+"</strong>)</li>";
-    msg += "  <li value='JLD'>ì „ë¼ë„(<strong>"+dao.cinemacntFromAddr1("JLD")+"</strong>)</li>";
-    msg += "  <li value='JJD'>ì œì£¼ë„(<strong>"+dao.cinemacntFromAddr1("JJD")+"</strong>)</li>";
+    msg += "  <li value='all' style='border-bottom: 1px dotted gray;'>Àü±¹(<strong>"+dao.cinemacntFromAddr1("all")+"</strong>)</li>";
+      msg += "  <li value='SEO'>¼­¿ï(<strong>"+dao.cinemacntFromAddr1("SEO")+"</strong>)</li>";
+    msg += "  <li value='GGD'>°æ±âµµ(<strong>"+dao.cinemacntFromAddr1("GGD")+"</strong>)</li>";
+      msg += "  <li value='ICH'>ÀÎÃµ(<strong>"+dao.cinemacntFromAddr1("ICH")+"</strong>)</li>";
+    msg += "  <li value='GWD'>°­¿øµµ(<strong>"+dao.cinemacntFromAddr1("GWD")+"</strong>)</li>";
+    msg += "  <li value='CCD'>ÃæÃ»µµ(<strong>"+dao.cinemacntFromAddr1("CCD")+"</strong>)</li>";
+    msg += "  <li value='GSD'>°æ»óµµ(<strong>"+dao.cinemacntFromAddr1("GSD")+"</strong>)</li>";
+    msg += "  <li value='JLD'>Àü¶óµµ(<strong>"+dao.cinemacntFromAddr1("JLD")+"</strong>)</li>";
+    msg += "  <li value='JJD'>Á¦ÁÖµµ(<strong>"+dao.cinemacntFromAddr1("JJD")+"</strong>)</li>";
     msg += "</ul>";
     
-    // ì¶œë ¥
+    // Ãâ·Â
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
@@ -118,49 +118,49 @@ public class TicketCont {
     out.close();
   }//addr1List() end
 
-  // ì˜í™”ì„ íƒ -> ìƒì˜ê·¹ì¥ì˜ ì£¼ì†Œ1 ëª©ë¡ ê°€ì ¸ì˜¤ê¸°
+  // ¿µÈ­¼±ÅÃ -> »ó¿µ±ØÀåÀÇ ÁÖ¼Ò1 ¸ñ·Ï °¡Á®¿À±â
   @RequestMapping(value = "/ticket/addr1ListFromMovie.do", method = RequestMethod.POST)
   public void addr1ListFromMovie(HttpServletRequest req, HttpServletResponse resp, String addr1, int mCode) throws IOException {
     String msg = "";
     MovieDTO dto = new MovieDTO();
     dto.setmCode(mCode);
-    dto.setmName(addr1);  // addr1ì„ mNameì— ë‹´ì•„ì„œ ë³´ëƒ„
+    dto.setmName(addr1);  // addr1À» mName¿¡ ´ã¾Æ¼­ º¸³¿
     
-    if(addr1.equals("all")) { msg += "ì „êµ­"; }
-    else if(addr1.equals("SEO")) { msg += "ì„œìš¸"; }
-    else if(addr1.equals("GGD")) { msg += "ê²½ê¸°ë„"; }
-    else if(addr1.equals("ICH")) { msg += "ì¸ì²œ"; }
-    else if(addr1.equals("GWD")) { msg += "ê°•ì›ë„"; }
-    else if(addr1.equals("CCD")) { msg += "ì¶©ì²­ë„"; }
-    else if(addr1.equals("GSD")) { msg += "ê²½ìƒë„"; }
-    else if(addr1.equals("JLD")) { msg += "ì „ë¼ë„"; }
-    else if(addr1.equals("JJD")) { msg += "ì œì£¼ë„"; }
+    if(addr1.equals("all")) { msg += "Àü±¹"; }
+    else if(addr1.equals("SEO")) { msg += "¼­¿ï"; }
+    else if(addr1.equals("GGD")) { msg += "°æ±âµµ"; }
+    else if(addr1.equals("ICH")) { msg += "ÀÎÃµ"; }
+    else if(addr1.equals("GWD")) { msg += "°­¿øµµ"; }
+    else if(addr1.equals("CCD")) { msg += "ÃæÃ»µµ"; }
+    else if(addr1.equals("GSD")) { msg += "°æ»óµµ"; }
+    else if(addr1.equals("JLD")) { msg += "Àü¶óµµ"; }
+    else if(addr1.equals("JJD")) { msg += "Á¦ÁÖµµ"; }
     msg += "(<strong>"+dao.cinemacntFromAddr1Movie(dto)+"</strong>)";
     
     msg += "|";
     
     msg += "<ul>";
     dto.setmName("all");
-    msg += "  <li value='all' style='border-bottom: 1px dotted gray;'>ì „êµ­(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
+    msg += "  <li value='all' style='border-bottom: 1px dotted gray;'>Àü±¹(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
     dto.setmName("SEO");
-    msg += "  <li value='SEO'>ì„œìš¸(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
+    msg += "  <li value='SEO'>¼­¿ï(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
     dto.setmName("GGD");
-    msg += "  <li value='GGD'>ê²½ê¸°ë„(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
+    msg += "  <li value='GGD'>°æ±âµµ(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
     dto.setmName("ICH");
-    msg += "  <li value='ICH'>ì¸ì²œ(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
+    msg += "  <li value='ICH'>ÀÎÃµ(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
     dto.setmName("GWD");
-    msg += "  <li value='GWD'>ê°•ì›ë„(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
+    msg += "  <li value='GWD'>°­¿øµµ(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
     dto.setmName("CCD");
-    msg += "  <li value='CCD'>ì¶©ì²­ë„(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
+    msg += "  <li value='CCD'>ÃæÃ»µµ(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
     dto.setmName("GSD");
-    msg += "  <li value='GSD'>ê²½ìƒë„(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
+    msg += "  <li value='GSD'>°æ»óµµ(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
     dto.setmName("JLD");
-    msg += "  <li value='JLD'>ì „ë¼ë„(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
+    msg += "  <li value='JLD'>Àü¶óµµ(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
     dto.setmName("JJD");
-    msg += "  <li value='JJD'>ì œì£¼ë„(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
+    msg += "  <li value='JJD'>Á¦ÁÖµµ(<strong>" + dao.cinemacntFromAddr1Movie(dto) + "</strong>)</li>";
     msg += "</ul>";
     
-    // ì¶œë ¥
+    // Ãâ·Â
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
@@ -168,7 +168,7 @@ public class TicketCont {
     out.close();
   }//addr1ListFromMovie() end
 
-  // ì²´ì¸ì„ íƒ -> ì£¼ì†Œ1 ëª©ë¡ ê°€ì ¸ì˜¤ê¸°
+  // Ã¼ÀÎ¼±ÅÃ -> ÁÖ¼Ò1 ¸ñ·Ï °¡Á®¿À±â
   @RequestMapping(value = "/ticket/addr1ListFromChain.do", method = RequestMethod.POST)
   public void addr1ListFromChain(HttpServletRequest req, HttpServletResponse resp, String addr1, String CLMD) throws IOException {
     String msg = "";
@@ -176,49 +176,49 @@ public class TicketCont {
     dto.setCineCode(CLMD);
     dto.setAddr1(addr1);
     
-    if(addr1.equals("all")) { msg += "ì „êµ­"; }
-    else if(addr1.equals("SEO")) { msg += "ì„œìš¸"; }
-    else if(addr1.equals("GGD")) { msg += "ê²½ê¸°ë„"; }
-    else if(addr1.equals("ICH")) { msg += "ì¸ì²œ"; }
-    else if(addr1.equals("GWD")) { msg += "ê°•ì›ë„"; }
-    else if(addr1.equals("CCD")) { msg += "ì¶©ì²­ë„"; }
-    else if(addr1.equals("GSD")) { msg += "ê²½ìƒë„"; }
-    else if(addr1.equals("JLD")) { msg += "ì „ë¼ë„"; }
-    else if(addr1.equals("JJD")) { msg += "ì œì£¼ë„"; }
+    if(addr1.equals("all")) { msg += "Àü±¹"; }
+    else if(addr1.equals("SEO")) { msg += "¼­¿ï"; }
+    else if(addr1.equals("GGD")) { msg += "°æ±âµµ"; }
+    else if(addr1.equals("ICH")) { msg += "ÀÎÃµ"; }
+    else if(addr1.equals("GWD")) { msg += "°­¿øµµ"; }
+    else if(addr1.equals("CCD")) { msg += "ÃæÃ»µµ"; }
+    else if(addr1.equals("GSD")) { msg += "°æ»óµµ"; }
+    else if(addr1.equals("JLD")) { msg += "Àü¶óµµ"; }
+    else if(addr1.equals("JJD")) { msg += "Á¦ÁÖµµ"; }
     msg += "(<strong>"+dao.cinemacntFromAddr1CLMD(dto)+"</strong>)";
     
     msg += "|";
     
     msg += "<ul>";
     dto.setAddr1("all");
-    msg += "  <li value='all' style='border-bottom: 1px dotted gray;'>ì „êµ­(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
+    msg += "  <li value='all' style='border-bottom: 1px dotted gray;'>Àü±¹(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
     dto.setAddr1("SEO");
-    msg += "  <li value='SEO'>ì„œìš¸(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
+    msg += "  <li value='SEO'>¼­¿ï(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
     dto.setAddr1("GGD");
-    msg += "  <li value='GGD'>ê²½ê¸°ë„(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
+    msg += "  <li value='GGD'>°æ±âµµ(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
     dto.setAddr1("ICH");
-    msg += "  <li value='ICH'>ì¸ì²œ(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
+    msg += "  <li value='ICH'>ÀÎÃµ(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
     dto.setAddr1("GWD");
-    msg += "  <li value='GWD'>ê°•ì›ë„(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
+    msg += "  <li value='GWD'>°­¿øµµ(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
     dto.setAddr1("CCD");
-    msg += "  <li value='CCD'>ì¶©ì²­ë„(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
+    msg += "  <li value='CCD'>ÃæÃ»µµ(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
     dto.setAddr1("GSD");
-    msg += "  <li value='GSD'>ê²½ìƒë„(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
+    msg += "  <li value='GSD'>°æ»óµµ(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
     dto.setAddr1("JLD");
-    msg += "  <li value='JLD'>ì „ë¼ë„(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
+    msg += "  <li value='JLD'>Àü¶óµµ(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
     dto.setAddr1("JJD");
-    msg += "  <li value='JJD'>ì œì£¼ë„(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
+    msg += "  <li value='JJD'>Á¦ÁÖµµ(<strong>" + dao.cinemacntFromAddr1CLMD(dto) + "</strong>)</li>";
     msg += "</ul>";
 
-    // ì¶œë ¥
+    // Ãâ·Â
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
     out.flush();
     out.close();
   }//addr1ListFromChain() end
-	
-	// ì£¼ì†Œ1 -> ê·¹ì¥ ëª©ë¡ <ul> ì „ì²´
+  
+  // ÁÖ¼Ò1 -> ±ØÀå ¸ñ·Ï <ul> ÀüÃ¼
   @RequestMapping(value = "/ticket/cinemaListFromAddr1.do", method = RequestMethod.POST)
   public void cinemaListFromAddr1(HttpServletRequest req, HttpServletResponse resp, String addr1) throws IOException {
     String msg = "";
@@ -238,39 +238,39 @@ public class TicketCont {
       if (cinema.getBrandName().equals("CGV")) {
         msg += "CGV";
       } else if (cinema.getBrandName().equals("LOTTE")) {
-        msg += "ë¡¯ë°ì‹œë„¤ë§ˆ";
+        msg += "·Ôµ¥½Ã³×¸¶";
       } else if (cinema.getBrandName().equals("MEGABOX")) {
-        msg += "ë©”ê°€ë°•ìŠ¤";
+        msg += "¸Ş°¡¹Ú½º";
       } else if (cinema.getBrandName().equals("INDEP")) {
-        msg += "ë…ë¦½ì˜í™”ê´€";
+        msg += "µ¶¸³¿µÈ­°ü";
       }//if end
       msg += " - " + cinema.getCineName();
       msg += "</li>";
     }//for end
     msg += "</ul>";
     
-    if(cinemalist.size()==0) {  // ìƒì˜ê·¹ì¥ì´ ì—†ì„ë•Œ ë©”ì„¸ì§€ ë„ì›€
+    if(cinemalist.size()==0) {  // »ó¿µ±ØÀåÀÌ ¾øÀ»¶§ ¸Ş¼¼Áö ¶ç¿ò
       msg += "<div style='margin-top:5px; margin-left:15px; font-size:11pt;'>";
-      msg += "  <strong>ìƒì˜ê·¹ì¥ì´ ì—†ìŠµë‹ˆë‹¤.";
-      msg += "  <br>ë‹¤ë¥¸ ì§€ì—­ì„ ì„ íƒí•´ ì£¼ì„¸ìš”.</strong>";
+      msg += "  <strong>»ó¿µ±ØÀåÀÌ ¾ø½À´Ï´Ù.";
+      msg += "  <br>´Ù¸¥ Áö¿ªÀ» ¼±ÅÃÇØ ÁÖ¼¼¿ä.</strong>";
       msg += "</div>";
     }//if end
 
-    // ì¶œë ¥
+    // Ãâ·Â
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
     out.flush();
     out.close();
   }//cinemaListFromAddr1() end
-	
-	// ì˜í™”ì½”ë“œ, ì£¼ì†Œ1 -> ê·¹ì¥ ëª©ë¡ <ul> ì „ì²´
-	@RequestMapping(value="/ticket/cinemaListFromMovieAddr1.do", method = RequestMethod.POST)
+  
+  // ¿µÈ­ÄÚµå, ÁÖ¼Ò1 -> ±ØÀå ¸ñ·Ï <ul> ÀüÃ¼
+  @RequestMapping(value="/ticket/cinemaListFromMovieAddr1.do", method = RequestMethod.POST)
   public void cinemaListFromMovieAddr1(HttpServletRequest req, HttpServletResponse resp, int mCode, String addr1) throws IOException {
     String msg = "";
     MovieDTO dto = new MovieDTO();
     dto.setmCode(mCode);
-    dto.setmName(addr1);  // mName ì— addr1 ë‹´ì•„ì˜´
+    dto.setmName(addr1);  // mName ¿¡ addr1 ´ã¾Æ¿È
     ArrayList<CinemaDTO> cinemalist = dao.cinemaListFromMovieAddr1(dto);
 
     msg += "<ul>";
@@ -278,36 +278,36 @@ public class TicketCont {
       CinemaDTO cinema = cinemalist.get(j);
       msg += "<li value='"+cinema.getCineCode()+"'>";
       if(cinema.getBrandName().equals("CGV")) { msg += "CGV"; }
-      else if(cinema.getBrandName().equals("LOTTE")) { msg += "ë¡¯ë°ì‹œë„¤ë§ˆ"; }
-      else if(cinema.getBrandName().equals("MEGABOX")) { msg += "ë©”ê°€ë°•ìŠ¤"; }
-      else if(cinema.getBrandName().equals("INDEP")) { msg += "ë…ë¦½ì˜í™”ê´€"; }//if end
+      else if(cinema.getBrandName().equals("LOTTE")) { msg += "·Ôµ¥½Ã³×¸¶"; }
+      else if(cinema.getBrandName().equals("MEGABOX")) { msg += "¸Ş°¡¹Ú½º"; }
+      else if(cinema.getBrandName().equals("INDEP")) { msg += "µ¶¸³¿µÈ­°ü"; }//if end
       msg += " - "+cinema.getCineName();
       msg += "</li>";
     }//for end
     msg += "</ul>";
     
-    if(cinemalist.size()==0) {  // ìƒì˜ê·¹ì¥ì´ ì—†ì„ë•Œ ë©”ì„¸ì§€ ë„ì›€
+    if(cinemalist.size()==0) {  // »ó¿µ±ØÀåÀÌ ¾øÀ»¶§ ¸Ş¼¼Áö ¶ç¿ò
       msg += "<div style='margin-top:5px; margin-left:15px; font-size:11pt;'>";
-      msg += "  <strong>ìƒì˜ê·¹ì¥ì´ ì—†ìŠµë‹ˆë‹¤.";
-      msg += "  <br>ë‹¤ë¥¸ ì§€ì—­ì„ ì„ íƒí•´ ì£¼ì„¸ìš”.</strong>";
+      msg += "  <strong>»ó¿µ±ØÀåÀÌ ¾ø½À´Ï´Ù.";
+      msg += "  <br>´Ù¸¥ Áö¿ªÀ» ¼±ÅÃÇØ ÁÖ¼¼¿ä.</strong>";
       msg += "</div>";
     }//if end
     
-    // ì¶œë ¥
+    // Ãâ·Â
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
     out.flush();
     out.close();
   }//cinemaListFromMovieAddr1() end
-	
-  // ì²´ì¸ë³„, ì£¼ì†Œ1 -> ê·¹ì¥ ëª©ë¡ <ul> ì „ì²´
-	@RequestMapping(value="/ticket/cinemaListFromChain.do", method = RequestMethod.POST)
+  
+  // Ã¼ÀÎº°, ÁÖ¼Ò1 -> ±ØÀå ¸ñ·Ï <ul> ÀüÃ¼
+  @RequestMapping(value="/ticket/cinemaListFromChain.do", method = RequestMethod.POST)
   public void cinemaListFromChain(HttpServletRequest req, HttpServletResponse resp, String clmd, String addr1) throws IOException {
     String msg = "";
     CinemaDTO dto = new CinemaDTO();
     dto.setCineCode(clmd);
-    dto.setAddr1(addr1);  // mName ì— addr1 ë‹´ì•„ì˜´
+    dto.setAddr1(addr1);  // mName ¿¡ addr1 ´ã¾Æ¿È
     ArrayList<CinemaDTO> cinemalist = dao.cinemaListFromCLMDAddr1(dto);
     
     msg += "<ul>";
@@ -315,30 +315,30 @@ public class TicketCont {
       CinemaDTO cinema = cinemalist.get(j);
       msg += "<li value='"+cinema.getCineCode()+"'>";
       if(cinema.getBrandName().equals("CGV")) { msg += "CGV"; }
-      else if(cinema.getBrandName().equals("LOTTE")) { msg += "ë¡¯ë°ì‹œë„¤ë§ˆ"; }
-      else if(cinema.getBrandName().equals("MEGABOX")) { msg += "ë©”ê°€ë°•ìŠ¤"; }
-      else if(cinema.getBrandName().equals("INDEP")) { msg += "ë…ë¦½ì˜í™”ê´€"; }//if end
+      else if(cinema.getBrandName().equals("LOTTE")) { msg += "·Ôµ¥½Ã³×¸¶"; }
+      else if(cinema.getBrandName().equals("MEGABOX")) { msg += "¸Ş°¡¹Ú½º"; }
+      else if(cinema.getBrandName().equals("INDEP")) { msg += "µ¶¸³¿µÈ­°ü"; }//if end
       msg += " - "+cinema.getCineName();
       msg += "</li>";
     }//for end
     msg += "</ul>";
     
-    if(cinemalist.size()==0) {  // ìƒì˜ê·¹ì¥ì´ ì—†ì„ë•Œ ë©”ì„¸ì§€ ë„ì›€
+    if(cinemalist.size()==0) {  // »ó¿µ±ØÀåÀÌ ¾øÀ»¶§ ¸Ş¼¼Áö ¶ç¿ò
       msg += "<div style='margin-top:5px; margin-left:15px; font-size:11pt;'>";
-      msg += "  <strong>ê·¹ì¥ì´ ì—†ìŠµë‹ˆë‹¤.";
-      msg += "  <br>ë‹¤ë¥¸ ì²´ì¸ ë˜ëŠ” ì§€ì—­ì„ ì„ íƒí•´ ì£¼ì„¸ìš”.</strong>";
+      msg += "  <strong>±ØÀåÀÌ ¾ø½À´Ï´Ù.";
+      msg += "  <br>´Ù¸¥ Ã¼ÀÎ ¶Ç´Â Áö¿ªÀ» ¼±ÅÃÇØ ÁÖ¼¼¿ä.</strong>";
       msg += "</div>";
     }//if end
     
-    // ì¶œë ¥
+    // Ãâ·Â
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
     out.flush();
     out.close();
   }//cinemaListFromChain() end
-	
-	// ì˜í™”ì½”ë“œ -> ê·¹ì¥ ëª©ë¡ cineCodeë§Œ | êµ¬ë¶„ ì •ë ¬
+  
+  // ¿µÈ­ÄÚµå -> ±ØÀå ¸ñ·Ï cineCode¸¸ | ±¸ºĞ Á¤·Ä
   @RequestMapping(value="/ticket/graycinemalist.do", method = RequestMethod.POST)
   public void grayCinemaList(HttpServletRequest req, HttpServletResponse resp, int mCode) throws IOException {
     String msg = "";
@@ -355,15 +355,15 @@ public class TicketCont {
     }//for end
     //System.out.println(msg);
     
-    // ì¶œë ¥
+    // Ãâ·Â
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
     out.flush();
     out.close();
   }//grayCinemaList() end
-	
-	// ê·¹ì¥ ê²€ìƒ‰
+  
+  // ±ØÀå °Ë»ö
   @RequestMapping(value="/ticket/cinemaSearch.do", method = RequestMethod.POST)
   public void cinemaSearch(HttpServletRequest req, HttpServletResponse resp, String key) throws IOException {
     String msg = "";
@@ -372,7 +372,7 @@ public class TicketCont {
     
     msg += "<div style='height:40px; border-bottom:1px solid gray; color:black; padding: 6pt 0pt 0pt 12pt;'>";
     msg += "<strong style='color:#ff3f07;'> '"+key+"'</strong>";
-    msg += "ì— ëŒ€í•œ ê²€ìƒ‰ê²°ê³¼";
+    msg += "¿¡ ´ëÇÑ °Ë»ö°á°ú";
     msg += "</div>";
     
     msg += "<ul style='padding-top:3px;'>";
@@ -380,25 +380,25 @@ public class TicketCont {
       CinemaDTO cinema = cinemalist.get(j);
       msg += "<li value='"+cinema.getCineCode()+"'>";
       if(cinema.getBrandName().equals("CGV")) { msg += "CGV"; }
-      else if(cinema.getBrandName().equals("LOTTE")) { msg += "ë¡¯ë°ì‹œë„¤ë§ˆ"; }
-      else if(cinema.getBrandName().equals("MEGABOX")) { msg += "ë©”ê°€ë°•ìŠ¤"; }
-      else if(cinema.getBrandName().equals("INDEP")) { msg += "ë…ë¦½ì˜í™”ê´€"; }//if end
+      else if(cinema.getBrandName().equals("LOTTE")) { msg += "·Ôµ¥½Ã³×¸¶"; }
+      else if(cinema.getBrandName().equals("MEGABOX")) { msg += "¸Ş°¡¹Ú½º"; }
+      else if(cinema.getBrandName().equals("INDEP")) { msg += "µ¶¸³¿µÈ­°ü"; }//if end
       msg += " - "+cinema.getCineName();
       msg += "</li>";
     }//for end
     msg += "</ul>";
     
-    // ì¶œë ¥
+    // Ãâ·Â
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
     out.flush();
     out.close();
   }//cinemaListFromMovieAddr1() end
-	/* -------------------- ê·¹ì¥ì„ íƒ ë¶€ë¶„ AJAX END -------------------- */
+  /* -------------------- ±ØÀå¼±ÅÃ ºÎºĞ AJAX END -------------------- */
 
-  /* ------------------ ì˜ˆë§¤ : ë‚ ì§œì„ íƒ ë¶€ë¶„ ------------------ */
-  // ìƒì˜ë‚ ì§œ ëª¨ë‘ ê°€ì ¸ì™€ì„œ | êµ¬ë¶„ ì •ë ¬
+  /* ------------------ ¿¹¸Å : ³¯Â¥¼±ÅÃ ºÎºĞ ------------------ */
+  // »ó¿µ³¯Â¥ ¸ğµÎ °¡Á®¿Í¼­ | ±¸ºĞ Á¤·Ä
   @RequestMapping(value="/ticket/sdateAllList.do", method = RequestMethod.POST)
   public void sdateAllList(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     String msg = "";
@@ -411,7 +411,7 @@ public class TicketCont {
       }//if end
     }//for end
     
-    // ì¶œë ¥
+    // Ãâ·Â
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
@@ -419,7 +419,7 @@ public class TicketCont {
     out.close();
   }//sdateAllList() end
   
-  // ì˜í™”ì½”ë“œ -> ìƒì˜ë‚ ì§œ ê°€ì ¸ì™€ì„œ | êµ¬ë¶„ ì •ë ¬
+  // ¿µÈ­ÄÚµå -> »ó¿µ³¯Â¥ °¡Á®¿Í¼­ | ±¸ºĞ Á¤·Ä
   @RequestMapping(value = "/ticket/sdateListFromMovie.do", method = RequestMethod.POST)
   public void sdateListFromMovie(HttpServletRequest req, HttpServletResponse resp, int mCode) throws IOException {
     String msg = "";
@@ -432,7 +432,7 @@ public class TicketCont {
       } // if end
     } // for end
     
-    // ì¶œë ¥
+    // Ãâ·Â
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
@@ -440,7 +440,7 @@ public class TicketCont {
     out.close();
   }//sdateListFromMovie() end
 
-  // ê·¹ì¥ì½”ë“œ -> ìƒì˜ë‚ ì§œ ê°€ì ¸ì™€ì„œ | êµ¬ë¶„ ì •ë ¬
+  // ±ØÀåÄÚµå -> »ó¿µ³¯Â¥ °¡Á®¿Í¼­ | ±¸ºĞ Á¤·Ä
   @RequestMapping(value = "/ticket/sdateListFromCinema.do", method = RequestMethod.POST)
   public void sdateListFromCinema(HttpServletRequest req, HttpServletResponse resp, String cineCode) throws IOException {
     String msg = "";
@@ -453,7 +453,7 @@ public class TicketCont {
       } // if end
     } // for end
     
-    // ì¶œë ¥
+    // Ãâ·Â
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
@@ -461,7 +461,7 @@ public class TicketCont {
     out.close();
   }//sdateListFromCinema() end
 
-  // ì˜í™”ì½”ë“œ,ê·¹ì¥ì½”ë“œ -> ìƒì˜ë‚ ì§œ ê°€ì ¸ì™€ì„œ | êµ¬ë¶„ ì •ë ¬
+  // ¿µÈ­ÄÚµå,±ØÀåÄÚµå -> »ó¿µ³¯Â¥ °¡Á®¿Í¼­ | ±¸ºĞ Á¤·Ä
   @RequestMapping(value = "/ticket/sdateListFromMovieCinema.do", method = RequestMethod.POST)
   public void sdateListFromMovieCinema(HttpServletRequest req, HttpServletResponse resp, int mCode, String cineCode) throws IOException {
     String msg = "";
@@ -477,24 +477,24 @@ public class TicketCont {
       } // if end
     } // for end
     
-    // ì¶œë ¥
+    // Ãâ·Â
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
     out.flush();
     out.close();
   }//sdateListFromMovieCinema() end
-  /* ------------------ ì˜ˆë§¤ : ë‚ ì§œì„ íƒ ë¶€ë¶„ END ------------------ */
+  /* ------------------ ¿¹¸Å : ³¯Â¥¼±ÅÃ ºÎºĞ END ------------------ */
   
-  /* ------------------ ì˜ˆë§¤ : ìƒì˜ì‹œê°„í‘œ ë¶€ë¶„ ------------------ */
-  // ì˜í™”,ê·¹ì¥,ë‚ ì§œ -> ê´€ë³„ ìƒì˜ì‹œì‘ì‹œê°„ <ul> ëª©ë¡
+  /* ------------------ ¿¹¸Å : »ó¿µ½Ã°£Ç¥ ºÎºĞ ------------------ */
+  // ¿µÈ­,±ØÀå,³¯Â¥ -> °üº° »ó¿µ½ÃÀÛ½Ã°£ <ul> ¸ñ·Ï
   @RequestMapping(value = "/ticket/screentimeRoom.do", method = RequestMethod.POST)
   public void screentimeRoom(HttpServletRequest req, HttpServletResponse resp, int mCode, String cineCode, String sdate) throws IOException {
     String msg = "";
     MovieDTO dto = new MovieDTO();
     dto.setmCode(mCode);
-    dto.setScreen(cineCode); // ë³€ìˆ˜ ë¹Œë¦¼
-    dto.setS_date(sdate);    // ë³€ìˆ˜ ë¹Œë¦¼
+    dto.setScreen(cineCode); // º¯¼ö ºô¸²
+    dto.setS_date(sdate);    // º¯¼ö ºô¸²
     ArrayList<ScreenDTO> stimelist = dao.screentimeRoom(dto);
     
     for (int j = 0; j < stimelist.size(); j++) {
@@ -504,26 +504,18 @@ public class TicketCont {
       }//if end
     }//for end
 
-    // ì¶œë ¥
+    // Ãâ·Â
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
     out.flush();
     out.close();
   }//screentimeRoom() end
-  /* ------------------ ì˜ˆë§¤ : ìƒì˜ì‹œê°„í‘œ ë¶€ë¶„ END ------------------ */
-  
-  
-  /* -------------------- ì¢Œì„ì„ íƒ --------------------------------- */
-  @RequestMapping(value="/ticket/select.do", method = RequestMethod.GET)
-  public String selectSeat(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    return "ticket/ticketSeat";
-  }//selectSeat() end
-  /* -------------------- ì¢Œì„ì„ íƒ END -------------------- */
+  /* ------------------ ¿¹¸Å : »ó¿µ½Ã°£Ç¥ ºÎºĞ END ------------------ */
   
 
-  /* -------------------- ì˜í™”ì •ë³´ ë¶€ë¶„ AJAX -------------------- */
-  // ì˜í™”ì„ íƒ -> ì˜í™”ì •ë³´ í¬ìŠ¤í„° ê°€ì ¸ì˜¤ê¸°
+  /* -------------------- ¿µÈ­Á¤º¸ ºÎºĞ AJAX -------------------- */
+  // ¿µÈ­¼±ÅÃ -> ¿µÈ­Á¤º¸ Æ÷½ºÅÍ °¡Á®¿À±â
   @RequestMapping(value="/ticket/movieposter.do", method = RequestMethod.POST)
   public void movieposter(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     String msg = "";
@@ -531,14 +523,14 @@ public class TicketCont {
     
     int mCode = Integer.parseInt(req.getParameter("mCode"));
     MovieDTO dto = new MovieDTO();
-    //dtoì— ì„ íƒí•œ ì˜í™”ì˜ mCodeë¥¼ setí•´ì„œ movieDAOì— ìˆëŠ” readí•¨ìˆ˜ ë¶ˆëŸ¬ì˜´
+    //dto¿¡ ¼±ÅÃÇÑ ¿µÈ­ÀÇ mCode¸¦ setÇØ¼­ movieDAO¿¡ ÀÖ´Â readÇÔ¼ö ºÒ·¯¿È
     dto.setmCode(mCode);
     dto = dao.MovieData(dto);
     //<input type="image" class="movie_poster" src="./img/bgr_poster2.PNG">
     //msg += "<input type='image' class='movie_poster' src='" + root + "movie/img_poster/" + dto.getPoster() + ">";
     //msg += "<input type='image' class='movie_poster' src='moviemovit/movie/storage/" + dto.getPoster() + ">";
     
-    // ì¶œë ¥
+    // Ãâ·Â
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
@@ -546,9 +538,9 @@ public class TicketCont {
     out.close();
     
   }//movieposter() end
-	/* -------------------- ì˜í™”ì •ë³´ ë¶€ë¶„ AJAX END -------------------- */
+  /* -------------------- ¿µÈ­Á¤º¸ ºÎºĞ AJAX END -------------------- */
   
-  /* -------------------- ì¢Œì„ì„ íƒ --------------------------------- */
+  /* -------------------- ÁÂ¼®¼±ÅÃ --------------------------------- */
   @RequestMapping(value="/ticket/create.do", method = RequestMethod.POST)
   public ModelAndView selectSeat(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     ModelAndView mav = new ModelAndView();
@@ -557,22 +549,22 @@ public class TicketCont {
     mav.setViewName("ticket/ticketSeat");
     return mav;
   }//selectSeat() end
-  /* -------------------- ì¢Œì„ì„ íƒ END -------------------- */  
-	
+  /* -------------------- ÁÂ¼®¼±ÅÃ END -------------------- */  
+  
   @RequestMapping(value="/ticket/payment.do", method = RequestMethod.GET)
   public ModelAndView payment(CouponDTO dto, HttpServletRequest req, HttpServletResponse resp) throws IOException {
     ModelAndView mav = new ModelAndView();
 
     HttpSession session = req.getSession();
     
-    //ë¡œê·¸ì¸ë˜ì–´ì„œ sessionì— ì˜¬ë¼ê°„ ê°’ ê°€ì ¸ì˜¤ê¸°
+    //·Î±×ÀÎµÇ¾î¼­ session¿¡ ¿Ã¶ó°£ °ª °¡Á®¿À±â
     String uid = (String)session.getAttribute("s_id");
     
-    //uid,upw dtoì— ë‹´ê¸°
+    //uid,upw dto¿¡ ´ã±â
     UserDTO udto = new UserDTO();
     udto.setUid(uid);
     
-    //DBì—ì„œ íšŒì›ì •ë³´ ê°€ì ¸ì˜¤ê¸°
+    //DB¿¡¼­ È¸¿øÁ¤º¸ °¡Á®¿À±â
     udto = dao.getMemberInfo(udto);
     System.out.println("ticketCont userid : " + udto.getUid());
     
@@ -581,7 +573,7 @@ public class TicketCont {
     ArrayList<CouponDTO> couponList = dao.couponList(dto);
     
     System.out.println(couponList);
-    // í˜ì´ì§€ ì´ë™ ë° ê°’ ì˜¬ë¦¬ê¸°
+    // ÆäÀÌÁö ÀÌµ¿ ¹× °ª ¿Ã¸®±â
     mav.addObject("couponList", couponList);
     mav.setViewName("ticket/payment");
     return mav;
