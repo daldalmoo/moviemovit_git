@@ -665,14 +665,29 @@ public class ReviewCont {
     InetAddress local = InetAddress.getLocalHost();
     String ip = local.getHostAddress();
     sdto.setIp(ip);
-    System.out.println(ip);
+    /*System.out.println(ip);*/
     
     //값이 제대로 넘어오는지 확인
-    System.out.println(sdto.getPixel());
+    /*System.out.println(sdto.getPixel());
     System.out.println(sdto.getUid());
-    System.out.println(sdto.getS_e());
+    System.out.println(sdto.getS_e());*/
     
     String msg = "";
+    
+    /*
+    uid값 null이면 로그인페이지로 보내기
+    if(sdto.getUid() == null) {
+      msg += "<!DOCTYPE html>";
+      msg += "<html><body>";
+      msg += "<script>";
+      msg += "  alert('로그인이 필요합니다.');";
+      msg += "  window.location='../user/loginform.do";
+      msg += "</script>";
+      msg += "</html></body>";
+      mav.addObject("msg", msg);
+      mav.setViewName("msgView");
+    }
+    */
     
     //해당 ID가 이전에 글을 쓴 적이 있는지 확인
     ReviewStar dupdto = dao.duplicate(sdto);
@@ -756,7 +771,7 @@ public class ReviewCont {
     //사이즈값으로 제대로 찍히나 확인
     System.out.println(list.size());
     
-    mav.setViewName("review/cinemaRead"); //reviewList
+    mav.setViewName("review/read"); //reviewList
         
     mav.addObject("list", list);
     mav.addObject("reviewstar", reviewstar);
@@ -810,7 +825,7 @@ public class ReviewCont {
       msg += "<html><body>";
       msg += "<script>";
       msg += "  alert('삭제 성공');";
-      msg += "  window.location='./cinemaList.do';";
+      msg += "  window.location='./list.do';";
       msg += "</script>";
       msg += "</body></html>";
       mav.addObject("msg", msg);
