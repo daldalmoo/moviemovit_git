@@ -39,7 +39,6 @@
 
 		<!-- Section: intro -->
 		<section id="intro" class="intro">
-		
 			<div class="slogan">
 				<a href="../index.do"> <img src="../img/logo2.jpg" alt="" /></a>
 			</div>
@@ -50,11 +49,11 @@
 		<div class="nav_wrapper">
 			<!--  X 버튼 -->
 			<div class="spinner-master">
-				<input type="checkbox" id="spinner-form" /> <label
-					for="spinner-form" class="spinner-spin">
-					<div class="spinner diagonal part-1"></div>
-					<div class="spinner horizontal"></div>
-					<div class="spinner diagonal part-2"></div>
+				<input type="checkbox" id="spinner-form" /> 
+				<label for="spinner-form" class="spinner-spin">
+				  <div class="spinner diagonal part-1"></div>
+				  <div class="spinner horizontal"></div>
+				  <div class="spinner diagonal part-2"></div>
 				</label>
 			</div>
 			<a href="#search_box" class="btn" id="search">&#9740;</a>
@@ -67,7 +66,7 @@
 							<li><a href="../qna/list.do" title="연락">Contact</a></li>
 						</ul></li>
 					<li><a href="../ticket/create.do" title="예매">Ticket</a></li>
-					<li><a href="../review/cinemaList.do" title="영화관 리뷰 게시판">Review</a></li>
+					<li><a href="../review/list.do" title="영화관 리뷰 게시판">Review</a></li>
 					<li><a href="#Link" title="취향분석">Movit</a>
 						<ul>
 							<li><a href="../movie/movieList.do" title="영화 평가하기">평가늘리기</a></li>
@@ -76,11 +75,6 @@
 						</ul></li>
 				</ul>
 			</nav>
-			<form class="search_box" id="search_box" action="/search/">
-				<input name="search_criteria" placeholder="Search here" value=""
-					type="text"> <input class="search_icon" value="Search"
-					type="submit">
-			</form>
 		</div>
 		<!--   Navigation end -->
 
