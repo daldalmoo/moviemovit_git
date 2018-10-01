@@ -192,7 +192,7 @@ table tr:nth-child(2n+1) {
         <c:forEach var="sdto" items="${list }">
             <tr>
                 <td>${sdto.star}</td>
-                <td>
+                <td>${sdto.wdate}
                     <c:choose>
                         <c:when test="${sdto.wdate== 'romance'}">로맨스</c:when>
                         <c:when test="${sdto.wdate== 'crime'}">범죄/느와르</c:when>
@@ -204,6 +204,9 @@ table tr:nth-child(2n+1) {
                         <c:when test="${sdto.wdate== 'docu'}">다큐</c:when>
                         <c:when test="${sdto.wdate== 'etc'}">기타</c:when>
                     </c:choose>
+                </td>
+                <td>
+                ${sdto.uid }
                 </td>
                 
             </tr>

@@ -55,8 +55,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="genrestar" resultType="StarDTO" parameterType="StarDTO">
-      <![CDATA[
-      select genre as wdate, avg(star) as star, uid
+	    <![CDATA[
+			select genre as wdate, avg(star) as star, uid
             from movieTable mt join starTable st
             ON mt.mCode = st.mCode
             WHERE uid=#{uid}
