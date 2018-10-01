@@ -185,7 +185,7 @@ table tr:nth-child(2n+1) {
   }
 }
 </style>
-
+</head>
 <body>
 
 <div class="table-users">
