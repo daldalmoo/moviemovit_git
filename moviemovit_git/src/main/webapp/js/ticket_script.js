@@ -422,6 +422,7 @@ function screentimeView() {
   if(MCODE!=0 && CINECODE!="" && SDATE!="") {
     $.post("./screentimeRoom.do", "mCode="+MCODE+"&cineCode="+CINECODE+"&sdate="+SDATE, function(data) { // 선택가능날짜 모두표시
       alert(data);
+      $("#screentime_area .screentime").html(data);
       /*var data = datastr.split("|");
       for(var i=0; i<data.length; i++) {
         $(".calendar td[onclick='javascript:SelDate(\""+data[i].trim()+"\")']").addClass("ready");

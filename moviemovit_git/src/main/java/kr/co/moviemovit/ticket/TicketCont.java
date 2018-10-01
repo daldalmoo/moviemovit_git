@@ -497,6 +497,20 @@ public class TicketCont {
     dto.setS_date(sdate);    // º¯¼ö ºô¸²
     ArrayList<ScreenDTO> stimelist = dao.screentimeRoom(dto);
     
+    msg += "<dl id='1'>";
+    msg += "  <dt>1 °ü</dt>";
+    msg += "  <dd>";
+    msg += "    <ul>";
+    msg += "      <li onclick='timeclick('1030');'>10:30</li>";
+    msg += "      <li>13:40</li>";
+    msg += "      <li>17:10</li>";
+    msg += "      <li>21:00</li>";
+    msg += "    </ul>";
+    msg += "  </dd>";
+    msg += "</dl>";
+    
+    
+    
     for (int j = 0; j < stimelist.size(); j++) {
       msg += stimelist.get(j);
       if (j != stimelist.size() - 1) {

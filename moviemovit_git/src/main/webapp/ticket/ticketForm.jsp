@@ -4,7 +4,7 @@
 <%@ include file="../header1.jsp"%>
 
 <%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
-<link rel="stylesheet" href="../css/ticket_style.css?ver=9" type="text/css" />
+<link rel="stylesheet" href="../css/ticket_style.css?ver=2" type="text/css" />
 
 <%@ include file="../header2.jsp"%>
 <%-- 본문시작 ticketForm.jsp : 회원들이 예매하는 폼 --%>
@@ -165,7 +165,7 @@ function buildCalendar() {
 
 <form class="cbp-mc-form" name="regForm" method='POST' action='./create.do'>
   <!-- POST 방식으로 보낼 데이터 -->
-  <input type='hidden' id='mCode'     name='sCode'     value=''>
+  <input type='hidden' id='sCode'     name='sCode'     value=''>
   <input type='hidden' id='auditType' name='auditType' value=''>
   
   <table id="ticketArea">
@@ -299,7 +299,7 @@ function buildCalendar() {
             <input type="image" class="movie_poster" src="./img/bgr_poster.PNG">
           </div>
 
-          <h3><span id="select_m_name">영화제목</span></h3>
+          <h3><span id="select_m_name">신과함께</span></h3>
 
           <!-- 예매 결과 -->
           <dl class="1st_result">
@@ -307,21 +307,21 @@ function buildCalendar() {
               <span class="space">극장</span>
             </dt>
             <dd>
-              <span id="select_space_txt">영화브랜드 지점</span>
+              <span id="select_space_txt">롯데시네마 - 월드타워점</span>
             </dd>
 
             <dt>
               <span class="date">날짜</span>
             </dt>
             <dd>
-              <span id="wdate">yyyy.mm.dd(요일) 시:분</span>
+              <span id="wdate">2018-10-01</span>
             </dd>
 
             <dt>
               <span class="people">인원</span>
             </dt>
             <dd>
-              <span id="auditType">-</span>
+              <span id="auditType">성인 1, 청소년 2</span>
               <input type="hidden" id="peocnt" name="peocnt" value="">
             </dd>
 
@@ -329,7 +329,7 @@ function buildCalendar() {
               <span class="price">금액</span>
             </dt>
             <dd>
-              <span id="total">-</span>
+              <span id="total">26000</span>
             </dd>
           </dl>
 
@@ -372,9 +372,42 @@ function buildCalendar() {
               <dd>
                 <ul>
                   <li onclick="timeclick('1030');">10:30</li>
-                  <li>17:40</li>
-                  <li>17:40</li>
-                  <li>17:40</li>
+                  <li>13:40</li>
+                  <li>17:10</li>
+                  <li>21:00</li>
+                </ul>
+              </dd>
+            </dl>
+            <dl id="2">
+              <dt>2 관</dt>
+              <dd>
+                <ul>
+                  <li onclick="timeclick('1030');">10:30</li>
+                  <li>13:40</li>
+                  <li>17:10</li>
+                  <li>21:00</li>
+                </ul>
+              </dd>
+            </dl>
+            <dl id="2">
+              <dt>2 관</dt>
+              <dd>
+                <ul>
+                  <li onclick="timeclick('1030');">10:30</li>
+                  <li>13:40</li>
+                  <li>17:10</li>
+                  <li>21:00</li>
+                </ul>
+              </dd>
+            </dl>
+            <dl id="2">
+              <dt>2 관</dt>
+              <dd>
+                <ul>
+                  <li onclick="timeclick('1030');">10:30</li>
+                  <li>13:40</li>
+                  <li>17:10</li>
+                  <li>21:00</li>
                 </ul>
               </dd>
             </dl>
