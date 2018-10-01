@@ -1,44 +1,41 @@
 
 -- 찬홍 0917 평균 test
-SELECT sCode, mCode, uid, (select avg(star) from starTable where mCode=1) as star , comment, wdate
+SELECT (select avg(star) from starTable WHERE mCode=4) AS avgstar
 FROM starTable
+WHERE mCode=4
+GROUP BY mCode      
 
-select mt.mCode, st.star
-from (SELECT mCode, (select avg(star) from starTable where mCode=1) as star
-      FROM starTable ) st join movieTable mt
-ON mt.mCode = st.mCode
-WHERE mt.mCode = 1
-
-
-select mt.mCode, mt.mName, mt.s_date, avg(star) 
+select mt.mCode, avg(star) as star 
 from movieTable mt join starTable st
 ON mt.mCode = st.mCode
 GROUP BY mt.mCode
 
-SELECT mt.mCode, mt.poster, mt.mName, st.star
-FROM movieTable mt join starTable st
-ON mt.mCode = st.mCode
-
-SELECT sCode, mCode, uid, (select avg(star) from starTable) as star, comment, wdate
-FROM starTable
-WHERE mCode=1
-SELECT mCode, (select avg(star) from starTable where mCode=3) as avgstar
-FROM starTable
-where 
-
-SELECT (select avg(star) from starTable) AS avgstar
+--선호장르별 탑3 내림차순
+SELECT (select avg(star) from starTable WHERE mCode=4) AS avgstar
 FROM starTable
 WHERE mCode=4
 GROUP BY mCode
-            
-select mt.mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, s_date, e_date, avg(star) as runningTime 
-from movieTable mt join starTable st
-ON mt.mCode = st.mCode
-GROUP BY mt.mCode
 
-          
-          
-          
-          
+--특정 유저가 평가한 영화 장르의 평균 점수
+select avg(star)
+from (select *
+      from movieTable) mt join starTable st
+on mt.mCode = st.mCode
+where uid='member2'
+group by genre
+
+--특정 유저가 평가한 영화의 장르
+select *
+from (select *
+      from movieTable) mt join starTable st
+on mt.mCode = st.mCode
+limit
+where uid='member2'
+group by genre
+
+
+select * 
+from starTable
+
           
           
