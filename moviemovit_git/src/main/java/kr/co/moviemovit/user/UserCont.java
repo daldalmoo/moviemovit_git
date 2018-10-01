@@ -203,10 +203,30 @@ public class UserCont {
 		ModelAndView mav = new ModelAndView();
 		
 		HttpSession session = req.getSession();
-		session.removeAttribute("s_id");
-		session.removeAttribute("s_passwd");		
-
-		mav.setViewName("redirect:/index.do");
+		
+       String msg="";
+		if(req.getSession()!=null) {
+			session.removeAttribute("s_id");
+			session.removeAttribute("s_passwd");		
+			 msg += "<!DOCTYPE html>";
+		      msg += "<html><body>";
+		      msg += "<script>";
+		      msg += "  alert('로그아웃되었습니다');";
+		      msg += "  window.location='../index.do';";
+		      msg += "</script>";
+		      msg += "</html></body>";
+		}else {
+		 msg += "<!DOCTYPE html>";
+	      msg += "<html><body>";
+	      msg += "<script>";
+	      msg += "  alert('로그아웃 실패하였습니다.');";
+	      msg += "  history.go(-1);";
+	      msg += "</script>";
+	      msg += "</html></body>";
+		}
+		 mav.addObject("msg", msg);
+		    mav.setViewName("msgView");
+		
 		return mav;
 	}//logout() end
 	
