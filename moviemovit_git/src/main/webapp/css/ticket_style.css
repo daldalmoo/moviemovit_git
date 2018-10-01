@@ -44,8 +44,9 @@
 }
 .cinema_title .searchtxt{ /* 검색창 */
   text-align: center;
+  color: black;
 }
-.cinema_title .searchbtn { /* 검색 버튼 */
+.cinema_title .closebtn { /* 검색 버튼 */
   cursor: pointer;
   width: 22px;
   height: 25px;
@@ -99,11 +100,12 @@
 }
 
 /*********** 2) 극장선택 ***********/
-#cinema_area {     /* 극장 종류 div */
+#cinema_area {
   position: relative;
   margin: 0px;
   vertical-align: top;
 }
+
 #cinema_area .cinema_select ul {     /* 극장 종류 div */
   background: linear-gradient(to top, #e4e4e8 0%, #f3f3f4 100%);
   position: relative;
@@ -123,6 +125,7 @@
   border-left: 1px solid #bcbcbc;
   padding-left: 1pt;
   padding-right: 1pt;
+  cursor: pointer;
 }
 #cinema_area .cinema_select ul li:first-child {
   border-left: none;
@@ -153,10 +156,13 @@
 #cinema_area .main_list {  /* 영화또는날짜 선택안됐을경우 none */
   display: block;
 }
+#cinema_area .cinema_chain {  /* 체인별 극장일 경우 cinema_addr1 대신 들어갈 div */
+  display: none;
+}
 
-#cinema_area .cinema_addr1 {   /* 극장 대분류주소 div */
+#cinema_area .cinema_addr1 {   /* 극장 주소1 div */
   text-align: left;
-  border-bottom: 2px solid;
+  border-bottom: 1px dashed gray;
   font-size: 11pt;
   padding-top: 2px;
   padding-bottom: 2px;
@@ -174,7 +180,8 @@
 #cinema_area .cinema_addr1 .click .addr1selectedbtn {
   content: url("../ticket/img/listbtn_click.gif");
 }
-#cinema_area .cinema_addr1 .addr1list {  /* 극장 대분류주소 목록 div */
+
+#cinema_area .cinema_addr1 .addr1list {  /* 극장 주소1 목록 div */
   z-index: 10;
   background-color: white;
   border: 1px solid;
@@ -196,6 +203,7 @@
 }
 #cinema_area .cinema_addr1 .addr1list li {
   padding: 0.5px 0px 0.5px 10px;
+  cursor: pointer;
 }
 #cinema_area .cinema_addr1 .addr1list li:first-child {
   padding-bottom: 1px;
@@ -208,10 +216,72 @@
   background-color: #ecedf4;
 }
 
+#cinema_area .cinema_chain {  /* 체인별 극장 버튼 div */
+  width: 100%;
+  height: 32px;
+  text-align: left;
+  border-bottom: 1px solid gray;
+  padding : 0px 0px 0px 15px;
+}
+#cinema_area .cinema_chain ul {
+  display: flex;   /* 각 li 주위 모든 여백 없애줌 */
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+#cinema_area .cinema_chain li {
+  display: inline;      /* 리스트를 가로로 */
+  margin: 1px 2px 1px 2px;
+  padding: 2px 1px 0px 1px;
+  height: 28px;
+}
+#cinema_area .cinema_chain li:hover {
+  background: linear-gradient(to top, #fbfbfb 0%, #f5f3f4 70%);
+  border: 1px solid #d1d0d6;
+  padding-top: 0px;
+}
+#cinema_area .cinema_chain li.on {
+  background: linear-gradient(to top, #f3f3f4 0%, #d7d7dd 100%);
+  border: 1px solid #bcbcc7;
+  padding-top: 0px;
+}
+#cinema_area .cinema_chain .cgvbtn a {
+  display: inline-block;
+  background: url("../ticket/img/logo_CGV.png") no-repeat;
+  background-size: 100% 100%;
+  width: 50px;
+  height: 25px;
+  cursor: pointer;
+}
+#cinema_area .cinema_chain .lottebtn a {
+  display: inline-block;
+  background: url("../ticket/img/logo_LOTTE.png") no-repeat;
+  background-size: 100% 100%;
+  width: 70px;
+  height: 25px;
+  cursor: pointer;
+}
+#cinema_area .cinema_chain .megabtn a {
+  display: inline-block;
+  background: url("../ticket/img/logo_MEGA.png") no-repeat;
+  background-size: 100% 100%;
+  width: 63px;
+  height: 25px;
+  cursor: pointer;
+}
+#cinema_area .cinema_chain .indebtn a {
+  display: inline-block;
+  background: url("../ticket/img/logo_INDE.png") no-repeat;
+  background-size: 100% 100%;
+  width: 35px;
+  height: 25px;
+  cursor: pointer;
+}
+
 #cinema_area .main_list {  /* 극장 리스트 div */
   text-align: left;
   width: 100%;
-  height: 372px;
+  height: 372px;   /* 체인별극장 선택되면 372-32=340px */
   overflow: auto;
 }
 #cinema_area .main_list ul {
@@ -223,12 +293,13 @@
 }
 #cinema_area .main_list li {
   padding: 2px 0px 2px 15px;
+  cursor: pointer;
 }
 #cinema_area .main_list li:hover {
   font-weight: bold;
   background-color: #ecedf4;
 }
-#cinema_area .main_list li .on {
+#cinema_area .main_list .on {
   font-weight: bold;
   background-color: #999eca;
 }
@@ -236,8 +307,36 @@
 /*********** 3) 날짜선택 ***********/
 #cal_area{
    margin:auto;
-   width:75%;
-   height:10%;
+   width:80%;
+   height:200px;
+}
+#cal_area #YM {
+  height: 30px;
+}
+#cal_area #YM #prev {
+  color: black;
+  float: left;
+  vertical-align: bottom;
+  width: 10px;
+  height: 10px;
+  line-height: 15px;
+  margin: 7px 0 0 0;
+  cursor: pointer;
+}
+#cal_area #YM span {
+  font-size: 15pt;
+  line-height: 15px;
+  vertical-align: bottom;
+}
+#cal_area #YM #next {
+  color: black;
+  float: right;
+  vertical-align: bottom;
+  width: 10px;
+  height: 10px;
+  line-height: 15px;
+  margin: 7px 7px 0 0;
+  cursor: pointer;
 }
 .calendar {
   width: 100%;
@@ -248,89 +347,69 @@
   border-spacing: 2px;
   border-color: grey;
 }
-.calendar td.on {
-  background-color: #999eca;
-}
 .calendar .week {
   background: #f1f0f0;
   color: #515151;
   font-size: 16px;
   font-weight: bold;
   border-bottom: 1px solid #d6d6d6;
-  height: 40px;
+  height: 35px;
 }
-.calendar .saturday {
-  background: white;
-  color: #3a87ad;
-  font-size: 16px;
-  font-weight: bold;
-  height: 55px;
+.calendar td {
   border: 2px solid #f1f0f0;
-  cursor: pointer;
 }
-.calendar .sunday {
-  background: white;
-  color: crimson;
-  font-size: 16px;
-  font-weight: bold;
-  height: 55px;
-  border: 2px solid #f1f0f0;
-  cursor: pointer;
-}
-.calendar .today {
-/*
-  background: white;
-  color: darkblue;
-  font-size: 16px;
-  font-weight: bold;
-  height: 55px;
-  border: 2px solid darkblue;
-*/
-  background: white;
-  color: #515151;
-  font-size: 16px;
-  font-weight: bold;
-  height: 55px;
-  border: 2px solid #f1f0f0;
-  cursor: pointer;
-}
+.calendar .day,
+.calendar .today,
+.calendar .saturday,
+.calendar .sunday,
 .calendar .blank {
   background: white;
-  color: brown;
+  height: 45px;
   font-size: 16px;
   font-weight: bold;
-  height: 55px;
-  border: 2px solid #f1f0f0;
+  cursor: pointer;
+  color: #c0c0c0;
+  pointer-events: none;
 }
-.calendar .day {
-  background: white;
+.calendar .day.ready {
   color: #515151;
-  font-size: 16px;
-  font-weight: bold;
-  height: 55px;
-  border: 2px solid #f1f0f0;
-  cursor: pointer;
 }
-#prev {
-  color: black;
-  float: left;
-  vertical-align: bottom;
-  width: 10px;
-  height: 10px;
-  line-height: 5px;
-  margin: 7px 0 0 0;
-  cursor: pointer;
+.calendar .today {
+  border: 2px solid #767eb3;
 }
-#next {
-  color: black;
-  float: right;
-  vertical-align: bottom;
-  width: 10px;
-  height: 10px;
-  line-height: 5px;
-  margin: 7px 7px 0 0;
-  cursor: pointer;
+.calendar .saturday.ready {
+  color: #0080ff;
 }
+.calendar .sunday.ready {
+  color: #ff0000;
+}
+.calendar .day.ready,
+.calendar .today.ready,
+.calendar .saturday.ready,
+.calendar .sunday.ready {
+  background-color: #ebedf9;
+  border: 2px solid #c1c8ee;
+  pointer-events: auto;
+}
+.calendar .day:hover,
+.calendar .today:hover,
+.calendar .saturday:hover,
+.calendar .sunday:hover {
+  background-color: #d1d5e9;
+  text-decoration: underline;
+}
+.calendar .day.on,
+.calendar .today.on,
+.calendar .saturday.on,
+.calendar .sunday.on {
+  background-color: #868ec6;
+  border: 2px solid #6568b6;
+}
+
+#date_area .calenderinfo {
+  margin-top: 10px;
+}
+
 /*********** 4) 영화정보 **************/
 .section_result {
   display: inline-block;
@@ -434,14 +513,6 @@
   font-weight: bold;
 }
 .ticket_data li {
-  cursor: pointer;
-  background: url('../ticket/img/selectBefore_people.PNG');
-}
-.ticket_data li.on {
-  cursor: pointer;
-  background: url('../ticket/img/selectAfter_people.PNG');
-}
-.ticket_data li {
   display: inline-block;
   width: 30px;
   height: 27px;
@@ -449,7 +520,15 @@
   float: left;
   text-align: center;
   padding-top: 3px;
-  
+  cursor: pointer;
+  background: url('../ticket/img/selectBefore_people.PNG');
+}
+.ticket_data li.on {
+  cursor: pointer;
+  background: url('../ticket/img/selectAfter_people.PNG');
+}
+.ticket_data li.on:hover {
+  cursor: auto;
 }
 #price_lst_area .ticket_data td{
   vertical-align: bottom;

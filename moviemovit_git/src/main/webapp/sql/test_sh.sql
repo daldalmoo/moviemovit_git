@@ -15,7 +15,7 @@ FROM userTable
 WHERE uid LIKE '%1%'
 ORDER BY uid ASC
 
--- 회원 추가
+-- 뷰 테스트용 insert
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
 VALUES('m1', 'me1234!', '기경민', 'W', '19940426', 'cheerup_km@naver.com', '01012345678',now(), 'ADMIN');
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
@@ -29,13 +29,6 @@ VALUES('m5', 's1234!', '우신혜', 'W', '19911020', 'sh@naver.com', '01012345678',
 INSERT INTO userTable(uid,upw,uname,gender,birth,email,phone,wdate,grade)
 VALUES('m6', 's1234!', '우신혜', 'W', '19911020', 'sh@naver.com', '01012345678',now(), 'F');
 
--- QnATable 목록 답변알고리즘부분만 보기
-select title, uid, groupNo, indent, groupNum
-from QnATable
-where groupNo=5;
-
-
--- 뷰 테스트용 insert
 insert into screenTable(sCode,roomCode,sdate,stime,mCode)
 values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C001_1', '2018-09-17', '1030', '2');
 insert into screenTable(sCode,roomCode,sdate,stime,mCode)
@@ -46,6 +39,20 @@ insert into screenTable(sCode,roomCode,sdate,stime,mCode)
 values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L001_3', '2018-09-17', '1030', '5');
 insert into screenTable(sCode,roomCode,sdate,stime,mCode)
 values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'D001_2', '2018-09-17', '1030', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'D001_2', '2018-10-01', '1030', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'D001_2', '2018-10-02', '1030', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'D001_2', '2018-10-03', '1030', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'D001_2', '2018-10-04', '1030', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'D001_2', '2018-10-05', '1030', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'D001_2', '2018-10-06', '1030', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'D001_2', '2018-10-07', '1030', '5');
 
 insert into roomTable(roomCode,cineCode,roomName,seatCnt,DD,seatImg)
 values('C001_2','C001',1,50,'2D, 3D','moving/images/seat1.jpg');
@@ -87,12 +94,7 @@ insert into cinemaTable(cineCode,brandName,cineName,tel,addr1,addr2,addr3,wido,k
 values('M022','MEGABOX','제주','1544-0070','JJD','제주도 제주시 중앙로14길','18','33.5116003','126.5226707','default.png',now(),'운영시간 : 8:00~2:00','http://www.megabox.co.kr');
 
 
--- 영화선택(mCode) -> 상영극장(cineCode,brandName,cineName,logoImgMF) 가져오기
-SELECT sCode,roomCode,sdate,stime
-FROM screenTable
-WHERE mCode=2
-ORDER BY sCode ASC;
-
+-- 영화선택(mCode) -> 상영극장(cineCode,brandName,cineName,logoImgMF)
 SELECT *
 FROM cinemaTable CT
 INNER JOIN roomTable RT
@@ -103,10 +105,88 @@ WHERE mCode=3 AND addr1='SEO'
 GROUP BY CT.cineCode
 ORDER BY brandName ASC, cineName ASC;
 
--- 각 주소의 극장목록
+-- 주소1 -> 극장목록
 SELECT cineCode, brandName, cineName
 FROM cinemaTable
 WHERE addr1="SEO"
 ORDER BY brandName ASC, cineName ASC;
 
+-- 영화코드,주소1 -> 상영극장 개수
+SELECT COUNT(CT.cineCode)
+FROM cinemaTable CT
+INNER JOIN roomTable RT
+ON CT.cineCode=RT.cineCode
+INNER JOIN screenTable ST
+ON RT.roomCode=ST.roomCode
+WHERE mCode=3 AND addr1='SEO';
 
+-- 영화코드,주소1 -> 상영극장 개수 (mMame 에 addr1 담아옴)
+    SELECT COUNT(cineCode) cnt
+    FROM ( SELECT CT.cineCode
+      FROM cinemaTable CT
+      INNER JOIN roomTable RT
+      ON CT.cineCode=RT.cineCode
+      INNER JOIN screenTable ST
+      ON RT.roomCode=ST.roomCode
+      WHERE mCode=5
+      AND addr1="ICH"
+      GROUP BY cineCode ) a
+
+-- 체인별, 주소1 -> 극장 목록 <ul> 전체
+SELECT *
+FROM cinemaTable
+WHERE cineCode LIKE 'C%'
+ORDER BY cineName ASC;
+
+-- 극장명 검색
+SELECT cineCode, brandName, cineName
+FROM cinemaTable
+WHERE cineName LIKE '%타%'
+
+-- 영화코드 -> 상영날짜
+    SELECT sdate
+    FROM cinemaTable CT
+    INNER JOIN roomTable RT
+    ON CT.cineCode=RT.cineCode
+    INNER JOIN screenTable ST
+    ON RT.roomCode=ST.roomCode
+    WHERE mCode=5
+    AND addr1="SEO"
+    GROUP BY ST.sdate
+    ORDER BY sdate
+    
+
+
+
+-- *********************** 지영 크롤링
+--캐릭터셋 확인
+show variables like 'c%';
+
+-- 아닐경우 변경
+ALTER DATABASE myjava DEFAULT CHARACTER SET utf8;
+alter Database myjava collate = 'utf8_general_ci';
+
+-- 특수문자 필요할때 
+ALTER DATABASE homestead CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
+-- CSV 넣기
+load data local infile 'd:/cs/people.csv'
+into table peopleTable 
+fields terminated by ','
+lines TERMINATED BY '\n';
+
+load data local infile 'd:/cs/cinema.csv'
+into table cinemaTable
+fields terminated by ','
+lines TERMINATED BY '\n';
+
+load data local infile 'd:/cs/screen.csv'
+into table screenTable
+fields terminated by ','
+lines TERMINATED BY '\n';
+
+load data local infile 'd:/cs/movie.csv'
+into table movieTable
+fields terminated by ','
+lines TERMINATED BY '\n';
+-- *********************** 지영 크롤링 END
