@@ -29,9 +29,9 @@ public class MovieCont {
 	MovieDAO dao;
 
 	public MovieCont() {
-		System.out.println("-----MovieCont() °´Ã¼ »ı¼º");
-	}//±âº»»ı¼ºÀÚ
-	//°á°úÈ®ÀÎ
+		System.out.println("------MovieCont() ê°ì²´ ìƒì„±");
+	}//ê¸°ë³¸ìƒì„±ì
+	//ê²°ê³¼í™•ì¸
 	//http://localhost:9090/moviemovit/movie/create.do
 	
 	@RequestMapping(value="/movie/create.do", method=RequestMethod.GET)
@@ -50,7 +50,7 @@ public class MovieCont {
 	    mav.setViewName("movie/msgView");
 	    mav.addObject("root", Utility.getRoot());
 	//------------------------------------------------------------    
-	//  Àü¼ÛµÈ ÆÄÀÏÀÌ ÀúÀåµÇ´Â ½ÇÁ¦ °æ·Î
+	//  ì „ì†¡ëœ íŒŒì¼ì´ ì €ì¥ë˜ëŠ” ì‹¤ì œ ê²½ë¡œ
 	    String basePath = req.getRealPath("/movie/img_poster");
 	    MultipartFile posterMF = dto.getPosterMF();
 	    String poster = UploadSaveManager.saveFileSpring30(posterMF, basePath);
@@ -59,45 +59,45 @@ public class MovieCont {
 	//------------------------------------------------------------   
 	       	    
 	    if(dto.getGenre().equals("romance")) {
-			 dto.setGenre("·Î¸Ç½º");
+			 dto.setGenre("ë¡œë§¨ìŠ¤");
 		 } else if (dto.getGenre().equals("crime")) {
-			 dto.setGenre("¹üÁË/´À¿Í¸£");
+			 dto.setGenre("ë²”ì£„/ëŠì™€ë¥´");
 		 } else if (dto.getGenre().equals("comedy")) {
-			 dto.setGenre("ÄÚ¹Ìµğ");
+			 dto.setGenre("ì½”ë¯¸ë””");
 		 } else if (dto.getGenre().equals("FanSF")) {
-			 dto.setGenre("ÆÇÅ¸Áö/SF");
+			 dto.setGenre("íŒíƒ€ì§€/SF");
 		 } else if (dto.getGenre().equals("action")) {
-			 dto.setGenre("¾×¼Ç");
+			 dto.setGenre("ì•¡ì…˜");
 		 } else if (dto.getGenre().equals("thrillhorror")) {
-			 dto.setGenre("½º¸±·¯/°øÆ÷");
+			 dto.setGenre("ìŠ¤ë¦´ëŸ¬/ê³µí¬");
 		 } else if (dto.getGenre().equals("drama")) {
-			 dto.setGenre("µå¶ó¸¶");
+			 dto.setGenre("ë“œë¼ë§ˆ");
 		 } else if (dto.getGenre().equals("docu")) {
-			 dto.setGenre("´ÙÅ¥");
+			 dto.setGenre("ë‹¤í");
 		 } else if (dto.getGenre().equals("ani")) {
-			 dto.setGenre("¾Ö´Ï¸ŞÀÌ¼Ç");
+			 dto.setGenre("ì• ë‹ˆë©”ì´ì…˜");
 		 } else if (dto.getGenre().equals("etc")) {
-			 dto.setGenre("±âÅ¸");
+			 dto.setGenre("ê¸°íƒ€");
 		 }//if end
 	    
 	    if(dto.getScreen().equals("soon")) {
-	    	dto.setScreen("»ó¿µ¿¹Á¤");
+	    	dto.setScreen("ìƒì˜ì˜ˆì •");
 	    } else if(dto.getScreen().equals("ing")) {
-	    	dto.setScreen("»ó¿µÁß");
+	    	dto.setScreen("ìƒì˜ì¤‘");
 	    } else if(dto.getScreen().equals("end")) {
-	    	dto.setScreen("»ó¿µÁ¾·á");
+	    	dto.setScreen("ìƒì˜ì¢…ë£Œ");
 	    }//if end
 
 	    int cnt=dao.create(dto);
 	    if(cnt==0) {
-	      mav.addObject("msg1", "<p>¿µÈ­ µî·Ï ½ÇÆĞ</p>");
+	      mav.addObject("msg1", "<p>ì˜í™” ë“±ë¡ ì‹¤íŒ¨</p>");
 	      mav.addObject("img", "<img src='../img/fail.png'>");
-	      mav.addObject("link1", "<input type='button' value='´Ù½Ã½Ãµµ' onclick='javascript:history.back()'>");
-	      mav.addObject("link2", "<input type='button' value='¸ñ·ÏÀ¸·Î' onclick='location.href=\"./adminmovieList.do?mCode=" + dto.getmCode() + "\"'>");
+	      mav.addObject("link1", "<input type='button' value='ë‹¤ì‹œì‹œë„' onclick='javascript:history.back()'>");
+	      mav.addObject("link2", "<input type='button' value='ëª©ë¡ìœ¼ë¡œ' onclick='location.href=\"./adminmovieList.do?mCode=" + dto.getmCode() + "\"'>");
 	    }else {
-	      mav.addObject("msg1", "<p>¿µÈ­ µî·Ï ¼º°ø</p>");
+	      mav.addObject("msg1", "<p>ì˜í™” ë“±ë¡ ì„±ê³µ</p>");
 	      mav.addObject("img", "<img src='../img/success.jpg'>");
-	      mav.addObject("link1", "<input type='button' value='¸ñ·ÏÀ¸·Î' onclick='location.href=\"./adminmovieList.do?mCode=" + dto.getmCode() + "\"'>");      
+	      mav.addObject("link1", "<input type='button' value='ëª©ë¡ìœ¼ë¡œ' onclick='location.href=\"./adminmovieList.do?mCode=" + dto.getmCode() + "\"'>");      
 	    }
 	    return mav;
 	       
@@ -156,14 +156,14 @@ public class MovieCont {
 	    mav.setViewName("movie/msgView");
 	    int cnt = dao.delete(dto);
 	    if(cnt==0) {
-	      mav.addObject("msg1", "<p>¿µÈ­ »èÁ¦ ½ÇÆĞ</p>");
+	      mav.addObject("msg1", "<p>ì˜í™” ì‚­ì œ ì‹¤íŒ¨</p>");
 	      mav.addObject("img", "<img src='../img/fail.png'>");
-	      mav.addObject("link1", "<input type='button' value='´Ù½Ã½Ãµµ' onclick='javascript:history.back()'>");
-	      mav.addObject("link2", "<input type='button' value='¸ñ·Ï' onclick='location.href=\"./movieList.do\"'>");
+	      mav.addObject("link1", "<input type='button' value='ë‹¤ì‹œì‹œë„' onclick='javascript:history.back()'>");
+	      mav.addObject("link2", "<input type='button' value='ëª©ë¡' onclick='location.href=\"./movieList.do\"'>");
 	    }else {
-	      mav.addObject("msg1", "<p>¿µÈ­ »èÁ¦ ¼º°ø</p>");
+	      mav.addObject("msg1", "<p>ì˜í™” ì‚­ì œ ì„±ê³µ</p>");
 	      mav.addObject("img", "<img src='../img/success.jpg'>");
-	      mav.addObject("link2", "<input type='button' value='¸ñ·Ï' onclick='location.href=\"./movieList.do\"'>");
+	      mav.addObject("link2", "<input type='button' value='ëª©ë¡' onclick='location.href=\"./movieList.do\"'>");
 	    }//if end
 	    return mav;    
 	 }//deleteProc() end
@@ -185,7 +185,7 @@ public class MovieCont {
 	    mav.setViewName("movie/msgView");
 	    mav.addObject("root", Utility.getRoot());
 	    //------------------------------------------------------------    
-		//  Àü¼ÛµÈ ÆÄÀÏÀÌ ÀúÀåµÇ´Â ½ÇÁ¦ °æ·Î
+		//  ì „ì†¡ëœ íŒŒì¼ì´ ì €ì¥ë˜ëŠ” ì‹¤ì œ ê²½ë¡œ
 		    String basePath = req.getRealPath("/movie/storage");
 		//  <input type='file' name='posterMF'>
 		    MultipartFile posterMF = dto.getPosterMF();
@@ -195,46 +195,46 @@ public class MovieCont {
 		//------------------------------------------------------------   
 				
 		if(dto.getGenre().equals("romance")) {
-			 dto.setGenre("·Î¸Ç½º");
+			 dto.setGenre("ë¡œë§¨ìŠ¤");
 		 } else if (dto.getGenre().equals("crime")) {
-			 dto.setGenre("¹üÁË/´À¿Í¸£");
+			 dto.setGenre("ë²”ì£„/ëŠì™€ë¥´");
 		 } else if (dto.getGenre().equals("comedy")) {
-			 dto.setGenre("ÄÚ¹Ìµğ");
+			 dto.setGenre("ì½”ë¯¸ë””");
 		 } else if (dto.getGenre().equals("FanSF")) {
-			 dto.setGenre("ÆÇÅ¸Áö/SF");
+			 dto.setGenre("íŒíƒ€ì§€/SF");
 		 } else if (dto.getGenre().equals("action")) {
-			 dto.setGenre("¾×¼Ç");
+			 dto.setGenre("ì•¡ì…˜");
 		 } else if (dto.getGenre().equals("thrillhorror")) {
-			 dto.setGenre("½º¸±·¯/°øÆ÷");
+			 dto.setGenre("ìŠ¤ë¦´ëŸ¬/ê³µí¬");
 		 } else if (dto.getGenre().equals("drama")) {
-			 dto.setGenre("µå¶ó¸¶");
+			 dto.setGenre("ë“œë¼ë§ˆ");
 		 } else if (dto.getGenre().equals("docu")) {
-			 dto.setGenre("´ÙÅ¥");
+			 dto.setGenre("ë‹¤í");
 		 } else if (dto.getGenre().equals("ani")) {
-			 dto.setGenre("¾Ö´Ï¸ŞÀÌ¼Ç");
+			 dto.setGenre("ì• ë‹ˆë©”ì´ì…˜");
 		 } else if (dto.getGenre().equals("etc")) {
-			 dto.setGenre("±âÅ¸");
+			 dto.setGenre("ê¸°íƒ€");
 		 }//if end
 	    
 	    if(dto.getScreen().equals("soon")) {
-	    	dto.setScreen("»ó¿µ¿¹Á¤");
+	    	dto.setScreen("ìƒì˜ì˜ˆì •");
 	    } else if(dto.getScreen().equals("ing")) {
-	    	dto.setScreen("»ó¿µÁß");
+	    	dto.setScreen("ìƒì˜ì¤‘");
 	    } else if(dto.getScreen().equals("end")) {
-	    	dto.setScreen("»ó¿µÁ¾·á");
+	    	dto.setScreen("ìƒì˜ì¢…ë£Œ");
 	    }//if end
 	    
 		int cnt = dao.update(dto);
 	    
 	    if(cnt==0) {
-	      mav.addObject("msg1", "<p>¿µÈ­ ¼öÁ¤ ½ÇÆĞ</p>");
+	      mav.addObject("msg1", "<p>ì˜í™” ìˆ˜ì • ì‹¤íŒ¨</p>");
 	      mav.addObject("img", "<img src='../img/fail.png'>");
-	      mav.addObject("link1", "<input type='button' value='´Ù½Ã½Ãµµ' onclick='javascript:history.back()'>");
-	      mav.addObject("link2", "<input type='button' value='¿µÈ­¸ñ·Ï' onclick='location.href=\"./movieList.do\"'>");
+	      mav.addObject("link1", "<input type='button' value='ë‹¤ì‹œì‹œë„' onclick='javascript:history.back()'>");
+	      mav.addObject("link2", "<input type='button' value='ì˜í™”ëª©ë¡' onclick='location.href=\"./movieList.do\"'>");
 	    }else {
-	      mav.addObject("msg1", "<p>¿µÈ­ ¼öÁ¤ ¼º°ø</p>");
+	      mav.addObject("msg1", "<p>ì˜í™” ìˆ˜ì • ì„±ê³µ</p>");
 	      mav.addObject("img", "<img src='../img/success.jpg'>");
-	      mav.addObject("link2", "<input type='button' value='¿µÈ­¸ñ·Ï' onclick='location.href=\"./movieList.do\"'>");
+	      mav.addObject("link2", "<input type='button' value='ì˜í™”ëª©ë¡' onclick='location.href=\"./movieList.do\"'>");
 	    }//if end
 	    return mav;    
 	  }//updateProc() end
@@ -246,10 +246,10 @@ public class MovieCont {
 			String peoName = req.getParameter("keyWord").trim();
 			System.out.println(peoName);
 			
-			String message = ""; //ÀÀ´ä ¸Ş¼¼Áö
-			if(peoName.length()>0) { //°Ë»ö¾î°¡ Á¸ÀçÇÏ´ÂÁö?
+			String message = ""; //ì‘ë‹µ ë©”ì„¸ì§€
+			if(peoName.length()>0) { //ê²€ìƒ‰ì–´ê°€ ì¡´ì¬í•˜ëŠ”ì§€?
 				ArrayList<PeopleDTO> peopleList = dao.peopleNameList(peoName);
-				//,¸¦ ±âÁØÀ¸·Î ¹®ÀÚ¸¦ ³ª´²¼­ °¹¼ö¸¸Å­ Ãâ·Â
+				//,ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë¬¸ìë¥¼ ë‚˜ëˆ ì„œ ê°¯ìˆ˜ë§Œí¼ ì¶œë ¥
 				int size = peopleList.size();
 				if(size>0) {
 					message += size + "|";
@@ -264,7 +264,7 @@ public class MovieCont {
 					}//for end
 				}//if end
 			} else {
-				System.out.println("ÀÎ¹°¸ñ·Ï ºÒ·¯¿À±â ½ÇÆĞ");
+				System.out.println("ì¸ë¬¼ëª©ë¡ ë¶ˆëŸ¬ì˜¤ê¸° ì‹¤íŒ¨");
 			}//if end
 			
 			resp.setContentType("text/plain; charset=UTF-8");
@@ -281,10 +281,10 @@ public class MovieCont {
 			String peoName = req.getParameter("keyWord2").trim();
 			System.out.println(peoName);
 			
-			String message = ""; //ÀÀ´ä ¸Ş¼¼Áö
-			if(peoName.length()>0) { //°Ë»ö¾î°¡ Á¸ÀçÇÏ´ÂÁö?
+			String message = ""; //ì‘ë‹µ ë©”ì„¸ì§€
+			if(peoName.length()>0) { //ê²€ìƒ‰ì–´ê°€ ì¡´ì¬í•˜ëŠ”ì§€?
 				ArrayList<PeopleDTO> peopleList2 = dao.peopleNameList(peoName);
-				//,¸¦ ±âÁØÀ¸·Î ¹®ÀÚ¸¦ ³ª´²¼­ °¹¼ö¸¸Å­ Ãâ·Â
+				//,ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë¬¸ìë¥¼ ë‚˜ëˆ ì„œ ê°¯ìˆ˜ë§Œí¼ ì¶œë ¥
 				int size = peopleList2.size();
 				if(size>0) {
 					message += size + "|";
@@ -299,7 +299,7 @@ public class MovieCont {
 					}//for end
 				}//if end
 			} else {
-				System.out.println("ÀÎ¹°¸ñ·Ï ºÒ·¯¿À±â ½ÇÆĞ");
+				System.out.println("ì¸ë¬¼ëª©ë¡ ë¶ˆëŸ¬ì˜¤ê¸° ì‹¤íŒ¨");
 			}//if end
 			
 			resp.setContentType("text/plain; charset=UTF-8");
