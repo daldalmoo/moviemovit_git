@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header1.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
   //주소 값에서 cineCode 가져오기
 			String cineCode = request.getParameter("cineCode");
@@ -17,9 +18,6 @@
 	margin: auto;
 }
 </style>
-
-
-<%@ include file="../header2.jsp"%>
 
 
 <!-- 상영관 등록 FORM -->
@@ -150,4 +148,3 @@ $("#DD3").change(function() {
 </script>
 
 <%-- 본문끝 --%>
-<%@ include file="../footer.jsp"%>

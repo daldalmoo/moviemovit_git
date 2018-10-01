@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../header1.jsp"%>
-<%@ include file="../header2.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style>
 
 /*공개,수정,삭제 스타일 버튼*/
@@ -211,22 +211,22 @@ div#toplist {
 									</div>
 									<div class="post-info-rate-share">
 										<c:choose>
-											<c:when test="${dto.startotal == 0}">
+											<c:when test="${dto.startotal < 1}">
 												<img src="./img/star0.png" width="150">
 											</c:when>
-											<c:when test="${dto.startotal < 3 }">
+											<c:when test="${dto.startotal < 2 }">
 												<img src="./img/star1.png" width="150">
 											</c:when>
-											<c:when test="${dto.startotal < 5}">
+											<c:when test="${dto.startotal < 3}">
 												<img src="./img/star2.png" width="150">
 											</c:when>
-											<c:when test="${dto.startotal < 7}">
+											<c:when test="${dto.startotal < 4}">
 												<img src="./img/star3.png" width="150">
 											</c:when>
-											<c:when test="${dto.startotal < 9}">
+											<c:when test="${dto.startotal < 5}">
 												<img src="./img/star4.png" width="150">
 											</c:when>
-											<c:when test="${dto.startotal < 11} ">
+											<c:when test="${dto.startotal < 6} ">
 												<img src="./img/star5.png" width="150">
 											</c:when>
 											<c:when test="${dto.startotal eq '' || empty dto.startotal }">
@@ -388,4 +388,3 @@ div#toplist {
 		
 		 */
 	</script>
-	<%@ include file="../footer.jsp"%>

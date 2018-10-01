@@ -92,4 +92,7 @@ public interface ReviewMapper {
   // Update
   public int reviewUpdate(ReviewStar sdto);
   
+  // 이전 글과 중복 확인
+  public ArrayList<ReviewStar> starRead(ReviewStar sdto);
+  
 } // class end
