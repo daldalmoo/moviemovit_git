@@ -509,10 +509,14 @@ public class TicketCont {
 	/* -------------------- 영화정보 부분 AJAX END -------------------- */
   
   /* -------------------- 좌석선택 --------------------------------- */
-  @RequestMapping(value="/ticket/select.do", method = RequestMethod.GET)
-  public String selectSeat(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    return "ticket/ticketSeat";
+  @RequestMapping(value="/ticket/create.do", method = RequestMethod.POST)
+  public ModelAndView selectSeat(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    ModelAndView mav = new ModelAndView();
+    int peocnt = Integer.parseInt(req.getParameter("peocnt"));
+    mav.addObject("peocnt",peocnt);
+    mav.setViewName("ticket/ticketSeat");
+    return mav;
   }//selectSeat() end
-  /* -------------------- 좌석선택 END -------------------- */
+  /* -------------------- 좌석선택 END -------------------- */  
 	
 }//class end

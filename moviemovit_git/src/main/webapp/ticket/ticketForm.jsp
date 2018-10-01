@@ -319,6 +319,7 @@ function buildCalendar() {
             </dt>
             <dd>
               <span id="auditType">-</span>
+              <input type="hidden" id="peocnt" name="peocnt" value="">
             </dd>
 
             <dt>

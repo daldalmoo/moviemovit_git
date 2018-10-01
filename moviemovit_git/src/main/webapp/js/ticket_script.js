@@ -1,4 +1,4 @@
-
+﻿
 // --------------------- 예매하기 AJAX File
 $.ajaxSetup({datatype:"text"});
    
@@ -393,7 +393,7 @@ $(".cinemainfo .cinema_logo").click(function() {
 });//click() end
 /******************* 상영시간표 AJAX END *******************/
 
-/******************* 인원선택 AJAX *******************/
+/* --------------- 인원선택 AJAX --------------------- */
 var peocnt = 0; // 인원
 
 var adutemp = 0; // 같은유형에서 변경할때 임시변수
@@ -472,6 +472,8 @@ $(".adult").click(function() {
   price += aduprice;
   $("#total").empty();
   $("#total").text(price);
+  //alert("a" + peocnt);
+  $("#peocnt").val(peocnt);
 });// click() end
 
 $(".youth").click(function() {
@@ -531,6 +533,8 @@ $(".youth").click(function() {
   price += youprice;
   $("#total").empty();
   $("#total").text(price);
+  //alert("y" + peocnt);
+  $("#peocnt").val(peocnt);
 });// click() end
 
 $(".senior").click(function() {
@@ -590,6 +594,8 @@ $(".senior").click(function() {
   price += senprice;
   $("#total").empty();
   $("#total").text(price);
+  //alert("s" + peocnt);
+  $("#peocnt").val(peocnt);
 });// click() end
 
 $(".kid").click(function() {
@@ -649,10 +655,9 @@ $(".kid").click(function() {
   price += kidprice;
   $("#total").empty();
   $("#total").text(price);
+  alert("k" + peocnt);
+  $("#peocnt").val(peocnt);
+  alert($("#peocnt").val());
 });//click() end
 
-/******************* 인원선택 AJAX END *******************/
-
-/******************* 금액 AJAX *******************/
-
-/******************* 금액 AJAX END *******************/
+/* --------------- 금액 AJAX ---------------------*/
