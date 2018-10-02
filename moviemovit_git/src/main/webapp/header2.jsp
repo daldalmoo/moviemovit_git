@@ -66,7 +66,6 @@ function logoutCheck(){
 					<div class="spinner diagonal part-2"></div>
 				</label>
 			</div>
-			<a href="#search_box" class="btn" id="search">&#9740;</a>
 			<nav id="menu" class="menu">
 				<ul class="dropdown">
 					<li><a href="#Link">Home</a>

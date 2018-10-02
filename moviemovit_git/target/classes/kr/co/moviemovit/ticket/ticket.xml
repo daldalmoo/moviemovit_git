@@ -201,28 +201,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- ********* 예매 : 날짜선택 부분 END ******** -->
   
   <!-- ********* 예매 : 상영시간표 부분 ******** -->
-  <!-- 영화,극장,날짜 -> 관별 시간 띄움 (cineCode를 screen 변수, sdate를 s_date 변수에 담아옴) -->
+  <!-- 영화,극장,날짜 -> 관별 시간 띄움 (cineCode를 screen에 sdate를 s_date에 담아옴, roomName을 roomCode에 보냄 ) -->
   <select id="screentimeRoom" parameterType="MovieDTO" resultType="ScreenDTO">
     <![CDATA[
-      SELECT *
-      FROM screenTable
+      SELECT sCode, RT.roomName as roomCode, sdate, stime, mCode
+      FROM screenTable ST
+      INNER JOIN roomTable RT
+      ON ST.roomCode=RT.roomCode
       WHERE mCode = #{mCode}
-           AND roomCode LIKE concat(#{screen},'%') 
+           AND ST.roomCode LIKE concat(#{screen},'%') 
            AND sdate = #{s_date}
     ]]>
   </select>
   <!-- ********* 예매 : 상영시간표 부분 END ******** -->
   
-  
-  
-  <!-- 영화선택 -> 영화정보 포스터 가져오기 -->
-  <select id="movieData" parameterType="MovieDTO" resultType="MovieDTO">
+  <!-- ********* 예매 : 영화예매정보 부분 ******** -->
+  <!-- 영화선택 -> 영화포스터,영화이름 가져오기 -->
+  <select id="movieData" parameterType="int" resultType="MovieDTO">
     <![CDATA[
-      SELECT mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date
+      SELECT poster, mName
       FROM movieTable
       WHERE mCode = #{mCode}
     ]]> 
   </select>
+  <!-- ********* 예매 : 영화예매정보 부분 END ******** -->
+  <!-- *********************** 예매 END *********************** -->
   
   <!-- 쿠폰 목록 -->
   <select id="couponList" resultType="CouponDTO">

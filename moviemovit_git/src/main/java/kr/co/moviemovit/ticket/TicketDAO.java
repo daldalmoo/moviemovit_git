@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kr.co.moviemovit.coupon.CouponDTO;
-import kr.co.moviemovit.coupon.CouponMapper;
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
 import kr.co.moviemovit.user.UserDTO;
-import kr.co.moviemovit.user.UserMapper;
 import kr.co.moviemovit.screen.ScreenDTO;
 
 @Component
@@ -131,7 +129,6 @@ public class TicketDAO {
   /* ------------------ 예매 : 날짜선택 부분 END ------------------ */
   
   /* ------------------ 예매 : 상영시간표 부분 END ------------------ */
-  //<select id="screentimeRoom" parameterType="MovieDTO" resultType="ScreenDTO">
   public ArrayList<ScreenDTO> screentimeRoom(MovieDTO dto) {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     ArrayList<ScreenDTO> screenlist = mapper.screentimeRoom(dto);
@@ -139,14 +136,14 @@ public class TicketDAO {
   }//screentimeRoom() end
   /* ------------------ 예매 : 상영시간표 부분 END ------------------ */
   
-  
-  /* -------------------- 영화선택 -> 영화정보 포스터 부분 -------------------- */
-  public MovieDTO MovieData(MovieDTO dto) {
+
+  /* -------------------- 예매 : 영화예매정보 부분 -------------------- */
+  public MovieDTO MovieData(int mCode) {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
-    MovieDTO movieData = mapper.movieData(dto);
+    MovieDTO movieData = mapper.movieData(mCode);
     return movieData;
   }//MovieData() end
-  /* -------------------- 영화선택 -> 영화정보 포스터 부분 END -------------------- */
+  /* -------------------- 예매 : 영화예매정보 부분 END -------------------- */
   
   // 쿠폰 목록 select
   public ArrayList<CouponDTO> couponList(CouponDTO dto) {

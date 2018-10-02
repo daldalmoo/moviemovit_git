@@ -4,7 +4,7 @@
 <%@ include file="../header1.jsp"%>
 
 <%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
-<link rel="stylesheet" href="../css/ticket_style.css?ver=9" type="text/css" />
+<link rel="stylesheet" href="../css/ticket_style.css?ver=2" type="text/css" />
 
 <%@ include file="../header2.jsp"%>
 <%-- 본문시작 ticketForm.jsp : 회원들이 예매하는 폼 --%>
@@ -165,8 +165,7 @@ function buildCalendar() {
 
 <form class="cbp-mc-form" name="regForm" method='POST' action='./create.do'>
   <!-- POST 방식으로 보낼 데이터 -->
-  <input type='hidden' id='mCode'     name='sCode'     value=''>
-  <input type='hidden' id='auditType' name='auditType' value=''>
+  <input type='hidden' id='sCode'     name='sCode'     value=''>
   
   <table id="ticketArea">
     <!-------------------------------- 1행 타이틀  --------------------------------------->
@@ -296,25 +295,30 @@ function buildCalendar() {
           </div>
 
           <div id="thumb_poster" class="thumb_poster">
-            <input type="image" class="movie_poster" src="./img/bgr_poster.PNG">
+            <img src="./img/bgr_poster.PNG" class="movie_poster">
+            <input type="hidden" id="m_poster" name="m_poster" value="">
           </div>
 
-          <h3><span id="select_m_name">영화제목</span></h3>
-
-          <!-- 예매 결과 -->
+          <h3>
+            <span id="select_m_name">-</span>
+            <input type="hidden" id="m_name" name="m_name" value="">
+          </h3>
+          
           <dl class="1st_result">
             <dt>
               <span class="space">극장</span>
             </dt>
             <dd>
-              <span id="select_space_txt">영화브랜드 지점</span>
+              <span id="select_space_txt">-</span>
+              <input type="hidden" id="cine_name" name="cine_name" value="">
             </dd>
 
             <dt>
               <span class="date">날짜</span>
             </dt>
             <dd>
-              <span id="wdate">yyyy.mm.dd(요일) 시:분</span>
+              <span id="wdate">-</span>
+              <input type="hidden" id="s_date" name="s_date" value="">
             </dd>
 
             <dt>
@@ -337,9 +341,7 @@ function buildCalendar() {
             <input type="image" class="reserve"
               src="./img/btn_reserve.PNG" alt="예매하기" onclick="javascript:NextBtn();">
           </div>
-          
         </div>
-
       </td>
       <!-- -------------------------- movieinfo_area : 영화정보 end -------------------------------- -->
     </tr>
@@ -365,21 +367,7 @@ function buildCalendar() {
             <img src="./img/default.png" class="cinema_logo">
             <span class="cinemainfo_name">영화관-지점</span>
           </div>
-          <div class="screentime">
-            
-            <dl id="1">
-              <dt>1 관</dt>
-              <dd>
-                <ul>
-                  <li onclick="timeclick('1030');">10:30</li>
-                  <li>17:40</li>
-                  <li>17:40</li>
-                  <li>17:40</li>
-                </ul>
-              </dd>
-            </dl>
-            
-          </div>
+          <div class="screentime"></div>
         </div>
       </td>
       <!-- -------------------------- screentime_area : 상영시간 선택 end -------------------------------- -->
@@ -471,7 +459,7 @@ function buildCalendar() {
   <br>
 </form>
 
-<script src="../js/ticket_script.js?ver=2" charset="utf-8"></script>
+<script src="../js/ticket_script.js?ver=3" charset="utf-8"></script>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>
