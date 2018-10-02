@@ -8,7 +8,24 @@ public class TicketDTO {
   private int cCode;     // 쿠폰사용여부 <- couponTable
   private String seat;   // 예매좌석위치(최대5명)
   private String auditType;  // 관람객유형 (adu you sen kid -> 성인 청소년 경로우대 아이)
+
+  //숙제
+  private String grade;
+  private int cnt;
   
+  
+  public String getGrade() {
+    return grade;
+  }
+
+  public void setGrade(String grade) {
+    this.grade = grade;
+  }
+
+  public int getCnt() {
+    return cnt;
+  }
+
   public TicketDTO() {
     System.out.println("---------- TicketDTO() 객체 생성");
   }//default constructor

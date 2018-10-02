@@ -4,15 +4,15 @@
 <%@ include file="../header1.jsp"%>
 
 <%-- head 에 들어가는 태그 (link, style, meta 등) 여기 추가  --%>
-<link rel="stylesheet" href="../css/seat_style.css?ver=2" type="text/css" />
+<link rel="stylesheet" href="../css/seat_style.css?ver=3" type="text/css" />
 
 
 <%@ include file="../header2.jsp"%>
 <%-- 본문시작 ticketSeat.jsp : 좌석선택 --%>
 
-<form class="cbp-mc-form" name="regForm" method='POST' action='./create.do'>
-  <table id="seatArea">
+<form class="cbp-mc-form" name="regForm" method='POST' action="./payment.do">
   <input type="hidden" id="peocnt" value="${peocnt }">
+  <table id="seatArea">
     <!-------------------------------- 1행 타이틀  --------------------------------------->
     <tr>
       <th class="seat_title" colspan="2" style="width:80%;">좌석선택</th>
@@ -121,54 +121,55 @@
     <!-- -------------------------- movieinfo_area : 영화정보 ----------------------------------- -->
     <td id="movieinfo_area" style="background: linear-gradient(to top, #3b3d58 0%, #5d607d 100%); color: white;">
         <div class="section_result">
-          <div id="btn_reset">
-            <input type="image" class="initReserve" src="./img/btn_initReserve.PNG" alt="예매다시하기" onclick="javascript:InitReserveMovie('0')">
-          </div>
-
           <div id="thumb_poster" class="thumb_poster">
-            <input type="image" class="movie_poster" src="./img/bgr_poster.PNG">
+            <img src="${m_poster }" class="movie_poster">
+            <input type="hidden" id="m_poster" name="m_poster" value="${m_poster }">
           </div>
 
-          <h3><span id="select_m_name">영화제목</span></h3>
-
-          <!-- 예매 결과 -->
+          <h3>
+            <span id="select_m_name">${m_name }</span>
+            <input type="hidden" id="m_name" name="m_name" value="${m_name }">
+          </h3>
+          
           <dl class="1st_result">
             <dt>
               <span class="space">극장</span>
             </dt>
             <dd>
-              <span id="select_space_txt">영화브랜드 지점</span>
+              <span id="select_space_txt">${cine_name }</span>
+              <input type="hidden" id="cine_name" name="cine_name" value="${cine_name }">
             </dd>
 
             <dt>
               <span class="date">날짜</span>
             </dt>
             <dd>
-              <span id="select_date_txt">yyyy.mm.dd(요일) 시:분</span>
+              <span id="wdate">${s_date }</span>
+              <input type="hidden" id="s_date" name="s_date" value="${s_date }">
             </dd>
 
             <dt>
               <span class="people">인원</span>
             </dt>
             <dd>
-              <span id="select_people_txt">-</span>
+              <span id="select_people_txt">${auditData }</span>
+              <input type="hidden" name="auditData" value="${auditData }">
             </dd>
 
             <dt>
               <span class="price">금액</span>
             </dt>
             <dd>
-              <span id="total">-</span>
+              <span id="total">${totalprice }</span>
+              <input type="hidden" id="totalprice" name="totalprice" value="${totalprice }">
             </dd>
           </dl>
 
           <div id="btn_area">
-            <input type="image" class="reserve"
-              src="./img/btn_reserve.PNG" alt="예매하기" onclick="javascript:NextBtn();">
+            <input type="image" class="reserve" src="./img/btn_reserve.PNG" alt="예매하기" onclick="javascript:NextBtn();">
           </div>
           
         </div>
-
       </td>
       <!-- -------------------------- movieinfo_area : 영화정보 end -------------------------------- -->
     </tr>
@@ -177,7 +178,7 @@
 
 </form>
 
-<script src="../js/seat_script.js?ver=1" charset="utf-8"></script>
+<script src="../js/seat_script.js?ver=2" charset="utf-8"></script>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

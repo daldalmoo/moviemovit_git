@@ -39,7 +39,7 @@ $(".seatline").click(function() {
 			alert("선택인원을 초과했습니다.");
 		}			
 	}// if end
-	alert("최종 str : " + str);
+	//alert("최종 str : " + str);
 	//alert("seatTemp : " + seatTemp);
 });// click() end
 /* --------------- 좌석선택 END ------------------------- */

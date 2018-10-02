@@ -73,12 +73,12 @@
   display: inline-block;
   position: relative;
 }
-.section_result #btn_reset {;
+.section_result #btn_reset {
   margin:0 0 20px 0;
 }
 .thumb_poster .movie_poster { /*영화 포스터*/
-  width: 85%;
-  height: 80%;
+  width: 230px;
+  height: 330px;
   margin: auto;
 }
 .section_result h3 { /*영화 제목*/
@@ -90,12 +90,14 @@
   font-weight: bold;
 }
 .section_result dt {
-  margin-left: 50px;
+  margin: auto;
   float: left;
   line-height: 2;
 }
 .section_result dd {
   line-height: 2;
+  margin: 0;
+  padding: 0;
 }
 .section_result .btn_area a {
   display: block;

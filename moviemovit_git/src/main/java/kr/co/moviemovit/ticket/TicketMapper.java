@@ -74,10 +74,10 @@ public interface TicketMapper {
   /* ------------------ 예매 : 상영시간표 부분 END ------------------ */
   
 
-  /* -------------------- 영화선택 -> 영화정보 포스터 부분 END -------------------- */
-  //<select id="movieData">
-  public MovieDTO movieData(MovieDTO dto);
-  /* -------------------- 영화선택 -> 영화정보 포스터 부분 END -------------------- */
+  /* -------------------- 예매 : 영화예매정보 부분 -------------------- */
+  //<select id="movieData" parameterType="int" resultType="MovieDTO">
+  public MovieDTO movieData(int mCode);
+  /* -------------------- 예매 : 영화예매정보 부분 END -------------------- */
   
   //쿠폰목록
   public ArrayList<CouponDTO> couponList(CouponDTO dto);

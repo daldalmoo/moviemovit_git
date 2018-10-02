@@ -177,13 +177,18 @@ WHERE cineName LIKE '%타%'
     ORDER BY sdate
     
 -- 영화,극장,날짜 -> 관별 시간 띄움
-    SELECT *
-    FROM screenTable
+    SELECT sCode, RT.roomName as roomCode, sdate, stime, mCode
+    FROM screenTable ST
+    INNER JOIN roomTable RT
+    ON ST.roomCode=RT.roomCode
     WHERE mCode = 5
-          AND roomCode LIKE 'D001%' 
+          AND ST.roomCode LIKE 'D001%' 
           AND sdate = '2018-09-17'
     
-    
+-- mCode -> 영화포스터,영화이름 가져오기
+SELECT poster, mName
+FROM movieTable
+WHERE mCode='10'
     
     
     

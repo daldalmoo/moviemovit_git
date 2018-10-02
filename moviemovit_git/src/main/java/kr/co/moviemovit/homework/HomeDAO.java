@@ -6,7 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import kr.co.moviemovit.coupon.CouponDTO;
 import kr.co.moviemovit.movie.MovieDTO;
+import kr.co.moviemovit.ticket.TicketDTO;
 
 @Component
 public class HomeDAO {
@@ -16,12 +18,24 @@ public class HomeDAO {
 
   public HomeDAO() {
      System.out.println("----------MovieDAO()");
-  }//Â±Ã¢ÂºÂ» Â»Ã½Â¼ÂºÃ€Ãš
+  }//¡¾?¨¬? ??¨ù¨¬??
   
   
   public  ArrayList<MovieDTO> homework1() {
     HomeMapper mapper = sqlSesison.getMapper(HomeMapper.class);
     ArrayList<MovieDTO> list = mapper.homework1();
+     return list;
+  }
+  
+  public  ArrayList<CouponDTO> homework2() {
+    HomeMapper mapper = sqlSesison.getMapper(HomeMapper.class);
+    ArrayList<CouponDTO> list = mapper.homework2();
+     return list;
+  }
+  
+  public  ArrayList<TicketDTO> homework3() {
+    HomeMapper mapper = sqlSesison.getMapper(HomeMapper.class);
+    ArrayList<TicketDTO> list = mapper.homework3();
      return list;
   }
 
