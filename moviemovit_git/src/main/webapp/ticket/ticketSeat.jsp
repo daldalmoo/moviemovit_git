@@ -12,6 +12,7 @@
 
 <form class="cbp-mc-form" name="regForm" method='POST' action="./payment.do">
   <input type="hidden" id="peocnt" value="${peocnt }">
+  <input type="hidden" id="sCode" value="${sCode }">
   <table id="seatArea">
     <!-------------------------------- 1행 타이틀  --------------------------------------->
     <tr>

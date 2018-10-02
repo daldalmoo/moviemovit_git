@@ -418,3 +418,111 @@ values('2018092615293540',now(),'member17',2,'G8,G9,G11','you,sen,kid',36);
 
 insert into ticketTable(tCode,wdate,uid,sCode,seat,auditType,cCode)
 values('2018092615293541',now(),'member21',2,'H16','adu',46);
+---------------------
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C001_1', '2018-10-04', '1030', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C001_1', '2018-10-04', '1045', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C001_1', '2018-10-04', '1130', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C002_1', '2018-10-07', '1230', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C002_1', '2018-10-07', '1430', '1');
+
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C002_2', '2018-10-07', '1540', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C002_2', '2018-10-07', '1350', '1');
+
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C003_1', '2018-10-10', '1630', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C003_2', '2018-10-11', '1730', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'C003_3', '2018-10-12', '1830', '1');
+--
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L001_1', '2018-10-05', '1000', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L001_2', '2018-10-05', '1100', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L001_3', '2018-10-05', '1230', '1');
+
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L002_1', '2018-10-08', '0830', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L002_2', '2018-10-08', '0930', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L002_3', '2018-10-08', '1330', '5');
+
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L003_1', '2018-10-12', '1430', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L003_2', '2018-10-12', '1530', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L003_3', '2018-10-12', '1630', '1');
+
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L003_1', '2018-10-14', '1730', '5');
+--
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L001_1', '2018-10-05', '1000', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L001_2', '2018-10-05', '1100', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L001_3', '2018-10-05', '1230', '1');
+
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L002_1', '2018-10-08', '0830', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L002_2', '2018-10-08', '0930', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L002_3', '2018-10-08', '1330', '5');
+
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L003_1', '2018-10-12', '1430', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L003_2', '2018-10-12', '1530', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L003_3', '2018-10-12', '1630', '1');
+
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'L003_1', '2018-10-14', '1730', '5');
+--
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'M001_1', '2018-10-20', '1030', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'M001_2', '2018-10-20', '1100', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'M001_3', '2018-10-20', '1230', '1');
+
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'M002_1', '2018-10-17', '1030', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'M002_2', '2018-10-17', '1100', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'M002_3', '2018-10-17', '1230', '5');
+
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'M003_1', '2018-10-11', '1030', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'M003_2', '2018-10-11', '1200', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'M003_3', '2018-10-11', '1330', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'M003_3', '2018-10-11', '1430', '1');
+--
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'D001_1', '2018-10-14', '1000', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'D001_1', '2018-10-14', '1100', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'D001_1', '2018-10-14', '1230', '1');
+
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'D002_1', '2018-10-10', '0800', '1');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'D002_1', '2018-10-11', '2300', '5');
+insert into screenTable(sCode,roomCode,sdate,stime,mCode)
+values((SELECT IFNULL(MAX(sCode),0)+1 FROM screenTable as screen), 'D002_2', '2018-10-10', '1130', '1');

@@ -557,6 +557,7 @@ public class TicketCont {
     int peocnt = Integer.parseInt(req.getParameter("peocnt"));
     int totalprice = Integer.parseInt(req.getParameter("totalprice"));
     String auditData = req.getParameter("auditData");
+    int sCode = Integer.parseInt(req.getParameter("sCode"));
     mav.addObject("m_poster",m_poster);
     mav.addObject("m_name",m_name);
     mav.addObject("cine_name",cine_name);
@@ -564,6 +565,7 @@ public class TicketCont {
     mav.addObject("peocnt",peocnt);
     mav.addObject("totalprice",totalprice);
     mav.addObject("auditData",auditData);
+    mav.addObject("sCode",sCode);
     mav.setViewName("ticket/ticketSeat");
     return mav;
   }//selectSeat() end
@@ -582,6 +584,7 @@ public class TicketCont {
     String auditData = req.getParameter("auditData");
     // System.out.println("ticket Cont 좌석선택 : " + totalprice);
     String movieseat = req.getParameter("movieseat");
+    int sCode = Integer.parseInt(req.getParameter("sCode"));
 
     // 로그인되어서 session에 올라간 값 가져오기
     String uid = (String) session.getAttribute("s_id");
@@ -605,6 +608,7 @@ public class TicketCont {
     mav.addObject("couponList", couponList);
     mav.addObject("auditData", auditData);
     mav.addObject("movieseat", movieseat);
+    mav.addObject("sCode", sCode);
     mav.setViewName("ticket/payment");
     return mav;
   }// payment() end
@@ -620,7 +624,6 @@ public class TicketCont {
     
     dto.settCode("2018080711330601");
     dto.setWdate("20180807113306");
-    dto.setcCode(1);
     dto.setUid(uid);
     dto.setSeat(movieseat);
     
