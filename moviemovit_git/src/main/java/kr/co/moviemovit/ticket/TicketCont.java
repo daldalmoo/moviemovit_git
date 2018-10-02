@@ -534,10 +534,9 @@ public class TicketCont {
     
     MovieDTO dto = dao.MovieData(mCode);
     msg += root + "/movie/img_poster/" + dto.getPoster();
-    //msg += "/moviemovit/movie/storage/" + dto.getPoster();
     msg += "|";
     msg += dto.getmName();
-    System.out.println(msg);
+    //System.out.println(msg);
     
     // Ãâ·Â
     resp.setContentType("text/plain; charset=UTF-8");
