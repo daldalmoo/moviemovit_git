@@ -52,9 +52,6 @@ table tr:nth-child(2n) {
 table tr:nth-child(2n+1) {
   background-color: #bfe1ff;
 }
-
-
-
 /*공개,수정,삭제 스타일*/
 .cbp-mc-button {
   background: #40bf80;
@@ -72,9 +69,6 @@ table tr:nth-child(2n+1) {
 .cbp-mc-button:hover {
   background: #2b8256;
 }
-
-
-
 @media screen and (max-width: 700px) {
   table, tr, td {
     display: block;
@@ -178,7 +172,6 @@ table tr:nth-child(2n+1) {
     overflow: visible;
   }
 }
-
 </style>
 <%@ include file="../header2.jsp"%>
 <%-- 본문시작 movieList.jsp --%>
@@ -193,38 +186,56 @@ table tr:nth-child(2n+1) {
    
     <table>
         <tr>
-            <th>영화명</th>
-            <th>장르</th>
             <th>평균평점</th>
+            <th>장르</th>
         </tr>
-        <c:forEach var="dto" items="${dto }">
+        <c:forEach var="sdto" items="${list }">
             <tr>
-                <td>${dto.mName}</td>
-                <td>${dto.genre}
+                <td>${sdto.star}</td>
+                <td>${sdto.wdate}
                     <c:choose>
-                        <c:when test="${dto.genre== 'romance'}">로맨스</c:when>
-                        <c:when test="${dto.genre== 'crime'}">범죄/느와르</c:when>
-                        <c:when test="${dto.genre== 'comedy'}">코미디</c:when>
-                        <c:when test="${dto.genre== 'FanSF'}">판타지/SF</c:when>
-                        <c:when test="${dto.genre== 'action'}">액션/SF</c:when>
-                        <c:when test="${dto.genre== 'thrillhorror'}">스릴러/공포</c:when>
-                        <c:when test="${dto.genre== 'drama'}">드라마</c:when>
-                        <c:when test="${dto.genre== 'docu'}">다큐</c:when>
-                        <c:when test="${dto.genre== 'etc'}">기타</c:when>
+                        <c:when test="${sdto.wdate== 'romance'}">로맨스</c:when>
+                        <c:when test="${sdto.wdate== 'crime'}">범죄/느와르</c:when>
+                        <c:when test="${sdto.wdate== 'comedy'}">코미디</c:when>
+                        <c:when test="${sdto.wdate== 'FanSF'}">판타지/SF</c:when>
+                        <c:when test="${sdto.wdate== 'action'}">액션/SF</c:when>
+                        <c:when test="${sdto.wdate== 'thrillhorror'}">스릴러/공포</c:when>
+                        <c:when test="${sdto.wdate== 'drama'}">드라마</c:when>
+                        <c:when test="${sdto.wdate== 'docu'}">다큐</c:when>
+                        <c:when test="${sdto.wdate== 'etc'}">기타</c:when>
                     </c:choose>
+                </td>
+                <td>
+                ${sdto.uid }
                 </td>
                 
             </tr>
         </c:forEach>
     </table>
    
-   <!-- 하단 버튼 -->
-	<div class="cbp-mc-submit-wrap">
-		<input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='./movieList.do'"/>
-		<input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />
-	</div>
+  
 </div>
+<div class="table-users">
+   <div class="header">무비무빗의 추천 영화</div>
+   
+    <table>
+        <tr>
+            <th>제목</th>
+            <th>장르</th>
+            <th>상영여부</th>
+        </tr>
+        
 
+            <tr>
+                <td>원더풀 고스트</td>
+                <td>코미디</td> 
+                <td><input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />  </td>
+            </tr>
+        
+    </table>
+   
+  
+</div>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>
