@@ -58,7 +58,7 @@ public class StarCont {
 	    }else {
 		  mav.addObject("msg1", "<p>별점 등록 성공</p>");
 		  mav.addObject("img", "<img src='../img/success.jpg'>");
-		  mav.addObject("link1", "<input type='button' value='목록으로' onclick='location.href=\"./List.do?mCode=" + sdto.getmCode() + "\"'>");      
+		  mav.addObject("link1", "<input type='button' value='목록으로' onclick='location.href=\"../movie/movieList.do\"'>");      
 		}//if end
 	   return mav;
 	 }//createProc() end
@@ -87,8 +87,9 @@ public class StarCont {
 		 ModelAndView mav = new ModelAndView();
 		 mav.setViewName("/star/List");
 		 ArrayList<HashMap<MovieDTO, StarDTO>> starlist=dao.starlist(sdto);
-		 dto=dao.movieList(dto);
+		 
 		 int avgstar = dao.avgstar(sdto);
+		 dto=dao.movieList(dto);
 		 mav.addObject("starlist", starlist);
 		 mav.addObject("dto", dto);
 		 mav.addObject("avgstar", avgstar);

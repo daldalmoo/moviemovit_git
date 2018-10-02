@@ -11,6 +11,7 @@ import kr.co.moviemovit.people.PeopleDTO;
 import kr.co.moviemovit.people.PeopleMapper;
 import kr.co.moviemovit.screen.ScreenMapper;
 import kr.co.moviemovit.star.StarDTO;
+import kr.co.moviemovit.star.StarMapper;
 
 @Component
 public class MovieDAO {
@@ -81,5 +82,17 @@ public class MovieDAO {
 		ArrayList<MovieDTO> starlist = mapper.starlist(dto);
 		return starlist;
 	}//starlist() end
+	
+	public ArrayList<HashMap<MovieDTO, StarDTO>> starlist2(StarDTO sdto) {
+		MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
+		ArrayList<HashMap<MovieDTO, StarDTO>> starlist = mapper.starlist2(sdto);
+		return starlist;
+	}//starlist() end
+	
+	public int avgstar2(StarDTO sdto) {
+		MovieMapper mapper = sqlSesison.getMapper(MovieMapper.class);
+		int avgstar = mapper.avgstar2(sdto);
+		return avgstar;
+	}//avgstar() end
 	
 }//class end

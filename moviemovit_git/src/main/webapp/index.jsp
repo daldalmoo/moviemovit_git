@@ -146,7 +146,7 @@ footer {
           <ul>
             <li><a href="movie/movieList.do" title="영화 평가하기">평가늘리기</a></li>
             <li><a href="#Link">평가결과</a></li>
-            <li><a href="#Link">분석결과</a></li>
+            <li><a href="star/avgList.do">분석결과</a></li>
           </ul>
         </li>
       </ul>

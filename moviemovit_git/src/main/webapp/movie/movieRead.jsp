@@ -13,6 +13,15 @@
   height: 250px;
   width: 250px;
 }
+
+.simg {
+  font-size: 0;
+  text-align: center;
+  width: 100px;
+  
+  
+}
+
 .table-users {
   border: 1px solid #327a81;
   border-radius: 10px;
@@ -183,6 +192,15 @@ table tr:nth-child(2n+1) {
 
 <div class="table-users">
    <div class="header">Movie List</div>
+   <!-- 하단 버튼 -->
+	<div class="cbp-mc-submit-wrap">
+		<input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='./movieList.do'"/>
+		<input class="cbp-mc-button" type="button" value="평점등록" onclick="location.href='../star/create.do?mCode=${dto.mCode }'"/>
+		<input class="cbp-mc-button" type="button" value="한줄평보기" onclick="location.href='../star/List.do?mCode=${dto.mCode }'"/>
+		<input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />
+		<input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./delete.do?mCode=${dto.mCode }'"/>
+		<input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./update.do?mCode=${dto.mCode }'"/>
+	</div>
    <input type='hidden' name='mCode' value='${mCode }'>
    <table style="text-align:center; margin:center;">
       <tr>
@@ -195,9 +213,7 @@ table tr:nth-child(2n+1) {
       </tr>
       <tr>
         <th>장르</th>
-        <td>
-        ${dto.genre}
-        </td>
+        <td>${dto.genre}</td>
       </tr>
       <tr>
         <th>상영분류</th>
@@ -205,7 +221,7 @@ table tr:nth-child(2n+1) {
       </tr>
       <tr>
         <th>관람등급</th>
-        <td>${dto.age}</td>
+        <td>${dto.age==0 }</td>
       </tr>
       <tr>
         <th>줄거리</th>
@@ -242,16 +258,68 @@ table tr:nth-child(2n+1) {
            
    </table>
    
-   <!-- 하단 버튼 -->
-	<div class="cbp-mc-submit-wrap">
-		<input class="cbp-mc-button" type="button" value="영화등록" onclick="location.href='./create.do'"/>
-		<input class="cbp-mc-button" type="button" value="영화목록" onclick="location.href='./movieList.do'"/>
-		<input class="cbp-mc-button" type="button" value="평점등록" onclick="location.href='../star/create.do?mCode=${dto.mCode }'"/>
-		<input class="cbp-mc-button" type="button" value="예매하기" onclick="#" />
-		<input class="cbp-mc-button" type="button" value="삭제" onclick="location.href='./delete.do?mCode=${dto.mCode }'"/>
-		<input class="cbp-mc-button" type="button" value="수정" onclick="location.href='./update.do?mCode=${dto.mCode }'"/>
-	</div>
+   
+	<div>
+   <strong>  
+              평균별점: ${avgstar} 
+              <c:if test="${avgstar==0 }">
+       <img class="simg" src="./img_star/star0.png"> 
+       </c:if>
+       <c:if test="${avgstar==1 }">
+           <img class="simg" src="./img_star/star1.png"> 
+       </c:if>
+       <c:if test="${avgstar==2 }">
+           <img class="simg" src="./img_star/star2.png"> 
+       </c:if>
+       <c:if test="${avgstar==3 }">
+           <img class="simg" src="./img_star/star3.png"> 
+       </c:if>
+       <c:if test="${avgstar==4 }">
+           <img class="simg" src="./img_star/star4.png"> 
+       </c:if>
+       <c:if test="${avgstar==5 }">
+           <img class="simg" src="./img_star/star5.png">
+       </c:if>
+        </strong>
+     <br>
+   </div>
+ 
+
+   
+   <c:forEach var="sdto" items="${starlist }">
+   <table calss="startable">
+   
+    <tr>
+        별점: ${sdto.star}
+     
+     <c:if test="${sdto.star==0 }">
+           <img class="simg" src="./img_star/star0.png"> 
+       </c:if>
+       <c:if test="${sdto.star==1 }">
+           <img class="simg" src="./img_star/star1.png"> 
+       </c:if>
+       <c:if test="${sdto.star==2 }">
+           <img class="simg" src="./img_star/star2.png"> 
+       </c:if>
+       <c:if test="${sdto.star==3 }">
+           <img class="simg" src="./img_star/star3.png"> 
+       </c:if>
+       <c:if test="${sdto.star==4 }">
+           <img class="simg" src="./img_star/star4.png"> 
+       </c:if>
+       <c:if test="${sdto.star==5 }">
+           <img class="simg" src="./img_star/star5.png">
+       </c:if>
+     
+     한줄평: ${sdto.comment } 
+     작성일: ${sdto.wdate } 
+     </tr>
+   </table>
+   </c:forEach>  
+	
+	
 </div>
+
 
 
 <%-- 본문끝 --%>
