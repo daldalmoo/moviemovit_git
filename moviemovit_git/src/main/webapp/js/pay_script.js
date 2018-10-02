@@ -107,6 +107,7 @@ $("#groupTitle input").click(function() {
 
 /* --------------- 쿠폰선택 ----------------------------- */
 $("#cCode").click(function() {
+ // alert("쿠폰클릭함");
 	var disprice = $("#totalprice").val();
 	disprice = disprice * 0.9;
 	
