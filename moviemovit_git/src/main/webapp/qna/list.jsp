@@ -278,7 +278,7 @@ table tr:nth-child(2n+1) {
                         <a href="list.do?curPage=${qnapage.nextPage}"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                     <c:if test="${qnapage.curRange ne endPage}">
-                        <a href="adminlist.do?curPage=${qnapage.endPage}"><i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a> 
+                        <a href="list.do?curPage=${qnapage.endPage}"><i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                 </div>
                 
