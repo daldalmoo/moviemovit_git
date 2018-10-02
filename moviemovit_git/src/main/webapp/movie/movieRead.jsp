@@ -221,7 +221,7 @@ table tr:nth-child(2n+1) {
       </tr>
       <tr>
         <th>관람등급</th>
-        <td>${dto.age==0 }</td>
+        <td>${dto.age }</td>
       </tr>
       <tr>
         <th>줄거리</th>
