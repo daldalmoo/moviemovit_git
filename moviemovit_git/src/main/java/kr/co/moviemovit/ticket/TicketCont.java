@@ -581,6 +581,7 @@ public class TicketCont {
     int totalprice = Integer.parseInt(req.getParameter("totalprice"));
     String auditData = req.getParameter("auditData");
     // System.out.println("ticket Cont 좌석선택 : " + totalprice);
+    String movieseat = req.getParameter("movieseat");
 
     // 로그인되어서 session에 올라간 값 가져오기
     String uid = (String) session.getAttribute("s_id");
@@ -603,7 +604,50 @@ public class TicketCont {
     mav.addObject("totalprice", totalprice);
     mav.addObject("couponList", couponList);
     mav.addObject("auditData", auditData);
+    mav.addObject("movieseat", movieseat);
     mav.setViewName("ticket/payment");
     return mav;
   }// payment() end
+  
+  @RequestMapping(value = "/ticket/book.do", method = RequestMethod.POST)
+  public ModelAndView movieBook(TicketDTO dto, HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    ModelAndView mav = new ModelAndView();
+    HttpSession session = req.getSession();
+    String msg = "";
+    
+    String uid = (String) session.getAttribute("s_id");
+    String movieseat = req.getParameter("movieseat");
+    
+    dto.settCode("2018080711330601");
+    dto.setWdate("20180807113306");
+    dto.setcCode(1);
+    dto.setUid(uid);
+    dto.setSeat(movieseat);
+    
+    int result = dao.moviebook(dto);
+
+    // 예매 결과 b
+    if (result == 0) {
+      msg += "<!DOCTYPE html>";
+      msg += "<html><body>";
+      msg += "<script>";
+      msg += "  alert('예매에 실패했습니다');";
+      msg += "  history.go(-1);";
+      msg += "</script>";
+      msg += "</html></body>";
+      mav.addObject("msg", msg);
+      mav.setViewName("msgView");
+    } else {
+      msg += "<!DOCTYPE html>";
+      msg += "<html><body>";
+      msg += "<script>";
+      msg += "  alert('예매에 성공했습니다');";
+      msg += "  window.location='../index.do';";
+      msg += "</script>";
+      msg += "</html></body>";
+      mav.addObject("msg", msg);
+      mav.setViewName("msgView");
+    } // if end
+    return mav;
+  }// movieBook() end
 }//class end

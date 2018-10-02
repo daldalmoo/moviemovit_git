@@ -86,4 +86,8 @@ public interface TicketMapper {
   //<select id="getMemberInfo">
   public UserDTO getMemberInfo(UserDTO dto);
   
+  /*¿¹¸Å*/
+  //<select id="getMemberInfo">
+  public int moviebook(TicketDTO dto);
+  
 }// interface end

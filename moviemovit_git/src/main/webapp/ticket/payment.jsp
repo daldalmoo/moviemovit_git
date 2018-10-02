@@ -10,7 +10,7 @@
 <%@ include file="../header2.jsp"%>
 <%-- 본문시작 payment.jsp : 결제수단 --%>
 
-<form class="cbp-mc-form" name="regForm" method='POST' action='./create.do'>
+<form class="cbp-mc-form" name="regForm" method='POST' action='./book.do'>
   <table id="paymentArea">
     <!-------------------------------- 1행 타이틀  --------------------------------------->
     <tr>
@@ -109,6 +109,7 @@
             <dd>
               <span id="select_people_txt">${auditData }</span>
               <input type="hidden" name="auditData" value="${auditData }">
+              <input type="hidden" name="movieseat" value="${movieseat }">
             </dd>
 
             <dt>

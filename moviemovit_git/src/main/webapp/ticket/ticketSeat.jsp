@@ -154,6 +154,7 @@
             <dd>
               <span id="select_people_txt">${auditData }</span>
               <input type="hidden" name="auditData" value="${auditData }">
+              <input type="hidden" id="movieseat" name="movieseat" value="">
             </dd>
 
             <dt>

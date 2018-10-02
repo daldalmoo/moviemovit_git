@@ -39,6 +39,7 @@ $(".seatline").click(function() {
 			alert("선택인원을 초과했습니다.");
 		}			
 	}// if end
+	  $("#movieseat").val(str);
 	//alert("최종 str : " + str);
 	//alert("seatTemp : " + seatTemp);
 });// click() end

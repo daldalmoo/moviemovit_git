@@ -34,7 +34,7 @@ public class TicketDTO {
     return tCode;
   }
 
-  public void setbCode(String tCode) {
+  public void settCode(String tCode) {
     this.tCode = tCode;
   }
 
