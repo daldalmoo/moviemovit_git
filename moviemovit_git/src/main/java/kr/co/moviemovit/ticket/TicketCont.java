@@ -555,41 +555,47 @@ public class TicketCont {
     String cine_name = req.getParameter("cine_name");
     String s_date = req.getParameter("s_date");
     int peocnt = Integer.parseInt(req.getParameter("peocnt"));
+    int totalprice = Integer.parseInt(req.getParameter("totalprice"));
+    String auditData = req.getParameter("auditData");
     mav.addObject("m_poster",m_poster);
     mav.addObject("m_name",m_name);
     mav.addObject("cine_name",cine_name);
     mav.addObject("s_date",s_date);
     mav.addObject("peocnt",peocnt);
+    mav.addObject("totalprice",totalprice);
+    mav.addObject("auditData",auditData);
     mav.setViewName("ticket/ticketSeat");
     return mav;
   }//selectSeat() end
   /* -------------------- 좌석선택 END -------------------- */  
 
-  @RequestMapping(value="/ticket/payment.do", method = RequestMethod.GET)
+  @RequestMapping(value="/ticket/payment.do", method = RequestMethod.POST)
   public ModelAndView payment(CouponDTO dto, HttpServletRequest req, HttpServletResponse resp) throws IOException {
     ModelAndView mav = new ModelAndView();
-
     HttpSession session = req.getSession();
-    
-    //로그인되어서 session에 올라간 값 가져오기
-    String uid = (String)session.getAttribute("s_id");
-    
-    //uid,upw dto에 담기
+
+    int totalprice = Integer.parseInt(req.getParameter("totalprice"));
+    String auditData = req.getParameter("auditData");
+    // System.out.println("ticket Cont 좌석선택 : " + totalprice);
+
+    // 로그인되어서 session에 올라간 값 가져오기
+    String uid = (String) session.getAttribute("s_id");
+
+    // uid,upw dto에 담기
     UserDTO udto = new UserDTO();
     udto.setUid(uid);
-    
-    //DB에서 회원정보 가져오기
+
+    // DB에서 회원정보 가져오기
     udto = dao.getMemberInfo(udto);
-    System.out.println("ticketCont userid : " + udto.getUid());
-    
+    // System.out.println("ticketCont userid : " + udto.getUid());
     dto.setUid(udto.getUid());
-    
     ArrayList<CouponDTO> couponList = dao.couponList(dto);
-    
-    System.out.println(couponList);
+
     // 페이지 이동 및 값 올리기
+    mav.addObject("totalprice", totalprice);
     mav.addObject("couponList", couponList);
+    mav.addObject("auditData", auditData);
     mav.setViewName("ticket/payment");
     return mav;
-  }//payment() end
+  }// payment() end
 }//class end

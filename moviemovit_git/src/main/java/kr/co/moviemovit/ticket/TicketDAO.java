@@ -152,7 +152,7 @@ public class TicketDAO {
     return couponList;
   }//couponList() end
   
-  //회원정보 read
+  // 회원정보 read
   public UserDTO getMemberInfo(UserDTO dto) {
     TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
     dto = mapper.getMemberInfo(dto);

@@ -290,10 +290,6 @@ function buildCalendar() {
 	  <!-- -------------------------- movieinfo_area : 영화정보 ----------------------------------- -->
 	  <td id="movieinfo_area" rowspan="3" style="background: linear-gradient(to top, #3b3d58 0%, #5d607d 100%); color: white;">
         <div class="section_result">
-          <div id="btn_reset">
-            <input type="image" class="initReserve" src="./img/btn_initReserve.PNG" alt="예매다시하기" onclick="javascript:InitReserveMovie('0')">
-          </div>
-
           <div id="thumb_poster" class="thumb_poster">
             <img src="./img/bgr_poster.PNG" class="movie_poster">
             <input type="hidden" id="m_poster" name="m_poster" value="">
@@ -326,6 +322,8 @@ function buildCalendar() {
             </dt>
             <dd>
               <span id="auditType">-</span>
+              <!-- ticketSeat.jsp에 hidden속성으로 보낼 값(위에 span은 name속성이안된다그래서) /Cont.java에서 req로 받으면 댐-->
+              <input type="hidden" id="auditData" name="auditData" value="">
               <input type="hidden" id="peocnt" name="peocnt" value="">
             </dd>
 
@@ -334,6 +332,7 @@ function buildCalendar() {
             </dt>
             <dd>
               <span id="total">-</span>
+              <input type="hidden" id="totalprice" name="totalprice" value="">
             </dd>
           </dl>
 

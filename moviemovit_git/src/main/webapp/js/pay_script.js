@@ -105,3 +105,19 @@ $("#groupTitle input").click(function() {
 });//click() end
 /* --------------- 결제수단 END ------------------------- */
 
+/* --------------- 쿠폰선택 ----------------------------- */
+$("#cCode").click(function() {
+	var disprice = $("#totalprice").val();
+	disprice = disprice * 0.9;
+	
+	var str = "";
+	str += "     <th>쿠폰적용 금액</th>";
+	str += "     <td style='padding:10px;'>";
+	str += "       <input type='text' id='disprice' value='"+ disprice +"'>원";
+	str += "     </td>";
+	$("#discountPrice").html(str);
+	$("#total").empty();
+	$("#total").text(disprice);
+});//click() end
+/* --------------- 쿠폰선택 END ------------------------- */
+

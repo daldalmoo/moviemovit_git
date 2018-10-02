@@ -25,18 +25,30 @@
           <tr><th id="groupTitle">할인선택</th></tr>
           <tr>
             <td id="couponData">
-								<table>
+								<table style="margin:auto;">
 									<tr>
-										<th>쿠폰코드</th>
+										<th style="text-align: center">쿠폰코드</th>
 									</tr>
-
-									<c:forEach var="dto" items="${couponList }">
-										<tr>
-											<td>${dto.cCode }</td>
-										</tr>
-									</c:forEach>
+	
+									<tr >
+											<td style="padding:10px;text-align: center;">
+											   <input type="hidden" id="totalprice" name="totalprice" value="${totalprice }">
+											   <c:forEach var="dto" items="${couponList }">
+											     <input type="radio" id="cCode" name="coupon" value=${dto.cCode }>&nbsp;10% 할인 쿠폰<br>
+											   </c:forEach>
+											</td>
+									</tr>
+    
+									<tr>
+									 <th>결제금액</th>
+									 <td style='padding: 10px;'>
+									   <input type='text' id='oirprice' value="${totalprice }">원
+									 </td>
+								  </tr>
+								  
+								  <tr id="discountPrice"></tr>
+									
 								</table>
-
 						</td>
           </tr>
           
@@ -52,7 +64,7 @@
           </tr>
           
           <tr style="height: 40%;">
-            <td id="payData">결제리스트                         
+            <td id="payData">                        
             </td>            
           </tr>
           
@@ -94,20 +106,20 @@
               <span class="people">인원</span>
             </dt>
             <dd>
-              <span id="select_people_txt">-</span>
+              <span id="select_people_txt">${auditData }</span>
             </dd>
 
             <dt>
               <span class="price">금액</span>
             </dt>
             <dd>
-              <span id="total">-</span>
+              <span id="total">${totalprice }</span>
+              <input type="hidden" id="totalprice" name="totalprice" value="${totalprice }">
             </dd>
           </dl>
 
           <div id="btn_area">
-            <input type="image" class="reserve"
-              src="./img/btn_reserve.PNG" alt="예매하기" onclick="javascript:NextBtn();">
+            <input type="image" class="reserve" src="./img/btn_reserve.PNG" alt="예매하기" onclick="javascript:NextBtn();">
           </div>
           
         </div>
@@ -120,7 +132,7 @@
 
 </form>
 
-<script src="../js/pay_script.js" charset="utf-8"></script>
+<script src="../js/pay_script.js?ver=1" charset="utf-8"></script>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>

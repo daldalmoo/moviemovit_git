@@ -10,7 +10,7 @@
 <%@ include file="../header2.jsp"%>
 <%-- 본문시작 ticketSeat.jsp : 좌석선택 --%>
 
-<form class="cbp-mc-form" name="regForm" method='POST' action='./create.do'>
+<form class="cbp-mc-form" name="regForm" method='POST' action="./payment.do">
   <table id="seatArea">
   <input type="hidden" id="peocnt" value="${peocnt }">
     <!-------------------------------- 1행 타이틀  --------------------------------------->
@@ -151,20 +151,21 @@
               <span class="people">인원</span>
             </dt>
             <dd>
-              <span id="select_people_txt">-</span>
+              <span id="select_people_txt">${auditData }</span>
+              <input type="hidden" name="auditData" value="${auditData }">
             </dd>
 
             <dt>
               <span class="price">금액</span>
             </dt>
             <dd>
-              <span id="total">-</span>
+              <span id="total">${totalprice }</span>
+              <input type="hidden" id="totalprice" name="totalprice" value="${totalprice }">
             </dd>
           </dl>
 
           <div id="btn_area">
-            <input type="image" class="reserve"
-              src="./img/btn_reserve.PNG" alt="예매하기" onclick="javascript:NextBtn();">
+            <input type="image" class="reserve" src="./img/btn_reserve.PNG" alt="예매하기" onclick="javascript:NextBtn();">
           </div>
           
         </div>
@@ -177,7 +178,7 @@
 
 </form>
 
-<script src="../js/seat_script.js?ver=1" charset="utf-8"></script>
+<script src="../js/seat_script.js?ver=2" charset="utf-8"></script>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>
