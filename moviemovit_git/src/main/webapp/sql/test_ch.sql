@@ -123,11 +123,3 @@ VALUES ((SELECT ifnull(MAX(mCode),0)+1 FROM movieTable as movie), 'movie/img_pos
 
 INSERT INTO movieTable(mCode, poster, mName, genre, screen, age, s_e, country, director, actor, DD, runningTime, s_date, e_date)
 VALUES ((SELECT ifnull(MAX(mCode),0)+1 FROM movieTable as movie), 'movie/img_poster/범블비.jpg', '나미야 잡화점의 기적', 'drama', 'end', '0', '수 십년 만에 부활한 고민상담소', '일본', '히로키 류이치', '야마다 료스케, 니시다 토시유키', '2D', '120', '2018-02-28', '2018-03-13');
-
-
-
-
-
-
-
-            

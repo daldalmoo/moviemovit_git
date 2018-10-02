@@ -11,9 +11,12 @@
   text-align: center;
   text-transform: uppercase;        
 }
-mimg {        /* 영화 포스터 */
-  height: 400px;
-  width: 200px;
+
+
+.simg {
+  font-size: 0;
+  text-align: center;
+  width: 100px;
 }
 .table-users {
   border: 1px solid #327a81;
@@ -191,8 +194,27 @@ table tr:nth-child(2n+1) {
         </tr>
         <c:forEach var="sdto" items="${list }">
             <tr>
-                <td>${sdto.star}</td>
-                <td>${sdto.wdate}
+                <td>
+                 <c:if test="${sdto.star==0 }">
+       <img class="simg" src="./img_star/star0.png"> 
+       </c:if>
+       <c:if test="${sdto.star==1 }">
+           <img class="simg" src="./img_star/star1.png"> 
+       </c:if>
+       <c:if test="${sdto.star==2 }">
+           <img class="simg" src="./img_star/star2.png"> 
+       </c:if>
+       <c:if test="${sdto.star==3 }">
+           <img class="simg" src="./img_star/star3.png"> 
+       </c:if>
+       <c:if test="${sdto.star==4 }">
+           <img class="simg" src="./img_star/star4.png"> 
+       </c:if>
+       <c:if test="${sdto.star==5 }">
+           <img class="simg" src="./img_star/star5.png">
+       </c:if>
+                </td>
+                <td>${sdto.wdate }
                     <c:choose>
                         <c:when test="${sdto.wdate== 'romance'}">로맨스</c:when>
                         <c:when test="${sdto.wdate== 'crime'}">범죄/느와르</c:when>
@@ -205,10 +227,7 @@ table tr:nth-child(2n+1) {
                         <c:when test="${sdto.wdate== 'etc'}">기타</c:when>
                     </c:choose>
                 </td>
-                <td>
-                ${sdto.uid }
-                </td>
-                
+               
             </tr>
         </c:forEach>
     </table>

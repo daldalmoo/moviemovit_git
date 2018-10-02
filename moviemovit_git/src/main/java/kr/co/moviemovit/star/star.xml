@@ -61,6 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             ON mt.mCode = st.mCode
             WHERE uid=#{uid}
             group by genre
+            order by star desc
         ]]>
   </select>
 	
