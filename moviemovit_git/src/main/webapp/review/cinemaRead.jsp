@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../header1.jsp"%>
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -102,8 +102,6 @@ text-align: left;
 	*/
 	background-color: #D8D8D8; /* 크롬, 모질라 등, 기타 브라우저 */
 }
-
-
 
 /* 지도test */
 .map{
@@ -866,4 +864,3 @@ text-align: left;
 </script>
 </body>
 </html>
-<%-- 본문끝 --%>

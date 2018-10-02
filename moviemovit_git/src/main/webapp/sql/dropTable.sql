@@ -12,4 +12,3 @@ drop table peopleTable;
 drop table movieTable;
 drop table userTable;
 
-

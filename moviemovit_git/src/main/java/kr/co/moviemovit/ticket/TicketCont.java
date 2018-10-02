@@ -3,6 +3,7 @@ package kr.co.moviemovit.ticket;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -625,7 +626,16 @@ public class TicketCont {
     String movieseat = req.getParameter("movieseat");
     String auditType = req.getParameter("auditType");
     
-    dto.settCode("2018080711330601");
+    Calendar cal = Calendar.getInstance();
+    int year = cal.get(Calendar.YEAR);
+    int mon = cal.get(Calendar.MONTH)+1;
+    int day = cal.get(Calendar.DAY_OF_MONTH);
+    int hour = cal.get(Calendar.HOUR_OF_DAY);
+    int min = cal.get(Calendar.MINUTE);
+    int sec = cal.get(Calendar.SECOND);
+    String ttemp = Integer.toString(year+mon+day+hour+min+sec);
+    
+    dto.settCode(ttemp);
     dto.setWdate("20180807113306");
     dto.setUid(uid);
     dto.setSeat(movieseat);

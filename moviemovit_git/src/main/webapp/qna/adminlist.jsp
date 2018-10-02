@@ -260,7 +260,7 @@ padding-top:0px;}
 	</c:forEach>
 </table>
 </div>
-<input class="cbp-mc-button" type="button" value="qna 등록" onclick="location.href='admincreateForm.jsp'"/>
+
  <div>
                     <c:if test="${qnapage.curPage ne 1 }">
                         <a href="adminlist.do?curpage=${noticepage.startPage }" ><i class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i></a> 

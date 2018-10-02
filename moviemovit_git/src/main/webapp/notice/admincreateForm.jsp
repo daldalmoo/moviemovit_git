@@ -42,11 +42,11 @@ padding-top:0px;}
 		<table class="cbp-mc-column">	
 			<tr>
 				<th> 제목</th>
-				<td><input type="text" id="title"name="title" size="50"  placeholder="공지사항제목" ></td>
+				<td><input type="text" id="title"name="title" size="50"  placeholder="공지사항제목" style="width: 700px;" ></td>
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" id="uid"name="uid" size="50" ></td>
+				<td><input type="text" id="uid"name="uid" size="50"style="width: 700px;" ></td>
 			<tr>
 				<th>내용</th>
 				<td><textarea name="s_e" id="s_e" style="width: 700px; height: 400px;"></textarea>
