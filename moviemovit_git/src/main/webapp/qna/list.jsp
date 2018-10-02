@@ -277,10 +277,11 @@ table tr:nth-child(2n+1) {
                     <c:if test="${qnapage.curPage ne qnapage.pageCnt && qnapage.pageCnt > 0}">
                         <a href="list.do?curPage=${qnapage.nextPage}"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
-                    <c:if test="${qnapage.curRange ne qnapage.rangeCnt && qnapage.rangeCnt > 0}">
-                        <a href="list.do?curPage=${qnapage.curPage}"><i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a> 
+                    <c:if test="${qnapage.curRange ne endPage}">
+                        <a href="list.do?curPage=${qnapage.endPage}"><i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i></a> 
                     </c:if>
                 </div>
+                
                 
                 <div>
                     총 게시글 수 : ${qnapage.listCnt }
