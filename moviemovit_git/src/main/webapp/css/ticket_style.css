@@ -478,8 +478,6 @@
   position: relative;
   top: 15px;
   margin: auto;
-  /*상영시간표 끝나면 지우기*/
-  cursor: pointer;
 }
 #screentime_area .cinemainfo .cinemainfo_name {
   vertical-align: bottom;
@@ -537,6 +535,7 @@
 /*********** 6) 인원선택 ***********/
 #price_lst_area {
   margin: 0 0 0 10px;
+  pointer-events: none;
 }
 
 #price_lst_area .ticket_title th {

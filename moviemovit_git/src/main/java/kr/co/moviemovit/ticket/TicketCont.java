@@ -497,24 +497,21 @@ public class TicketCont {
     dto.setS_date(sdate);    // 변수 빌림
     ArrayList<ScreenDTO> stimelist = dao.screentimeRoom(dto);
     
-    msg += "<dl id='1'>";
-    msg += "  <dt>1 관</dt>";
-    msg += "  <dd>";
-    msg += "    <ul>";
-    msg += "      <li onclick='timeclick('1030');'>10:30</li>";
-    msg += "      <li>13:40</li>";
-    msg += "      <li>17:10</li>";
-    msg += "      <li>21:00</li>";
-    msg += "    </ul>";
-    msg += "  </dd>";
-    msg += "</dl>";
-    
-    
-    
-    for (int j = 0; j < stimelist.size(); j++) {
-      msg += stimelist.get(j);
-      if (j != stimelist.size() - 1) {
-        msg += "|";
+    String tempPrevRoomCode = "";
+    for (int i = 0; i < stimelist.size(); i++) {
+      ScreenDTO screen =  stimelist.get(i);
+      if(screen.getRoomCode().equals(tempPrevRoomCode)==false) {
+        msg += "<dl>";
+        msg += "  <dt>"+screen.getRoomCode()+" 관</dt>";
+        msg += "  <dd>";
+        msg += "    <ul>";
+      }//if end
+      msg += "      <li value='"+screen.getsCode()+"'>"+screen.getStime().substring(0, 2)+":"+screen.getStime().substring(2, 4)+"</li>";
+      if(screen.getRoomCode().equals(tempPrevRoomCode)==false) {
+        msg += "    </ul>";
+        msg += "  </dd>";
+        msg += "</dl>";
+        tempPrevRoomCode = screen.getRoomCode();
       }//if end
     }//for end
 
@@ -527,21 +524,18 @@ public class TicketCont {
   }//screentimeRoom() end
   /* ------------------ 예매 : 상영시간표 부분 END ------------------ */
 
-  /* -------------------- 영화정보 부분 AJAX -------------------- */
-  // 영화선택 -> 영화정보 포스터 가져오기
+  /* -------------------- 예매 : 영화예매정보 부분 -------------------- */
+  // 영화선택 -> 영화포스터|영화이름 가져오기
   @RequestMapping(value="/ticket/movieposter.do", method = RequestMethod.POST)
-  public void movieposter(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+  public void movieposter(HttpServletRequest req, HttpServletResponse resp, int mCode) throws IOException {
     String msg = "";
     String root = Utility.getRoot(); // /moviemovit
     
-    int mCode = Integer.parseInt(req.getParameter("mCode"));
-    MovieDTO dto = new MovieDTO();
-    //dto에 선택한 영화의 mCode를 set해서 movieDAO에 있는 read함수 불러옴
-    dto.setmCode(mCode);
-    dto = dao.MovieData(dto);
-    //<input type="image" class="movie_poster" src="./img/bgr_poster2.PNG">
-    //msg += "<input type='image' class='movie_poster' src='" + root + "movie/img_poster/" + dto.getPoster() + ">";
-    //msg += "<input type='image' class='movie_poster' src='moviemovit/movie/storage/" + dto.getPoster() + ">";
+    MovieDTO dto = dao.MovieData(mCode);
+    msg += root + "movie/img_poster/" + dto.getPoster();
+    //msg += "/moviemovit/movie/storage/" + dto.getPoster();
+    msg += "|";
+    msg += dto.getmName();
     
     // 출력
     resp.setContentType("text/plain; charset=UTF-8");
@@ -549,15 +543,22 @@ public class TicketCont {
     out.println(msg);
     out.flush();
     out.close();
-    
   }//movieposter() end
-  /* -------------------- 영화정보 부분 AJAX END -------------------- */
+  /* -------------------- 예매 : 영화예매정보 부분 END -------------------- */
   
   /* -------------------- 좌석선택 --------------------------------- */
   @RequestMapping(value="/ticket/create.do", method = RequestMethod.POST)
   public ModelAndView selectSeat(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     ModelAndView mav = new ModelAndView();
+    String m_poster = req.getParameter("m_poster");
+    String m_name = req.getParameter("m_name");
+    String cine_name = req.getParameter("cine_name");
+    String s_date = req.getParameter("s_date");
     int peocnt = Integer.parseInt(req.getParameter("peocnt"));
+    mav.addObject("m_poster",m_poster);
+    mav.addObject("m_name",m_name);
+    mav.addObject("cine_name",cine_name);
+    mav.addObject("s_date",s_date);
     mav.addObject("peocnt",peocnt);
     mav.setViewName("ticket/ticketSeat");
     return mav;

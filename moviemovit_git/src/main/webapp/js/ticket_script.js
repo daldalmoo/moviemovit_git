@@ -9,6 +9,7 @@ var CLMD = "C";   // 선택된 극장체인
 var CINECODE = "";// 선택된 극장코드
 var CINEINFONAME = "";
 var SDATE = "";   // 선택된 날짜
+var SCODE = 0;    // 선택된 상영코드
 
 // 페이지 로드가 끝난 후 실행
 $(document).ready(function() {
@@ -38,6 +39,10 @@ function ResetMovie() {
   // 상영시간표 호출
   screentimeView();
   
+  // 예매정보 : 영화포스터 및 영화이름 초기화
+  $("#movieinfo_area #thumb_poster .movie_poster").css("content","url('../ticket/img/bgr_poster.PNG')");
+  $("#movieinfo_area #select_m_name").text("-");
+  
 }//ResetMovie() end
 
 // 영화선택시 호출
@@ -61,6 +66,15 @@ $("#movie_area .SelMovieList").click(function(){
     } else if(CINETAB==3) {  // 체인별
       cinetab3mainlist();
     }//if end
+    
+    // 예매정보 : 영화포스터 및 영화이름 설정
+    $.post("./movieposter.do","mCode="+MCODE,function(data) {
+      var minfo = data.split("|");
+      $("#movieinfo_area #thumb_poster .movie_poster").css("content","url('"+minfo[0]+"')");
+      $("#movieinfo_area #select_m_name").text(minfo[1]);
+      $("#movieinfo_area #thumb_poster #m_poster").val(minfo[0]);
+      $("#movieinfo_area #m_name").val(minfo[1]);
+    });//post end
   }//if end
 
   // 날짜목록 호출
@@ -70,8 +84,6 @@ $("#movie_area .SelMovieList").click(function(){
   screentimeView();
   
 });//SelMovieList click() end
-
-//영화선택하면 해당 포스터가져와서 영화정보에 뿌려줌 
 
 /******************* 영화선택 부분 AJAX END *******************/
 
@@ -92,6 +104,9 @@ function ResetCinema() {
   
   CINEINFONAME = "";
   screentimeView();  // 상영시간표 호출
+  
+  // 예매정보 : 극장 초기화
+  $("#movieinfo_area .1st_result #select_space_txt").text("-");
 }//ResetCinema() end
 
 // 극장종류 선택시 호출
@@ -132,12 +147,6 @@ $(document).on('click', '#cinema_area .cinema_chain li', function(){
   // 극장목록 가져오기
   cinetab3mainlist();
 });//.cinema_chain li click() end
-
-// 주소1 목록 변경될 때마다 호출
-/*$(document).on('DOMSubtreeModified', '#cinema_area .addr1list', function(){
-  alert(CINEADDR1);
-});//.addr1selected click() end
-*/
 
 // 주소1 class="click" 일때 주소1 목록 보여주기
 $("#cinema_area .addr1selected").click(function(){
@@ -293,11 +302,14 @@ function closeSearch() {
 // 주의! 위처럼 쓰면 ajax에서 쓴 html의 엘리먼트는 이벤트 작동 안함
 $(document).on('click', '#cinema_area .main_list li', function(){
   //alert("main_list li 클릭됨. $(this).attr('value'):" + $(this).attr('value'));
-  if ($(this).hasClass("on") == true) { // 이미 선택된 영화라면 on class 지우고 전역변수 초기화
+  if ($(this).hasClass("on")) { // 이미 선택된 영화라면
     $(this).removeClass("on");
     CINECODE = "";
     CINEINFONAME = "";
     screentimeView();  // 상영시간표 호출
+    
+    // 예매정보 : 극장 초기화
+    $("#movieinfo_area .1st_result #select_space_txt").text("-");
   } else { // 영화를 선택했을 때
     $("#cinema_area .main_list li").removeClass("on");
     $(this).addClass("on");
@@ -305,6 +317,9 @@ $(document).on('click', '#cinema_area .main_list li', function(){
     CINECODE = $(this).attr('value').trim(); // 전역변수 할당
     CINEINFONAME = $(this).text();
     screentimeView();  // 상영시간표 호출
+    
+    // 예매정보 : 극장 설정
+    $("#movieinfo_area .1st_result #select_space_txt").text(CINEINFONAME);
   }//if end
   
   // 영화목록 호출 TODO
@@ -314,15 +329,6 @@ $(document).on('click', '#cinema_area .main_list li', function(){
 });//SelMovieList click() end
 
 /******************* 극장선택 부분 AJAX END *******************/
-
-/* ---------영화선택 -> 영화정보 포스터 가져오기 AJAX ---------*/
-
-function moiveInfo_poster(data) {
-  //alert(data);
-  //$("#thumb_poster").html(data);
-}//moiveInfo_poster() end
-
-/* ---------영화선택 -> 영화정보 포스터 가져오기 AJAX END -----*/
 
 /******************* 날짜선택 AJAX *******************/
 // 이전달 클릭시
@@ -381,16 +387,20 @@ function SelDate(data) {
   //alert(data);
 }//SelDate() end
 $(".calendar td").click(function() {
-  // 선택된 날짜 class="on", 이미 선택된 인원이면 on class 지움
-  if($(this).hasClass("on")==true) {
+  if($(this).hasClass("on")) {  // 이미 선택된 날짜이면
     $(this).removeClass("on");
-  } else {
+    SDATE = "";
+
+    // 예매정보 : 날짜 초기화
+    $("#movieinfo_area .1st_result #wdate").text("-");
+  } else {  // 새로 선택하는 날짜이면
     $(".calendar td").removeClass("on");
     $(this).addClass("on");
+    SDATE = $(this).attr("onclick").substr(20,10);
+
+    // 예매정보 : 날짜 설정
+    $("#movieinfo_area .1st_result #wdate").html(SDATE);
   }//if end
-  
-  SDATE = $(this).attr("onclick").substr(20,10);
-  //alert(SDATE);
 
   // 상영시간표 호출
   screentimeView();
@@ -401,6 +411,8 @@ $(".calendar td").click(function() {
 /******************* 상영시간표 AJAX *******************/
 // 영화, 극장, 날짜 정보로 뷰 띄워주기
 function screentimeView() {
+  SCODE = 0;
+  
   if(CINECODE=="") { // 극장없음
     $("#screentime_area .cinemainfo .cinema_logo").css("content","url('../ticket/img/default.png')");
     $("#screentime_area .cinemainfo .cinemainfo_name").text("영화관-지점");
@@ -421,29 +433,50 @@ function screentimeView() {
   // 영화,극장,날짜 모두 선택되면 관별 상영시작시간 띄움
   if(MCODE!=0 && CINECODE!="" && SDATE!="") {
     $.post("./screentimeRoom.do", "mCode="+MCODE+"&cineCode="+CINECODE+"&sdate="+SDATE, function(data) { // 선택가능날짜 모두표시
-      alert(data);
       $("#screentime_area .screentime").html(data);
-      /*var data = datastr.split("|");
-      for(var i=0; i<data.length; i++) {
-        $(".calendar td[onclick='javascript:SelDate(\""+data[i].trim()+"\")']").addClass("ready");
-      }//for end */
     });//post end
+  } else {
+    $("#screentime_area .screentime").html("");
   }//if end
 }//screentimeView() end
 
 // 상영시간 클릭하면 호출
-function timeclick(time) {
-  alert(time);
-}//timeclick() end
+$(document).on('click', '#screentime_area .screentime li', function(){
+  if($(this).hasClass("on")) {  // 이미 클릭되어있으면
+    $(this).removeClass('on');
+    SCODE = 0;
+    
+    // 인원선택부분 비활성화
+    $("#price_lst_area td").css("font-weight","normal");
+    $("#price_lst_area li").css("color","#d0d3e3");
+    $("#price_lst_area").css("pointer-events","none");
 
+    // 예매정보 : 관, 시간 초기화
+    var room = $("#movieinfo_area .1st_result #select_space_txt").text().split(',');
+    $("#movieinfo_area .1st_result #select_space_txt").html(room[0]);
+    var time = $("#movieinfo_area .1st_result #wdate").text().split(',');
+    $("#movieinfo_area .1st_result #wdate").html(time[0]);
+  } else {  // 클릭 안되어있으면
+    $(this).addClass('on');
+    SCODE = $(this).attr("value");
+    $("#sCode").val(SCODE);
+    
+    // 인원선택부분 활성화
+    $("#price_lst_area td").css("font-weight","bold");
+    $("#price_lst_area li").css("color","black");
+    $("#price_lst_area").css("pointer-events","auto");
 
-
-//상영시간표 선택하면 인원선택의 li부분 font-weight bold하기!
-//임시로 ex)8관 눌렀을 때 활성화되는걸로 작업중
-$(".cinemainfo .cinema_logo").click(function() {
-  $("#price_lst_area td").css("font-weight","bold");
-  $("#price_lst_area li").css("color","black");
-});//click() end
+    // 예매정보 : 관, 시간 설정
+    var room = ", " + $(this).parents("dl").find("dt").text().substr(0,1)+"관";
+    $("#movieinfo_area .1st_result #select_space_txt").append(room);
+    var time = ", " + $(this).text();
+    $("#movieinfo_area .1st_result #wdate").append(time);
+    
+    // hidden 변수 설정 : 극장, 날짜
+    $("#movieinfo_area .1st_result #cine_name").val($("#movieinfo_area .1st_result #select_space_txt").text());
+    $("#movieinfo_area .1st_result #s_date").val($("#movieinfo_area .1st_result #wdate").text());
+  }//if end
+});//.screentime li click() end
 /******************* 상영시간표 AJAX END *******************/
 
 /******************* 인원선택 AJAX *******************/

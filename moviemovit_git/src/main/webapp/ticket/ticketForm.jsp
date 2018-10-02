@@ -166,7 +166,6 @@ function buildCalendar() {
 <form class="cbp-mc-form" name="regForm" method='POST' action='./create.do'>
   <!-- POST 방식으로 보낼 데이터 -->
   <input type='hidden' id='sCode'     name='sCode'     value=''>
-  <input type='hidden' id='auditType' name='auditType' value=''>
   
   <table id="ticketArea">
     <!-------------------------------- 1행 타이틀  --------------------------------------->
@@ -296,32 +295,37 @@ function buildCalendar() {
           </div>
 
           <div id="thumb_poster" class="thumb_poster">
-            <input type="image" class="movie_poster" src="./img/bgr_poster.PNG">
+            <img src="./img/bgr_poster.PNG" class="movie_poster">
+            <input type="hidden" id="m_poster" name="m_poster" value="">
           </div>
 
-          <h3><span id="select_m_name">신과함께</span></h3>
-
-          <!-- 예매 결과 -->
+          <h3>
+            <span id="select_m_name">-</span>
+            <input type="hidden" id="m_name" name="m_name" value="">
+          </h3>
+          
           <dl class="1st_result">
             <dt>
               <span class="space">극장</span>
             </dt>
             <dd>
-              <span id="select_space_txt">롯데시네마 - 월드타워점</span>
+              <span id="select_space_txt">-</span>
+              <input type="hidden" id="cine_name" name="cine_name" value="">
             </dd>
 
             <dt>
               <span class="date">날짜</span>
             </dt>
             <dd>
-              <span id="wdate">2018-10-01</span>
+              <span id="wdate">-</span>
+              <input type="hidden" id="s_date" name="s_date" value="">
             </dd>
 
             <dt>
               <span class="people">인원</span>
             </dt>
             <dd>
-              <span id="auditType">성인 1, 청소년 2</span>
+              <span id="auditType">-</span>
               <input type="hidden" id="peocnt" name="peocnt" value="">
             </dd>
 
@@ -329,7 +333,7 @@ function buildCalendar() {
               <span class="price">금액</span>
             </dt>
             <dd>
-              <span id="total">26000</span>
+              <span id="total">-</span>
             </dd>
           </dl>
 
@@ -337,9 +341,7 @@ function buildCalendar() {
             <input type="image" class="reserve"
               src="./img/btn_reserve.PNG" alt="예매하기" onclick="javascript:NextBtn();">
           </div>
-          
         </div>
-
       </td>
       <!-- -------------------------- movieinfo_area : 영화정보 end -------------------------------- -->
     </tr>
@@ -365,54 +367,7 @@ function buildCalendar() {
             <img src="./img/default.png" class="cinema_logo">
             <span class="cinemainfo_name">영화관-지점</span>
           </div>
-          <div class="screentime">
-            
-            <dl id="1">
-              <dt>1 관</dt>
-              <dd>
-                <ul>
-                  <li onclick="timeclick('1030');">10:30</li>
-                  <li>13:40</li>
-                  <li>17:10</li>
-                  <li>21:00</li>
-                </ul>
-              </dd>
-            </dl>
-            <dl id="2">
-              <dt>2 관</dt>
-              <dd>
-                <ul>
-                  <li onclick="timeclick('1030');">10:30</li>
-                  <li>13:40</li>
-                  <li>17:10</li>
-                  <li>21:00</li>
-                </ul>
-              </dd>
-            </dl>
-            <dl id="2">
-              <dt>2 관</dt>
-              <dd>
-                <ul>
-                  <li onclick="timeclick('1030');">10:30</li>
-                  <li>13:40</li>
-                  <li>17:10</li>
-                  <li>21:00</li>
-                </ul>
-              </dd>
-            </dl>
-            <dl id="2">
-              <dt>2 관</dt>
-              <dd>
-                <ul>
-                  <li onclick="timeclick('1030');">10:30</li>
-                  <li>13:40</li>
-                  <li>17:10</li>
-                  <li>21:00</li>
-                </ul>
-              </dd>
-            </dl>
-            
-          </div>
+          <div class="screentime"></div>
         </div>
       </td>
       <!-- -------------------------- screentime_area : 상영시간 선택 end -------------------------------- -->
@@ -504,7 +459,7 @@ function buildCalendar() {
   <br>
 </form>
 
-<script src="../js/ticket_script.js?ver=2" charset="utf-8"></script>
+<script src="../js/ticket_script.js?ver=3" charset="utf-8"></script>
 
 <%-- 본문끝 --%>
 <%@ include file="../footer.jsp"%>
