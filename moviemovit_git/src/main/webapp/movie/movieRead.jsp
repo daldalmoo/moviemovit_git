@@ -221,7 +221,20 @@ table tr:nth-child(2n+1) {
       </tr>
       <tr>
         <th>관람등급</th>
-        <td>${dto.age }</td>
+        <td>
+<c:if test="${dto.age==0 }">
+       전체관람가
+       </c:if>
+       <c:if test="${dto.age==12 }">
+       12세
+       </c:if>
+       <c:if test="${dto.age==15 }">
+       15세
+       </c:if>
+       <c:if test="${dto.age==19 }">
+       청소년 관람불가
+       </c:if>
+</td>
       </tr>
       <tr>
         <th>줄거리</th>
