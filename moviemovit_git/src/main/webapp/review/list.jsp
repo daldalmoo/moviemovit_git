@@ -2,85 +2,226 @@
 <%@ include file="../header1.jsp"%>
 <%@ include file="../header2.jsp"%>
 <style>
+.header {
+    background-color: #fed513; /* 테이블 이름 배경 색상 (COUPON LIST) */
+    color: black; /* 테이블 이름 글자 색상 (COUPON LIST) */
+    font-weight: bold;
+    font-size: 1.5em;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+}
 
-/*공개,수정,삭제 스타일 버튼*/
-.cbp-mc-button {
-    background: #40bf80;
-    border: none;
+.table-users {
+    border: 1px solid #327a81;
+    border-radius: 10px;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+    max-width: calc(100% - 2em);
+    margin: 1em auto;
+    overflow: hidden;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+}
+
+table tr:nth-child(2n) {
+    background-color: white;
+}
+
+table tr:nth-child(2n+1) {
+    background-color: #feed9a; /* 테이블 격줄마다 색상 */
+}
+
+table th, table td {
+    color: #2b686e;
+    padding: 10px;
+}
+
+table th {
+    background-color: #feed9a; /* 테이블 컬럼명 색상 (Picture, Name, ...) */
+    font-weight: 300;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+table td:last-child {
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+td:nth-child(3), td:nth-child(4) {
+    min-width: 100px;
+}
+
+@media screen and (max-width: 564px) {
+    table, tr, td {
+        display: block;
+    }
+    tbody {
+        display: table;
+        width: 100%;
+        text-align: left;
+    }
+    tr {
+        position: relative;
+    }
+    tr:first-child {
+        display: none;
+    }
+    table td {
+        position: relative;
+        color: #2b686e;
+        padding: 5px;
+    }
+    td:before {
+        position: relative;
+        color: #2b686e;
+    }
+    td:nth-child(1):before {
+        content: '쿠폰코드 : ';
+    }
+    td:nth-child(2):before {
+        content: '회원아이디 : ';
+    }
+    td:nth-child(3):before {
+        content: '발급일 : ';
+    }
+    td:nth-child(4):before {
+        content: '만료일 : ';
+    }
+} /* media(564px) end */
+.cbp-mc-submit-wrap {
+    text-align: right;
+    padding-top: 0px;
+    padding-right: 20px;
+    clear: both;
+}
+
+.cbp-mc-submit-wrap input.cbp-mc-submit {
+    background: #40bf80; /* 쿠폰 등록 버튼 색상 */
+    border: 0px solid #327a81;
     color: #fff;
+    font-weight: bold;
     width: auto;
     cursor: pointer;
     text-transform: uppercase;
     display: inline-block;
-    padding: 5px 5px;
-    font-size: 0.8em;
+    padding: 15px 30px;
+    font-size: 1.1em;
     border-radius: 2px;
     letter-spacing: 1px;
 }
 
+.cbp-mc-submit-wrap input.cbp-mc-submit:hover {
+    background: #2b8256; /* 쿠폰 등록 버튼 마우스 오버시 색상 */
+}
+
+.listbutton {
+    background: #40bf80; /* 공개 수정 삭제 버튼 색상 */
+    border: 0px solid #feed9a;
+    color: #fff;
+    font-weight: bold;
+    width: auto;
+    cursor: pointer;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 1.1em;
+    border-radius: 2px;
+    letter-spacing: 1px;
+}
+
+.listbutton:hover {
+    background: #2b8256; /* 공개 수정 삭제 버튼 마우스 오버시 색상 */
+}
+
+/*공개,수정,삭제 스타일 버튼*/
+.cbp-mc-button {
+	background: #40bf80;
+	border: none;
+	color: #fff;
+	width: auto;
+	cursor: pointer;
+	text-transform: uppercase;
+	display: inline-block;
+	padding: 5px 5px;
+	font-size: 0.8em;
+	border-radius: 2px;
+	letter-spacing: 1px;
+}
+
 div.ex2 {
-    height: 100%;
-    width: 100%;
-    overflow: auto;
+	height: 100%;
+	width: 100%;
+	overflow: auto;
 }
 
 div.brand_list {
-    height: 100%;
-    width: 100%;
-    overflow: auto;
+	height: 100%;
+	width: 100%;
+	overflow: auto;
 }
 
 div.searchbar {
-    height: 50%;
-    width: 100%;
-    overflow: auto;
+	height: 50%;
+	width: 100%;
+	overflow: auto;
 }
 
 /* 브랜드선택창 */
 .brandList {
-    position: relative;
-    display: block;
-    padding: 10px 15px;
-    margin-bottom: -1px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+	position: relative;
+	display: block;
+	padding: 10px 15px;
+	margin-bottom: -1px;
+	background-color: #fff;
+	border: 1px solid #ddd;
 }
 
 /* 브랜드선택창 클릭시 버튼변화 */
 a.brandList.active, a.brandList.active:hover, a.brandList.active:focus {
-    z-index: 2;
-    color: #fff;
-    background-color: #428bca;
-    border-color: #428bca;
+	z-index: 2;
+	color: #fff;
+	background-color: #428bca;
+	border-color: #428bca;
 }
 
 div#toplist {
-    text-align: center;
-    font-size: 15pt;
-    font-weight: bold;
-    color: white;
-    background-color: #fed513;
-    height: 10%;
+	text-align: center;
+	font-size: 15pt;
+	font-weight: bold;
+	color: white;
+	background-color: #fed513;
+	height: 10%;
 }
 </style>
 
 <%
   String cineCode = request.getParameter("cineCode");
-            request.setAttribute("cineCode", cineCode);
+			request.setAttribute("cineCode", cineCode);
 %>
 
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon" href="images/fav-icon.png" />
 <script type="application/x-javascript">
+	
     
      addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 </script>
 <!----webfonts---->
 <link
-    href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800'
-    rel='stylesheet' type='text/css'>
+	href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800'
+	rel='stylesheet' type='text/css'>
 <!----//webfonts---->
 <!-- Global CSS for the page and tiles -->
 <link rel="stylesheet" href="css/main.css">
@@ -89,292 +230,320 @@ div#toplist {
 <script src="js/jquery.min.js"></script>
 
 <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script
-    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <!----start-dropdown--->
 <script>
-    var $ = jQuery.noConflict();
-    $(function() {
-        $('#activator').click(function() {
-            $('#box').animate({
-                'top' : '0px'
-            }, 500);
-        });
-        $('#boxclose').click(function() {
-            $('#box').animate({
-                'top' : '-700px'
-            }, 500);
-        });
-    });
-    $(document).ready(function() {
-        //Hide (Collapse) the toggle containers on load
-        $(".toggle_container").hide();
-        //Switch the "Open" and "Close" state per click then slide up/down (depending on open/close state)
-        $(".trigger").click(function() {
-            $(this).toggleClass("active").next().slideToggle("slow");
-            return false; //Prevent the browser jump to the link anchor
-        });
+	var $ = jQuery.noConflict();
+	$(function() {
+		$('#activator').click(function() {
+			$('#box').animate({
+				'top' : '0px'
+			}, 500);
+		});
+		$('#boxclose').click(function() {
+			$('#box').animate({
+				'top' : '-700px'
+			}, 500);
+		});
+	});
+	$(document).ready(function() {
+		//Hide (Collapse) the toggle containers on load
+		$(".toggle_container").hide();
+		//Switch the "Open" and "Close" state per click then slide up/down (depending on open/close state)
+		$(".trigger").click(function() {
+			$(this).toggleClass("active").next().slideToggle("slow");
+			return false; //Prevent the browser jump to the link anchor
+		});
 
-    });
+	});
 </script>
 <!----//End-dropdown--->
 <!---//End-click-drop-down-menu----->
 </head>
 <body>
 
-    <!-- 카테고리 시작 -->
-    <div class="container-fluid">
+	<!-- 카테고리 시작 -->
+	<div class="container-fluid">
 
-        <div class="row" id="toplist">
-            <div class="col-xs-6 col-md-4">지역</div>
-            <div class="col-md-4">브랜드</div>
-            <div class="col-xs-6 col-md-4">검색</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6 col-md-4">
-                <div class="ex2">
-                    <div class="list-group">
-                        <a class="list-group-item active" id="0">전국</a> <a
-                            class="list-group-item" id="SEO">서울</a> <a
-                            class="list-group-item" id="GGD">경기</a> <a
-                            class="list-group-item" id="ICH">인천</a> <a
-                            class="list-group-item" id="GWD">강원</a> <a
-                            class="list-group-item" id="CCD">충청</a> <a
-                            class="list-group-item" id="GSD">경상</a> <a
-                            class="list-group-item" id="JLD">전라</a> <a
-                            class="list-group-item" id="JJD">제주</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="brand_list">
-                    <!-- 영화관 목록 출력 -->
-                    지역을 선택해 주세요
-                </div>
-            </div>
-            <div class="col-xs-6 col-md-4">
-            <br><br>
-                <div class="searchbar">
-                <br><br>
-                    <form id="form_search" method="get"
-                        action="/moviemovit/review/search.do">
-                        <select id="sch_type" name="sch_type">
-                            <option value="cineName">영화관이름</option>
-                            <input type="text" id="sch_value" name="sch_value"
-                            value="${mapSearch.sch_value}" />
-                            <button class="cbp-mc-button"  type="button" onclick="search();">검색</button>
-                            </select>
-                    </form>
-                    <br>
-                    <br>
-                    <br>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    <!---start-content---->
-    <div class="wholeList">
-        <div class="content">
-            <div class="wrap">
-                <div id="main" role="main">
-                    <ul id="tiles">
-                        <!-- These are our grid blocks -->
-                        <c:forEach var="dto" items="${list }">
-                            <li><a href="./read.do?cineCode=${dto.cineCode }">
-                                    <img src="img/${dto.logoImg}">
-                            </a>
-                                <div class="post-info">
-                                    <div class="post-basic-info">
-                                        <h3>${dto.cineName }</h3>
-                                        <span> <c:choose>
-                                                <c:when test="${dto.brandName == 'CGV'}">
+		<div class="row" id="toplist">
+			<div class="col-xs-6 col-md-4">지역</div>
+			<div class="col-md-4">브랜드</div>
+			<div class="col-xs-6 col-md-4">검색</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6 col-md-4">
+				<div class="ex2">
+					<div class="list-group">
+						<a class="list-group-item active" id="0">전국</a> <a
+							class="list-group-item" id="SEO">서울</a> <a
+							class="list-group-item" id="GGD">경기</a> <a
+							class="list-group-item" id="ICH">인천</a> <a
+							class="list-group-item" id="GWD">강원</a> <a
+							class="list-group-item" id="CCD">충청</a> <a
+							class="list-group-item" id="GSD">경상</a> <a
+							class="list-group-item" id="JLD">전라</a> <a
+							class="list-group-item" id="JJD">제주</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="brand_list">
+					<!-- 영화관 목록 출력 -->
+					지역을 선택해 주세요
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-4">
+				<br>
+				<br>
+				<div class="searchbar">
+					<br>
+					<br>
+					<form id="form_search" method="get"
+						action="/moviemovit/review/search.do">
+						<select id="sch_type" name="sch_type">
+							<option value="cineName">영화관이름</option>
+							<input type="text" id="sch_value" name="sch_value"
+							value="${mapSearch.sch_value}" />
+							<button class="cbp-mc-button" type="button" onclick="search();">검색</button>
+						</select>
+					</form>
+					<br>
+					<h3 style="font: bold;">추천영화관</h3>
+					<div class="cbp-mc-submit-wrap"></div>
+					<div class="table-users">
+						<table>
+							<tr>
+								<th style="width: 30%">영화관</th>
+								<th style="width: 30%">지역</th>
+								<th>추천별점</th>
+							</tr>
+							<tr>
+								<td>주안CGV</t>
+								<td>인천</td>
+								<td><img src="./img/star3.png" style="width: 30%;"></td>
+							</tr>
+							<tr>
+								<td>인천롯데시네마</td>
+								<td>인천</td>
+								<td><img src="./img/star3.png" style="width: 30%;"></td>
+							</tr>
+							<tr>
+								<td>주안남CGV</td>
+								<td>인천</td>
+								<td><img src="./img/star3.png" style="width: 30%;"></td>
+							</tr>
+						</table>
+					</div>
+
+					<br>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<!---start-content---->
+	<div class="wholeList">
+		<div class="content">
+			<div class="wrap">
+				<div id="main" role="main">
+					<ul id="tiles">
+						<!-- These are our grid blocks -->
+						<c:forEach var="dto" items="${list }">
+							<li><a href="./read.do?cineCode=${dto.cineCode }"> <img
+									src="img/${dto.logoImg}">
+							</a>
+								<div class="post-info">
+									<div class="post-basic-info">
+										<h3>${dto.cineName }</h3>
+										<span> <c:choose>
+												<c:when test="${dto.brandName == 'CGV'}">
                                    CGV
                                    </c:when>
-                                                <c:when test="${dto.brandName == 'LOTTE'}">
+												<c:when test="${dto.brandName == 'LOTTE'}">
                                    롯데시네마
                                    </c:when>
-                                                <c:when test="${dto.brandName == 'INDEP'}">
+												<c:when test="${dto.brandName == 'INDEP'}">
                                    독립영화관
                                    </c:when>
-                                                <c:when test="${dto.brandName == 'MEGABOX'}">
+												<c:when test="${dto.brandName == 'MEGABOX'}">
                                    메가박스
                                    </c:when>
-                                            </c:choose></span>
-                                        <p>${dto.addr2}
-                                            ${dto.addr3} <br> ${dto.tel}
-                                        </p>
-                                    </div>
-                                    <div class="post-info-rate-share">
-                                        <c:choose>
-                                            <c:when test="${dto.startotal < 1}">
-                                                <img src="./img/star0.png" width="150">
-                                            </c:when>
-                                            <c:when test="${dto.startotal < 2 }">
-                                                <img src="./img/star1.png" width="150">
-                                            </c:when>
-                                            <c:when test="${dto.startotal < 3}">
-                                                <img src="./img/star2.png" width="150">
-                                            </c:when>
-                                            <c:when test="${dto.startotal < 4}">
-                                                <img src="./img/star3.png" width="150">
-                                            </c:when>
-                                            <c:when test="${dto.startotal < 5}">
-                                                <img src="./img/star4.png" width="150">
-                                            </c:when>
-                                            <c:when test="${dto.startotal < 6} ">
-                                                <img src="./img/star5.png" width="150">
-                                            </c:when>
-                                            <c:when test="${dto.startotal eq '' || empty dto.startotal }">
-                                                <img src="./img/star0.png" width="150">
-                                            </c:when>
-                                        </c:choose>
-                                        <div class="clear"></div>
-                                    </div>
-                                </div></li>
-                        </c:forEach>
-                        <!-- End of grid blocks -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!---//End-content---->
-        <!----wookmark-scripts---->
-        <script src="js/jquery.imagesloaded.js"></script>
-        <script src="js/jquery.wookmark.js"></script>
-        <script>
-            (function($) {
-                var $tiles = $('#tiles'), $handler = $('li', $tiles), $main = $('#main'), $window = $(window), $document = $(document), options = {
-                    autoResize : true, // This will auto-update the layout when the browser window is resized.
-                    container : $main, // Optional, used for some extra CSS styling
-                    offset : 20, // Optional, the distance between grid items
-                    itemWidth : 280
-                // Optional, the width of a grid item
-                };
-                /**
-                 * Reinitializes the wookmark handler after all images have loaded
-                 */
-                function applyLayout() {
-                    $tiles.imagesLoaded(function() {
-                        // Destroy the old handler
-                        if ($handler.wookmarkInstance) {
-                            $handler.wookmarkInstance.clear();
-                        }
+											</c:choose></span>
+										<p>${dto.addr2}
+											${dto.addr3} <br> ${dto.tel}
+										</p>
+									</div>
+									<div class="post-info-rate-share">
+										<c:choose>
+											<c:when test="${dto.startotal < 1}">
+												<img src="./img/star0.png" width="150">
+											</c:when>
+											<c:when test="${dto.startotal < 2 }">
+												<img src="./img/star1.png" width="150">
+											</c:when>
+											<c:when test="${dto.startotal < 3}">
+												<img src="./img/star2.png" width="150">
+											</c:when>
+											<c:when test="${dto.startotal < 4}">
+												<img src="./img/star3.png" width="150">
+											</c:when>
+											<c:when test="${dto.startotal < 5}">
+												<img src="./img/star4.png" width="150">
+											</c:when>
+											<c:when test="${dto.startotal < 6} ">
+												<img src="./img/star5.png" width="150">
+											</c:when>
+											<c:when test="${dto.startotal eq '' || empty dto.startotal }">
+												<img src="./img/star0.png" width="150">
+											</c:when>
+										</c:choose>
+										<div class="clear"></div>
+									</div>
+								</div></li>
+						</c:forEach>
+						<!-- End of grid blocks -->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!---//End-content---->
+		<!----wookmark-scripts---->
+		<script src="js/jquery.imagesloaded.js"></script>
+		<script src="js/jquery.wookmark.js"></script>
+		<script>
+			(function($) {
+				var $tiles = $('#tiles'), $handler = $('li', $tiles), $main = $('#main'), $window = $(window), $document = $(document), options = {
+					autoResize : true, // This will auto-update the layout when the browser window is resized.
+					container : $main, // Optional, used for some extra CSS styling
+					offset : 20, // Optional, the distance between grid items
+					itemWidth : 280
+				// Optional, the width of a grid item
+				};
+				/**
+				 * Reinitializes the wookmark handler after all images have loaded
+				 */
+				function applyLayout() {
+					$tiles.imagesLoaded(function() {
+						// Destroy the old handler
+						if ($handler.wookmarkInstance) {
+							$handler.wookmarkInstance.clear();
+						}
 
-                        // Create a new layout handler.
-                        $handler = $('li', $tiles);
-                        $handler.wookmark(options);
-                    });
-                }
-                /**
-                 * When scrolled all the way to the bottom, add more tiles
-                 */
-                function onScroll() {
-                    // Check if we're within 100 pixels of the bottom edge of the broser window.
-                    /*   var winHeight = window.innerHeight ? window.innerHeight : $window.height(), // iphone fix
-                          closeToBottom = ($window.scrollTop() + winHeight > $document.height() - 100);
-                     */
-                    if (closeToBottom) {
-                        // Get the first then items from the grid, clone them, and add them to the bottom of the grid
-                        /*  var $items = $('li', $tiles),
-                             $firstTen = $items.slice(0, 10);
-                         $tiles.append($firstTen.clone());
-                         */
-                        applyLayout();
-                    }
-                }
-                ;
+						// Create a new layout handler.
+						$handler = $('li', $tiles);
+						$handler.wookmark(options);
+					});
+				}
+				/**
+				 * When scrolled all the way to the bottom, add more tiles
+				 */
+				function onScroll() {
+					// Check if we're within 100 pixels of the bottom edge of the broser window.
+					/*   var winHeight = window.innerHeight ? window.innerHeight : $window.height(), // iphone fix
+					      closeToBottom = ($window.scrollTop() + winHeight > $document.height() - 100);
+					 */
+					if (closeToBottom) {
+						// Get the first then items from the grid, clone them, and add them to the bottom of the grid
+						/*  var $items = $('li', $tiles),
+						     $firstTen = $items.slice(0, 10);
+						 $tiles.append($firstTen.clone());
+						 */
+						applyLayout();
+					}
+				}
+				;
 
-                // Call the layout function for the first time
-                applyLayout();
+				// Call the layout function for the first time
+				applyLayout();
 
-                // Capture scroll event.
-                $window.bind('scroll.wookmark', onScroll);
-            })(jQuery);
-        </script>
-    </div>
+				// Capture scroll event.
+				$window.bind('scroll.wookmark', onScroll);
+			})(jQuery);
+		</script>
+	</div>
 
 
-    <script src="../js/jquery.js"></script>
-    <script>
-        //카테고리      
-        // 1. 지역 선택
-        // 지역 LIST에 있는 item을 click 하면 
-        $(".list-group-item").click(function() {
-            // 클릭한 주소값 가져오기
-            var clickaddr = $(this).attr("id");
-            // active 제거 후 active 추가하기 
-            $(".list-group-item").removeClass("active");
-            $(this).addClass("active");
+	<script src="../js/jquery.js"></script>
+	<script>
+		//카테고리      
+		// 1. 지역 선택
+		// 지역 LIST에 있는 item을 click 하면 
+		$(".list-group-item").click(function() {
+			// 클릭한 주소값 가져오기
+			var clickaddr = $(this).attr("id");
+			// active 제거 후 active 추가하기 
+			$(".list-group-item").removeClass("active");
+			$(this).addClass("active");
 
-            //alert(clickaddr);
+			//alert(clickaddr);
 
-            //AJAX : 카테고리에 브랜드 리스트 출력
-            $.post("./addrList.do", {
-                "addr1" : clickaddr
-            }, addrList);
+			//AJAX : 카테고리에 브랜드 리스트 출력
+			$.post("./addrList.do", {
+				"addr1" : clickaddr
+			}, addrList);
 
-            function addrList(result) {
-                //alert('완료');
-                $(".brand_list").html(result);
-            }//callback 함수 and
+			function addrList(result) {
+				//alert('완료');
+				$(".brand_list").html(result);
+			}//callback 함수 and
 
-            //결과 LIST
-            $.post("./selectAddr.do", {
-                "addr1" : clickaddr
-            }, selectAddr, "html");
+			//결과 LIST
+			$.post("./selectAddr.do", {
+				"addr1" : clickaddr
+			}, selectAddr, "html");
 
-            function selectAddr(result) {
-                //alert('완료');
-                $(".wholeList").html(result);
-            }//callback 함수 and
+			function selectAddr(result) {
+				//alert('완료');
+				$(".wholeList").html(result);
+			}//callback 함수 and
 
-        }) //CheckIdProc() end
+		}) //CheckIdProc() end
 
-        // LIST를 만들어놓고 brand Name이 일치하는 아이들만 SET 시키기
+		// LIST를 만들어놓고 brand Name이 일치하는 아이들만 SET 시키기
 
-        // 2. 영화관 brand 선택시 해당 영화관 출력
-        // 지역 영화관에 있는 item을 click 하면 
-        $(document).on("click", ".brandList", function() {
-            // 클릭한 주소값 가져오기
-            var clickBrand = $(this).attr("id");
-            var clickAddr = $("a.list-group-item.active").prop("id");
-            // active 제거 후 active 추가하기 
-            $(".brandList").removeClass("active");
-            $(this).addClass("active");
+		// 2. 영화관 brand 선택시 해당 영화관 출력
+		// 지역 영화관에 있는 item을 click 하면 
+		$(document).on("click", ".brandList", function() {
+			// 클릭한 주소값 가져오기
+			var clickBrand = $(this).attr("id");
+			var clickAddr = $("a.list-group-item.active").prop("id");
+			// active 제거 후 active 추가하기 
+			$(".brandList").removeClass("active");
+			$(this).addClass("active");
 
-            //alert(clickAddr);
-            //alert(clickBrand);
+			//alert(clickAddr);
+			//alert(clickBrand);
 
-            $.post("./selectBrand.do", {
-                "addr1" : clickAddr,
-                "brandName" : clickBrand
-            }, selectBrand, "html");
+			$.post("./selectBrand.do", {
+				"addr1" : clickAddr,
+				"brandName" : clickBrand
+			}, selectBrand, "html");
 
-            function selectBrand(result) {
-                //alert('완료');
-                $(".wholeList").html(result);
-            }//callback 함수 and
+			function selectBrand(result) {
+				//alert('완료');
+				$(".wholeList").html(result);
+			}//callback 함수 and
 
-        }) //CheckIdProc() end
+		}) //CheckIdProc() end
 
-        // 검색
-        function search() {
-            var sch_value = jQuery('#form_search #sch_value').val();
-            if (sch_value == '') {
-                alert('검색어를 입력하세요.');
-            } else {
-                jQuery('#form_search').submit();
-            }
-        }
-        //jQuery('#form_search #sch_type option').val('${mapSearch.sch_type}');
-        jQuery('#form_search #sch_type value').val('${mapSearch.sch_type}');
-        /*
-         일단 체크 된 값들을 받아오기 > 받아온 다음  
-         select해서 list를 다시 만들어서 받아오는 것보다
-         카테고리박스가 체크된 값들 중에서 brandName이랑 일치하는 것을 for문으로 돌려서 받기...?
-        
-         */
-    </script>
-    <%@ include file="../footer.jsp"%>
+		// 검색
+		function search() {
+			var sch_value = jQuery('#form_search #sch_value').val();
+			if (sch_value == '') {
+				alert('검색어를 입력하세요.');
+			} else {
+				jQuery('#form_search').submit();
+			}
+		}
+		//jQuery('#form_search #sch_type option').val('${mapSearch.sch_type}');
+		jQuery('#form_search #sch_type value').val('${mapSearch.sch_type}');
+		/*
+		 일단 체크 된 값들을 받아오기 > 받아온 다음  
+		 select해서 list를 다시 만들어서 받아오는 것보다
+		 카테고리박스가 체크된 값들 중에서 brandName이랑 일치하는 것을 for문으로 돌려서 받기...?
+		
+		 */
+	</script>
+	<%@ include file="../footer.jsp"%>
