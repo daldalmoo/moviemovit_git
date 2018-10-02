@@ -573,7 +573,11 @@ public class TicketCont {
   public ModelAndView payment(CouponDTO dto, HttpServletRequest req, HttpServletResponse resp) throws IOException {
     ModelAndView mav = new ModelAndView();
     HttpSession session = req.getSession();
-
+    
+    String m_poster = req.getParameter("m_poster");
+    String m_name = req.getParameter("m_name");
+    String cine_name = req.getParameter("cine_name");
+    String s_date = req.getParameter("s_date");
     int totalprice = Integer.parseInt(req.getParameter("totalprice"));
     String auditData = req.getParameter("auditData");
     // System.out.println("ticket Cont 좌석선택 : " + totalprice);
@@ -592,6 +596,10 @@ public class TicketCont {
     ArrayList<CouponDTO> couponList = dao.couponList(dto);
 
     // 페이지 이동 및 값 올리기
+    mav.addObject("m_poster",m_poster);
+    mav.addObject("m_name",m_name);
+    mav.addObject("cine_name",cine_name);
+    mav.addObject("s_date",s_date);
     mav.addObject("totalprice", totalprice);
     mav.addObject("couponList", couponList);
     mav.addObject("auditData", auditData);

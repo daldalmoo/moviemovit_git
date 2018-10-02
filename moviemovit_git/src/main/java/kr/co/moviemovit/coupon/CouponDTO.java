@@ -5,6 +5,36 @@ public class CouponDTO {
   private String uid;   // 유저 아이디
   private String startDate;   // 발급일
   private String expDate;     // 만료일
+
+  //과제용
+  private int cnt;
+  private int tot;
+  private String grade;
+  
+  public int getTot() {
+    return tot;
+  }
+
+  public void setTot(int tot) {
+    this.tot = tot;
+  }
+
+  public String getGrade() {
+    return grade;
+  }
+
+  public void setGrade(String grade) {
+    this.grade = grade;
+  }
+
+   
+  public int getCnt() {
+    return cnt;
+  }
+
+  public void setCnt(int cnt) {
+    this.cnt = cnt;
+  }
   
   public CouponDTO() {
     System.out.println("---------- CouponDTO() 객체 생성");

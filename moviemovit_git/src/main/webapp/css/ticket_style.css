@@ -421,7 +421,7 @@
   transform: translateY(-50%);
   padding:0px;
 }*/
-.section_result #btn_reset {;
+.section_result #btn_reset {
   margin:0 0 20px 0;
 }
 .thumb_poster .movie_poster { /*영화 포스터*/
@@ -451,15 +451,6 @@
   display: block;
   background: url("../ticket/img/btn_reserve.PNG");
 }
-/*
-#movieinfo_area #1st_result {
-  width: 300px;
-}
-#movieinfo_area 
-#1st_result>tbody>tr>th {
-  border: none;
-}*/
-
 
 /*********** 5) 상영시간선택 ***********/
 #screentime_area .time_area {
