@@ -246,6 +246,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ]]>
   </select>
   
+  <!-- 회원가입 insert -->
+  <insert id="moviebook" parameterType="TicketDTO">    
+    <![CDATA[
+      INSERT INTO ticketTable(tcode,wdate,uid,sCode,seat,auditType,cCode)
+      VALUES (#{tcode}, #{wdate}, #{uid}, #{sCode}, #{seat}, #{auditType}, #{cCode})
+    ]]>
+  </insert>
+  
 </mapper>
 
 

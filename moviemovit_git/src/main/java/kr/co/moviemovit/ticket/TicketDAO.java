@@ -10,6 +10,7 @@ import kr.co.moviemovit.coupon.CouponDTO;
 import kr.co.moviemovit.movie.MovieDTO;
 import kr.co.moviemovit.review.CinemaDTO;
 import kr.co.moviemovit.user.UserDTO;
+import kr.co.moviemovit.user.UserMapper;
 import kr.co.moviemovit.screen.ScreenDTO;
 
 @Component
@@ -159,4 +160,10 @@ public class TicketDAO {
     return dto;
   }//getMemberInfo() end
   
+  //영화예매
+  public int moviebook(TicketDTO dto) {
+    TicketMapper mapper = sqlSession.getMapper(TicketMapper.class);
+    int result = mapper.moviebook(dto);
+    return result;
+  }//moviebook() end
 }//class end
