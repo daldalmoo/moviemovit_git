@@ -6,7 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- namespace="팩키지.인터페이스" -->
 <mapper namespace="kr.co.moviemovit.homework.HomeMapper">
 
-    <select id="homework1" parameterType="kr.co.moviemovit.star.StarDTO" resultType="kr.co.moviemovit.movie.MovieDTO">
+  <select id="homework1"
+    parameterType="kr.co.moviemovit.star.StarDTO"
+    resultType="kr.co.moviemovit.movie.MovieDTO">
             <![CDATA[   
             SELECT mName, genre, aver
             FROM movieTable B
@@ -18,6 +20,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             ORDER BY aver
             limit 3
             ]]>
+  </select>
+  <select id="homework2"
+    parameterType="kr.co.moviemovit.user.UserDTO"
+    resultType="kr.co.moviemovit.coupon.CouponDTO">
+            <![CDATA[   
+      select grade, count(A.uid) as cnt
+      FROM couponTable as A
+      JOIN (select uid, grade
+      from userTable) as B ON A.uid = B.uid
+      group by grade
+      ORDER by cnt DESC
+      limit 3
+            ]]>
+  </select>
+  
+     <select id="homework3"
+        parameterType="kr.co.moviemovit.user.UserDTO"
+        resultType="kr.co.moviemovit.ticket.TicketDTO">
+            <![CDATA[   
+            select grade, count(A.uid) as cnt
+            FROM ticketTable as A
+            JOIN (select uid, grade
+            from userTable) as B ON A.uid = B.uid
+            group by grade
+            ORDER by cnt DESC
+            limit 3
+            ]]>
     </select>
-
+  
+  
 </mapper>
