@@ -60,21 +60,21 @@ public class ReviewCont {
     String addr1 = req.getParameter("addr1");
     System.out.println("addr1 : "+addr1);
     
-    //Ä«Å×°í¸®¿¡ º¸¿©ÁÙ ÁÖ¼Ò ¸®½ºÆ®
+    //ì¹´í…Œê³ ë¦¬ì— ë³´ì—¬ì¤„ ì£¼ì†Œ ë¦¬ìŠ¤íŠ¸
     ArrayList<CinemaDTO> addrList = dao.addrList(addr1);
     
-    msg += " <a class='brandList active' id='0'>ÀüÃ¼</a>";
+    msg += " <a class='brandList active' id='0'>ì „ì²´</a>";
     for(int j=0; j<addrList.size(); j++) {
       CinemaDTO cinema = addrList.get(j);
       msg += "  <a class='brandList' id='"+cinema.getBrandName()+"'>";
       if(cinema.getBrandName().equals("CGV")) { msg += "CGV"; }
-      else if(cinema.getBrandName().equals("LOTTE")) { msg += "·Ôµ¥½Ã³×¸¶"; }
-      else if(cinema.getBrandName().equals("MEGABOX")) { msg += "¸Ş°¡¹Ú½º"; }
-      else if(cinema.getBrandName().equals("INDEP")) { msg += "µ¶¸³¿µÈ­°ü"; }//if end
+      else if(cinema.getBrandName().equals("LOTTE")) { msg += "ë¡¯ë°ì‹œë„¤ë§ˆ"; }
+      else if(cinema.getBrandName().equals("MEGABOX")) { msg += "ë©”ê°€ë°•ìŠ¤"; }
+      else if(cinema.getBrandName().equals("INDEP")) { msg += "ë…ë¦½ì˜í™”ê´€"; }//if end
       msg += "  </a>";
     }//for end
     
-    // Ãâ·Â
+    // ì¶œë ¥
     resp.setContentType("text/plain; charset=UTF-8");
     PrintWriter out = resp.getWriter();
     out.println(msg);
@@ -88,15 +88,15 @@ public class ReviewCont {
     System.out.println(addr1);
     ArrayList<CinemaDTO> list = dao.selectAddr(addr1);
     
-    // list size°¡ 0ÀÌ¸é ÀüÃ¼ List Ãâ·Â
+    // list sizeê°€ 0ì´ë©´ ì „ì²´ List ì¶œë ¥
     if(list.size()==0) {
       
       list = dao.cinemaList();
       
     }
     
-    //°ª Àß ³Ñ¾î¿À´Â °Í È®ÀÎ
-    //MOELANDVIEW·Î °ª ¹Ş¾Æ¼­ REFRESHÇÏ±â
+    //ê°’ ì˜ ë„˜ì–´ì˜¤ëŠ” ê²ƒ í™•ì¸
+    //MOELANDVIEWë¡œ ê°’ ë°›ì•„ì„œ REFRESHí•˜ê¸°
     ModelAndView mav= new ModelAndView();
     
     mav.addObject("list", list); 
@@ -115,20 +115,20 @@ public class ReviewCont {
    dto.setAddr1(addr1);
    dto.setBrandName(brandName);
    
-   System.out.println("ÁÖ¼Ò :" + addr1);
-   System.out.println("ºê·£µå :"+ brandName);
+   System.out.println("ì£¼ì†Œ :" + addr1);
+   System.out.println("ë¸Œëœë“œ :"+ brandName);
 
     ArrayList<CinemaDTO> list = dao.selectBrand(dto);
     
-    // list size°¡ 0ÀÌ¸é ÁÖ¼Ò¸¸ ¼±ÅÃÇÑ List Ãâ·Â
+    // list sizeê°€ 0ì´ë©´ ì£¼ì†Œë§Œ ì„ íƒí•œ List ì¶œë ¥
     
     if(list.size()==0) {
       
       list = dao.selectAddr(addr1);
     }
     
-    //°ª Àß ³Ñ¾î¿À´Â °Í È®ÀÎ
-    //MOELANDVIEW·Î °ª ¹Ş¾Æ¼­ REFRESHÇÏ±â
+    //ê°’ ì˜ ë„˜ì–´ì˜¤ëŠ” ê²ƒ í™•ì¸
+    //MOELANDVIEWë¡œ ê°’ ë°›ì•„ì„œ REFRESHí•˜ê¸°
     ModelAndView mav= new ModelAndView();
     
     mav.addObject("list", list); 
@@ -178,7 +178,7 @@ public class ReviewCont {
     MultipartFile logoImgMF = dto.getLogoImgMF();
     
     
-    // ÀÌ¹ÌÁö°¡ Ã·ºÎµÇÁö ¾Ê¾ÒÀ¸¸é µğÆúÆ® ÀÌ¹ÌÁö·Î SET
+    // ì´ë¯¸ì§€ê°€ ì²¨ë¶€ë˜ì§€ ì•Šì•˜ìœ¼ë©´ ë””í´íŠ¸ ì´ë¯¸ì§€ë¡œ SET
     if(logoImgMF.isEmpty()) {  
       dto.setLogoImg("default.png");
     } else { 
@@ -186,8 +186,8 @@ public class ReviewCont {
       dto.setLogoImg(logoImg);
     }
     
-    // CINECODE°¡ NVL·Î ¸¸µé¾îÁöÁö ¾Ê±â ¶§¹®¿¡ º°µµ·Î »ı¼º
-    // BRANDÀÇ ¾ÕÀÚ¸® + ÇØ´ç ºê·£µå ³» ¸î¹øÂ° ¿µÈ­°üÀÎÁö cincodeset
+    // CINECODEê°€ NVLë¡œ ë§Œë“¤ì–´ì§€ì§€ ì•Šê¸° ë•Œë¬¸ì— ë³„ë„ë¡œ ìƒì„±
+    // BRANDì˜ ì•ìë¦¬ + í•´ë‹¹ ë¸Œëœë“œ ë‚´ ëª‡ë²ˆì§¸ ì˜í™”ê´€ì¸ì§€ cincodeset
     String cineCode = dao.setCineCode(dto.getBrandName());
     dto.setCineCode(cineCode);
     int count = dao.cinemaForm(dto);
@@ -198,7 +198,7 @@ public class ReviewCont {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('µî·Ï ½ÇÆĞ');";
+      msg += "  alert('ë“±ë¡ ì‹¤íŒ¨');";
       msg += "  history.go(-1);";
       msg += "</script>";
       msg += "</html></body>";
@@ -208,7 +208,7 @@ public class ReviewCont {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('µî·Ï ¼º°ø');";
+      msg += "  alert('ë“±ë¡ ì„±ê³µ');";
       msg += "  window.location='./cinemaList.do';";
       msg += "</script>";
       msg += "</html></body>";
@@ -219,14 +219,14 @@ public class ReviewCont {
     return mav;
   } // 
   
-  // CREATE : À§µµ, °æµµ¸¦ ¾ò±â À§ÇÑ Á¤º¸
+  // CREATE : ìœ„ë„, ê²½ë„ë¥¼ ì–»ê¸° ìœ„í•œ ì •ë³´
   @RequestMapping(value="/review/geoCoding.do")
   public void geoCoding(HttpServletRequest req, HttpServletResponse response) throws Exception{
     String location = req.getParameter("addr");
 
     Geocoder geocoder = new Geocoder();
-    // setAddress : º¯È¯ÇÏ·Á´Â ÁÖ¼Ò (°æ±âµµ ¼º³²½Ã ºĞ´ç±¸ µî)
-    // setLanguate : ÀÎÄÚµù ¼³Á¤
+    // setAddress : ë³€í™˜í•˜ë ¤ëŠ” ì£¼ì†Œ (ê²½ê¸°ë„ ì„±ë‚¨ì‹œ ë¶„ë‹¹êµ¬ ë“±)
+    // setLanguate : ì¸ì½”ë”© ì„¤ì •
     GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(location).setLanguage("ko").getGeocoderRequest();
     GeocodeResponse geocoderResponse;
     geocoderResponse = geocoder.geocode(geocoderRequest);
@@ -241,7 +241,7 @@ public class ReviewCont {
                 
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/xml");
-            response.getWriter().write(coordStr); // ÀÀ´ä°á°ú¹İÈ¯
+            response.getWriter().write(coordStr); // ì‘ë‹µê²°ê³¼ë°˜í™˜
           }
   } // 
   
@@ -253,7 +253,7 @@ public class ReviewCont {
   @RequestMapping(value="/review/cinemaUpdate.do", method = RequestMethod.GET)
   public ModelAndView cinemaUpdate(CinemaDTO dto) {
     ModelAndView mav = new ModelAndView();
-    // dto¸¦ ÇöÀç dto·Î ¾÷µ¥ÀÌÆ®
+    // dtoë¥¼ í˜„ì¬ dtoë¡œ ì—…ë°ì´íŠ¸
     dto = dao.cinemaRead(dto);
     mav.addObject("dto", dto);
     mav.setViewName("review/cinemaUpdate");
@@ -273,7 +273,7 @@ public class ReviewCont {
       
       dto.setCineCode(cineCode);
 
-      // Àü¼ÛµÇ´Â ÆÄÀÏÀÌ ÀúÀåµÇ´Â ½ÇÁ¦ °æ·Î
+      // ì „ì†¡ë˜ëŠ” íŒŒì¼ì´ ì €ì¥ë˜ëŠ” ì‹¤ì œ ê²½ë¡œ
       String basePath = req.getSession().getServletContext().getRealPath("/review/img");
 
       MultipartFile logoImgMF = dto.getLogoImgMF();
@@ -281,11 +281,11 @@ public class ReviewCont {
       
       if (logoImgMF.getSize() > 0) {
         UploadSaveManager.deleteFile(basePath, oldlogoImgMF);
-        // »õ·Î¿î ÆÄÀÏ ÀÖÀ» °æ¿ì »èÁ¦ÇÏ°í ÇÏ±â
+        // ìƒˆë¡œìš´ íŒŒì¼ ìˆì„ ê²½ìš° ì‚­ì œí•˜ê³  í•˜ê¸°
         String logoImg = UploadSaveManager.saveFileSpring30(logoImgMF, basePath);
         dto.setLogoImg(logoImg);
       } else {
-        // ±âÁ¸ÆÄÀÏÀ» »õ·Î ÀúÀå
+        // ê¸°ì¡´íŒŒì¼ì„ ìƒˆë¡œ ì €ì¥
         dto.setLogoImg(oldDTO.getLogoImg());
       }
 
@@ -296,7 +296,7 @@ public class ReviewCont {
         msg += "<!DOCTYPE html>";
         msg += "<html><body>";
         msg += "<script>";
-        msg += "  alert('¼öÁ¤ ½ÇÆĞ');";
+        msg += "  alert('ìˆ˜ì • ì‹¤íŒ¨');";
         msg += "  history.go(-1);";
         msg += "</script>";
         msg += "</html></body>";
@@ -306,7 +306,7 @@ public class ReviewCont {
         msg += "<!DOCTYPE html>";
         msg += "<html><body>";
         msg += "<script>";
-        msg += "  alert('¼öÁ¤ ¼º°ø');";
+        msg += "  alert('ìˆ˜ì • ì„±ê³µ');";
         msg += "  window.location='./cinemaList.do';";
         msg += "</script>";
         msg += "</html></body>";
@@ -325,7 +325,7 @@ public class ReviewCont {
   @RequestMapping(value="/review/cinemaDelete.do", method = RequestMethod.GET)
   public ModelAndView cinemaDelete(HttpServletRequest req) {
     ModelAndView mav = new ModelAndView();
-    // dto¸¦ ÇöÀç dto·Î ¾÷µ¥ÀÌÆ®
+    // dtoë¥¼ í˜„ì¬ dtoë¡œ ì—…ë°ì´íŠ¸
     String cineCode = req.getParameter("cineCode");
     
     mav.addObject("cineCode", cineCode);
@@ -334,10 +334,10 @@ public class ReviewCont {
 
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
-      msg += "<p>»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?</p>";
-      msg += "<input type='button' value='È®ÀÎ' onclick='location.href=\"./cinemaDeletePro.do?cineCode="
+      msg += "<p>ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?</p>";
+      msg += "<input type='button' value='í™•ì¸' onclick='location.href=\"./cinemaDeletePro.do?cineCode="
           + cineCode + "\"'>";
-      msg += "<input type='button' value='Ãë¼Ò' onclick='javascript:history.back()'>";
+      msg += "<input type='button' value='ì·¨ì†Œ' onclick='javascript:history.back()'>";
       msg += "</html></body>";
       
       mav.addObject("msg", msg);
@@ -360,7 +360,7 @@ public class ReviewCont {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('»èÁ¦ ½ÇÆĞ');";
+      msg += "  alert('ì‚­ì œ ì‹¤íŒ¨');";
       msg += "  history.go(-1);";
       msg += "</script>";
       msg += "</body></html>";
@@ -370,7 +370,7 @@ public class ReviewCont {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('»èÁ¦ ¼º°ø');";
+      msg += "  alert('ì‚­ì œ ì„±ê³µ');";
       msg += "  window.location='./cinemaList.do';";
       msg += "</script>";
       msg += "</body></html>";
@@ -422,53 +422,53 @@ public class ReviewCont {
    System.out.println(req.getParameter("DD3")); 
    
 
-   ////////////// ÁÂ¼®ÀÌ¹ÌÁö ////////////
+   ////////////// ì¢Œì„ì´ë¯¸ì§€ ////////////
    // cinema IMG file
    mav.addObject("root", Utility.getRoot());
    // Real Path
    String basePath = req.getRealPath("/review/roomimg");
    MultipartFile seatImgMF = dto.getSeatImgMF();
-   // ÁÂ¼®ÀÌ¹ÌÁö ÇÊ¼ö
+   // ì¢Œì„ì´ë¯¸ì§€ í•„ìˆ˜
    String seatImg = UploadSaveManager.saveFileSpring30(seatImgMF, basePath);
    dto.setSeatImg(seatImg);
 
    
-   ////////////// »ó¿µÅ¸ÀÔ ////////////
-   // DD setÇÏ±â
+   ////////////// ìƒì˜íƒ€ì… ////////////
+   // DD setí•˜ê¸°
    String DD = "";
    
-   // ±âÅ¸ »ó¿µ°üÀÌ¸é input °ª ¹Ş¾Æ¿À±â
+   // ê¸°íƒ€ ìƒì˜ê´€ì´ë©´ input ê°’ ë°›ì•„ì˜¤ê¸°
    if (req.getParameter("DD1").equals("ETC")) {
      DD += req.getParameter("DDand1");
    } else {
-     // ±âÅ¸ »ó¿µ°üÀÌ ¾Æ´Ñ °æ¿ì DD1¿¡ ¼±ÅÃÇÑ value°ª
+     // ê¸°íƒ€ ìƒì˜ê´€ì´ ì•„ë‹Œ ê²½ìš° DD1ì— ì„ íƒí•œ valueê°’
      DD += req.getParameter("DD1");
    }
    
-   //DD2 ºÎÅÍ´Â ÇÊ¼ö ÀÔ·ÂÀÌ ¾Æ´Ï±â ¶§¹®¿¡ null°ªÀÎÁö È®ÀÎ
-   //0ÀÌ¶ó¸é DD¿¡ º°µµ Ãß°¡ ÇÏÁö ¾ÊÀ½
+   //DD2 ë¶€í„°ëŠ” í•„ìˆ˜ ì…ë ¥ì´ ì•„ë‹ˆê¸° ë•Œë¬¸ì— nullê°’ì¸ì§€ í™•ì¸
+   //0ì´ë¼ë©´ DDì— ë³„ë„ ì¶”ê°€ í•˜ì§€ ì•ŠìŒ
    if(req.getParameter("DD2")!="0") {
-     //nullÀÌ ¾Æ´Ï¸é ±âÅ¸ »ó¿µ°ü ¼±ÅÃ ¿©ºÎ È®ÀÎ
+     //nullì´ ì•„ë‹ˆë©´ ê¸°íƒ€ ìƒì˜ê´€ ì„ íƒ ì—¬ë¶€ í™•ì¸
    if (req.getParameter("DD2").equals("ETC")) {
      DD += "," + req.getParameter("DDand2");
    } else {
-     // ±âÅ¸ »ó¿µ°üÀ» ¼±ÅÃÇÏÁö ¾Ê¾ÒÀ¸¸é DD2ÀÇ °ª °¡Á®¿À±â
+     // ê¸°íƒ€ ìƒì˜ê´€ì„ ì„ íƒí•˜ì§€ ì•Šì•˜ìœ¼ë©´ DD2ì˜ ê°’ ê°€ì ¸ì˜¤ê¸°
      DD += "," + req.getParameter("DD2");
    }
-   } // DD2°ª ÀÔ·ÂÇß´ÂÁö È®ÀÎ
+   } // DD2ê°’ ì…ë ¥í–ˆëŠ”ì§€ í™•ì¸
    
-   //DD3 ºÎÅÍ´Â ÇÊ¼ö ÀÔ·Â ¾Æ´Ï±â¿¡ nullÀÎÁö  È®ÀÎ
-   //0ÀÌ¶ó¸é DD¿¡ º°µµ Ãß°¡ ÇÏÁö ¾ÊÀ½
+   //DD3 ë¶€í„°ëŠ” í•„ìˆ˜ ì…ë ¥ ì•„ë‹ˆê¸°ì— nullì¸ì§€  í™•ì¸
+   //0ì´ë¼ë©´ DDì— ë³„ë„ ì¶”ê°€ í•˜ì§€ ì•ŠìŒ
    if(req.getParameter("DD3")!="0") {
-     //nullÀÌ ¾Æ´Ï¸é DD3°¡ ±âÅ¸»ó¿µ°ü ¿©ºÎ È®ÀÎ
+     //nullì´ ì•„ë‹ˆë©´ DD3ê°€ ê¸°íƒ€ìƒì˜ê´€ ì—¬ë¶€ í™•ì¸
    if (req.getParameter("DD3").equals("ETC")) {
      DD += "," + req.getParameter("DDand3");
    } else {
      DD += "," + req.getParameter("DD3");
    }
-   } // DD3 ÀÔ·Â°ª È®ÀÎ ³¡
+   } // DD3 ì…ë ¥ê°’ í™•ì¸ ë
    
-   //¸ğµç °ª ÀÔ·Â È®ÀÎ ÈÄ DD3¿¡ ÀÔ·Â
+   //ëª¨ë“  ê°’ ì…ë ¥ í™•ì¸ í›„ DD3ì— ì…ë ¥
    System.out.println(DD);
    dto.setDD(DD);
    
@@ -480,7 +480,7 @@ public class ReviewCont {
      msg += "<!DOCTYPE html>";
      msg += "<html><body>";
      msg += "<script>";
-     msg += "  alert('µî·Ï ½ÇÆĞ');";
+     msg += "  alert('ë“±ë¡ ì‹¤íŒ¨');";
      msg += "  history.go(-1);";
      msg += "</script>";
      msg += "</html></body>";
@@ -490,7 +490,7 @@ public class ReviewCont {
      msg += "<!DOCTYPE html>";
      msg += "<html><body>";
      msg += "<script>";
-     msg += "  alert('µî·Ï ¼º°ø');";
+     msg += "  alert('ë“±ë¡ ì„±ê³µ');";
      msg += "  window.location='./cinemaList.do';";
      msg += "</script>";
      msg += "</html></body>";
@@ -523,7 +523,7 @@ public class ReviewCont {
  @RequestMapping(value="/review/roomUpdate.do", method = RequestMethod.GET)
  public ModelAndView roomUpdate(RoomDTO dto) {
    ModelAndView mav = new ModelAndView();
-   // dto¸¦ ÇöÀç dto·Î ¾÷µ¥ÀÌÆ®
+   // dtoë¥¼ í˜„ì¬ dtoë¡œ ì—…ë°ì´íŠ¸
    dto = dao.roomRead(dto);
  
    mav.addObject("dto", dto);
@@ -542,7 +542,7 @@ public class ReviewCont {
      
      dto.setCineCode(roomCode);
 
-     // Àü¼ÛµÇ´Â ÆÄÀÏÀÌ ÀúÀåµÇ´Â ½ÇÁ¦ °æ·Î
+     // ì „ì†¡ë˜ëŠ” íŒŒì¼ì´ ì €ì¥ë˜ëŠ” ì‹¤ì œ ê²½ë¡œ
      String basePath = req.getSession().getServletContext().getRealPath("/review/roomimg");
 
      MultipartFile seatImgMF = dto.getSeatImgMF();
@@ -550,11 +550,11 @@ public class ReviewCont {
      
      if (seatImgMF.getSize() > 0) {
        UploadSaveManager.deleteFile(basePath, oldseatImgMF);
-       // »õ·Î¿î ÆÄÀÏ ÀÖÀ» °æ¿ì »èÁ¦ÇÏ°í ÇÏ±â
+       // ìƒˆë¡œìš´ íŒŒì¼ ìˆì„ ê²½ìš° ì‚­ì œí•˜ê³  í•˜ê¸°
        String seatImg = UploadSaveManager.saveFileSpring30(seatImgMF, basePath);
        dto.setSeatImg(seatImg);
      } else {
-       // ±âÁ¸ÆÄÀÏÀ» »õ·Î ÀúÀå
+       // ê¸°ì¡´íŒŒì¼ì„ ìƒˆë¡œ ì €ì¥
        dto.setSeatImg(oldDTO.getSeatImg());
      }
 
@@ -565,7 +565,7 @@ public class ReviewCont {
        msg += "<!DOCTYPE html>";
        msg += "<html><body>";
        msg += "<script>";
-       msg += "  alert('¼öÁ¤ ½ÇÆĞ');";
+       msg += "  alert('ìˆ˜ì • ì‹¤íŒ¨');";
        msg += "  history.go(-1);";
        msg += "</script>";
        msg += "</html></body>";
@@ -575,7 +575,7 @@ public class ReviewCont {
        msg += "<!DOCTYPE html>";
        msg += "<html><body>";
        msg += "<script>";
-       msg += "  alert('¼öÁ¤ ¼º°ø');";
+       msg += "  alert('ìˆ˜ì • ì„±ê³µ');";
        msg += "  window.location='./cinemaList.do';";
        msg += "</script>";
        msg += "</html></body>";
@@ -600,11 +600,11 @@ public class ReviewCont {
 
      msg += "<!DOCTYPE html>";
      msg += "<html><body>";
-     msg += "<input type='hidden' value='Ãë¼Ò'>";
-     msg += "<p>»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?</p>";
-     msg += "<input type='button' value='È®ÀÎ' onclick='location.href=\"./roomDeletePro.do?roomCode="
+     msg += "<input type='hidden' value='ì·¨ì†Œ'>";
+     msg += "<p>ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?</p>";
+     msg += "<input type='button' value='í™•ì¸' onclick='location.href=\"./roomDeletePro.do?roomCode="
          + roomCode + "\"'>";
-     msg += "<input type='button' value='Ãë¼Ò' onclick='javascript:history.back()'>";
+     msg += "<input type='button' value='ì·¨ì†Œ' onclick='javascript:history.back()'>";
      msg += "</html></body>";
      
      mav.addObject("msg", msg);
@@ -627,7 +627,7 @@ public class ReviewCont {
      msg += "<!DOCTYPE html>";
      msg += "<html><body>";
      msg += "<script>";
-     msg += "  alert('»èÁ¦ ½ÇÆĞ');";
+     msg += "  alert('ì‚­ì œ ì‹¤íŒ¨');";
      msg += "  history.go(-1);";
      msg += "</script>";
      msg += "</body></html>";
@@ -637,7 +637,7 @@ public class ReviewCont {
      msg += "<!DOCTYPE html>";
      msg += "<html><body>";
      msg += "<script>";
-     msg += "  alert('»èÁ¦ ¼º°ø');";
+     msg += "  alert('ì‚­ì œ ì„±ê³µ');";
      msg += "  window.location='./cinemaList.do';";
      msg += "</script>";
      msg += "</body></html>";
@@ -656,18 +656,18 @@ public class ReviewCont {
     ModelAndView mav= new ModelAndView();
     mav.setViewName("review/reviewForm");
     return mav;
-  } // get (view º¸¿©ÁÖ±â)
+  } // get (view ë³´ì—¬ì£¼ê¸°)
   
   @RequestMapping(value="/review/create.do", method=RequestMethod.POST)
   public ModelAndView createProc(ReviewStar sdto, HttpServletRequest req) throws UnknownHostException {
     ModelAndView mav = new ModelAndView();
-    /*ip°¡Á®¿À±â*/
+    /*ipê°€ì ¸ì˜¤ê¸°*/
     InetAddress local = InetAddress.getLocalHost();
     String ip = local.getHostAddress();
     sdto.setIp(ip);
     /*System.out.println(ip);*/
     
-    //°ªÀÌ Á¦´ë·Î ³Ñ¾î¿À´ÂÁö È®ÀÎ
+    //ê°’ì´ ì œëŒ€ë¡œ ë„˜ì–´ì˜¤ëŠ”ì§€ í™•ì¸
     /*System.out.println(sdto.getPixel());
     System.out.println(sdto.getUid());
     System.out.println(sdto.getS_e());*/
@@ -675,12 +675,12 @@ public class ReviewCont {
     String msg = "";
     
     /*
-    uid°ª nullÀÌ¸é ·Î±×ÀÎÆäÀÌÁö·Î º¸³»±â
+    uidê°’ nullì´ë©´ ë¡œê·¸ì¸í˜ì´ì§€ë¡œ ë³´ë‚´ê¸°
     if(sdto.getUid() == null) {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('·Î±×ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.');";
+      msg += "  alert('ë¡œê·¸ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.');";
       msg += "  window.location='../user/loginform.do";
       msg += "</script>";
       msg += "</html></body>";
@@ -689,31 +689,31 @@ public class ReviewCont {
     }
     */
     
-    //ÇØ´ç ID°¡ ÀÌÀü¿¡ ±ÛÀ» ¾´ ÀûÀÌ ÀÖ´ÂÁö È®ÀÎ
+    //í•´ë‹¹ IDê°€ ì´ì „ì— ê¸€ì„ ì“´ ì ì´ ìˆëŠ”ì§€ í™•ì¸
     ReviewStar dupdto = dao.duplicate(sdto);
     
-    //ÇØ´ç ID°¡ ±ÛÀ» ¾´ÀûÀÌ ÀÖÀ¸¸é ÀÌÀü ±Û »èÁ¦ ÈÄ ±Û¾²°Ô ÇÏ±â
+    //í•´ë‹¹ IDê°€ ê¸€ì„ ì“´ì ì´ ìˆìœ¼ë©´ ì´ì „ ê¸€ ì‚­ì œ í›„ ê¸€ì“°ê²Œ í•˜ê¸°
     if(dupdto!=null) {
       
       System.out.println(dupdto.getNo());
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  var bResult = confirm('ÀÌÀü¿¡ ÀÛ¼ºÇÑ ±ÛÀÌ ÀÖ½À´Ï´Ù. ÇØ´ç ±ÛÀ» Áö¿ì°í »õ ¸®ºä¸¦ µî·ÏÇÏ°Ú½À´Ï±î?');";
-      msg += "  if (bResult == true) {";  // ¿¹¸¦ ´©¸¥ °æ¿ì
+      msg += "  var bResult = confirm('ì´ì „ì— ì‘ì„±í•œ ê¸€ì´ ìˆìŠµë‹ˆë‹¤. í•´ë‹¹ ê¸€ì„ ì§€ìš°ê³  ìƒˆ ë¦¬ë·°ë¥¼ ë“±ë¡í•˜ê² ìŠµë‹ˆê¹Œ?');";
+      msg += "  if (bResult == true) {";  // ì˜ˆë¥¼ ëˆ„ë¥¸ ê²½ìš°
       
-      // µî·Ï 
+      // ë“±ë¡ 
       int count = dao.create(sdto);  
       if (count == 0) {
-        msg += "  alert('µî·Ï ½ÇÆĞ');";
+        msg += "  alert('ë“±ë¡ ì‹¤íŒ¨');";
         msg += "  history.go(-1);";
       } else {
-        msg += "  alert('º°Á¡ µî·Ï ¼º°ø');";
-      } // µî·Ï if end
+        msg += "  alert('ë³„ì  ë“±ë¡ ì„±ê³µ');";
+      } // ë“±ë¡ if end
         
-      //»èÁ¦ ÁøÇà
+      //ì‚­ì œ ì§„í–‰
       msg += "    window.location='./deleteProc.do?no="+dupdto.getNo()+"';";
-      msg += "  } else {";  // ¾Æ´Ï¿À¸¦ ´©¸¥ °æ¿ì
+      msg += "  } else {";  // ì•„ë‹ˆì˜¤ë¥¼ ëˆ„ë¥¸ ê²½ìš°
       msg += "    history.go(-1);";
       msg += "  }";
       msg += "</script>";
@@ -721,14 +721,14 @@ public class ReviewCont {
       mav.addObject("msg", msg);
       mav.setViewName("msgView");
     } else {
-    //ÇØ´ç ID°¡ ±ÛÀ» ¾´ÀûÀÌ ¾øÀ¸¸é ¹Ù·Î º°Á¡µî·ÏÀ¸·Î
+    //í•´ë‹¹ IDê°€ ê¸€ì„ ì“´ì ì´ ì—†ìœ¼ë©´ ë°”ë¡œ ë³„ì ë“±ë¡ìœ¼ë¡œ
     int count = dao.create(sdto);  
     
     if (count == 0) {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('º°Á¡ µî·Ï ½ÇÆĞ');";
+      msg += "  alert('ë³„ì  ë“±ë¡ ì‹¤íŒ¨');";
       msg += "  history.go(-1);";
       msg += "</script>";
       msg += "</html></body>";
@@ -738,18 +738,18 @@ public class ReviewCont {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('º°Á¡ µî·Ï ¼º°ø');";
+      msg += "  alert('ë³„ì  ë“±ë¡ ì„±ê³µ');";
       msg += "  window.location='./cinemaRead.do?cineCode="+ sdto.getCineCode() +"';";
       msg += "</script>";
       msg += "</html></body>";
       mav.addObject("msg", msg);
       mav.setViewName("msgView");
     } // if end
-    }// °Ô½Ã±Û Áßº¹È®ÀÎ ³¡
+    }// ê²Œì‹œê¸€ ì¤‘ë³µí™•ì¸ ë
     return mav;
-  } // POST (½ÇÁ¦ ½ÇÇàµÇ´Â¾Ö) 
+  } // POST (ì‹¤ì œ ì‹¤í–‰ë˜ëŠ”ì• ) 
   
-  //cinemaRead ( ¿µÈ­°ü »ó¼¼Á¤º¸ ,¸®ºäº¸±â, ¸®ºä¸Å±â±â ) -----------
+  //cinemaRead ( ì˜í™”ê´€ ìƒì„¸ì •ë³´ ,ë¦¬ë·°ë³´ê¸°, ë¦¬ë·°ë§¤ê¸°ê¸° ) -----------
   @RequestMapping(value="/review/cinemaRead.do", method=RequestMethod.GET)
   public ModelAndView cinemaRead(CinemaDTO dto) {
     ModelAndView mav = new ModelAndView();
@@ -760,15 +760,15 @@ public class ReviewCont {
     ReviewStar sdto = new ReviewStar();
     sdto.setCineCode(dto.getCineCode());
     
-    //¸®ºä½ºÅ¸´Â ¿µÈ­°üÀÇ Æò±Õ°ª
+    //ë¦¬ë·°ìŠ¤íƒ€ëŠ” ì˜í™”ê´€ì˜ í‰ê· ê°’
     ReviewStar reviewstar = dao.starRead(sdto);
    
    
-    //¿µÈ­°ü¿¡ ¾²¿©Áø ¸®ºä ¸®½ºÆ®
+    //ì˜í™”ê´€ì— ì“°ì—¬ì§„ ë¦¬ë·° ë¦¬ìŠ¤íŠ¸
     ArrayList<ReviewStar> list = dao.list(dto.getCineCode());
-    // ÆäÀÌÁö ÀÌµ¿ ¹× °ª ¿Ã¸®±â
+    // í˜ì´ì§€ ì´ë™ ë° ê°’ ì˜¬ë¦¬ê¸°
     
-    //»çÀÌÁî°ªÀ¸·Î Á¦´ë·Î ÂïÈ÷³ª È®ÀÎ
+    //ì‚¬ì´ì¦ˆê°’ìœ¼ë¡œ ì œëŒ€ë¡œ ì°íˆë‚˜ í™•ì¸
     System.out.println(list.size());
     
     mav.setViewName("review/cinemaRead"); //reviewList
@@ -790,11 +790,11 @@ public class ReviewCont {
     
     msg += "<!DOCTYPE html>";
     msg += "<html><body>";
-    msg += "<input type='hidden' value='Ãë¼Ò'>";
-    msg += "<p>»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?</p>";
-    msg += "<input type='button' value='È®ÀÎ' onclick='location.href=\"./deleteProc.do?no="
+    msg += "<input type='hidden' value='ì·¨ì†Œ'>";
+    msg += "<p>ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?</p>";
+    msg += "<input type='button' value='í™•ì¸' onclick='location.href=\"./deleteProc.do?no="
         + no + "\"'>";
-    msg += "<input type='button' value='Ãë¼Ò' onclick='javascript:history.back()'>";
+    msg += "<input type='button' value='ì·¨ì†Œ' onclick='javascript:history.back()'>";
     msg += "</html></body>";
     mav.addObject("msg", msg);
     mav.setViewName("msgView");
@@ -814,7 +814,7 @@ public class ReviewCont {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('»èÁ¦ ½ÇÆĞ');";
+      msg += "  alert('ì‚­ì œ ì‹¤íŒ¨');";
       msg += "  history.go(-1);";
       msg += "</script>";
       msg += "</body></html>";
@@ -824,7 +824,7 @@ public class ReviewCont {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('»èÁ¦ ¼º°ø');";
+      msg += "  alert('ì‚­ì œ ì„±ê³µ');";
       msg += "  window.location='./list.do';";
       msg += "</script>";
       msg += "</body></html>";
@@ -838,14 +838,14 @@ public class ReviewCont {
   
   @RequestMapping(value="/review/reviewUpdate.do", method = RequestMethod.GET)
   public ModelAndView reviewUpdate(int no, String cineCode) {
-    System.out.println("no°ª :" + no + "/ cineCode°ª :"+cineCode);
+    System.out.println("noê°’ :" + no + "/ cineCodeê°’ :"+cineCode);
     ReviewStar inputStar = new ReviewStar();
     inputStar.setNo(no);
     inputStar.setCineCode(cineCode);
     ModelAndView mav = new ModelAndView();
     ReviewStar rs = dao.updateList(inputStar);
     mav.addObject("rs", rs);
-    System.out.println(rs.getS_e()+" <---³»¿ëÀÔ´Ï´ç");
+    System.out.println(rs.getS_e()+" <---ë‚´ìš©ì…ë‹ˆë‹¹");
     mav.setViewName("review/reviewForm");
     return mav;
   }//reviewUpdate GET
@@ -854,8 +854,8 @@ public class ReviewCont {
   public ModelAndView updateProc(ReviewStar sdto) {
     ModelAndView mav = new ModelAndView();
     
-    System.out.println(sdto.getPixel() +"<--È­Áú/  ³»¿ë-->"+ sdto.getS_e());
-    System.out.println(sdto.getNo()+"³Ñ¹ö/¾ÆÀÌµğ"+sdto.getUid());
+    System.out.println(sdto.getPixel() +"<--í™”ì§ˆ/  ë‚´ìš©-->"+ sdto.getS_e());
+    System.out.println(sdto.getNo()+"ë„˜ë²„/ì•„ì´ë””"+sdto.getUid());
     
     int cnt = dao.reviewUpdate(sdto);
     
@@ -864,7 +864,7 @@ public class ReviewCont {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('¼öÁ¤ ½ÇÆĞ');";
+      msg += "  alert('ìˆ˜ì • ì‹¤íŒ¨');";
       msg += "  history.go(-1);";
       msg += "</script>";
       msg += "</html></body>";
@@ -874,7 +874,7 @@ public class ReviewCont {
       msg += "<!DOCTYPE html>";
       msg += "<html><body>";
       msg += "<script>";
-      msg += "  alert('¼öÁ¤ ¼º°ø');";
+      msg += "  alert('ìˆ˜ì • ì„±ê³µ');";
       msg += "  window.location='./cinemaRead.do?cineCode="+ sdto.getCineCode() +"';";
       msg += "</script>";
       msg += "</html></body>";
@@ -884,10 +884,10 @@ public class ReviewCont {
     return mav;
   }// updateProc() end
  
-  ////////////////////////////////// È¸¿ø¿ë
+  ////////////////////////////////// íšŒì›ìš©
   
   
-  // È¸¿ø¿ë LIST
+  // íšŒì›ìš© LIST
   @RequestMapping(value="/review/list.do", method=RequestMethod.GET)
   public ModelAndView memberList() {
     
@@ -900,7 +900,7 @@ public class ReviewCont {
   } 
 
 
-  //cinemaRead È¸¿ø¿ë
+  //cinemaRead íšŒì›ìš©
   @RequestMapping(value="/review/read.do", method=RequestMethod.GET)
   public ModelAndView memberRead(CinemaDTO dto) {
     ModelAndView mav = new ModelAndView();
@@ -911,15 +911,15 @@ public class ReviewCont {
     ReviewStar sdto = new ReviewStar();
     sdto.setCineCode(dto.getCineCode());
     
-    //¸®ºä½ºÅ¸´Â ¿µÈ­°üÀÇ Æò±Õ°ª
+    //ë¦¬ë·°ìŠ¤íƒ€ëŠ” ì˜í™”ê´€ì˜ í‰ê· ê°’
     ReviewStar reviewstar = dao.starRead(sdto);
    
    
-    //¿µÈ­°ü¿¡ ¾²¿©Áø ¸®ºä ¸®½ºÆ®
+    //ì˜í™”ê´€ì— ì“°ì—¬ì§„ ë¦¬ë·° ë¦¬ìŠ¤íŠ¸
     ArrayList<ReviewStar> list = dao.list(dto.getCineCode());
-    // ÆäÀÌÁö ÀÌµ¿ ¹× °ª ¿Ã¸®±â
+    // í˜ì´ì§€ ì´ë™ ë° ê°’ ì˜¬ë¦¬ê¸°
     
-    //»çÀÌÁî°ªÀ¸·Î Á¦´ë·Î ÂïÈ÷³ª È®ÀÎ
+    //ì‚¬ì´ì¦ˆê°’ìœ¼ë¡œ ì œëŒ€ë¡œ ì°íˆë‚˜ í™•ì¸
     System.out.println(list.size());
     
     mav.setViewName("review/read"); //reviewList
@@ -938,9 +938,9 @@ public class ReviewCont {
     dto = dao.cinemaRead(dto);
     ArrayList<ReviewStar> reviewstar = dao.reviewstar();
     ArrayList<ReviewStar> list = dao.list(dto.getCineCode());
-    // ÆäÀÌÁö ÀÌµ¿ ¹× °ª ¿Ã¸®±â
+    // í˜ì´ì§€ ì´ë™ ë° ê°’ ì˜¬ë¦¬ê¸°
     
-    //»çÀÌÁî°ªÀ¸·Î Á¦´ë·Î ÂïÈ÷³ª È®ÀÎ
+    //ì‚¬ì´ì¦ˆê°’ìœ¼ë¡œ ì œëŒ€ë¡œ ì°íˆë‚˜ í™•ì¸
     System.out.println(list.size());
     
     mav.addObject("list", list);

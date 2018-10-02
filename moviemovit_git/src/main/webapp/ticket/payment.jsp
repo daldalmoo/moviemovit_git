@@ -108,8 +108,8 @@
               <span class="people">인원</span>
             </dt>
             <dd>
-              <span id="select_people_txt">${auditData }</span>
-              <input type="hidden" name="auditData" value="${auditData }">
+              <span id="select_people_txt">${auditType }</span>
+              <input type="hidden" name="auditType" value="${auditType }">
               <input type="hidden" name="movieseat" value="${movieseat }">
             </dd>
 

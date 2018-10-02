@@ -498,21 +498,22 @@ public class TicketCont {
     ArrayList<ScreenDTO> stimelist = dao.screentimeRoom(dto);
     
     String tempPrevRoomCode = "";
+    msg += "<dl>";
+    msg += "  <dd>";
+    msg += "    <ul>";
     for (int i = 0; i < stimelist.size(); i++) {
       ScreenDTO screen =  stimelist.get(i);
       if(screen.getRoomCode().equals(tempPrevRoomCode)==false) {
+    	msg += "    </ul>";
+        msg += "  </dd>";
+        msg += "</dl>";
         msg += "<dl>";
         msg += "  <dt>"+screen.getRoomCode()+" 관</dt>";
         msg += "  <dd>";
         msg += "    <ul>";
       }//if end
       msg += "      <li value='"+screen.getsCode()+"'>"+screen.getStime().substring(0, 2)+":"+screen.getStime().substring(2, 4)+"</li>";
-      if(screen.getRoomCode().equals(tempPrevRoomCode)==false) {
-        msg += "    </ul>";
-        msg += "  </dd>";
-        msg += "</dl>";
-        tempPrevRoomCode = screen.getRoomCode();
-      }//if end
+      tempPrevRoomCode = screen.getRoomCode();
     }//for end
 
     // 출력
@@ -532,10 +533,11 @@ public class TicketCont {
     String root = Utility.getRoot(); // /moviemovit
     
     MovieDTO dto = dao.MovieData(mCode);
-    msg += root + "movie/img_poster/" + dto.getPoster();
+    msg += root + "/movie/img_poster/" + dto.getPoster();
     //msg += "/moviemovit/movie/storage/" + dto.getPoster();
     msg += "|";
     msg += dto.getmName();
+    System.out.println(msg);
     
     // 출력
     resp.setContentType("text/plain; charset=UTF-8");
@@ -581,7 +583,8 @@ public class TicketCont {
     String cine_name = req.getParameter("cine_name");
     String s_date = req.getParameter("s_date");
     int totalprice = Integer.parseInt(req.getParameter("totalprice"));
-    String auditData = req.getParameter("auditData");
+    String auditType = req.getParameter("auditType");
+    System.out.println("payment() : "+auditType);
     // System.out.println("ticket Cont 좌석선택 : " + totalprice);
     String movieseat = req.getParameter("movieseat");
     int sCode = Integer.parseInt(req.getParameter("sCode"));
@@ -606,7 +609,7 @@ public class TicketCont {
     mav.addObject("s_date",s_date);
     mav.addObject("totalprice", totalprice);
     mav.addObject("couponList", couponList);
-    mav.addObject("auditData", auditData);
+    mav.addObject("auditType", auditType);
     mav.addObject("movieseat", movieseat);
     mav.addObject("sCode", sCode);
     mav.setViewName("ticket/payment");
@@ -621,11 +624,14 @@ public class TicketCont {
     
     String uid = (String) session.getAttribute("s_id");
     String movieseat = req.getParameter("movieseat");
+    String auditType = req.getParameter("auditType");
     
     dto.settCode("2018080711330601");
     dto.setWdate("20180807113306");
     dto.setUid(uid);
     dto.setSeat(movieseat);
+    dto.setAuditType(auditType);
+    System.out.println(dto.toString());
     
     int result = dao.moviebook(dto);
 

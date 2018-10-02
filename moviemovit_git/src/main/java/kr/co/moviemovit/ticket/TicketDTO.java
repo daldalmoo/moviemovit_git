@@ -26,6 +26,10 @@ public class TicketDTO {
     return cnt;
   }
 
+  public void setCnt(int cnt) {
+    this.cnt = cnt;
+  }
+
   public TicketDTO() {
     System.out.println("---------- TicketDTO() °´Ã¼ »ý¼º");
   }//default constructor
@@ -85,5 +89,13 @@ public class TicketDTO {
   public void setAuditType(String auditType) {
     this.auditType = auditType;
   }
+
+@Override
+public String toString() {
+	return "TicketDTO [tCode=" + tCode + ", wdate=" + wdate + ", uid=" + uid + ", sCode=" + sCode + ", cCode=" + cCode
+			+ ", seat=" + seat + ", auditType=" + auditType + ", grade=" + grade + ", cnt=" + cnt + "]";
+}
+  
+  
   
 }//class end
