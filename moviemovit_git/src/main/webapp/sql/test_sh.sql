@@ -189,10 +189,23 @@ WHERE cineName LIKE '%타%'
 SELECT poster, mName
 FROM movieTable
 WHERE mCode='10'
-    
-    
-    
-    
+
+
+
+select *
+from userTable
+
+cinemaTable
+roomTable
+screenTable
+
+
+
+
+
+
+
+
 
 -- *********************** 지영 크롤링
 --캐릭터셋 확인

@@ -172,7 +172,7 @@ table tr:nth-child(2n+1) {
    <div class="box-image">
      
      <span class="thumb-image">
-     <a href="../star/List.do?mCode=${dto.mCode }">
+     <a href="./movieRead.do?mCode=${dto.mCode }">
        <img class="mimg" src="./img_poster/${dto.poster }" width="400" height="800" />
      </a>
      </span>
@@ -181,16 +181,20 @@ table tr:nth-child(2n+1) {
      <span>
        <strong>
        ${dto.s_date }개봉<br> 
-       <c:if test="${dto.screen=='soon' }">
-       상영예정
+       ${dto.screen}<br>
+       <c:if test="${dto.age==0 }">
+       전체관람가
        </c:if>
-       <c:if test="${dto.screen=='ing' }">
-       상영중
+       <c:if test="${dto.age==12 }">
+       12세
        </c:if>
-       <c:if test="${dto.screen=='end' }">
-       상영종료
+       <c:if test="${dto.age==15 }">
+       15세
        </c:if>
-       <br>
+       <c:if test="${dto.age==19 }">
+       청소년 관람불가
+       </c:if>
+      <br>
        <c:if test="${dto.runningTime==0 }">
            <img class="simg" src="./img_star/star0.png"> 
        </c:if>

@@ -149,11 +149,15 @@ public class MovieCont {
 
 	 
 	 @RequestMapping(value="/movie/movieRead.do", method=RequestMethod.GET)
-	 public ModelAndView read(MovieDTO dto) {
+	 public ModelAndView read(MovieDTO dto, StarDTO sdto) {
 		 ModelAndView mav = new ModelAndView();
 		 mav.setViewName("movie/movieRead");
+         ArrayList<HashMap<MovieDTO, StarDTO>> starlist=dao.starlist2(sdto);
+		 int avgstar = dao.avgstar2(sdto);
 		 dto = dao.read(dto); 
 		 mav.addObject("dto", dto);
+		 mav.addObject("starlist", starlist);
+		 mav.addObject("avgstar", avgstar);
 		 return mav;    
 	 }//read() end
 	 
@@ -202,7 +206,7 @@ public class MovieCont {
 	    mav.addObject("root", Utility.getRoot());
 	    //------------------------------------------------------------    
 		//  전송된 파일이 저장되는 실제 경로
-		    String basePath = req.getRealPath("/movie/storage");
+		    String basePath = req.getRealPath("/movie/img_poster");
 		//  <input type='file' name='posterMF'>
 		    MultipartFile posterMF = dto.getPosterMF();
 		    String poster = UploadSaveManager.saveFileSpring30(posterMF, basePath);

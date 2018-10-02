@@ -27,4 +27,8 @@ public interface MovieMapper {
 	public StarDTO avgstar(int star);
 	
 	public ArrayList<MovieDTO> starlist(MovieDTO dto);
+	
+    public ArrayList<HashMap<MovieDTO, StarDTO>> starlist2(StarDTO sdto);
+	
+	public int avgstar2(StarDTO sdto);
 }//interface end
